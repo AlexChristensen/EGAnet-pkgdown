@@ -1,8 +1,13 @@
 </br>
 
+<!-- Logo -->
+
 <div id="logo">
 <img border="0" src="https://github.com/hfgolino/EGAnet/blob/master/inst/EGAnet_hex_2.png?raw=true" alt="EGAnet logo" width=250/>
 </div>
+
+
+<!-- Badges -->
 
 <div id="badges"><!-- pkgdown markup -->
 <a href="https://CRAN.R-project.org/package=EGAnet"><img border="0" src="https://www.r-pkg.org/badges/version/EGAnet?color=blue" alt="CRAN version"/></a>
@@ -16,6 +21,8 @@
 
 <span style="font-size: 10px;">
 
+<!-- Introduction -->
+
 The {EGAnet} package is the primary source for implementing the Exploratory Graph Analysis (EGA) framework in R. 
 
 The goal of the package is to provide:
@@ -28,12 +35,17 @@ The goal of the package is to provide:
 
 </span>
 
-<span style="font-size: 20px;">
+<span style="font-size: 35px;">
 How to Install
 </span>
 
+<span class="fab fa-r-project fa-3x"></span>
 
-<span class="fab fa fab fa-github fa-lg"></span>
+```
+install.packages("EGAnet")
+```
+
+<span class="fab fa fab fa-github fa-3x"></span>
 
 ```
 if(!"devtools" %in% unlist(lapply(.libPaths(), list.files))){
@@ -43,22 +55,33 @@ if(!"devtools" %in% unlist(lapply(.libPaths(), list.files))){
 devtools::install_github("hfgolino/EGAnet")
 ```
 
-Exploratory Graph Analysis
-=============
-### Hudson F. Golino ###
-### Associate Professor of Quantitative Methods, Department of Psychology, University of Virginia. ###
-### Contact: <hfg9s@virginia.edu> ###
+<span style="font-size: 35px;">
+Contact
+</span>
 
-### Alexander P. Christensen ###
-### Assistant Professor of Quantitative Methods, Department of Psychology and Human Development, Vanderbilt University ###
-### Contact: <alexander.christensen@vanderbilt.edu> ###
+<!-- spaces are needed to appear as new lines -->
 
+<span style="font-size: 20px;">
+[Hudson F. Golino](https://psychology.as.virginia.edu/golino) <br>
+Associate Professor of Quantitative Methods <br>
+Department of Psychology <br>
+University of Virginia <br>
+<hfg9s@virginia.edu> <br>
+<a href="https://twitter.com/GolinoHudson"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://scholar.google.com/citations?user=Ris_otUAAAAJ&hl=en&oi=ao"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+</span>
 
-News
-============
+<span style="font-size: 20px;">
+[Alexander P. Christensen](https://www.vanderbilt.edu/psychological_sciences/bio/alexander-christensen) <br>
+Assistant Professor of Quantitative Methods <br>
+Department of Psychology and Human Development <br>
+Vanderbilt University <br>
+<alexpaulchristensen@gmail.com> <br>
+<a href="https://scholar.google.com/citations?user=RbatznQAAAAJ&hl=en&oi=ao"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+</span>
+</span>
 
-The EGAnet package version 2.0.0 (Blue Metallic) is now available on [CRAN](https://cran.r-project.org/web/packages/EGAnet/index.html).
+<span style="font-size: 35px;">
+Support
+</span>
 
-You can read about some of the changes in this dedicated [Wiki](https://github.com/hfgolino/EGAnet/wiki/What's-Changed%3F). There's also a [Wiki for the new plotting system](https://github.com/hfgolino/EGAnet/wiki/Plots-in-%7BEGAnet%7D), and a series of posts about the package on Twitter: [some new functions](https://twitter.com/GolinoHudson/status/1691800126866829739?s=20), [new stability analysis](https://twitter.com/GolinoHudson/status/1684912389194436610?s=20), and [more](https://twitter.com/GolinoHudson/).
-
-The EGAnet package is currently supported by two University of Virginia grants, one from the STAR - [Support Transformative Autism Research](https://curry.virginia.edu/faculty-research/centers-labs-projects/supporting-transformative-autism-research-star) initiative and one from the [Democracy Initiative](http://democracyinitiative.virginia.edu).
+The {EGAnet} package is currently supported by two University of Virginia grants, one from the STAR - [Support Transformative Autism Research](https://curry.virginia.edu/faculty-research/centers-labs-projects/supporting-transformative-autism-research-star) initiative and one from the [Democracy Initiative](http://democracyinitiative.virginia.edu).
