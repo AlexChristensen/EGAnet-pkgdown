@@ -1,0 +1,9 @@
+^\.git$
+^\.github$
+^\.Rproj\.user$
+^Readme\.md$
+
+^.*\.Rproj$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
