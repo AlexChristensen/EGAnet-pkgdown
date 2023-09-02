@@ -1,0 +1,18 @@
+---
+title: "Test"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Test}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This is a test
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load {EGAnet}
+library(EGAnet)
+
+# Perform EGA
+EGA(wmt2[,7:24])
+```

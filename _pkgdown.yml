@@ -1,4 +1,85 @@
 url: ~
 template:
   bootstrap: 5
-
+navbar:
+  type: default
+  left:
+    - text: "Getting Started"
+      href: articles/test.html
+    - text: "Reference"
+      href: reference/index.html
+reference:
+  - title: "EGA Functions"
+    desc: "Main Exploratory Graph Analysis functions"
+    contents:
+      - "bootEGA"
+      - "dynEGA"
+      - "dynEGA.ind.pop"
+      - "EGA"
+      - "EGA.estimate"
+      - "EGA.fit"
+      - "hierEGA"
+      - "riEGA"
+  - title: "EGA Psychometric Functions"
+    desc: "Exploratory Graph Analysis network psychometric framework functions"
+    contents:
+      - "CFA"
+      - "dimensionStability"
+      - "invariance"
+      - "itemStability"
+      - "LCT"
+      - "net.loads"
+      - "net.scores"
+      - "UVA"
+  - title: "Information Theory Functions"
+    desc: "Information Theory-related functions for network psychometrics"
+    contents:
+      - "boot.ergoInfo"
+      - "entropyFit"
+      - "ergoInfo"
+      - "genTEFI"
+      - "infoCluster"
+      - "jsd"
+      - "tefi"
+      - "totalCor"
+      - "totalCorMat"
+      - "vn.entropy"
+  - title: "Plots"
+    desc: "Plot-related functions"
+    contents:
+      - "color_palette_EGA"
+      - "compare.EGA.plots"
+      - "plot.EGAnet"
+  - title: "Basic Functions"
+    desc: "General purpose functions that allow for a more modular usage"
+    contents:
+      - "auto.correlate"
+      - "community.consensus"
+      - "community.detection"
+      - "community.homogenize"
+      - "community.unidimensional"
+      - "convert2igraph"
+      - "convert2tidygraph"
+      - "EBICglasso.qgraph"
+      - "Embed"
+      - "glla"
+      - "igraph2matrix"
+      - "modularity"
+      - "network.estimation"
+      - "polychoric.matrix"
+      - "simDFM"
+      - "TMFG"
+      - "wto"
+  - title: "Data and Package Information"
+    desc: "Data hosted in the {EGAnet} package"
+    contents:
+      - "EGAnet-package"
+      - "boot.wmt"
+      - "depression"
+      - "dnn.weights"
+      - "ega.wmt"
+      - "intelligenceBattery"
+      - "optimism"
+      - "prime.num"
+      - "sim.dynEGA"
+      - "wmt2"
