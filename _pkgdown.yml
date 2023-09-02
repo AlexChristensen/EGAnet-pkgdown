@@ -1,6 +1,10 @@
 url: ~
 template:
   bootstrap: 5
+  bootswatch: yeti
+  bslib:
+    text-muted: 
+      - "#fff !important" 
 navbar:
   type: default
   left:
@@ -8,6 +12,8 @@ navbar:
       href: articles/test.html
     - text: "Reference"
       href: reference/index.html
+    - text: "News"
+      href: news/index.html
 reference:
   - title: "EGA Functions"
     desc: "Main Exploratory Graph Analysis functions"
@@ -83,3 +89,6 @@ reference:
       - "prime.num"
       - "sim.dynEGA"
       - "wmt2"
+news:
+   one_page: true
+   cran_dates: true

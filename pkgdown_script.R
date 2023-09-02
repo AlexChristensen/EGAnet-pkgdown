@@ -3,3 +3,6 @@
 
 # Run to build the website
 pkgdown::build_site()
+
+# Iterate on colors
+pkgdown::init_site()
