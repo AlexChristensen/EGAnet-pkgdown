@@ -1,0 +1,151 @@
+---
+title: "Plotting with {EGAnet}"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plotting with {EGAnet}}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Plotting in {EGAnet} has become much more flexible by passing on _most_ arguments to {GGally}'s [ggnet2](https://briatte.github.io/ggnet/) (some arguments might not change to keep a consistent {EGAnet} style to the plots). This Wiki walks through some of the flexibility available in {EGAnet}'s plots. This demonstration is only the start &ndash; you can use these plots as the foundation for your own creations. These examples focus solely on `EGA` plotting but apply to all `*EGA` plots. 
+
+### Basic Plot
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load necessary packages
+library(EGAnet); library(GGally); library(ggplot2)
+
+plot(ega.wmt)
+```
+
+### Legend
+
+#### Change Names
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, legend.names = c("Dimension 1", "Dimension 2"))
+```
+
+#### Remove legend
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt) + theme(legend.position = "none")
+```
+
+Handling legend title and text can be done using the standard {ggplot2} `theme` arguments
+
+### Title
+
+#### Basic Title
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt) + ggtitle("EGA Title")
+```
+
+#### Adjusted Title (centered, larger size, bold)
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt) + 
+  ggtitle("Better EGA Title") +
+  theme(plot.title = element_text(size = 14, face = "bold", hjust = 0.5))
+```
+
+### Layout
+
+For all available layout options, see documentation for {sna}'s `gplot.layout`.
+
+#### Circle
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, layout = "circle")
+```
+
+#### Eigen
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, layout = "eigen")
+```
+
+### Nodes
+
+#### Colors
+
+Change Colors Using Color Palette
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, color.palette = "blue.ridge2")
+```
+
+Change Colors Using HEX Codes
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, node.color = c("#F5815A", "#47BCC9"))
+```
+
+An awesome resource to generate color palettes: [https://coolors.co/](https://coolors.co/)
+
+#### Size
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, node.size = 12)
+```
+
+Change Size based on Node Strength
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, node.size = colSums(ega.wmt$network)^2 * 16)
+```
+
+### Edges
+
+#### Size
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, edge.size = 12)
+```
+
+#### Transparency
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(ega.wmt, edge.alpha = 0.1)
+```
+
+#### Colors and Line Type
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(
+  ega.wmt, edge.alpha = 1,
+  edge.lty = c( # line type
+    "dashed", # positive edge first
+    "solid" # negative edge second
+  ),
+  edge.color = c( # color
+    "pink", # positive edges first
+    "black" # negative edges second
+  )
+)
+```
+
+#### Positive Only
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(
+  ega.wmt,
+  edge.color = c(
+    "darkgreen", # positive edges (default color)
+    "white" # negative edges second
+  )
+)
+```
+
+#### Negative Only
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+plot(
+  ega.wmt, edge.alpha = 1, # used to increase visibility 
+  edge.color = c(
+    "white", # positive edges first
+    "red" # negative edges (default color)
+  )
+)
+```

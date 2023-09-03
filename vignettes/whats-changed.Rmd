@@ -1,0 +1,103 @@
+---
+title: "What's Changed?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{What's Changed?}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+In a word: *everything*
+
+Nearly **every** line of code is new. 
+
+New, however, doesn't mean throwing out the old &ndash; your previous code should still work. 
+
+So, what's changed?
+
+### Faster
+
+The new {EGAnet} is *fast*. Nearly all functions were optimized, resulting in 2-15*x* *faster* code than previous versions. Analyses that used to take minutes now take seconds. 
+
+The biggest difference? Fast computation of tetrachoric and polychoric correlations
+
+These correlations are at the core of most {EGAnet} functions. Unfortunately, there aren't many implementations in R that quickly compute these correlations. So, we've implemented our own tetrachoric and polychoric correlations in C. 
+
+Here's a comparison between {EGAnet}'s `auto.correlate`, its former implementation of {qgraph}'s `cor_auto`, {psych}'s `polychoric`, and recently [published](https://doi.org/10.1080/10705511.2021.1929996) and fast implementation in R: {Turbofuns}'s `PolychoricRM` (using 1 core). This demonstration used the `bfi` dataset in {psych} with 100 repetitions:
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: milliseconds
+      expr       min        lq       mean     median         uq       max neval cld
+    EGAnet   75.1616   75.4386   77.57433   75.74405   78.19075  201.0211   500  a 
+ Turbofuns   79.5288   79.7113   80.45382   79.87415   80.30210   97.3525   500  a 
+    qgraph  437.7368  449.0530  490.07021  456.72130  560.37485  743.6972   500   b 
+     psych 2555.8532 2586.6863 2701.75927 2603.60790 2727.74910 4682.7300   500   c")
+```
+
+`auto.correlate`'s median time was on par with `PolychoricRM`. `auto.correlate` includes several checks to compute Pearson's correlations for continuous data and polyserial correlations for continuous with ordinal data similar to `cor_auto`; however, `auto.correlate` is *6x faster*. Compared to `polychoric`, `auto.correlate` is *33x faster*.
+
+To put the speed difference in context: `auto.correlate` completes one full `bootEGA` and gets 100 iterations into a *second* `bootEGA` by the time `cor_auto` completes its first 100 iterations in its *first* `bootEGA`.
+
+### More Flexible
+
+Functions are more modular and build on each other to allow for combinations that were previously unthinkable.
+
+Want to use {igraph}'s `cluster_spinglass` in `EGA`? You can do that
+
+Want to see `itemStability` of your `hierEGA`? You can do that
+
+Want to perform a `bootEGA` with `EGA.fit` using `BGGM` and consensus clustering Louvain (`community.consensus`)? That's a lot... but you can do that too 
+
+Such flexibility warrants a disclaimer: Just because you *can*, doesn't mean you *should!* Keep best practices in mind.
+
+### More Informative
+
+Functions that had S3 `print`, `summary`, and `plot` methods have been updated. Functions that didn't have `print`, `summary`, and `plot` methods now do. 
+
+`print` and `summary` methods are designed to give you the information you want without hassle. Here's `EGA`'s `summary` output:
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Model: GLASSO (EBIC with gamma = 0.5)
+Correlations: auto
+Lambda: 0.0764652282008741 (n = 100, ratio = 0.1)
+
+Number of nodes: 25
+Number of edges: 117
+Edge density: 0.390
+
+Non-zero edge weights: 
+     M    SD    Min   Max
+ 0.046 0.119 -0.269 0.548
+
+----
+
+Algorithm:  Walktrap
+
+Number of communities:  5
+
+A1 A2 A3 A4 A5 C1 C2 C3 C4 C5 E1 E2 E3 E4 E5 N1 N2 N3 N4 N5 O1 O2 O3 O4 O5 
+ 1  1  1  1  1  2  2  2  2  2  3  3  3  3  3  4  4  4  4  4  5  5  5  5  5 
+
+----
+
+Unidimensional Method: Louvain
+Unidimensional: No
+
+----
+
+TEFI: -27.335")
+```
+
+Model and algorithm information, network descriptives, community memberships, and fit (Total Entropy Fit Index) are provided with every `*EGA` function. This information is everything (and perhaps more!) than you need to write your reproducible Methods section. 
+
+What about `plot`? There's so much flexibility there that it needs its own [Wiki](https://github.com/hfgolino/EGAnet/wiki/Plots-in-%7BEGAnet%7D)
+
+### More Reproducible
+
+Like polychoric correlations, we've implemented high quality open-source pseudorandom number generation (PRNG) in C instead of R. This change avoids potential conflicts with the `seed` you set in your script and the `seed` you set in an {EGAnet} PRNG function. 
+
+In short, your results can be replicated, time and time again.
+
+*For the gritty details, head over to [Reproducibility and PRNG](https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG)*
+
+### For more details on what's changed, check out the [NEWS](https://github.com/hfgolino/EGAnet/blob/master/NEWS)

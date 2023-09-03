@@ -1,0 +1,210 @@
+---
+title: "Reproducibility and Pseudorandom Number Generation (PRNG)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reproducibility and Pseudorandom Number Generation (PRNG)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Random number generation is [important](https://quantumbase.com/sse/background/) and some methods are better than others. In {EGAnet}, there are two common cases where random number generation is used: bootstrap (e.g., `bootEGA`) and permutation (e.g., `invariance`). The most common approaches for R packages and R users alike are to use `sample` for permutation and bootstrap with replacement and `rnorm` for parametric (normal) bootstrap.
+
+Under the hood, these functions use a random number generator to obtain their values. By default, R uses the Mersenne Twister, a well-known and widely used pseudorandom number generator (PRNG). There are good reasons why R and other software programs use the Mersenne Twister: it's fast, it has a long period (meaning it will be a long time before it repeats itself), and most other software use it. There are, however, many known [limitations](https://arxiv.org/pdf/1910.06437.pdf). R offers some alternatives (see `?RNGkind`) but these must be manually set (with the consequence of resetting the state!). 
+
+Before getting into how {EGAnet} can make PRNG "reproducible", it's useful to know how it generates pseudorandom numbers (or not and skip ahead to the [Reproducibility](#reproducibility)).
+
+## PRNG in {EGAnet}
+
+The decision to use an alternative PRNG in {EGAnet} was based on three aims: (1) {EGAnet}'s PRNG results should be reproducible without affecting R's PRNG, (2) statistical quality, and (3) speed. The algorithms used in {EGAnet} are open-source and available in C. Because seeds are set in C, they do not affect the PRNG in R. 
+
+The bottom line: scripts with {EGAnet} PRNG functions do not change the PRNG in R, keeping your code reproducible regardless of whether {EGAnet} PRNG functions remain in your script.
+
+### Permutation, Bootstrap, and Random Uniform
+
+The xoshiro256++ ([Blackman & Vigna, 2021](https://doi.org/10.1145/3460772)) algorithm is _the_ PRNG in {EGAnet}. The algorithm is used wherever random numbers are generated: permutation, pre-generating seeds (see [Reproducibility](#reproducibility)), bootstrap with resampling, and generating uniform values between 0 and 1 that are used in random normal generation. The xoshiro256++ is a robust generator with its creators claiming (and [verifying](https://doi.org/10.1145/3460772), but see [repeat flaws](https://www.pcg-random.org/posts/xoshiro-repeat-flaws.html)<sup>[1](#footnote1), [2](#footnote2)</sup>) that it passes all known tests for PRNG (including tests where the Mersenne Twister and other algorithms [fail](https://prng.di.unimi.it/#shootout)). Besides having robust statistical quality, xoshiro256++ is fast.
+
+To show the speed, a benchmark comparison between `sample`, `sample.int` (a simpler, stricter version of `sample`), and an equivalent function using xoshiro256++ for PRNG was performed. The setup used `500` repetitions in `"block"` order meaning all iterations of one method are performed before another. These settings mirror the default usage in `bootEGA`. The number of values shuffled _without_ replacement (_N_) were manipulated in the power of 10. Here's the comparison:
+
+_N_ = 10
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: microseconds
+         expr min    lq     mean median    uq    max neval cld
+ xoshiro256++ 1.8 1.901 2.046578  1.902 2.100 17.701   500 a  
+       sample 4.2 4.401 4.802186  4.501 4.801 43.700   500  b 
+   sample.int 3.1 3.302 3.620432  3.501 3.801  7.102   500   c")
+```
+
+_N_ = 100
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: microseconds
+         expr   min    lq      mean median     uq    max neval cld
+ xoshiro256++ 2.501 2.602  3.004564 2.7010 2.9010 32.001   500 a  
+       sample 8.302 8.951 10.678220 9.3000 9.8005 42.601   500  b 
+   sample.int 7.200 7.702  8.519796 8.1005 8.4020 25.300   500   c")
+```
+
+_N_ = 1000
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: microseconds
+         expr    min      lq      mean median     uq     max neval cld
+ xoshiro256++  8.301  8.6010  9.304808  8.801  9.101  60.201   500 a  
+       sample 47.301 49.2505 51.768590 49.800 50.401 105.800   500  b 
+   sample.int 43.801 45.6010 49.985602 46.301 47.251 185.001   500   c")
+```
+
+_N_ = 10000
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: microseconds
+         expr     min       lq     mean   median       uq       max neval cld
+ xoshiro256++  70.501  73.7015 101.6722  75.3010  98.3010  8055.401   500  a 
+       sample 468.602 495.4510 519.5600 499.0000 504.0510 10295.201   500   b
+   sample.int 439.401 460.3020 483.3456 463.9015 469.8515  8857.901   500    c")
+```
+
+Focusing on the median values, the pattern becomes clear: xoshiro256++ is 2-6*x* faster than base R's `sample` and `sample.int`.
+
+### Random Normal
+
+The Ziggurat method ([Marsaglia & Tsang, 2000](https://doi.org/10.18637/jss.v005.i08)) is a fast and robust method to generate random normal data ([Thomas et al., 2007](https://doi.org/10.1145/1287620.1287622)). Dirk Eddelbuettel has a fantastic [write-up](https://cran.r-project.org/web/packages/RcppZiggurat/vignettes/RcppZiggurat.pdf) on the approach and his C++ implementation in {RcppZiggurat}, so details are not provided here. As Eddelbuettel compares in his write-up, different PRNG can be used with the Ziggurat method (including the Mersenne Twister; [Leong et al., 2005](https://doi.org/10.18637/jss.v012.i07)). In {EGAnet}, xoshiro256++ is used, supplying fast and statistically robust random uniform values to the Ziggurat method.
+
+The same conditions for the benchmark comparison with the `sample` functions was performed to generate random normal data with the Ziggurat method. A comparison was performed between {EGAnet}'s Ziggurat, {RcppZiggurat}'s `zrnorm`, and base R's `rnorm`. Here's the comparison:
+
+_N_ = 10
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: nanoseconds
+         expr  min   lq     mean median   uq   max neval cld
+       EGAnet 1200 1301 1461.380 1401.0 1501 14901   500 a  
+ RcppZiggurat  700  702  958.232  801.0  901 40401   500  b 
+        rnorm 1000 1101 1236.780 1101.5 1202  6101   500   c")
+```
+
+_N_ = 100
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: microseconds
+         expr   min    lq     mean median    uq    max neval cld
+       EGAnet 1.602 1.801 2.259408  1.901 2.101 25.901   500 a  
+ RcppZiggurat 1.000 1.202 1.536390  1.400 1.501 35.201   500  b 
+        rnorm 3.601 4.000 4.313174  4.201 4.401 22.801   500   c")
+```
+
+_N_ = 1000
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: microseconds
+         expr    min     lq     mean median      uq    max neval cld
+       EGAnet  5.401  6.301  6.58418  6.502  6.8010 21.301   500 a  
+ RcppZiggurat  4.701  5.502  5.96425  5.801  6.1015 44.601   500  b 
+        rnorm 31.702 32.800 33.37257 33.101 33.5020 47.100   500   c")
+```
+
+_N_ = 10000
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+cat("Unit: microseconds
+         expr     min      lq      mean   median       uq      max neval cld
+       EGAnet  51.301  53.600  59.48418  54.6005  65.7515  121.201   500 a 
+ RcppZiggurat  46.001  49.401  73.27382  51.9505  65.7010 7548.500   500  b  
+        rnorm 319.700 328.001 353.45898 339.0015 341.2010 7854.400   500   c")
+```
+
+Focusing on the median values, {EGAnet}'s implementation starts out the slowest when generating only 10 values. As _N_ increases, {EGAnet}'s Ziggurat keeps pace with {RcppZiggurat}'s implementation and outpaces `rnorm` by about 2-6*x*. The gap between {RcppZiggurat} and {EGAnet} starts to widen as _N_ becomes greater than 1000000 (median = 5.32 and 5.70 milliseconds, respectively). In practice, the speed difference between them would hardly be noticeable.
+
+## Reproducibility
+
+Reproducibility is fundamental to the integrity of scientific research _yet_ reproducibility is the opposite of randomness. Nevertheless, reproducing results that require randomness (e.g., bootstrap, permutation) are necessary. {EGAnet} tackles this problem in two different ways: (1) pre-generating seeds using PRNG in C and (2) using internal functions to maintain R's PRNG state.
+
+Pre-generating seeds in C (using xoshiro256++) avoids any potential for conflicts with R's PRNG. _N_ seeds are generated based on a single seed from a function (e.g., `seed = 1234`). Using the single `seed`, the resulting pre-generated seeds will always be the same. The seeds are expected to be independent (due to the PRNG) and set up to be ["thread safe"](https://en.wikipedia.org/wiki/Thread_safety) by using local storage meaning there is a minimal chance of unexpected behavior when using parallel processing (i.e., `ncores` > 1). By default, R's PRNG is _not_ thread safe and requires some [consideration](https://www.rdocumentation.org/packages/parallel/versions/3.6.2/topics/RNGstreams) for parallelization.
+
+The internal functions `store_state()` and `restore_state()` store the current state of R's PRNG at the very start of an {EGAnet} PRNG function and restore the state at the very end, respectively. This strategy alone is enough to ensure consistent results before and after PRNG in {EGAnet}.
+
+To see this reproducibility in action, here's a minimal example in R:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Set R's PRNG state
+set.seed(1)
+
+# Perform `runif(10)` once
+runif(10)
+
+# Perform `runif(10)` again
+runif(10)
+```
+
+For your scripts and {EGAnet} to be reproducible, there are two things we need to see: (1) the exact same values when running `runif(10)` twice where running `runif(10)` before a PRNG {EGAnet} function and then again after is the same as running it twice in a row without running {EGAnet} PRNG and (2) the exact same values from running a PRNG {EGAnet} function before and after running a PRNG R function like `runif(10)`. Here's the result:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load {EGAnet}
+library(EGAnet)
+
+# Set R's PRNG state
+set.seed(1)
+
+# Perform `runif(10)` once
+runif(10)
+
+# Perform `bootEGA` and set seed to `1234`
+boot <- bootEGA(wmt2[,7:24], uni.method = "LE", seed = 1234, plot.typicalStructure = FALSE)
+
+# Print summary
+summary(boot)
+
+# Perform `runif(10)` (again)
+runif(10)
+
+# Perform `bootEGA` and set seed to `1234` (again)
+boot <- bootEGA(wmt2[,7:24], uni.method = "LE", seed = 1234, plot.typicalStructure = FALSE)
+
+# Print summary (again)
+summary(boot)
+```
+
+The results of `runif` interspersed with `bootEGA` were fully reproduced. In this example, the Leading Eigenvector (`uni.method = "LE"`) was used because the Louvain algorithm uses PRNG that is not controlled by {EGAnet}. For more details on reproducibility with the Louvain algorithm, see [Louvain Reproducibility](#louvain-reproducibility).
+
+## Random Results
+
+Random results in PRNG functions in {EGAnet} are achieved by setting `seed = NULL`. A message will pop-up letting you know that the results will not be reproducible, so be sure to save your data before leaving R/RStudio. When setting `seed = NULL`, _n_ seeds will be pre-generated but rather than using a defined seed the seeds will be set based on your computer's clock time in _nanoseconds_ from the date January $1^{\text{st}}$, 1970 [UT](https://en.wikipedia.org/wiki/Universal_Time). This strategy means that unless you can pinpoint the exact _nanosecond_ (i.e., 0.000000001 second) when the computer grabbed your clock time, you're unlikely to get that exact seed (and results!) again. Although PRNG are never _truly_ random (but see [_true_ RNG](https://random.org)), the results you'll get will certainly be hard to reproduce.
+
+## Louvain Reproducibility
+
+The Louvain algorithm represents a special case in reproducibility in the {EGAnet} package. By default, the Louvain algorithm shuffles the order of the nodes when performed using some PRNG. The PRNG in {igraph} is not controlled by {EGAnet} and therefore results will usually be similar but not _exactly_ the same:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load {EGAnet}
+library(EGAnet)
+
+# Set R's PRNG state
+set.seed(1)
+
+# Perform `bootEGA` and set seed to `1234`
+boot <- bootEGA(wmt2[,7:24], seed = 1234, plot.typicalStructure = FALSE)
+
+# Print summary
+summary(boot)
+
+# Perform `bootEGA` and set seed to `1234` (again)
+boot <- bootEGA(wmt2[,7:24], seed = 1234, plot.typicalStructure = FALSE)
+
+# Print summary (again)
+summary(boot)
+```
+
+Notice that the results are very similar but they are not _exactly_ the same (frequencies for `1` and `3` are slightly different). The data that were generated in `bootEGA` _are_ exactly the same but the shuffles performed by the Louvain algorithm in {igraph} were not. The similarity in results may vary with how stable your data are (`itemStability` can help you gauge that). Implementing a reproducible Louvain is a work-in-progress and a goal for future {EGAnet} versions. 
+
+## References
+Blackman, D., & Vigna, S. (2021). Scrambled linear pseudorandom number generators. _ACM Transactions on Mathematical Software (TOMS)_, _47_(4), 1-32. https://doi.org/10.1145/3460772
+
+Leong, P. H., Zhang, G., Lee, D. U., Luk, W., & Villasenor, J. D. (2005). A Comment on the Implementation of the Ziggurat method. _Journal of Statistical Software_, _12_(7), 1-4. [https://doi.org/10.18637/jss.v012.i07](https://doi.org/10.18637/jss.v012.i07)
+
+Marsaglia, G., & Tsang, W. W. (2000). The ziggurat method for generating random variables. _Journal of Statistical Software_, _5_, 1-7. https://doi.org/10.18637/jss.v005.i08
+
+Thomas, D. B., Luk, W., Leong, P. H., & Villasenor, J. D. (2007). Gaussian random number generators. _ACM Computing Surveys_ (CSUR), _39_(4), 11-es. [https://doi.org/10.1145/1287620.1287622](https://doi.org/10.1145/1287620.1287622)
+
+## Source Code
+
+[xoshiro256++](https://prng.di.unimi.it/xoshiro256plusplus.c)
+
+[Ziggurat](https://people.sc.fsu.edu/~jburkardt/c_src/ziggurat/ziggurat.html)
+
+***
+
+<a name="footnote1"><sup>1</sup></a> When running [this program](https://gist.github.com/imneme/b706137e8da12d71f4dc376611750849) over xoshiro256++, the issue of repeats is present; however, with the recommended Splitmix64 generator for seed setting, this issue to go away. {EGAnet} implements xoshiro256++ with the Splitmix64 generator. Splitmix64 may not fully resolve the issue but it makes the it less likely.  
+
+<a name="footnote2"><sup>2</sup></a> There is some contention in the contemporary PRNG space. The [PCG](https://www.pcg-random.org/index.html) and [xo(ro)shiro](https://prng.di.unimi.it/) families of PRNG are two recent developments that are considered high quality PRNGs (among others). Despite the tension that exists, choosing one of these developments is a general improvement over most software default PRNGs. The decision to use xoshiro256++ came down to speed and ease of implementation and integration within {EGAnet} and the Ziggurat method.

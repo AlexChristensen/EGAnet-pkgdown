@@ -1,0 +1,20 @@
+To get started with {EGAnet}, you can use the Wiener Matrizen Test 2 (WMT-2) that is included in the package. The WMT-2 dataset is a German matrices intelligence test (in English, the name translates to Vienna Matrices Test 2). The test was designed using Rasch modeling to derive a short measure of (fluid) intelligence.
+
+The dataset is comprised of some demographic variables as well as the test items. Here's the variable names:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load {EGAnet}
+library(EGAnet)
+
+# Check variables names
+colnames(wmt2)
+```
+
+For the EGA analysis, only the variables of interest are necessary -- that is, only the `"wmt*"` variables are necessary. EGA is performed on the subset of these variables below:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Perform EGA
+ega_wmt <- EGA(wmt2[,7:24])
+```
+
+That's it! You're up and running with `EGA`. 

@@ -1,8 +1,8 @@
 ---
-title: "Test"
+title: "Using External Networks (and other packages)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Test}
+  %\VignetteIndexEntry{Using External Networks (and other packages)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

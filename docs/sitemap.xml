@@ -7,7 +7,19 @@
     <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/test.html</loc>
+    <loc>/articles/modular-approach.html</loc>
+  </url>
+  <url>
+    <loc>/articles/plotting.html</loc>
+  </url>
+  <url>
+    <loc>/articles/quick-start.html</loc>
+  </url>
+  <url>
+    <loc>/articles/reproducibility-prng.html</loc>
+  </url>
+  <url>
+    <loc>/articles/whats-changed.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>

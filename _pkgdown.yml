@@ -1,19 +1,47 @@
+# Website
 url: ~
+
+# Aesthetics
 template:
   bootstrap: 5
   bootswatch: yeti
   bslib:
     text-muted: 
       - "#fff !important" 
+
+# Navigation bar
 navbar:
   type: default
   left:
-    - text: "Getting Started"
-      href: articles/test.html
+    - text: "Quick Start"
+      href: articles/quick-start.html
+    - text: "Articles"
+      menu: 
+        - text: "Using External Networks"
+          href: articles/modular-approach.html
+        - text: "Plotting with {EGAnet}"
+          href: articles/plotting.html
+        - text: "More Articles..."
+          href: articles/index.html
     - text: "Reference"
       href: reference/index.html
     - text: "News"
       href: news/index.html
+      
+# "More Articles..." page
+articles:
+- title: Tutorials
+  contents:
+  - modular-approach
+  - plotting
+- title: Inner Workings
+  desc: >
+    Information about the inner workings of {EGAnet}
+  contents:
+  - whats-changed
+  - reproducibility-prng
+  
+# References (documentation)
 reference:
   - title: "EGA Functions"
     desc: "Main Exploratory Graph Analysis functions"
@@ -89,6 +117,8 @@ reference:
       - "prime.num"
       - "sim.dynEGA"
       - "wmt2"
+      
+# News
 news:
    one_page: true
    cran_dates: true
