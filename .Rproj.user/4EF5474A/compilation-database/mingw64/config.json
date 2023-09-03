@@ -1,0 +1,22 @@
+{
+    "args": [
+        "-ID:/R/R-4.3.1/include",
+        "-DNDEBUG",
+        "-DEIGEN_DONT_VECTORIZE",
+        "-nostdinc",
+        "-Id:/r/rtools43/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include/c++",
+        "-Id:/r/rtools43/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include/c++/x86_64-w64-mingw32.static.posix",
+        "-Id:/r/rtools43/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include/c++/backward",
+        "-Id:/r/rtools43/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include",
+        "-Id:/r/rtools43/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/../../../../include",
+        "-Id:/r/rtools43/x86_64-w64-mingw32.static.posix/bin/../lib/gcc/x86_64-w64-mingw32.static.posix/12.2.0/include-fixed",
+        "-include",
+        "D:/R Packages/EGAnet-pkgdown/.Rproj.user/4EF5474A/compilation-database/mingw64/c-definitions.h"
+    ],
+    "pch": "",
+    "is_cpp": false,
+    "hash": "1692715538",
+    "compiler": "4947574074073276986",
+    "rversion": "4.3.1",
+    "dbversion": 4
+}

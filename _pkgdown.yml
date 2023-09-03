@@ -1,5 +1,5 @@
 # Website
-url: ~
+url: http://r-ega.net/
 
 # Aesthetics
 template:
@@ -21,23 +21,40 @@ navbar:
           href: articles/modular-approach.html
         - text: "Plotting"
           href: articles/plotting.html
+        - text: "EGA + Transformers NLP"
+          href: articles/ega-nlp.html
         - text: "More Articles..."
           href: articles/index.html
     - text: "Reference"
       href: reference/index.html
     - text: "News"
       href: news/index.html
+    - text: "Errors"
+      href: articles/errors.html
+      
+# TODO
+# - text: "Consulting"
+#   href: articles/consulting.html
+# - text: "Courses"
+#   href: articles/course.html
+# - text: "Book"
+#   href: articles/book.html
+# - text: "App"
+#   href: https://alex-christensen.shinyapps.io/EGAnet-shiny/
       
 # "More Articles..." page
 articles:
 - title: Tutorials
   contents:
+  - quick-start
   - modular-approach
   - plotting
+  - ega-nlp
 - title: Inner Workings
   contents:
   - whats-changed
   - reproducibility-prng
+  - errors
   
 # References (documentation)
 reference:

@@ -1,3 +1,12 @@
+---
+title: "Quick Start"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quick Start}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
 To get started with {EGAnet}, you can use the Wiener Matrizen Test 2 (WMT-2) that is included in the package. The WMT-2 dataset is a German matrices intelligence test (in English, the name translates to Vienna Matrices Test 2). The test was designed using Rasch modeling to derive a short measure of (fluid) intelligence.
 
 The dataset is comprised of some demographic variables as well as the test items. Here's the variable names:
@@ -17,4 +26,12 @@ For the EGA analysis, only the variables of interest are necessary -- that is, o
 ega_wmt <- EGA(wmt2[,7:24])
 ```
 
-That's it! You're up and running with `EGA`. 
+That's it! You're up and running with `EGA`.
+
+To explore other features of the package, some quick links are provided below:
+
++   [External Networks (and external packages)](modular-approach.html)
+
++   [Plotting](plotting.html)
+
++   [EGA + Transformers NLP](ega-nlp.html)

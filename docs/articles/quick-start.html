@@ -38,14 +38,23 @@
 <li class="active nav-item">
   <a class="nav-link" href="../articles/quick-start.html">Quick Start</a>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/index.html">Articles</a>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/modular-approach.html">Using External Networks</a>
+    <a class="dropdown-item" href="../articles/plotting.html">Plotting</a>
+    <a class="dropdown-item" href="../articles/ega-nlp.html">EGA + Transformers NLP</a>
+    <a class="dropdown-item" href="../articles/index.html">More Articles...</a>
+  </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">News</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/errors.html">Errors</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -107,7 +116,14 @@ performed on the subset of these variables below:</p>
 <span><span class="va">ega_wmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span><span class="va">wmt2</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">24</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="quick-start_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <p>That’s it! You’re up and running with <code>EGA</code>.</p>
-  </main>
+<p>To explore other features of the package, some quick links are
+provided below:</p>
+<ul>
+<li><p><a href="modular-approach.html">External Networks (and external
+packages)</a></p></li>
+<li><p><a href="plotting.html">Plotting</a></p></li>
+<li><p><a href="ega-nlp.html">EGA + Transformers NLP</a></p></li>
+</ul></main>
 </div>
 
 

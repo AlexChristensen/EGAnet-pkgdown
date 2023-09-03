@@ -6,12 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="EGAnet">
-<title>Using External Networks (and other packages) • EGAnet</title>
+<title>Using External Networks (and external packages) • EGAnet</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using External Networks (and other packages)">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using External Networks (and external packages)">
 <meta property="og:description" content="EGAnet">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -43,6 +43,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/modular-approach.html">Using External Networks</a>
     <a class="dropdown-item" href="../articles/plotting.html">Plotting</a>
+    <a class="dropdown-item" href="../articles/ega-nlp.html">EGA + Transformers NLP</a>
     <a class="dropdown-item" href="../articles/index.html">More Articles...</a>
   </div>
 </li>
@@ -51,6 +52,9 @@
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">News</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/errors.html">Errors</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -76,7 +80,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Using External Networks (and other packages)</h1>
+      <img src="" class="logo" alt=""><h1>Using External Networks (and external packages)</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/hfgolino/EGAnet/blob/HEAD/vignettes/modular-approach.Rmd" class="external-link"><code>vignettes/modular-approach.Rmd</code></a></small>
@@ -85,11 +89,169 @@
 
     
     
+<p>Although {EGAnet} features many common methods used in the network
+psychometric literature, it does not include all possible options.
+Sometimes you might switch between {EGAnet} and other packages.</p>
 <div class="section level3">
-<h3 id="coming-soon">Coming soon…<a class="anchor" aria-label="anchor" href="#coming-soon"></a>
+<h3 id="alternative-networks">Alternative Networks<a class="anchor" aria-label="anchor" href="#alternative-networks"></a>
 </h3>
+<p>There are many different packages available to estimate psychometric
+networks. One common package is <a href="https://cran.r-project.org/web/packages/bootnet/index.html" class="external-link">{bootnet}</a>.
+<code><a href="https://rdrr.io/pkg/bootnet/man/estimateNetwork.html" class="external-link">bootnet::estimateNetwork</a></code> offers many different methods to
+estimate networks. The <code>"ggmModSelect"</code> approach will be used
+as an example.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hfgolino/EGAnet" class="external-link">EGAnet</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">bootnet</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load data</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">wmt2</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">24</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Estimate network</span></span>
+<span><span class="va">stepwise_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bootnet/man/estimateNetwork.html" class="external-link">estimateNetwork</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">data</span>, default <span class="op">=</span> <span class="st">"ggmModSelect"</span>, stepwise <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Once a network is estimated, then a modular approach to estimating
+the <code>EGA</code> workflow can be used. This workflow is the same as
+what’s used internally in the <code>EGA</code> function. If the network
+is coming from an <a href="https://r.igraph.org/" class="external-link">{igraph}</a> must be
+converted using the <code>igraph2matrix</code> function (e.g.,
+<code>ega_network &lt;- igraph2matrix(igraph_network)</code>). Any
+network that is a matrix or data frame object can be used in {EGAnet}
+functions like the output from <code>estimateNetwork</code>.</p>
+<div class="section level4">
+<h4 id="check-for-unidimensionality">Check for Unidimensionality<a class="anchor" aria-label="anchor" href="#check-for-unidimensionality"></a>
+</h4>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Perform unidimensionality check</span></span>
+<span><span class="va">unidimensional_membership</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/community.unidimensional.html">community.unidimensional</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print</span></span>
+<span><span class="va">unidimensional_membership</span></span></code></pre></div>
+<pre><code>Algorithm:  Louvain
+
+Number of communities:  2
+
+ wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11 wmt12 wmt13 
+    1     1     1     1     1     1     2     2     2     1     2     2     2 
+wmt14 wmt15 wmt16 wmt17 wmt18 
+    2     2     2     2     2 </code></pre>
+<p>The standard unidimensional check uses the Louvain <a href="https://doi.org/10.1088/1742-5468/2008/10/P10008" class="external-link">Louvain</a>
+algorithm on the zero-order correlation matrix (<a href="https://doi.org/10.31234/osf.io/ep3vx" class="external-link">Christensen, 2023</a>). The
+output will include the memberships regardless of whether the data are
+detected as unidimensional. In this output, the number of communities is
+2 and therefore <em>not</em> unidimensional. If the number of
+communities was 1, then there is no need to proceed with the
+multidimensional estimation.</p>
 </div>
-  </main>
+<div class="section level4">
+<h4 id="estimate-multidimensionality">Estimate Multidimensionality<a class="anchor" aria-label="anchor" href="#estimate-multidimensionality"></a>
+</h4>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Estimate multidimensionality</span></span>
+<span><span class="va">multidimensional_membership</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/community.detection.html">community.detection</a></span><span class="op">(</span></span>
+<span>  <span class="va">stepwise_result</span><span class="op">$</span><span class="va">graph</span>, algorithm <span class="op">=</span> <span class="st">"walktrap"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print</span></span>
+<span><span class="va">multidimensional_membership</span></span></code></pre></div>
+<pre><code>Algorithm:  Walktrap
+
+Number of communities:  2
+
+ wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11 wmt12 wmt13 
+    1     1     1     1     1     1     2     2     2     1     2     2     2 
+wmt14 wmt15 wmt16 wmt17 wmt18 
+    2     2     2     2     2 </code></pre>
+<p>For the multidimensional estimation, the estimated network should be
+used as the input. The algorithm can be set using a number of different
+algorithms (see <code><a href="../reference/community.detection.html">?community.detection</a></code>) but the default is to
+use the <a href="https://www.emis.de/journals/JGAA/getPaper-437.html?id=30" class="external-link">Walktrap</a>
+algorithm. From this output, Walktrap estimates 2 communities.</p>
+</div>
+<div class="section level4">
+<h4 id="obtain-final-memberships">Obtain Final Memberships<a class="anchor" aria-label="anchor" href="#obtain-final-memberships"></a>
+</h4>
+<p>A shortcut to obtain the final memberships as is used in
+<code>EGA</code> is provided below:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wc</span> <span class="op">&lt;-</span> <span class="fu">EGAnet</span><span class="fu">:::</span><span class="fu">swiftelse</span><span class="op">(</span></span>
+<span>    <span class="co"># Check for whether unidimensional membership should be used</span></span>
+<span>    <span class="fu">EGAnet</span><span class="fu">:::</span><span class="fu">unique_length</span><span class="op">(</span><span class="va">unidimensional_membership</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span>,</span>
+<span>    <span class="va">unidimensional_membership</span>, <span class="va">multidimensional_membership</span></span>
+<span>    <span class="co"># Otherwise, use multidimensional membership</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
+</h4>
+<p>In order to plot using {EGAnet}, the network and memberships need to
+be set up as an <code>EGA</code> class object:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set up EGA object</span></span>
+<span><span class="va">ega_object</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  network <span class="op">=</span> <span class="va">stepwise_result</span><span class="op">$</span><span class="va">graph</span>,</span>
+<span>  wc <span class="op">=</span> <span class="va">wc</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set `EGA` class</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">ega_object</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"EGA"</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ega_object</span><span class="op">)</span></span></code></pre></div>
+<p><img src="modular-approach_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+</div>
+<div class="section level4">
+<h4 id="modularity">Modularity<a class="anchor" aria-label="anchor" href="#modularity"></a>
+</h4>
+<p>Modularity can also be computed using the estimated network and
+appropriate memberships.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/modularity.html">modularity</a></span><span class="op">(</span><span class="va">stepwise_result</span><span class="op">$</span><span class="va">graph</span>, <span class="va">wc</span><span class="op">)</span></span></code></pre></div>
+<pre><code>[1] 0.204308</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="alternative-similarity-measures">Alternative Similarity Measures<a class="anchor" aria-label="anchor" href="#alternative-similarity-measures"></a>
+</h3>
+<p>By default, {EGAnet} uses the <code>auto.correlate</code> function to
+compute appropriate correlations for each set of pairwise variables.
+Other measures might need to be used in {EGAnet} functions.</p>
+<div class="section level4">
+<h4 id="cosine-similarity">Cosine Similarity<a class="anchor" aria-label="anchor" href="#cosine-similarity"></a>
+</h4>
+<p>A common example is from natural language processing and cognitive
+science where cosine similarity is a common association measure between
+two terms. Below, we’ll show a semantic network example from the <a href="https://doi.org/10.1037/met0000463" class="external-link">{SemNeT}</a> package.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hfgolino/EGAnet" class="external-link">EGAnet</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AlexChristensen/SemNeT" class="external-link">SemNeT</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compute cosine similarity</span></span>
+<span><span class="va">animals_cosine</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SemNeT/man/similarity.html" class="external-link">similarity</a></span><span class="op">(</span><span class="va">open.binary</span>, method <span class="op">=</span> <span class="st">"cosine"</span><span class="op">)</span></span></code></pre></div>
+<p>This data are from participants who performed a verbal fluency task
+and generated animals for 1 minute. Each row represents a participant
+and each column represents an animal. A <code>1</code> is an animal a
+participant provided; a <code>0</code> is an animal a participant did
+not provide.</p>
+<p>The <code>animals_cosine</code> object is a symmetric matrix that
+represents the cosine similarity between each animal. To use the cosine
+similarity matrix (or any other alternative similarity matrix) in an
+{EGAnet} function, <code>n</code> or the number of cases must be
+set:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Compute EGA</span></span>
+<span><span class="va">animals_ega</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span></span>
+<span>  <span class="co"># Arguments for `EGA`</span></span>
+<span>  <span class="va">animals_cosine</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">open.binary</span><span class="op">)</span>, model <span class="op">=</span> <span class="st">"TMFG"</span>,</span>
+<span>  <span class="co"># Arguments for `plot`</span></span>
+<span>  node.size <span class="op">=</span> <span class="fl">4</span>, label.size <span class="op">=</span> <span class="fl">3</span>, edge.size <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="modular-approach_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

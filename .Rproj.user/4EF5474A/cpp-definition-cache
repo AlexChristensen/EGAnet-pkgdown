@@ -1,0 +1,665 @@
+[
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/init.c",
+        "file_last_write": 1690998419.0,
+        "definitions": [
+            {
+                "usr": "c:@F@R_init_EGAnet",
+                "kind": 6,
+                "parent_name": "",
+                "name": "R_init_EGAnet(DllInfo *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/init.c",
+                "line": 57,
+                "column": 6,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/modularity.c",
+        "file_last_write": 1691422156.0,
+        "definitions": [
+            {
+                "usr": "c:@F@modularity_values",
+                "kind": 6,
+                "parent_name": "",
+                "name": "modularity_values(double *, int, double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/modularity.c",
+                "line": 7,
+                "column": 26,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@signed_modularity",
+                "kind": 6,
+                "parent_name": "",
+                "name": "signed_modularity(struct modularity_result, int *, int)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/modularity.c",
+                "line": 142,
+                "column": 8,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/modularity.h",
+        "file_last_write": 1691422156.0,
+        "definitions": [
+            {
+                "usr": "c:@S@modularity_result",
+                "kind": 3,
+                "parent_name": "",
+                "name": "modularity_result",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/modularity.h",
+                "line": 9,
+                "column": 8,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/nanotime.c",
+        "file_last_write": 1691705666.0,
+        "definitions": [
+            {
+                "usr": "c:@F@get_time_ns",
+                "kind": 6,
+                "parent_name": "",
+                "name": "get_time_ns",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/nanotime.c",
+                "line": 7,
+                "column": 10,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/nanotime.h",
+        "file_last_write": 1691705692.0,
+        "definitions": [],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+        "file_last_write": 1692450574.0,
+        "definitions": [
+            {
+                "usr": "c:@F@bsm_inverse_cdf",
+                "kind": 6,
+                "parent_name": "",
+                "name": "bsm_inverse_cdf(double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 37,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@joint_frequency_table",
+                "kind": 6,
+                "parent_name": "",
+                "name": "joint_frequency_table(int *, int, int, int, int *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 86,
+                "column": 7,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@update_joint_frequency",
+                "kind": 6,
+                "parent_name": "",
+                "name": "update_joint_frequency(int **, int *, int *, int *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 127,
+                "column": 10,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.c@F@compute_probabilities",
+                "kind": 6,
+                "parent_name": "",
+                "name": "compute_probabilities(double *, int, double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 232,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.c@F@compute_cumulative",
+                "kind": 6,
+                "parent_name": "",
+                "name": "compute_cumulative(double *, int)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 241,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.c@F@compute_thresholds",
+                "kind": 6,
+                "parent_name": "",
+                "name": "compute_thresholds(double *, int, double *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 250,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:@S@ThresholdsResult",
+                "kind": 3,
+                "parent_name": "",
+                "name": "ThresholdsResult",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 259,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@thresholds",
+                "kind": 6,
+                "parent_name": "",
+                "name": "thresholds(int *, int, int, int, int, double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 270,
+                "column": 25,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.c@F@error_function",
+                "kind": 6,
+                "parent_name": "",
+                "name": "error_function(double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 382,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.c@F@univariate_normal",
+                "kind": 6,
+                "parent_name": "",
+                "name": "univariate_normal(double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 404,
+                "column": 22,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@drezner_bivariate_normal",
+                "kind": 6,
+                "parent_name": "",
+                "name": "drezner_bivariate_normal(double, double, double, double, double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 417,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.c@F@compute_thresholds_and_probabilities",
+                "kind": 6,
+                "parent_name": "",
+                "name": "compute_thresholds_and_probabilities(double *, double *, int, int, double *, double *, double *, double *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 568,
+                "column": 20,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@polychoric_log_likelihood",
+                "kind": 6,
+                "parent_name": "",
+                "name": "polychoric_log_likelihood(double, double **, double *, double *, double *, double *, int, int)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 591,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@optimize",
+                "kind": 6,
+                "parent_name": "",
+                "name": "optimize(double (*)(double, double **, double *, double *, double *, double *, int, int), double **, double *, double *, double *, double *, int, int)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 651,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@polychoric",
+                "kind": 6,
+                "parent_name": "",
+                "name": "polychoric(int *, int, int, int, int, double)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 770,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@polychoric_correlation_matrix",
+                "kind": 6,
+                "parent_name": "",
+                "name": "polychoric_correlation_matrix(int *, int, int, int, double, double *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 797,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_polychoric_correlation_matrix",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_polychoric_correlation_matrix(SEXP, SEXP, SEXP, SEXP, SEXP)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.c",
+                "line": 839,
+                "column": 6,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+        "file_last_write": 1692009429.0,
+        "definitions": [
+            {
+                "usr": "c:polychoric_matrix.h@99@macro@CUT",
+                "kind": 9,
+                "parent_name": "",
+                "name": "CUT",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 5,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@353@macro@MISSING",
+                "kind": 9,
+                "parent_name": "",
+                "name": "MISSING",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 14,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@409@macro@A1",
+                "kind": 9,
+                "parent_name": "",
+                "name": "A1",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 17,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@433@macro@A2",
+                "kind": 9,
+                "parent_name": "",
+                "name": "A2",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 18,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@458@macro@A3",
+                "kind": 9,
+                "parent_name": "",
+                "name": "A3",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 19,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@482@macro@A4",
+                "kind": 9,
+                "parent_name": "",
+                "name": "A4",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 20,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@507@macro@A5",
+                "kind": 9,
+                "parent_name": "",
+                "name": "A5",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 21,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@531@macro@P",
+                "kind": 9,
+                "parent_name": "",
+                "name": "P",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 22,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@653@macro@COR_MAX",
+                "kind": 9,
+                "parent_name": "",
+                "name": "COR_MAX",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 26,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@674@macro@BV_FAC1",
+                "kind": 9,
+                "parent_name": "",
+                "name": "BV_FAC1",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 27,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@702@macro@BV_FAC2",
+                "kind": 9,
+                "parent_name": "",
+                "name": "BV_FAC2",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 28,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@829@macro@LOWER",
+                "kind": 9,
+                "parent_name": "",
+                "name": "LOWER",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 33,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@849@macro@UPPER",
+                "kind": 9,
+                "parent_name": "",
+                "name": "UPPER",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 34,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@868@macro@TOL",
+                "kind": 9,
+                "parent_name": "",
+                "name": "TOL",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 35,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@917@macro@MAX_ITER",
+                "kind": 9,
+                "parent_name": "",
+                "name": "MAX_ITER",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 36,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:polychoric_matrix.h@939@macro@ZEPS",
+                "kind": 9,
+                "parent_name": "",
+                "name": "ZEPS",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/polychoric_matrix.h",
+                "line": 37,
+                "column": 9,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/signed_modularity.c",
+        "file_last_write": 1691422156.0,
+        "definitions": [
+            {
+                "usr": "c:@F@r_signed_modularity",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_signed_modularity(SEXP, SEXP, SEXP)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/signed_modularity.c",
+                "line": 6,
+                "column": 6,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+        "file_last_write": 1692103772.0,
+        "definitions": [
+            {
+                "usr": "c:xoshiro.c@F@rotl",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rotl(const uint64_t, int)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 26,
+                "column": 24,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@next",
+                "kind": 6,
+                "parent_name": "",
+                "name": "next(xoshiro256_state *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 30,
+                "column": 10,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@splitmix64",
+                "kind": 6,
+                "parent_name": "",
+                "name": "splitmix64(uint64_t *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 94,
+                "column": 10,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@seed_xoshiro256",
+                "kind": 6,
+                "parent_name": "",
+                "name": "seed_xoshiro256(xoshiro256_state *, uint64_t)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 102,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@xoshiro_uniform",
+                "kind": 6,
+                "parent_name": "",
+                "name": "xoshiro_uniform(xoshiro256_state *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 116,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_xoshiro_uniform",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_xoshiro_uniform(SEXP, SEXP)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 121,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_xoshiro_seeds",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_xoshiro_seeds(SEXP, SEXP)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 156,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_xoshiro_shuffle",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_xoshiro_shuffle(SEXP, SEXP)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 191,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_xoshiro_shuffle_replace",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_xoshiro_shuffle_replace(SEXP, SEXP)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.c",
+                "line": 231,
+                "column": 6,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.h",
+        "file_last_write": 1692103749.0,
+        "definitions": [
+            {
+                "usr": "c:@SA@xoshiro256_state",
+                "kind": 3,
+                "parent_name": "",
+                "name": "",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.h",
+                "line": 7,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:@T@xoshiro256_state",
+                "kind": 8,
+                "parent_name": "",
+                "name": "xoshiro256_state",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/xoshiro.h",
+                "line": 9,
+                "column": 3,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.c",
+        "file_last_write": 1692099754.0,
+        "definitions": [
+            {
+                "usr": "c:@F@r4_nor_initialize",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r4_nor_initialize",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.c",
+                "line": 19,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r4_nor",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r4_nor(xoshiro256_state *, uint32_t *, double *, double *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.c",
+                "line": 55,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r4_nor_setup",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r4_nor_setup(uint32_t *, double *, double *)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.c",
+                "line": 168,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@r_ziggurat",
+                "kind": 6,
+                "parent_name": "",
+                "name": "r_ziggurat(SEXP, SEXP)",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.c",
+                "line": 265,
+                "column": 6,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.h",
+        "file_last_write": 1691775309.0,
+        "definitions": [
+            {
+                "usr": "c:ziggurat.h@46@macro@R",
+                "kind": 9,
+                "parent_name": "",
+                "name": "R",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.h",
+                "line": 4,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:ziggurat.h@71@macro@DN",
+                "kind": 9,
+                "parent_name": "",
+                "name": "DN",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.h",
+                "line": 5,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:ziggurat.h@104@macro@M1",
+                "kind": 9,
+                "parent_name": "",
+                "name": "M1",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.h",
+                "line": 6,
+                "column": 9,
+                "hidden": false
+            },
+            {
+                "usr": "c:ziggurat.h@135@macro@VN",
+                "kind": 9,
+                "parent_name": "",
+                "name": "VN",
+                "file": "D:/R Packages/EGAnet-pkgdown/src/ziggurat.h",
+                "line": 7,
+                "column": 9,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    }
+]

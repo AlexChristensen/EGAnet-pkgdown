@@ -1,210 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>http://r-ega.net/404.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>http://r-ega.net/articles/ega-nlp.html</loc>
   </url>
   <url>
-    <loc>/articles/modular-approach.html</loc>
+    <loc>http://r-ega.net/articles/errors.html</loc>
   </url>
   <url>
-    <loc>/articles/plotting.html</loc>
+    <loc>http://r-ega.net/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/quick-start.html</loc>
+    <loc>http://r-ega.net/articles/modular-approach.html</loc>
   </url>
   <url>
-    <loc>/articles/reproducibility-prng.html</loc>
+    <loc>http://r-ega.net/articles/plotting.html</loc>
   </url>
   <url>
-    <loc>/articles/whats-changed.html</loc>
+    <loc>http://r-ega.net/articles/quick-start.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>http://r-ega.net/articles/reproducibility-prng.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>http://r-ega.net/articles/whats-changed.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>http://r-ega.net/authors.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>http://r-ega.net/index.html</loc>
   </url>
   <url>
-    <loc>/Readme.html</loc>
+    <loc>http://r-ega.net/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/reference/auto.correlate.html</loc>
+    <loc>http://r-ega.net/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/boot.ergoInfo.html</loc>
+    <loc>http://r-ega.net/Readme.html</loc>
   </url>
   <url>
-    <loc>/reference/boot.wmt.html</loc>
+    <loc>http://r-ega.net/reference/auto.correlate.html</loc>
   </url>
   <url>
-    <loc>/reference/bootEGA.html</loc>
+    <loc>http://r-ega.net/reference/boot.ergoInfo.html</loc>
   </url>
   <url>
-    <loc>/reference/CFA.html</loc>
+    <loc>http://r-ega.net/reference/boot.wmt.html</loc>
   </url>
   <url>
-    <loc>/reference/color_palette_EGA.html</loc>
+    <loc>http://r-ega.net/reference/bootEGA.html</loc>
   </url>
   <url>
-    <loc>/reference/community.consensus.html</loc>
+    <loc>http://r-ega.net/reference/CFA.html</loc>
   </url>
   <url>
-    <loc>/reference/community.detection.html</loc>
+    <loc>http://r-ega.net/reference/color_palette_EGA.html</loc>
   </url>
   <url>
-    <loc>/reference/community.homogenize.html</loc>
+    <loc>http://r-ega.net/reference/community.consensus.html</loc>
   </url>
   <url>
-    <loc>/reference/community.unidimensional.html</loc>
+    <loc>http://r-ega.net/reference/community.detection.html</loc>
   </url>
   <url>
-    <loc>/reference/compare.EGA.plots.html</loc>
+    <loc>http://r-ega.net/reference/community.homogenize.html</loc>
   </url>
   <url>
-    <loc>/reference/convert2igraph.html</loc>
+    <loc>http://r-ega.net/reference/community.unidimensional.html</loc>
   </url>
   <url>
-    <loc>/reference/convert2tidygraph.html</loc>
+    <loc>http://r-ega.net/reference/compare.EGA.plots.html</loc>
   </url>
   <url>
-    <loc>/reference/depression.html</loc>
+    <loc>http://r-ega.net/reference/convert2igraph.html</loc>
   </url>
   <url>
-    <loc>/reference/dimensionStability.html</loc>
+    <loc>http://r-ega.net/reference/convert2tidygraph.html</loc>
   </url>
   <url>
-    <loc>/reference/dnn.weights.html</loc>
+    <loc>http://r-ega.net/reference/depression.html</loc>
   </url>
   <url>
-    <loc>/reference/dynEGA.html</loc>
+    <loc>http://r-ega.net/reference/dimensionStability.html</loc>
   </url>
   <url>
-    <loc>/reference/dynEGA.ind.pop.html</loc>
+    <loc>http://r-ega.net/reference/dnn.weights.html</loc>
   </url>
   <url>
-    <loc>/reference/EBICglasso.qgraph.html</loc>
+    <loc>http://r-ega.net/reference/dynEGA.html</loc>
   </url>
   <url>
-    <loc>/reference/EGA.estimate.html</loc>
+    <loc>http://r-ega.net/reference/dynEGA.ind.pop.html</loc>
   </url>
   <url>
-    <loc>/reference/EGA.fit.html</loc>
+    <loc>http://r-ega.net/reference/EBICglasso.qgraph.html</loc>
   </url>
   <url>
-    <loc>/reference/EGA.html</loc>
+    <loc>http://r-ega.net/reference/EGA.estimate.html</loc>
   </url>
   <url>
-    <loc>/reference/ega.wmt.html</loc>
+    <loc>http://r-ega.net/reference/EGA.fit.html</loc>
   </url>
   <url>
-    <loc>/reference/EGAnet-package.html</loc>
+    <loc>http://r-ega.net/reference/EGA.html</loc>
   </url>
   <url>
-    <loc>/reference/EGAnet-plot.html</loc>
+    <loc>http://r-ega.net/reference/ega.wmt.html</loc>
   </url>
   <url>
-    <loc>/reference/Embed.html</loc>
+    <loc>http://r-ega.net/reference/EGAnet-package.html</loc>
   </url>
   <url>
-    <loc>/reference/entropyFit.html</loc>
+    <loc>http://r-ega.net/reference/EGAnet-plot.html</loc>
   </url>
   <url>
-    <loc>/reference/ergoInfo.html</loc>
+    <loc>http://r-ega.net/reference/Embed.html</loc>
   </url>
   <url>
-    <loc>/reference/genTEFI.html</loc>
+    <loc>http://r-ega.net/reference/entropyFit.html</loc>
   </url>
   <url>
-    <loc>/reference/glla.html</loc>
+    <loc>http://r-ega.net/reference/ergoInfo.html</loc>
   </url>
   <url>
-    <loc>/reference/hierEGA.html</loc>
+    <loc>http://r-ega.net/reference/genTEFI.html</loc>
   </url>
   <url>
-    <loc>/reference/igraph2matrix.html</loc>
+    <loc>http://r-ega.net/reference/glla.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>http://r-ega.net/reference/hierEGA.html</loc>
   </url>
   <url>
-    <loc>/reference/infoCluster.html</loc>
+    <loc>http://r-ega.net/reference/igraph2matrix.html</loc>
   </url>
   <url>
-    <loc>/reference/intelligenceBattery.html</loc>
+    <loc>http://r-ega.net/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/invariance.html</loc>
+    <loc>http://r-ega.net/reference/infoCluster.html</loc>
   </url>
   <url>
-    <loc>/reference/itemStability.html</loc>
+    <loc>http://r-ega.net/reference/intelligenceBattery.html</loc>
   </url>
   <url>
-    <loc>/reference/jsd.html</loc>
+    <loc>http://r-ega.net/reference/invariance.html</loc>
   </url>
   <url>
-    <loc>/reference/LCT.html</loc>
+    <loc>http://r-ega.net/reference/itemStability.html</loc>
   </url>
   <url>
-    <loc>/reference/modularity.html</loc>
+    <loc>http://r-ega.net/reference/jsd.html</loc>
   </url>
   <url>
-    <loc>/reference/net.loads.html</loc>
+    <loc>http://r-ega.net/reference/LCT.html</loc>
   </url>
   <url>
-    <loc>/reference/net.scores.html</loc>
+    <loc>http://r-ega.net/reference/modularity.html</loc>
   </url>
   <url>
-    <loc>/reference/network.estimation.html</loc>
+    <loc>http://r-ega.net/reference/net.loads.html</loc>
   </url>
   <url>
-    <loc>/reference/optimism.html</loc>
+    <loc>http://r-ega.net/reference/net.scores.html</loc>
   </url>
   <url>
-    <loc>/reference/polychoric.matrix.html</loc>
+    <loc>http://r-ega.net/reference/network.estimation.html</loc>
   </url>
   <url>
-    <loc>/reference/prime.num.html</loc>
+    <loc>http://r-ega.net/reference/optimism.html</loc>
   </url>
   <url>
-    <loc>/reference/riEGA.html</loc>
+    <loc>http://r-ega.net/reference/polychoric.matrix.html</loc>
   </url>
   <url>
-    <loc>/reference/sim.dynEGA.html</loc>
+    <loc>http://r-ega.net/reference/prime.num.html</loc>
   </url>
   <url>
-    <loc>/reference/simDFM.html</loc>
+    <loc>http://r-ega.net/reference/riEGA.html</loc>
   </url>
   <url>
-    <loc>/reference/tefi.html</loc>
+    <loc>http://r-ega.net/reference/sim.dynEGA.html</loc>
   </url>
   <url>
-    <loc>/reference/TMFG.html</loc>
+    <loc>http://r-ega.net/reference/simDFM.html</loc>
   </url>
   <url>
-    <loc>/reference/totalCor.html</loc>
+    <loc>http://r-ega.net/reference/tefi.html</loc>
   </url>
   <url>
-    <loc>/reference/totalCorMat.html</loc>
+    <loc>http://r-ega.net/reference/TMFG.html</loc>
   </url>
   <url>
-    <loc>/reference/UVA.html</loc>
+    <loc>http://r-ega.net/reference/totalCor.html</loc>
   </url>
   <url>
-    <loc>/reference/vn.entropy.html</loc>
+    <loc>http://r-ega.net/reference/totalCorMat.html</loc>
   </url>
   <url>
-    <loc>/reference/wmt2.html</loc>
+    <loc>http://r-ega.net/reference/UVA.html</loc>
   </url>
   <url>
-    <loc>/reference/wto.html</loc>
+    <loc>http://r-ega.net/reference/vn.entropy.html</loc>
+  </url>
+  <url>
+    <loc>http://r-ega.net/reference/wmt2.html</loc>
+  </url>
+  <url>
+    <loc>http://r-ega.net/reference/wto.html</loc>
   </url>
 </urlset>

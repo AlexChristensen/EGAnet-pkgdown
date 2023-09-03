@@ -1,0 +1,460 @@
+---
+title: "EGA + Transformers NLP"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{EGA + Transformers NLP}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Transformers models are taking the data science world by storm. Their rise in popularity is due to their unparalleled ability to understand contextual information in language. In short, these models can quantify the qualitative.
+
+To demonstrate how transformers natural language processing (NLP) can be used in combination with {EGAnet}, we'll use an example of Taylor Swift's first and most recent albums: *Taylor Swift* and *Midnights*.
+
+### Set Up Transformers NLP and Genius API
+
+To get started, the [{text}](https://r-text.org) package needs to be installed and set up (see [{text} installation](http://r-text.org/articles/huggingface_in_r_extended_installation_guide.html) for instructions on getting set up).
+
+Once set up, load {text}:
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+load("./data/ega-nlp.RData")
+```
+
+```{r, echo = TRUE, eval = FALSE, warning = FALSE, message = FALSE, comment = NA}
+library(text)
+```
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+EGAnet:::silent_load(library(text))
+```
+
+We'll use another package called {simpleRgenius} to scrape lyrics from the [Genius](https://genius.com/) lyrics website. This package needs to be installed from GitHub and loaded:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Install {devtools} (if necessary)
+if(!"devtools" %in% unlist(lapply(.libPaths(), list.files))){
+  install.packages("devtools")
+}
+
+# Install {simpleRgenius}
+devtools::install_github("AlexChristensen/simpleRgenius")
+
+# Load {simpleRgenius}
+library(simpleRgenius)
+```
+
+After installing {simpleRgenius}, you'll need to set up an API with Genius (only necessary to reproduce this example). You can follow the instructions [here](https://github.com/AlexChristensen/simpleRgenius/wiki/Genius-API-Setup).
+
+### Scraping Lyrics
+
+At this point, you should have loaded {text} and {simpleRgenius} as well as imported your Genius API into R's environment (if following along and reproducing the code). The next step is to get all of the songs for Taylor Swift's *Midnights* album:
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+Sys.setenv(GENIUS_API_TOKEN = "xT4ny-9oP9kQXKmG1NtTRcLfzaHIc02R-fWEM_bbU2Bp_uHK-zHzVs4929vWR0Pz")
+```
+
+```{r, echo = TRUE, eval = FALSE, warning = FALSE, message = FALSE, comment = NA}
+# First, let's get all of the song names
+midnights_songs <- c(
+  "Lavender Haze", "Maroon", "Anti-Hero",
+  "Snow On The Beach", "You're On Your Own, Kid",
+  "Midnight Rain", "Question...?", "Vigilante Shit",
+  "Bejeweled", "Labyrinth", "Karma",
+  "Sweet Nothing", "Mastermind", 
+  "The Great War", "Bigger Than The Whole Sky",
+  "Paris", "High Infidelity", "Glitch",
+  "Would've, Could've, Should've",
+  "Dear Reader"
+)
+
+# Next, let's get the lyrics
+midnights_lyrics <- get_lyrics(
+  artist_name = "Taylor Swift",
+  song_names = midnights_songs
+)
+```
+
+### Perform Zero-shot Classification
+
+Next, zero-shot classification can be performed. There are many different models on [huggingface](https://huggingface.co) to choose from. We'll use Cross Encoder's base [RoBERTa](https://huggingface.co/cross-encoder/nli-roberta-base) model:
+
+```{r, echo = TRUE, eval = FALSE, warning = FALSE, message = FALSE, comment = NA}
+midnights_zero <- textZeroShot(
+  sequences = midnights_lyrics$Lyric, # text
+  candidate_labels = c(
+    "anxiety", "depression", "happiness",
+    "heartbreak", "love", "relationships",
+    "rebellious", "revenge", "romance"
+  ),
+  # theme (same as sentiment analysis)
+  model = "cross-encoder/nli-roberta-base",
+  # model to use
+  multi_label = TRUE
+  # whether multiple labels can be true
+)
+```
+
+### Reformat Zero-shot Output into Long Format
+
+To analyze data with {EGAnet}, data need to be in wide format. But first, let's do some basic NLP and visualization. The following code will (1) reformat the data into long format, (2) remove non-existent labels, (3) add back song names, and (4) summarize the lyrics by song:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load {tidyverse}
+library(tidyverse)
+
+# Wrangle the data
+midnights_long <- midnights_zero %>%
+  pivot_longer(
+    cols = starts_with("labels_") | starts_with("scores_"),
+    # Obtain columns with labels and scores
+    names_to = c(".value", "label_number"),
+    # Push the names to new columns
+    names_pattern = "(labels|scores)_(x_.*)"
+    # Set up the patterning for labels and scores
+  )
+
+# Remove NAs
+midnights_long <- na.omit(midnights_long)
+
+# Initialize vector for song names
+song_names <- character(length = nrow(midnights_long))
+
+# Create loop to store song names
+for(i in 1:nrow(midnights_long)){
+  
+  # Get matches for lyric
+  lyric_match <- min(
+    match( # Use `min` to get only one index
+      midnights_long$sequence[i],
+      midnights_lyrics$Lyric
+    )
+  )
+  
+  # Get song name
+  song_names[i] <- midnights_lyrics$Song[lyric_match]
+  
+}
+
+# Create vector to add songs back
+midnights_long$song_name <- song_names
+
+# Summarize by song
+midnights_summary <- midnights_long %>%
+  group_by(song_name, labels) %>%
+  summarize(
+    Probability = mean(
+      scores, na.rm = TRUE
+    )
+  )
+```
+
+### Basic NLP Visualization
+
+#### Keep Order of Songs
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Before visualizing...
+## Create factor to keep songs in order
+midnights_summary$song_name <- factor(
+  midnights_summary$song_name,
+  levels = midnights_songs
+)
+```
+
+#### Bar Plot by Song
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA, fig.height = 8, fig.width = 13, fig.align = "center"}
+# Visualize using histogram
+ggplot(
+  data = midnights_summary,
+  aes(x = Probability, y = labels, fill = labels)
+) +
+  facet_wrap(~song_name) +
+  geom_histogram(stat = "identity") +
+  labs(
+    x = "Probability",
+    y = "Sentiment",
+    title = "Midnights Album Sentiment"
+  ) +
+  scale_y_discrete(limits = rev) + # reverse order
+  theme( # basic theme
+    panel.background = element_blank(),
+    legend.title = element_blank(),
+    plot.title = element_text(size = 16, hjust = 0.5),
+    axis.line = element_line(linewidth = 1),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 14),
+    strip.text = element_text(size = 10),
+    legend.text = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+#### Album Arch of "relationships" Theme
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA, fig.height = 6, fig.width = 10, fig.align = "center"}
+# Visualize using line plot
+midnights_summary %>%
+  mutate( # focus on relationships across songs
+    alpha = ifelse(labels == "relationships", 1, 0.25)
+  ) %>%
+  ggplot(
+    aes(
+      x = song_name, y = Probability, group = labels, 
+      color = labels, alpha = alpha
+    ) 
+  ) +
+  geom_line(linewidth = 1) +
+  labs(
+    x = "Song",
+    y = "Probability",
+    title = "Midnights Album Arch"
+  ) +
+  theme( # basic theme
+    panel.background = element_blank(),
+    legend.title = element_blank(),
+    plot.title = element_text(size = 16, hjust = 0.5),
+    axis.line = element_line(linewidth = 1),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 14),
+    legend.text = element_text(size = 10),
+    legend.position = "bottom",
+    legend.key = element_rect(fill = NA), # remove grey box
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  scale_alpha_identity(guide = "none")
+```
+
+### Get Dimensionality of Album
+
+#### Reformat Lyrics into Wide Format
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Make each sentiment a column with values
+midnights_wide <- midnights_long %>%
+  pivot_wider(
+    names_from = "labels",
+    values_from = "scores"
+  ) %>%
+  group_by(song_name, sequence) %>%
+  summarize( 
+    anxiety = sum(anxiety, na.rm = TRUE), # CHANGE!
+    depression = sum(depression, na.rm = TRUE),
+    happiness = sum(happiness, na.rm = TRUE),
+    heartbreak = sum(heartbreak, na.rm = TRUE),
+    love = sum(love, na.rm = TRUE),
+    relationships = sum(relationships, na.rm = TRUE),
+    rebellious = sum(rebellious, na.rm = TRUE),
+    revenge = sum(revenge, na.rm = TRUE),
+    romance = sum(romance, na.rm = TRUE)
+  )
+```
+
+#### Perform EGA
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load {EGAnet}
+library(EGAnet)
+
+# Perform EGA
+midnights_ega <- EGA(midnights_wide[,-c(1:2)])
+
+# Get summary
+summary(midnights_ega)
+```
+
+#### Check Stability of EGA
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Perform bootstrap EGA
+midnights_boot <- bootEGA(midnights_wide[,-c(1:2)], seed = 12)
+
+# Get summary
+summary(midnights_boot)
+
+# Perform dimension stability
+dimensionStability(midnights_boot)
+```
+
+Overall, the dimensions are relative stable. The `depression` theme goes between the first and second dimension (roughly positive and negative valence themes, respectively). 
+
+### Invariance between the *Taylor Swift* and *Midnights* Albums
+
+Taking this analysis a step further, the themes can be analyzed for configural and metric invariance to determine whether there are thematic differences in lyrics between Taylor Swift's first and most recent albums.
+
+This analysis mimics analyses that might be performed using text data from an intervention or therapy study (e.g., pre/post, experiment/control).
+
+The same zero-shot classification analyses (including the same Cross Encoder RoBERTa model) should be performed using the same themes (i.e., classes).
+
+```{r, echo = FALSE, eval = FALSE, warning = FALSE, message = FALSE, comment = NA}
+# Get song names
+swift_songs <- c(
+  "Tim McGraw", "Picture to Burn", "Teardrops On My Guitar",
+  "A Place In This World", "Cold as You", "The Outside",
+  "Tied Together with a Smile", "Stay Beautiful",
+  "Should've Said No", "Mary's Song (Oh My My My)",
+  "Our Song", "I'm Only Me When I'm With You", "Invisible"
+)
+
+# Get lyrics
+swift_lyrics <- get_lyrics(
+  artist_name = "Taylor Swift",
+  song_names = swift_songs
+)
+
+# Perform zero-shot classification
+swift_zero <- textZeroShot(
+  sequences = swift_lyrics$Lyric, # text
+  candidate_labels = c( # themes
+    "anxiety", "depression", "happiness",
+    "heartbreak", "love", "relationships",
+    "rebellious", "revenge", "romance"
+  ),
+  model = "cross-encoder/nli-roberta-base",
+  multi_label = TRUE
+)
+
+# Wrangle the data
+swift_long <- swift_zero %>%
+  pivot_longer(
+    cols = starts_with("labels_") | starts_with("scores_"),
+    # Obtain columns with labels and scores
+    names_to = c(".value", "label_number"),
+    # Push the names to new columns
+    names_pattern = "(labels|scores)_(x_.*)"
+    # Set up the patterning for labels and scores
+  )
+
+# Remove NAs
+swift_long <- na.omit(swift_long)
+
+# Initialize vector for song names
+song_names <- character(length = nrow(swift_long))
+
+# Create loop to store song names
+for(i in 1:nrow(swift_long)){
+  
+  # Get matches for lyric
+  lyric_match <- min(
+    match( # Use `min` to get only one index
+      swift_long$sequence[i],
+      swift_lyrics$Lyric
+    )
+  )
+  
+  # Get song name
+  song_names[i] <- swift_lyrics$Song[lyric_match]
+  
+}
+
+# Create vector to add songs back
+swift_long$song_name <- song_names
+
+# Summarize by song
+swift_summary <- swift_long %>%
+  group_by(song_name, labels) %>%
+  summarize(
+    Probability = mean(
+      scores, na.rm = TRUE
+    )
+  )
+
+# Before visualizing...
+## Create factor to keep songs in order
+swift_summary$song_name <- factor(
+  swift_summary$song_name,
+  levels = swift_songs
+)
+
+# Make each sentiment a column with values
+swift_wide <- swift_long %>%
+  pivot_wider(
+    names_from = "labels",
+    values_from = "scores"
+  ) %>%
+  group_by(song_name, sequence) %>%
+  summarize( 
+    anxiety = sum(anxiety, na.rm = TRUE), # CHANGE!
+    depression = sum(depression, na.rm = TRUE),
+    happiness = sum(happiness, na.rm = TRUE),
+    heartbreak = sum(heartbreak, na.rm = TRUE),
+    love = sum(love, na.rm = TRUE),
+    relationships = sum(relationships, na.rm = TRUE),
+    rebellious = sum(rebellious, na.rm = TRUE),
+    revenge = sum(revenge, na.rm = TRUE),
+    romance = sum(romance, na.rm = TRUE)
+  )
+
+# Perform EGA
+swift_ega <- EGA(swift_wide[,-c(1:2)])
+
+# Get summary
+summary(swift_ega)
+
+# Perform bootstrap EGA
+swift_boot <- bootEGA(swift_wide[,-c(1:2)], seed = 12)
+
+# Get summary
+summary(swift_boot)
+
+# Perform dimension stability
+dimensionStability(swift_boot)
+```
+
+#### Set Up for Invariance
+
+Check out the mean probabilities of each theme across the albums
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Look at the mean probabilities of both
+# the Taylor Swift and Midnights albums
+colMeans(swift_wide[,-c(1:2)])
+colMeans(midnights_wide[,-c(1:2)])
+```
+
+Get *p*-values for *t*-tests between each theme
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+sapply(
+  colnames(swift_wide)[-c(1:2)], function(theme){
+    t.test(
+      swift_wide[,theme], midnights_wide[,theme], 
+      var.equal = TRUE
+    )$p.value
+  }
+)
+```
+
+Based on means, there are differences between `happiness` and `rebellious`.
+
+To get set up for `invariance`, groups need to be created:
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Set up groups
+groups <- c(
+  rep("Taylor Swift", nrow(swift_wide)),
+  rep("Midnights", nrow(midnights_wide))
+)
+
+# Combine datasets
+combined_wide <- rbind(
+  swift_wide[,-c(1:2)], midnights_wide[,-c(1,2)]
+)
+```
+
+#### Perform Invariance
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA, fig.height = 6, fig.width = 8, fig.align = "center"}
+# Perform invariance
+ega_invariance <- invariance(
+  data = combined_wide,
+  groups = groups,
+  seed = 12
+)
+
+# View and plot results
+ega_invariance; plot(ega_invariance)
+```
+
+Based on `invariance`, there is configural invariance but metric non-invariance for `anxiety`, `depression`, and `rebellious` themes. `anxiety` and `depression` themes had greater connectivity in the *Taylor Swift* album while `rebellious` themes had greater connectivity in the *Midnights* album. In essence, the two albums captured relatively different negative themes.
