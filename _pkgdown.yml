@@ -19,7 +19,7 @@ navbar:
       menu: 
         - text: "Using External Networks"
           href: articles/modular-approach.html
-        - text: "Plotting with {EGAnet}"
+        - text: "Plotting"
           href: articles/plotting.html
         - text: "More Articles..."
           href: articles/index.html
@@ -35,8 +35,6 @@ articles:
   - modular-approach
   - plotting
 - title: Inner Workings
-  desc: >
-    Information about the inner workings of {EGAnet}
   contents:
   - whats-changed
   - reproducibility-prng

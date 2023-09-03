@@ -35,6 +35,8 @@ The goal of the package is to provide:
 
 </span>
 
+*Check out [what's changed](articles/whats-changed.html) in version +2.0.0*
+
 <span style="font-size: 35px;">
 How to Install
 </span>

@@ -42,7 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/modular-approach.html">Using External Networks</a>
-    <a class="dropdown-item" href="../articles/plotting.html">Plotting with {EGAnet}</a>
+    <a class="dropdown-item" href="../articles/plotting.html">Plotting</a>
     <a class="dropdown-item" href="../articles/index.html">More Articles...</a>
   </div>
 </li>
@@ -99,6 +99,10 @@ foundation for your own creations. These examples focus solely on
 <code class="sourceCode R"><span><span class="co"># Load necessary packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hfgolino/EGAnet" class="external-link">EGAnet</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/" class="external-link">GGally</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># Estimate EGA</span></span>
+<span><span class="va">ega.wmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span><span class="va">wmt2</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">24</span><span class="op">]</span>, plot.EGA <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ega.wmt</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plotting_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 </div>
@@ -119,7 +123,7 @@ foundation for your own creations. These examples focus solely on
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ega.wmt</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plotting_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>Handling legend title and text can be done using the standard
-{ggplot2} <code>theme</code> arguments</p>
+<code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">?ggplot2::theme</a></code> arguments</p>
 </div>
 </div>
 <div class="section level3">
@@ -145,8 +149,10 @@ foundation for your own creations. These examples focus solely on
 <div class="section level3">
 <h3 id="layout">Layout<a class="anchor" aria-label="anchor" href="#layout"></a>
 </h3>
-<p>For all available layout options, see documentation for {sna}’s
-<code>gplot.layout</code>.</p>
+<p>For all available layout options, see
+<code><a href="https://rdrr.io/pkg/sna/man/gplot.layout.html" class="external-link">?sna::gplot.layout</a></code>. Remove <code>gplot.layout.</code> to
+use the layout (e.g., <code>gplot.layout.circle</code> =
+<code>layout = "circle"</code>)</p>
 <div class="section level4">
 <h4 id="circle">Circle<a class="anchor" aria-label="anchor" href="#circle"></a>
 </h4>
@@ -176,7 +182,7 @@ foundation for your own creations. These examples focus solely on
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ega.wmt</span>, node.color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#F5815A"</span>, <span class="st">"#47BCC9"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="plotting_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
-<p>An awesome resource to generate color palettes: <a href="https://coolors.co/" class="external-link">https://coolors.co/</a></p>
+<p>For quick color palette ideas, check out this <a href="https://coolors.co/" class="external-link">color palette generator</a></p>
 </div>
 <div class="section level4">
 <h4 id="size">Size<a class="anchor" aria-label="anchor" href="#size"></a>

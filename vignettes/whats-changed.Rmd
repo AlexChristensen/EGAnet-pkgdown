@@ -90,7 +90,7 @@ TEFI: -27.335")
 
 Model and algorithm information, network descriptives, community memberships, and fit (Total Entropy Fit Index) are provided with every `*EGA` function. This information is everything (and perhaps more!) than you need to write your reproducible Methods section. 
 
-What about `plot`? There's so much flexibility there that it needs its own [Wiki](https://github.com/hfgolino/EGAnet/wiki/Plots-in-%7BEGAnet%7D)
+What about `plot`? There's so much flexibility there that it needs its own [page](plotting.html)
 
 ### More Reproducible
 
@@ -98,6 +98,6 @@ Like polychoric correlations, we've implemented high quality open-source pseudor
 
 In short, your results can be replicated, time and time again.
 
-*For the gritty details, head over to [Reproducibility and PRNG](https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG)*
+*For the gritty details, head over to [Reproducibility and PRNG](reproducibility-prng.html)*
 
-### For more details on what's changed, check out the [NEWS](https://github.com/hfgolino/EGAnet/blob/master/NEWS)
+For more details on what's changed, check out the [NEWS](../news/index.html)

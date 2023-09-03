@@ -15,6 +15,10 @@ Plotting in {EGAnet} has become much more flexible by passing on _most_ argument
 # Load necessary packages
 library(EGAnet); library(GGally); library(ggplot2)
 
+# Estimate EGA
+ega.wmt <- EGA(wmt2[,7:24], plot.EGA = FALSE)
+
+# Plot
 plot(ega.wmt)
 ```
 
@@ -32,7 +36,7 @@ plot(ega.wmt, legend.names = c("Dimension 1", "Dimension 2"))
 plot(ega.wmt) + theme(legend.position = "none")
 ```
 
-Handling legend title and text can be done using the standard {ggplot2} `theme` arguments
+Handling legend title and text can be done using the standard `?ggplot2::theme` arguments
 
 ### Title
 
@@ -52,7 +56,7 @@ plot(ega.wmt) +
 
 ### Layout
 
-For all available layout options, see documentation for {sna}'s `gplot.layout`.
+For all available layout options, see `?sna::gplot.layout`. Remove `gplot.layout.` to use the layout (e.g., `gplot.layout.circle` = `layout = "circle"`)
 
 #### Circle
 
@@ -82,7 +86,7 @@ Change Colors Using HEX Codes
 plot(ega.wmt, node.color = c("#F5815A", "#47BCC9"))
 ```
 
-An awesome resource to generate color palettes: [https://coolors.co/](https://coolors.co/)
+For quick color palette ideas, check out this [color palette generator](https://coolors.co/)
 
 #### Size
 
