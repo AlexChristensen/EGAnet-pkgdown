@@ -9,8 +9,8 @@ articles:
   quick-start: quick-start.html
   reproducibility-prng: reproducibility-prng.html
   whats-changed: whats-changed.html
-last_built: 2023-09-03T18:23Z
+last_built: 2023-09-03T18:45Z
 urls:
-  reference: http://r-ega.net/reference
-  article: http://r-ega.net/articles
+  reference: https://r-ega.net/reference
+  article: https://r-ega.net/articles
 
