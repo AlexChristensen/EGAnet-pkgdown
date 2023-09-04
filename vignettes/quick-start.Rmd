@@ -30,6 +30,8 @@ That's it! You're up and running with `EGA`.
 
 To explore other features of the package, some quick links are provided below:
 
++   [EGA Workflow](ega.html)
+
 +   [External Networks (and external packages)](modular-approach.html)
 
 +   [Plotting](plotting.html)

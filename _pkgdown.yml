@@ -15,6 +15,10 @@ navbar:
   left:
     - text: "Quick Start"
       href: articles/quick-start.html
+    - text: "Workflows"
+      menu:
+        - text: "EGA"
+          href: articles/ega.html
     - text: "Articles"
       menu: 
         - text: "Using External Networks"
@@ -50,6 +54,9 @@ articles:
   - modular-approach
   - plotting
   - ega-nlp
+- title: Workflows
+  contents:
+  - ega
 - title: Inner Workings
   contents:
   - whats-changed
