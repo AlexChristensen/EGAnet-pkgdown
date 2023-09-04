@@ -21,12 +21,14 @@ navbar:
           href: articles/ega.html
     - text: "Articles"
       menu: 
-        - text: "Using External Networks"
-          href: articles/modular-approach.html
-        - text: "Plotting"
-          href: articles/plotting.html
         - text: "EGA + Transformers NLP"
           href: articles/ega-nlp.html
+        - text: "Using External Networks"
+          href: articles/modular-approach.html
+        - text: "Argument Flexibility"
+          href: articles/argument-flexibility.html
+        - text: "Plotting"
+          href: articles/plotting.html
         - text: "More Articles..."
           href: articles/index.html
     - text: "Reference"
@@ -51,15 +53,16 @@ articles:
 - title: Tutorials
   contents:
   - quick-start
+  - ega-nlp
   - modular-approach
   - plotting
-  - ega-nlp
 - title: Workflows
   contents:
   - ega
 - title: Inner Workings
   contents:
   - whats-changed
+  - argument-flexibility
   - reproducibility-prng
   - errors
   

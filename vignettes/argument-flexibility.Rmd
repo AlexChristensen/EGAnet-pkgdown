@@ -1,0 +1,131 @@
+---
+title: "Argument Flexibility"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Argument Flexibility}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+A big change to the {EGAnet} structure in version +2.0.0 was that nearly every argument can be passed down through sub-functions in a main function. Sounds useful, but what does that actually mean?
+
+Let's take the `EGA` function as an example. The `EGA` function has several other {EGAnet} functions that it uses to perform it's operations. These functions include:
+
++   `auto.correlate`
+    -   `cor`
+    -   `polychoric.matrix`
+
++   `EGA.estimate`
+    -   `auto.correlate` (see functions above)
+    -   `network.estimation`
+        +   `BGGM`
+        +   `EBICglasso.qgraph`
+        +   `TMFG`
+    -   `community.detection` (see `igraph::cluster_*` functions)
+    -   `community.consensus`
+    
++   `community.unidimensional`
+    -   `auto.correlate` (see functions above)
+    -   `network.estimation` (see functions above)
+    
++   `plot`
+
+The first-level points are all functions called by `EGA`. The second-level points are called by their first level functions and so on down the line. This function tree shows that (1) `EGA` calls a lot of functions but (2) all of these functions have their own arguments that *can* be called by `EGA`.
+
+`EGA` passes arguments that are not listed as default arguments (see `?EGA`) using the `...` argument. For every function in {EGAnet} that has the `...` means that you can pass along arguments to other functions in the package (and other packages). How do you know what arguments can be passed? The documentation for the `...` argument in every function with tell you. Let's take a look at `EGA`'s `...` argument documentation:
+
+> 	Additional arguments to be passed on to `auto.correlate`, `network.estimation`, `community.detection`, `community.consensus`, and `community.unidimensional`
+
+Each of these functions are linked directly to their documentation, so you can navigate to each function when specifying arguments of an {EGAnet} function.
+
+OK, let's see this flexibility in action.
+
+### Passing through `auto.correlate`
+
+#### Changing `corr`
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Load packages
+library(EGAnet); library(psychTools)
+
+# Use Spearman correlation
+bfi_ega_spearman <- EGA(bfi[,1:25], corr = "spearman", plot.EGA = FALSE)
+
+# Print result
+summary(bfi_ega_spearman)
+```
+
+How do you know whether something has changed? In general, most changes to methods will show up in the summary of the output. In this example, we can see that `Correlations: spearman` meaning that the correlations were changed to Spearman.
+
+#### Changing `ordinal.categories`
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# 5 categories and higher are treated as continuous
+bfi_ega_continuous <- EGA(bfi[,1:25], ordinal.categories = 4, plot.EGA = FALSE)
+
+# Print result
+summary(bfi_ega_continuous)
+```
+
+There usually isn't a case where you would want to change `ordinal.categories` argument of `auto.correlate` to be lower than its default value of `7`. The argument sets what data the function should consider as ordinal (defaults to up to 7 categories). For demonstration purposes, `ordinal.categories` is used to show that arguments from `EGA` are passed on to `auto.correlate`.
+
+### Passing through `network.estimation`
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Change the lambda.min.ratio
+bfi_ega_qgraph <- EGA(bfi[,1:25], lambda.min.ratio = 0.01, plot.EGA = FALSE)
+
+# Print result
+summary(bfi_ega_qgraph)
+```
+
+The `lambda.min.ratio` parameter was passed to `network.estimation` and on to `EBICglasso.qgraph`. The parameter is output in the summary above (see `Lambda:`). The `lambda.min.ratio` value used in this example is the default in `qgraph::EBICglasso`.
+
+### Passing through `community.detection`
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Change the algorithm and its arguments
+bfi_ega_leiden <- EGA(
+  bfi[,1:25], algorithm = "leiden",
+  objective_function = "CPM", # in {igraph}
+  resolution_parameter = 0.05, # in {igraph}
+  plot.EGA = FALSE
+)
+
+# Print result
+summary(bfi_ega_leiden)
+```
+
+The above code shows off *a lot* of {EGAnet}'s flexibility. First, the algorithm is being changed to `"leiden"` which is switched in the `community.detection` function. Second, the arguments `objective_function` and `resolution_parameter` are being passed to `igraph::cluster_leiden` and aren't even handled in {EGAnet}. The summary reflects these changes: `Algorithm: Leiden with Constant Potts Model`. 
+
+### Passing through `community.consensus`
+
+#### Changing `consensus.iter`
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# More consensus iterations
+bfi_ega_consensus <- EGA(
+  bfi[,1:25], algorithm = "louvain",
+  consensus.iter = 10000, plot.EGA = FALSE
+)
+
+# Print result
+summary(bfi_ega_consensus)
+```
+
+By default, the consensus clustering method performs `1000` iterations (see `?consensus.clustering`) but the iterations can be changed as well as the method (using `consensus.method` argument). This change is also reflected in the summary output with number of iterations in parentheses.
+
+#### Changing `order`
+
+```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
+# Get lower order result
+bfi_ega_lower <- EGA(
+  bfi[,1:25], algorithm = "louvain",
+  order = "lower", plot.EGA = FALSE
+)
+
+# Print result
+summary(bfi_ega_lower)
+```
+
+The `order` can also be changed. The `"lower"` order is used in Hierarchical EGA (`hierEGA`; [Jiménez et al., 2023](https://doi.org/10.1037/met0000590)) method but can be replicated using `EGA` and specifying the `order` argument.  

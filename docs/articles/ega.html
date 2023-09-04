@@ -47,9 +47,10 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/modular-approach.html">Using External Networks</a>
-    <a class="dropdown-item" href="../articles/plotting.html">Plotting</a>
     <a class="dropdown-item" href="../articles/ega-nlp.html">EGA + Transformers NLP</a>
+    <a class="dropdown-item" href="../articles/modular-approach.html">Using External Networks</a>
+    <a class="dropdown-item" href="../articles/argument-flexibility.html">Argument Flexibility</a>
+    <a class="dropdown-item" href="../articles/plotting.html">Plotting</a>
     <a class="dropdown-item" href="../articles/index.html">More Articles...</a>
   </div>
 </li>
@@ -95,8 +96,10 @@
 
     
     
-<p>The general workflow of a standard Exploratory Graph Analysis (EGA)
-should at minimum take the following order of analysis:</p>
+<p>The general workflow of Exploratory Graph Analysis (EGA; <a href="https://doi.org/10.1371/journal.pone.0174035" class="external-link">Golino &amp;
+Epskamp, 2017</a>; <a href="https://doi.org/10.1037/met0000255" class="external-link">Golino
+et al., 2020</a>) should at minimum take the following order of
+analysis:</p>
 <ul>
 <li><p>determine redundancies (using <code>UVA</code>)</p></li>
 <li><p>perform <code>EGA</code></p></li>
@@ -129,9 +132,7 @@ additional demographic variables (<code>sex</code>,
 <span><span class="co"># Perform Unique Variable Analysis</span></span>
 <span><span class="va">bfi_uva</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/UVA.html">UVA</a></span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">bfi</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span>,</span>
-<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span></span>
-<span>    <span class="va">bfi.dictionary</span><span class="op">$</span><span class="va">Item</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span></span>
-<span>  <span class="op">)</span></span>
+<span>  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">bfi.dictionary</span><span class="op">$</span><span class="va">Item</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="co"># Optional: provide item descriptions</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -170,23 +171,25 @@ Variable pairs with wTO &gt; 0.20 (small-to-moderate redundancy)
            Know how to comfort others. 0.203</code></pre>
 <p>Unique Variable Analysis (<a href="https://doi.org/10.1080/00273171.2023.2194606" class="external-link">Christensen,
 Garrido, &amp; Golino, 2023</a>) uses the weighted topological overlap
-measure (see <code><a href="../reference/wto.html">?wto</a></code>) on an estimated network. Values greater
-than 0.25 are determined to have considerable local dependency (i.e.,
-redundancy) that should be handled.</p>
+measure (<a href="https://doi.org/10.1073/pnas.0911376106" class="external-link">Nowick et
+al., 2009</a>; see <code><a href="../reference/wto.html">?wto</a></code>) on an estimated network. Values
+greater than 0.25 are determined to have considerable local dependence
+(i.e., redundancy) that should be handled.</p>
 <p>Based on the output above, there is one pair of variables that are
 above this cut-off (and quite substantially):
-<code>Get angry easily.</code> and <code>Get irritate easily.</code>
-(wto = 0.431). By default, the <code>UVA</code> will remove all
-redundant variables (wto <span class="math inline">\(\ge\)</span> 0.25)
-except for one based on the following rules:</p>
+<code>Get angry easily.</code> and <code>Get irritated easily.</code>
+(<span class="math inline">\(\omega\)</span> = 0.431). By default, the
+<code>UVA</code> will remove all redundant variables (<span class="math inline">\(\omega \ge\)</span> 0.25) except for one based on
+the following rules:</p>
 <ul>
-<li><p>doublets (two variables): The variable with the lowest maximum
-weighted topological overlap to all other variables (other than the one
-it is redundant with) is retained and the other is removed</p></li>
-<li><p>triplets (three or more variables): The variable with the highest
-mean weighted topological overlap to all other variables that are
-redundant with one another is retained and all others are
+<li><p><strong>doublets (two variables)</strong>: The variable with the
+lowest maximum weighted topological overlap to all other variables
+(other than the one it is redundant with) is retained and the other is
 removed</p></li>
+<li><p><strong>triplets (three or more variables)</strong>: The variable
+with the highest mean weighted topological overlap to all other
+variables that are redundant with one another is retained and all others
+are removed</p></li>
 </ul>
 <p>The variables that were removed in this automated process can be
 viewed using:</p>
@@ -249,9 +252,9 @@ descriptives about the network such as the number of nodes, edges, edge
 density, and descriptive statistics about the edges. Third, it tells us
 what community detection algorithm was used, the number of communities
 (dimensions), and each variable’s membership. Fourth, the unidimensional
-method and check (<code>No</code> it was not unidimensional). Finally,
-the Total Entropy Fit Index (or <code>tefi</code>) is provided, which
-can be used for model comparison (see <a href="https://doi.org/10.1080/00273171.2020.1779642" class="external-link">Golino et al.,
+method and check (<code>No</code> meaning it was not unidimensional).
+Finally, the Total Entropy Fit Index (or <code>tefi</code>) is provided,
+which can be used for model comparison (see <a href="https://doi.org/10.1080/00273171.2020.1779642" class="external-link">Golino et al.,
 2021</a>).</p>
 <p><em>To change the appearance of the</em> <code>EGA</code> <em>plot,
 see <a href="plotting.html">Plotting</a></em></p>
@@ -272,8 +275,8 @@ determine the robustness of the empirical <code>EGA</code> analysis
 (using <code>500</code> iterations by default). The plot output by
 <code>bootEGA</code> is the median network structure representing the
 median value of each pairwise partial correlation across the bootstraps.
-After obtain the median value for each pairwise partial correlation, a
-community detection algorithm is applied (<code>"walktrap"</code> by
+After obtaining the median value for each pairwise partial correlation,
+a community detection algorithm is applied (<code>"walktrap"</code> by
 default).</p>
 <p>In this example, the median structure matches our empirical
 structure:</p>
@@ -287,10 +290,11 @@ structure:</p>
 a community detection algorithm is applied adhoc to the median network
 structure, it is possible that the number and content of the communities
 do not match the empirical structure. This possibility happens from
-time-to-time and does not mean there is another wrong with your analysis
-but instead hint at some stability in the structure.</p>
-<p>Some basic descriptive statistics about the bootstrap analysis can be
-obtained:</p>
+time-to-time and does not mean there is anything wrong with your
+analysis but instead <em>might</em> hint at some instability in the
+structure.</p>
+<p>Following through on some basic descriptive statistics about the
+bootstrap analysis is often more informative:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">bfi_boot</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Model: GLASSO (EBIC)
@@ -307,8 +311,8 @@ Bootstrap Samples: 500 (Parametric)
 Frequency:  0.046 0.954
 
 Median dimensions: 5 [4.59, 5.41] 95% CI</code></pre>
-<p>Much like the empirical procedure, there is first information about
-the estimation methods and algorithms used. After, there information
+<p>Much like the empirical procedure, the first information is about the
+estimation methods and algorithms used. After, there is information
 about the bootstrap procedure including how frequent each number of
 communities were observed and the median number of communities (with 95%
 confidence intervals). In this example, the structure is quite stable
@@ -335,15 +339,15 @@ Structural Consistency:
 
     1     2     3     4     5 
 1.000 1.000 0.956 1.000 0.960 </code></pre>
-<p>The output of <code>dimensionStability</code> produces a plot with
-how often each variable is replicating in their empirical structure
-across bootstraps. The summary statistics produced also relay this
-information as well as structural consistency. Structural consistency is
-defined as the extent to which each empirically derived dimension is
+<p>The output of <code>dimensionStability</code> produces a plot of how
+often each variable is replicating in their empirical structure across
+bootstraps. The summary statistics produced also relay this information
+as well as structural consistency. Structural consistency is defined as
+the extent to which each empirically derived dimension is
 <em>exactly</em> (i.e., identical variable composition) recovered from
 the replicate bootstrap samples (<a href="https://doi.org/10.1002/per.2265" class="external-link">Christensen, Golino, &amp;
 Silvia, 2020</a>). In general, values of structural consistency and item
-stability greater than about 0.70-0.75 reflect sufficient stability (<a href="https://doi.org/10.3390/psych3030032" class="external-link">Christensen &amp; Golino,
+stability greater than 0.70-0.75 reflect sufficient stability (<a href="https://doi.org/10.3390/psych3030032" class="external-link">Christensen &amp; Golino,
 2021</a>). Our results demonstrate that the five dimension structure
 we’ve identified is quite robust.</p>
 </div>

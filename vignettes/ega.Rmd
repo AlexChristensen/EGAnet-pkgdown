@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The general workflow of a standard Exploratory Graph Analysis (EGA) should at minimum take the following order of analysis:
+The general workflow of Exploratory Graph Analysis (EGA; [Golino & Epskamp, 2017](https://doi.org/10.1371/journal.pone.0174035); [Golino et al., 2020](https://doi.org/10.1037/met0000255)) should at minimum take the following order of analysis:
 
 +   determine redundancies (using `UVA`)
 
@@ -32,9 +32,7 @@ library(EGAnet); library(psychTools)
 # Perform Unique Variable Analysis
 bfi_uva <- UVA(
   data = bfi[,1:25],
-  key = as.character(
-    bfi.dictionary$Item[1:25]
-  )
+  key = as.character(bfi.dictionary$Item[1:25])
   # Optional: provide item descriptions
 )
 
@@ -42,13 +40,13 @@ bfi_uva <- UVA(
 bfi_uva
 ```
 
-Unique Variable Analysis ([Christensen, Garrido, & Golino, 2023](https://doi.org/10.1080/00273171.2023.2194606 )) uses the weighted topological overlap measure (see `?wto`) on an estimated network. Values greater than 0.25 are determined to have considerable local dependency (i.e., redundancy) that should be handled.
+Unique Variable Analysis ([Christensen, Garrido, & Golino, 2023](https://doi.org/10.1080/00273171.2023.2194606 )) uses the weighted topological overlap measure ([Nowick et al., 2009](https://doi.org/10.1073/pnas.0911376106); see `?wto`) on an estimated network. Values greater than 0.25 are determined to have considerable local dependence (i.e., redundancy) that should be handled.
 
-Based on the output above, there is one pair of variables that are above this cut-off (and quite substantially): `Get angry easily.` and `Get irritate easily.` (wto = 0.431). By default, the `UVA` will remove all redundant variables (wto $\ge$ 0.25) except for one based on the following rules:
+Based on the output above, there is one pair of variables that are above this cut-off (and quite substantially): `Get angry easily.` and `Get irritated easily.` ($\omega$ = 0.431). By default, the `UVA` will remove all redundant variables ($\omega \ge$ 0.25) except for one based on the following rules:
 
-+   doublets (two variables): The variable with the lowest maximum weighted topological overlap to all other variables (other than the one it is redundant with) is retained and the other is removed
++   **doublets (two variables)**: The variable with the lowest maximum weighted topological overlap to all other variables (other than the one it is redundant with) is retained and the other is removed
 
-+   triplets (three or more variables): The variable with the highest mean weighted topological overlap to all other variables that are redundant with one another is retained and all others are removed
++   **triplets (three or more variables)**: The variable with the highest mean weighted topological overlap to all other variables that are redundant with one another is retained and all others are removed
 
 The variables that were removed in this automated process can be viewed using:
 
@@ -72,7 +70,7 @@ With the reduced data, five dimensions are recovered from the `bfi` dataset (con
 summary(bfi_ega)
 ```
 
-The summary contains several things of interest. First, it tells us what model was used to estimate the network (`"glasso"`) and what parameters were used for that model such as *gamma* ($\gamma = 0.5$) and *lambda* ($\lambda = 0.0597$). Second, there are descriptives about the network such as the number of nodes, edges, edge density, and descriptive statistics about the edges. Third, it tells us what community detection algorithm was used, the number of communities (dimensions), and each variable's membership. Fourth, the unidimensional method and check (`No` it was not unidimensional). Finally, the Total Entropy Fit Index (or `tefi`) is provided, which can be used for model comparison (see [Golino et al., 2021](https://doi.org/10.1080/00273171.2020.1779642)).
+The summary contains several things of interest. First, it tells us what model was used to estimate the network (`"glasso"`) and what parameters were used for that model such as *gamma* ($\gamma = 0.5$) and *lambda* ($\lambda = 0.0597$). Second, there are descriptives about the network such as the number of nodes, edges, edge density, and descriptive statistics about the edges. Third, it tells us what community detection algorithm was used, the number of communities (dimensions), and each variable's membership. Fourth, the unidimensional method and check (`No` meaning it was not unidimensional). Finally, the Total Entropy Fit Index (or `tefi`) is provided, which can be used for model comparison (see [Golino et al., 2021](https://doi.org/10.1080/00273171.2020.1779642)).
 
 *To change the appearance of the* `EGA` *plot, see [Plotting](plotting.html)*
 
@@ -86,7 +84,7 @@ bfi_boot <- bootEGA(
 )
 ```
 
-Bootstrap EGA ([Christensen & Golino, 2021](https://doi.org/10.3390/psych3030032)) performs a parametric (default) or resampling procedure to determine the robustness of the empirical `EGA` analysis (using `500` iterations by default). The plot output by `bootEGA` is the median network structure representing the median value of each pairwise partial correlation across the bootstraps. After obtain the median value for each pairwise partial correlation, a community detection algorithm is applied (`"walktrap"` by default).
+Bootstrap EGA ([Christensen & Golino, 2021](https://doi.org/10.3390/psych3030032)) performs a parametric (default) or resampling procedure to determine the robustness of the empirical `EGA` analysis (using `500` iterations by default). The plot output by `bootEGA` is the median network structure representing the median value of each pairwise partial correlation across the bootstraps. After obtaining the median value for each pairwise partial correlation, a community detection algorithm is applied (`"walktrap"` by default).
 
 In this example, the median structure matches our empirical structure:
 
@@ -97,15 +95,15 @@ bfi_compare <- compare.EGA.plots(
 )
 ```
 
-Although this result is common, it is by no means necessary. Because a community detection algorithm is applied adhoc to the median network structure, it is possible that the number and content of the communities do not match the empirical structure. This possibility happens from time-to-time and does not mean there is another wrong with your analysis but instead hint at some stability in the structure.
+Although this result is common, it is by no means necessary. Because a community detection algorithm is applied adhoc to the median network structure, it is possible that the number and content of the communities do not match the empirical structure. This possibility happens from time-to-time and does not mean there is anything wrong with your analysis but instead *might* hint at some instability in the structure.
 
-Some basic descriptive statistics about the bootstrap analysis can be obtained:
+Following through on some basic descriptive statistics about the bootstrap analysis is often more informative:
 
 ```{r, echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
 summary(bfi_boot)
 ```
 
-Much like the empirical procedure, there is first information about the estimation methods and algorithms used. After, there information about the bootstrap procedure including how frequent each number of communities were observed and the median number of communities (with 95\% confidence intervals). In this example, the structure is quite stable and can be taken as preliminary evidence of a robust structure.
+Much like the empirical procedure, the first information is about the estimation methods and algorithms used. After, there is information about the bootstrap procedure including how frequent each number of communities were observed and the median number of communities (with 95\% confidence intervals). In this example, the structure is quite stable and can be taken as preliminary evidence of a robust structure.
 
 The frequency of the number of communities should not be used as the main evidence of robustness. Instead, dimension and item stability should be obtained to better understand the details.
 
@@ -113,4 +111,4 @@ The frequency of the number of communities should not be used as the main eviden
 dimensionStability(bfi_boot)
 ```
 
-The output of `dimensionStability` produces a plot with how often each variable is replicating in their empirical structure across bootstraps. The summary statistics produced also relay this information as well as structural consistency. Structural consistency is defined as the extent to which each empirically derived dimension is *exactly* (i.e., identical variable composition) recovered from the replicate bootstrap samples ([Christensen, Golino, & Silvia, 2020](https://doi.org/10.1002/per.2265)). In general, values of structural consistency and item stability greater than about 0.70-0.75 reflect sufficient stability ([Christensen & Golino, 2021](https://doi.org/10.3390/psych3030032)). Our results demonstrate that the five dimension structure we've identified is quite robust.
+The output of `dimensionStability` produces a plot of how often each variable is replicating in their empirical structure across bootstraps. The summary statistics produced also relay this information as well as structural consistency. Structural consistency is defined as the extent to which each empirically derived dimension is *exactly* (i.e., identical variable composition) recovered from the replicate bootstrap samples ([Christensen, Golino, & Silvia, 2020](https://doi.org/10.1002/per.2265)). In general, values of structural consistency and item stability greater than 0.70-0.75 reflect sufficient stability ([Christensen & Golino, 2021](https://doi.org/10.3390/psych3030032)). Our results demonstrate that the five dimension structure we've identified is quite robust.

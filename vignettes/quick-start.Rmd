@@ -32,8 +32,10 @@ To explore other features of the package, some quick links are provided below:
 
 +   [EGA Workflow](ega.html)
 
++   [Argument Flexibility](argument-flexibility.html)
+
++   [EGA + Transformers NLP](ega-nlp.html)
+
 +   [External Networks (and external packages)](modular-approach.html)
 
 +   [Plotting](plotting.html)
-
-+   [EGA + Transformers NLP](ega-nlp.html)
