@@ -38,7 +38,10 @@ optimism_recoded <- apply(optimism, 2, function(x){x - 3})
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
 cat("Error in \"polychoric.matrix\" :
-Minimum of 'data' (-2) does not match expected range(s). Range must be between: '0' and '11'")
+Minimum value of 'data' (-2) does not match expected range(s). Values must range between: '0' and '11'
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#range-error")
 ```
 
 The error specifies that the issue occurred in the `polychoric.matrix` function. The error says that there are data with a minimum value of `-2` in the dataset when the function expects a minimum value to be `0`.
@@ -80,8 +83,11 @@ genTEFI(ega_optimism)
 ```
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
-cat("Error in \"genTEFI\" : 
-  Input into 'data' is not the expected class 'hierEGA'. Input is class 'EGA'")
+cat("Error in \"genTEFI\" :
+Input into 'data' is an object with 'EGA' class(es). Input is expected to be 'hierEGA' class(es)
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#class-error")
 ```
 
 The `genTEFI` function expects a `hierEGA` class but it received an `EGA` class object. This error means that the wrong object class was used with the function.
@@ -97,7 +103,10 @@ opt.hier <- EGA(data = as.list(optimism))
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
 cat("Error in \"EGA\" :
-Input into 'data' argument is not 'matrix', 'data.frame', 'tibble'. Input is 'list'")
+Input into 'data' is a 'list' object. Input is expected to be 'matrix', 'data.frame', 'tibble' object
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#object-error")
 ```
 
 Here, `EGA` expects to receive a matrix, data frame, or tibble but the input was a list. The data will need to be converted to one of these three object types before proceeding with the analysis.
@@ -113,7 +122,10 @@ opt.hier <- EGA(data = optimism, plot.EGA = "TRUE")
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
 cat("Error in \"EGA\" :
-Input into 'plot.EGA' is 'character'. Input is expected to be 'logical'")
+Input into 'plot.EGA' is 'character' type. Input is expected to be 'logical' type
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#typeof-error")
 ```
 
 In this example, `EGA` expected input into the argument `plot.EGA` to be a logical (`TRUE` or `FALSE`) but instead got a character `"TRUE"`. The error tells you that the input is expected to be logical.
@@ -123,13 +135,16 @@ In this example, `EGA` expected input into the argument `plot.EGA` to be a logic
 A length error is when a function receives input that is longer (or shorter) than expected:
 
 ```{r, echo = TRUE, eval = FALSE, warning = FALSE, message = FALSE, comment = NA}
-# Estimate EGA using a character TRUE
+# Estimate EGA using two TRUEs
 opt.hier <- EGA(data = optimism, plot.EGA = c(TRUE, TRUE))
 ```
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message = FALSE, comment = NA}
 cat("Error in \"EGA\" :
-Length of 'plot.EGA' (2) does not match expected length(s). Length must be: '1'")
+Length of 'plot.EGA' (2) does not match expected length(s). Length must be: '1'
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#length-error")
 ```
 
 This time for the `plot.EGA` argument the correct type of input was used (logical) but there were too many input. The `(2)` says that the argument received two inputs when it expected only `1`.

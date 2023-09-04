@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,7 +120,7 @@ occurs with <code>polychoric.matrix</code> in
 5-point Likert scale from -2 to 2 rather than 1 to 5:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load {EGAnet}</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hfgolino/EGAnet" class="external-link">EGAnet</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-ega.net">EGAnet</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Recode the optimism dataset</span></span>
 <span><span class="va">optimism_recoded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">optimism</span>, <span class="fl">2</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span><span class="va">x</span> <span class="op">-</span> <span class="fl">3</span><span class="op">}</span><span class="op">)</span></span>
@@ -128,7 +128,10 @@ occurs with <code>polychoric.matrix</code> in
 <span><span class="co"># Estimate EGA</span></span>
 <span><span class="va">ega_optimism</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">optimism_recoded</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Error in "polychoric.matrix" :
-Minimum of 'data' (-2) does not match expected range(s). Range must be between: '0' and '11'</code></pre>
+Minimum value of 'data' (-2) does not match expected range(s). Values must range between: '0' and '11'
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#range-error</code></pre>
 <p>The error specifies that the issue occurred in the
 <code>polychoric.matrix</code> function. The error says that there are
 data with a minimum value of <code>-2</code> in the dataset when the
@@ -173,8 +176,11 @@ expect:</p>
 <span></span>
 <span><span class="co"># Compute the Generalized Total Entropy Fit Index</span></span>
 <span><span class="fu"><a href="../reference/genTEFI.html">genTEFI</a></span><span class="op">(</span><span class="va">ega_optimism</span><span class="op">)</span></span></code></pre></div>
-<pre><code>Error in "genTEFI" : 
-  Input into 'data' is not the expected class 'hierEGA'. Input is class 'EGA'</code></pre>
+<pre><code>Error in "genTEFI" :
+Input into 'data' is an object with 'EGA' class(es). Input is expected to be 'hierEGA' class(es)
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#class-error</code></pre>
 <p>The <code>genTEFI</code> function expects a <code>hierEGA</code>
 class but it received an <code>EGA</code> class object. This error means
 that the wrong object class was used with the function.</p>
@@ -188,7 +194,10 @@ designed to handle:</p>
 <code class="sourceCode R"><span><span class="co"># Estimate EGA using a list object</span></span>
 <span><span class="va">opt.hier</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">optimism</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Error in "EGA" :
-Input into 'data' argument is not 'matrix', 'data.frame', 'tibble'. Input is 'list'</code></pre>
+Input into 'data' is a 'list' object. Input is expected to be 'matrix', 'data.frame', 'tibble' object
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#object-error</code></pre>
 <p>Here, <code>EGA</code> expects to receive a matrix, data frame, or
 tibble but the input was a list. The data will need to be converted to
 one of these three object types before proceeding with the analysis.</p>
@@ -202,7 +211,10 @@ expected type:</p>
 <code class="sourceCode R"><span><span class="co"># Estimate EGA using a character TRUE</span></span>
 <span><span class="va">opt.hier</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">optimism</span>, plot.EGA <span class="op">=</span> <span class="st">"TRUE"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Error in "EGA" :
-Input into 'plot.EGA' is 'character'. Input is expected to be 'logical'</code></pre>
+Input into 'plot.EGA' is 'character' type. Input is expected to be 'logical' type
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#typeof-error</code></pre>
 <p>In this example, <code>EGA</code> expected input into the argument
 <code>plot.EGA</code> to be a logical (<code>TRUE</code> or
 <code>FALSE</code>) but instead got a character <code>"TRUE"</code>. The
@@ -214,10 +226,13 @@ error tells you that the input is expected to be logical.</p>
 <p>A length error is when a function receives input that is longer (or
 shorter) than expected:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Estimate EGA using a character TRUE</span></span>
+<code class="sourceCode R"><span><span class="co"># Estimate EGA using two TRUEs</span></span>
 <span><span class="va">opt.hier</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">optimism</span>, plot.EGA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Error in "EGA" :
-Length of 'plot.EGA' (2) does not match expected length(s). Length must be: '1'</code></pre>
+Length of 'plot.EGA' (2) does not match expected length(s). Length must be: '1'
+
+For more details on how to fix this error, see:
+https://r-ega.net/articles/errors.html#length-error</code></pre>
 <p>This time for the <code>plot.EGA</code> argument the correct type of
 input was used (logical) but there were too many input. The
 <code>(2)</code> says that the argument received two inputs when it

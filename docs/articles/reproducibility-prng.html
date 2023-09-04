@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -279,7 +279,7 @@ values from running a PRNG {EGAnet} function before and after running a
 PRNG R function like <code>runif(10)</code>. Here’s the result:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load {EGAnet}</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hfgolino/EGAnet" class="external-link">EGAnet</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-ega.net">EGAnet</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set R's PRNG state</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
@@ -365,7 +365,7 @@ is not controlled by {EGAnet} and therefore results will usually be
 similar but not <em>exactly</em> the same:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load {EGAnet}</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hfgolino/EGAnet" class="external-link">EGAnet</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-ega.net">EGAnet</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Set R's PRNG state</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
@@ -384,9 +384,9 @@ Unidimensional Method:  Louvain
 
 EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
-                                  
-                1     2     3    4
-Frequency:  0.008 0.676 0.276 0.04
+                                 
+               1     2     3    4
+Frequency:  0.01 0.678 0.272 0.04
 
 Median dimensions: 2 [0.88, 3.12] 95% CI</code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -404,11 +404,11 @@ Unidimensional Method:  Louvain
 
 EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
-                                  
-                1    2     3     4
-Frequency:  0.006 0.68 0.276 0.038
+                                   
+                1     2     3     4
+Frequency:  0.012 0.674 0.276 0.038
 
-Median dimensions: 2 [0.9, 3.1] 95% CI</code></pre>
+Median dimensions: 2 [0.88, 3.12] 95% CI</code></pre>
 <p>Notice that the results are very similar but they are not
 <em>exactly</em> the same (frequencies for <code>1</code> and
 <code>3</code> are slightly different). The data that were generated in
