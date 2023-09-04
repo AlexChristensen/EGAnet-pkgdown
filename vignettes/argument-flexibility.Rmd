@@ -1,8 +1,8 @@
 ---
-title: "Argument Flexibility"
+title: "Argument Passing"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Argument Flexibility}
+  %\VignetteIndexEntry{Argument Passing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

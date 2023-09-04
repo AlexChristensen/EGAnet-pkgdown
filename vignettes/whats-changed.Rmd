@@ -50,7 +50,7 @@ Want to perform a `bootEGA` with `EGA.fit` using `BGGM` and consensus clustering
 
 Such flexibility warrants a disclaimer: Just because you *can*, doesn't mean you *should!* Keep best practices in mind.
 
-*To see the full range of flexibility, check out [Argument Flexibility](argument-flexibility.html)*
+*To see the full range of flexibility, check out [Argument Passing](argument-flexibility.html)*
 
 ### More Informative
 
