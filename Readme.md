@@ -3,7 +3,7 @@
 <!-- Logo -->
 
 <div id="logo">
-<img border="0" src="https://github.com/hfgolino/EGAnet/blob/master/inst/EGAnet_hex_2.png?raw=true" alt="EGAnet logo" width=250/>
+<img border="0" src="reference/figures/EGAnet_hex_2.png" alt="EGAnet logo" width=250/>
 </div>
 
 
@@ -15,8 +15,8 @@
 <a href="https://github.com/hfgolino/EGAnet/actions/workflows/r.yml"><img border="0" src="https://github.com/hfgolino/EGAnet/actions/workflows/r.yml/badge.svg" alt="R CMD check status"/></a> </br>
 <a href="https://www.repostatus.org/#active"><img border="0" src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."/></a>
 <a href="https://cran.r-project.org/package=EGAnet"><img border="0" src="https://cranlogs.r-pkg.org/badges/grand-total/EGAnet?color=blue" alt="Downloads Total"/></a>
-<a href="https://cran.r-project.org/package=EGAnet"><img border="0" src="http://cranlogs.r-pkg.org/badges/EGAnet?color=blue" alt="Downloads per month"/></a>
-<a href="https://cran.r-project.org/package=EGAnet"><img border="0" src="http://cranlogs.r-pkg.org/badges/last-day/EGAnet" alt="Downloads Yesterday"/></a>
+<a href="https://cran.r-project.org/package=EGAnet"><img border="0" src="https://cranlogs.r-pkg.org/badges/EGAnet?color=blue" alt="Downloads per month"/></a>
+<a href="https://cran.r-project.org/package=EGAnet"><img border="0" src="https://cranlogs.r-pkg.org/badges/last-day/EGAnet" alt="Downloads Yesterday"/></a>
 </div>
 
 <span style="font-size: 10px;">
@@ -86,4 +86,4 @@ Vanderbilt University <br>
 Support
 </span>
 
-The {EGAnet} package is currently supported by two University of Virginia grants, one from the STAR - [Support Transformative Autism Research](https://curry.virginia.edu/faculty-research/centers-labs-projects/supporting-transformative-autism-research-star) initiative and one from the [Democracy Initiative](http://democracyinitiative.virginia.edu).
+The {EGAnet} package is currently supported by two University of Virginia grants, one from the STAR - [Support Transformative Autism Research](https://curry.virginia.edu/faculty-research/centers-labs-projects/supporting-transformative-autism-research-star) initiative and one from the [Democracy Initiative](https://democracyinitiative.virginia.edu).
