@@ -94,6 +94,8 @@ The tuning parameter is chosen using the Extended Bayesian Information criterion
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">EBICglasso.qgraph</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  corr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"cor_auto"</span>, <span class="st">"pearson"</span>, <span class="st">"spearman"</span><span class="op">)</span>,</span>
+<span>  na.data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pairwise"</span>, <span class="st">"listwise"</span><span class="op">)</span>,</span>
 <span>  gamma <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  penalize.diagonal <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  nlambda <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -118,6 +120,43 @@ Should consist only of variables to be used in the analysis</p></dd>
 <dt>n</dt>
 <dd><p>Numeric (length = 1).
 Sample size if <code>data</code> provided is a correlation matrix</p></dd>
+
+
+<dt>corr</dt>
+<dd><p>Character (length = 1).
+Method to compute correlations.
+Defaults to <code>"auto"</code>.
+Available options:</p>
+<ul><li><p><code>"auto"</code> --- 
+Automatically computes appropriate correlations for
+the data using Pearson's for continuous, polychoric for ordinal,
+tetrachoric for binary, and polyserial/biserial for ordinal/binary with
+continuous. To change the number of categories that are considered
+ordinal, use <code>ordinal.categories</code>
+(see <code><a href="polychoric.matrix.html">polychoric.matrix</a></code> for more details)</p></li>
+<li><p><code>"cor_auto"</code> --- 
+Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. Arguments
+can be passed along to the function</p></li>
+<li><p><code>"pearson"</code> --- 
+Pearson's correlation is computed for all variables regardless of
+categories</p></li>
+<li><p><code>"spearman"</code> --- 
+Spearman's rank-order correlation is computed for all variables
+regardless of categories</p></li>
+</ul></dd>
+
+
+<dt>na.data</dt>
+<dd><p>Character (length = 1).
+How should missing data be handled?
+Defaults to <code>"pairwise"</code>.
+Available options:</p>
+<ul><li><p><code>"pairwise"</code> --- 
+Computes correlation for all available cases between
+two variables</p></li>
+<li><p><code>"listwise"</code> --- 
+Computes correlation for all complete cases in the dataset</p></li>
+</ul></dd>
 
 
 <dt>gamma</dt>
