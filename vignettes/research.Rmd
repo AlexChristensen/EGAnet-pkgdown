@@ -7,7 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-### EGA Framework Workflows
+### EGA Workflows
+
+Brown, G. P., Delgadillo, J., & Golino, H. (2023). Distinguishing the dimensions of the original Dysfunctional Attitude Scale in an archival clinical sample. *Cognitive Therapy and Research*, *47*(1), 69–83. doi: [10.1007/s10608-022-10333-w](research/Brown et al. - 2023 - Distinguishing the dimensions of the original Dysf.pdf)
 
 Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf)
 
@@ -31,6 +33,8 @@ Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network p
 
 Christensen, A. P., & Golino, H. (2021). Estimating the stability of psychological dimensions via bootstrap exploratory graph analysis: A Monte Carlo simulation and tutorial. *Psych*, *3*(3), 479–500. doi: [10.3390/psych3030032](research/Christensen and Golino - 2021 - Estimating the stability of psychological dimensio.pdf)
 
+Golino, H., Lillard, A. S., Becker, I., & Christensen, A. P. (2021). Investigating the structure of the Children’s Concentration and Empathy Scale using exploratory graph analysis. *Psychological Test Adaptation and Development*, *2*(1), 35–49. doi: [10.1027/2698-1866/a000008](research/Golino et al. - 2021 - Investigating the structure of the Children's Conc.pdf)
+
 ***
 
 ### Dynamic Exploratory Graph Analysis
@@ -38,6 +42,16 @@ Christensen, A. P., & Golino, H. (2021). Estimating the stability of psychologic
 +   [`dynEGA`](reference/dynEGA.html)
 
 Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf)
+
+***
+
+### EGA + NLP
+
+Kjellström, S., & Golino, H. (2019). Mining concepts of health responsibility using text mining and exploratory graph analysis. *Scandinavian Journal of Occupational Therapy*, *26*(6), 395–410. doi: [10.1080/11038128.2018.1455896](research/Kjellström and Golino - 2019 - Mining concepts of health responsibility using tex.pdf)
+
+Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf)
+
+Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf)
 
 ***
 
@@ -58,7 +72,11 @@ Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s co
 
 +   [`EGA`](reference/EGA.html)
 
-Golino, H. F., & Epskamp, S. (2017). Exploratory graph analysis: A new approach for estimating the number of dimensions in psychological research. *PLoS ONE*, *12*(6), e0174035. doi: [10.1371/journal.pone.0174035](research/Golino and Epskamp - 2017 - Exploratory graph analysis A new approach for est.pdf)
+Golino, H., & Epskamp, S. (2017). Exploratory graph analysis: A new approach for estimating the number of dimensions in psychological research. *PLoS ONE*, *12*(6), e0174035. doi: [10.1371/journal.pone.0174035](research/Golino and Epskamp - 2017 - Exploratory graph analysis A new approach for est.pdf)
+
+Golino, H., & Demetriou, A. (2017). Estimating the dimensionality of intelligence like data using Exploratory Graph Analysis. *Intelligence*, *62*, 54–70. doi: [10.1016/j.intell.2017.02.007](research/Golino and Demetriou - 2017 - Estimating the dimensionality of intelligence like.pdf)
+
+Christensen, A. P., Gross, G. M., Golino, H. F., Silvia, P. J., & Kwapil, T. R. (2019). Exploratory graph analysis of the multidimensional schizotypy scale. *Schizophrenia Research*, *206*, 43–51. doi: [10.1016/j.schres.2018.12.018](research/Christensen et al. - 2019 - Exploratory graph analysis of the multidimensional.pdf)
 
 Golino, H., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Sadana, R., Thiyagarajan, J. A., & Martinez-Molina, A. (2020). Investigating the performance of exploratory graph analysis and traditional techniques to identify the number of latent factors: A simulation and tutorial. *Psychological Methods*, *25*(3), 292–320. doi: [10.1037/met0000255](research/Golino et al. - 2020 - Investigating the performance of exploratory graph.pdf)
 
@@ -72,9 +90,13 @@ Christensen, A. P., Garrido, L. E., Guerra-Peña, K., & Golino, H. (2023). Compa
 
 Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s community detection in networks using the Total Entropy Fit Index. *PsyArXiv*. doi: [10.31234/osf.io/9pj2m](research/Jamison et al. - 2021 - Optimizing Walktrap’s Community Detection in Netwo.pdf)
 
+***
+
 ### Hierarchical Exploratory Graph Analysis
 
 +   [`hierEGA`](references/hierEGA.html)
+
+Golino, H., Thiyagarajan, J. A., Sadana, R., Teles, M., Christensen, A. P., & Boker, S. M. (2020). Investigating the broad domains of intrinsic capacity, functional ability and environment: An exploratory graph analysis approach for improving analytical methodologies for measuring healthy aging. *PsyArXiv*. doi: [10.31234/osf.io/hj5mc](research/Golino et al. - 2020 - Investigating the broad domains of intrinsic capac.pdf)
 
 Christensen, A. P., Cardillo, E. R., & Chatterjee, A. (2022). What kind of impacts can artwork have on viewers? Establishing a taxonomy for aesthetic impacts. *British Journal of Psychology*. doi: [10.1111/bjop.12623](research/Christensen et al. - 2022 - What kind of impacts can artwork have on viewers.pdf)
 
@@ -108,6 +130,26 @@ Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network p
 Christensen, A. P., & Golino, H. (2021). On the equivalency of factor and network loadings. *Behavior Research Methods*, *53*(4), 1563–1580. doi: [10.3758/s13428-020-01500-6](research/Christensen and Golino - 2021 - On the equivalency of factor and network loadings.pdf)
 
 Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf)
+
+***
+
+### Network Psychometrics + Information Theory
+
++   [boot.ergoInfo](reference/boot.ergoInfo.html)
++   [`ergoInfo`](reference/ergoInfo.html)
++   [`infoCluster`](reference/infoCluster.html)
++   [`jsd`](reference/jsd.html)
+
+Golino, H., Christensen, A. P., & Nesselroade, J. (2022). Towards a psychology of individuals: The ergodicity information index and a bottom-up approach for finding generalizations. *PsyArXiv*. doi: [10.31234/osf.io/th6rm](research/Golino et al. - 2022 - Towards a psychology of individuals The ergodicit.pdf)
+
+***
+
+### Total Correlation
+
++   [`totalCor`](reference/totalCor.html)
++   [`totalCorMat`](reference/totalCorMat.html)
+
+Felix, L. M., Mansur-Alves, M., Teles, M., Jamison, L., & Golino, H. (2021). Longitudinal impact and effects of booster sessions in a cognitive training program for healthy older adults. *Archives of Gerontology and Geriatrics*, *94*, 104337. doi: [10.1016/j.archger.2021.104337](research/Felix et al. - 2021 - Longitudinal impact and effects of booster session.pdf)
 
 ***
 
