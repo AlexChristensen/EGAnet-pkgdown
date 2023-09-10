@@ -1,8 +1,8 @@
 ---
-title: "Research"
+title: "Publications"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Research}
+  %\VignetteIndexEntry{Publications}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

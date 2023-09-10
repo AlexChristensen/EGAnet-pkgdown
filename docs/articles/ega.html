@@ -58,7 +58,7 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../articles/research.html">Research</a>
+  <a class="nav-link" href="../articles/research.html">Publications</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">News</a>
@@ -172,6 +172,9 @@ Variable pairs with wTO &gt; 0.20 (small-to-moderate redundancy)
             Have frequent mood swings. 0.205
                       Often feel blue. 0.204
            Know how to comfort others. 0.203</code></pre>
+<div style="float: right; margin: 10px;">
+<p><img src="images/wto_equation.png" width="300px"></p>
+</div>
 <p>Unique Variable Analysis (<a href="https://doi.org/10.1080/00273171.2023.2194606" class="external-link">Christensen,
 Garrido, &amp; Golino, 2023</a>) uses the weighted topological overlap
 measure (<a href="https://doi.org/10.1073/pnas.0911376106" class="external-link">Nowick et
@@ -213,7 +216,7 @@ $remove
 the data:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bfi_ega</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/EGA.html">EGA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bfi_uva</span><span class="op">$</span><span class="va">reduced_data</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ega_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><img src="ega_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>With the reduced data, five dimensions are recovered from the
 <code>bfi</code> dataset (consistent with the five factor model of
 personality). We can obtain a summary of this output:</p>
@@ -271,7 +274,7 @@ see <a href="plotting.html">Plotting</a></em></p>
 <span>  data <span class="op">=</span> <span class="va">bfi_uva</span><span class="op">$</span><span class="va">reduced_data</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">1</span> <span class="co"># set seed for reproducibility</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="ega_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p><img src="ega_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>Bootstrap EGA (<a href="https://doi.org/10.3390/psych3030032" class="external-link">Christensen &amp; Golino,
 2021</a>) performs a parametric (default) or resampling procedure to
 determine the robustness of the empirical <code>EGA</code> analysis
@@ -288,7 +291,7 @@ structure:</p>
 <span>  <span class="va">bfi_ega</span>, <span class="va">bfi_boot</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Empirical"</span>, <span class="st">"Bootstrap"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="ega_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="ega_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>Although this result is common, it is by no means necessary. Because
 a community detection algorithm is applied adhoc to the median network
 structure, it is possible that the number and content of the communities
@@ -325,7 +328,7 @@ main evidence of robustness. Instead, dimension and item stability
 should be obtained to better understand the details.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/dimensionStability.html">dimensionStability</a></span><span class="op">(</span><span class="va">bfi_boot</span><span class="op">)</span></span></code></pre></div>
-<p><img src="ega_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="ega_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <pre><code>EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
 

@@ -7,7 +7,9 @@ template:
   bootswatch: yeti
   bslib:
     text-muted: 
-      - "#fff !important" 
+      - "#fff !important"
+  params:
+    mathjax: true
 
 # Navigation bar
 navbar:
@@ -33,7 +35,7 @@ navbar:
           href: articles/index.html
     - text: "Reference"
       href: reference/index.html
-    - text: "Research"
+    - text: "Publications"
       href: articles/research.html
     - text: "News"
       href: news/index.html
@@ -67,7 +69,7 @@ articles:
   - argument-flexibility
   - reproducibility-prng
   - errors
-- title: Research
+- title: Publications
   contents:
   - research
   
@@ -152,3 +154,4 @@ reference:
 news:
    one_page: true
    cran_dates: true
+   
