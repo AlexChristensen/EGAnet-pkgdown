@@ -1,0 +1,10 @@
+---
+title: "Teaching"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Teaching}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
++   [Exploratory Graph Analysis](teaching/Exploratory-graph-analysis.pdf){target="_blank"}

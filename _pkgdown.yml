@@ -33,20 +33,20 @@ navbar:
           href: articles/plotting.html
         - text: "More Articles..."
           href: articles/index.html
-    - text: "Reference"
+    - text: "Functions"
       href: reference/index.html
-    - text: "Publications"
-      href: articles/research.html
     - text: "News"
       href: news/index.html
     - text: "Errors"
       href: articles/errors.html
+    - text: "Publications"
+      href: articles/research.html
+    - text: "Teaching"
+      href: articles/teaching.html
       
 # TODO
 # - text: "Consulting"
 #   href: articles/consulting.html
-# - text: "Courses"
-#   href: articles/course.html
 # - text: "Book"
 #   href: articles/book.html
 # - text: "App"
@@ -69,9 +69,10 @@ articles:
   - argument-flexibility
   - reproducibility-prng
   - errors
-- title: Publications
+- title: Resources 
   contents:
   - research
+  - teaching
   
 # References (documentation)
 reference:

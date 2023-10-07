@@ -55,7 +55,10 @@
   </div>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
+  <a class="nav-link" href="../articles/teaching.html">Teaching</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../articles/research.html">Publications</a>
@@ -384,11 +387,11 @@ Unidimensional Method:  Louvain
 
 EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
-                                  
-                1    2     3     4
-Frequency:  0.006 0.68 0.276 0.038
+                                 
+               1     2     3    4
+Frequency:  0.01 0.674 0.276 0.04
 
-Median dimensions: 2 [0.9, 3.1] 95% CI</code></pre>
+Median dimensions: 2 [0.88, 3.12] 95% CI</code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform `bootEGA` and set seed to `1234` (again)</span></span>
 <span><span class="va">boot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bootEGA.html">bootEGA</a></span><span class="op">(</span><span class="va">wmt2</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">24</span><span class="op">]</span>, seed <span class="op">=</span> <span class="fl">1234</span>, plot.typicalStructure <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -405,8 +408,8 @@ Unidimensional Method:  Louvain
 EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
                                   
-                1    2     3     4
-Frequency:  0.006 0.68 0.276 0.038
+                1     2     3    4
+Frequency:  0.002 0.682 0.276 0.04
 
 Median dimensions: 2 [0.9, 3.1] 95% CI</code></pre>
 <p>Notice that the results are very similar but they are not

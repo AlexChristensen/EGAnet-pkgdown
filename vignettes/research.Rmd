@@ -9,184 +9,184 @@ vignette: >
 
 ### EGA Workflows
 
-Brown, G. P., Delgadillo, J., & Golino, H. (2023). Distinguishing the dimensions of the original Dysfunctional Attitude Scale in an archival clinical sample. *Cognitive Therapy and Research*, *47*(1), 69–83. doi: [10.1007/s10608-022-10333-w](research/Brown et al. - 2023 - Distinguishing the dimensions of the original Dysf.pdf)
+Brown, G. P., Delgadillo, J., & Golino, H. (2023). Distinguishing the dimensions of the original Dysfunctional Attitude Scale in an archival clinical sample. *Cognitive Therapy and Research*, *47*(1), 69–83. doi: [10.1007/s10608-022-10333-w](research/Brown et al. - 2023 - Distinguishing the dimensions of the original Dysf.pdf){target="_blank"}
 
-Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf)
+Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf){target="_blank"}
 
 ***
 
 ### Bayesian Gaussian Graphical Model
 
-+   [`model = "BGGM"` in `EGA`](reference/EGA.html)
++   [`model = "BGGM"` in `EGA`](../reference/EGA.html){target="_blank"}
 
-Shi, D., Christensen, A. P., Day, E., Golino, H., & Garrido, L. E. (2023). A Bayesian approach for dimensionality assessment in psychological networks. *PsyArXiv*. doi: [10.31234/osf.io/9rcev](research/Shi et al. - 2023 - A Bayesian approach for dimensionality assessment.pdf)
+Shi, D., Christensen, A. P., Day, E., Golino, H., & Garrido, L. E. (2023). A Bayesian approach for dimensionality assessment in psychological networks. *PsyArXiv*. doi: [10.31234/osf.io/9rcev](research/Shi et al. - 2023 - A Bayesian approach for dimensionality assessment.pdf){target="_blank"}
 
 ***
 
 ### Bootstrap Exploratory Graph Analysis
 
-+   [`bootEGA`](reference/bootEGA.html)
-+   [`dimensionStability`](reference/dimensionStability.html)
-+   [`itemStability`](reference/itemStability.html)
++   [`bootEGA`](../reference/bootEGA.html){target="_blank"}
++   [`dimensionStability`](../reference/dimensionStability.html){target="_blank"}
++   [`itemStability`](../reference/itemStability.html){target="_blank"}
 
-Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network perspective on the validity and validation of personality trait questionnaires. *European Journal of Personality*, *34*(6), 1095–1108. doi: [10.1002/per.2265](research/Christensen et al. - 2020 - A psychometric network perspective on the validity.pdf)
+Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network perspective on the validity and validation of personality trait questionnaires. *European Journal of Personality*, *34*(6), 1095–1108. doi: [10.1002/per.2265](research/Christensen et al. - 2020 - A psychometric network perspective on the validity.pdf){target="_blank"}
 
-Christensen, A. P., & Golino, H. (2021). Estimating the stability of psychological dimensions via bootstrap exploratory graph analysis: A Monte Carlo simulation and tutorial. *Psych*, *3*(3), 479–500. doi: [10.3390/psych3030032](research/Christensen and Golino - 2021 - Estimating the stability of psychological dimensio.pdf)
+Christensen, A. P., & Golino, H. (2021). Estimating the stability of psychological dimensions via bootstrap exploratory graph analysis: A Monte Carlo simulation and tutorial. *Psych*, *3*(3), 479–500. doi: [10.3390/psych3030032](research/Christensen and Golino - 2021 - Estimating the stability of psychological dimensio.pdf){target="_blank"}
 
-Golino, H., Lillard, A. S., Becker, I., & Christensen, A. P. (2021). Investigating the structure of the Children’s Concentration and Empathy Scale using exploratory graph analysis. *Psychological Test Adaptation and Development*, *2*(1), 35–49. doi: [10.1027/2698-1866/a000008](research/Golino et al. - 2021 - Investigating the structure of the Children's Conc.pdf)
+Golino, H., Lillard, A. S., Becker, I., & Christensen, A. P. (2021). Investigating the structure of the Children’s Concentration and Empathy Scale using exploratory graph analysis. *Psychological Test Adaptation and Development*, *2*(1), 35–49. doi: [10.1027/2698-1866/a000008](research/Golino et al. - 2021 - Investigating the structure of the Children's Conc.pdf){target="_blank"}
 
 ***
 
 ### Dynamic Exploratory Graph Analysis
 
-+   [`dynEGA`](reference/dynEGA.html)
++   [`dynEGA`](../reference/dynEGA.html){target="_blank"}
 
-Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf)
+Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf){target="_blank"}
 
 ***
 
 ### EGA + NLP
 
-Kjellström, S., & Golino, H. (2019). Mining concepts of health responsibility using text mining and exploratory graph analysis. *Scandinavian Journal of Occupational Therapy*, *26*(6), 395–410. doi: [10.1080/11038128.2018.1455896](research/Kjellström and Golino - 2019 - Mining concepts of health responsibility using tex.pdf)
+Kjellström, S., & Golino, H. (2019). Mining concepts of health responsibility using text mining and exploratory graph analysis. *Scandinavian Journal of Occupational Therapy*, *26*(6), 395–410. doi: [10.1080/11038128.2018.1455896](research/Kjellström and Golino - 2019 - Mining concepts of health responsibility using tex.pdf){target="_blank"}
 
-Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf)
+Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf){target="_blank"}
 
-Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf)
+Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf){target="_blank"}
 
 ***
 
 ### Entropy Fit Indices
 
-+   [`EGA.fit`](references/EGA.fit.html)
-+   [`entropyFit`](reference/entropyFit.html)
-+   [`tefi`](reference/tefi.html)
-+   [`vn.entropy`](reference/vn.entropy.html)
++   [`EGA.fit`](references/EGA.fit.html){target="_blank"}
++   [`entropyFit`](../reference/entropyFit.html){target="_blank"}
++   [`tefi`](../reference/tefi.html){target="_blank"}
++   [`vn.entropy`](../reference/vn.entropy.html){target="_blank"}
 
-Golino, H., Moulder, R., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Nesselroade, J., Sadana, R., Thiyagarajan, J. A., & Boker, S. M. (2021). Entropy fit indices: New fit measures for assessing the structure and dimensionality of multiple latent variables. *Multivariate Behavioral Research*, *56*(6), 874–902. doi: [10.1080/00273171.2020.1779642](research/Golino et al. - 2021 - Entropy fit indices New fit measures for assessin.pdf)
+Golino, H., Moulder, R., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Nesselroade, J., Sadana, R., Thiyagarajan, J. A., & Boker, S. M. (2021). Entropy fit indices: New fit measures for assessing the structure and dimensionality of multiple latent variables. *Multivariate Behavioral Research*, *56*(6), 874–902. doi: [10.1080/00273171.2020.1779642](research/Golino et al. - 2021 - Entropy fit indices New fit measures for assessin.pdf){target="_blank"}
 
-Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s community detection in networks using the Total Entropy Fit Index. *PsyArXiv*. doi: [10.31234/osf.io/9pj2m](research/Jamison et al. - 2021 - Optimizing Walktrap’s Community Detection in Netwo.pdf)
+Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s community detection in networks using the Total Entropy Fit Index. *PsyArXiv*. doi: [10.31234/osf.io/9pj2m](research/Jamison et al. - 2021 - Optimizing Walktrap’s Community Detection in Netwo.pdf){target="_blank"}
 
 ***
 
 ### Exploratory Graph Analysis
 
-+   [`EGA`](reference/EGA.html)
++   [`EGA`](../reference/EGA.html){target="_blank"}
 
-Golino, H., & Epskamp, S. (2017). Exploratory graph analysis: A new approach for estimating the number of dimensions in psychological research. *PLoS ONE*, *12*(6), e0174035. doi: [10.1371/journal.pone.0174035](research/Golino and Epskamp - 2017 - Exploratory graph analysis A new approach for est.pdf)
+Golino, H., & Epskamp, S. (2017). Exploratory graph analysis: A new approach for estimating the number of dimensions in psychological research. *PLoS ONE*, *12*(6), e0174035. doi: [10.1371/journal.pone.0174035](research/Golino and Epskamp - 2017 - Exploratory graph analysis A new approach for est.pdf){target="_blank"}
 
-Golino, H., & Demetriou, A. (2017). Estimating the dimensionality of intelligence like data using Exploratory Graph Analysis. *Intelligence*, *62*, 54–70. doi: [10.1016/j.intell.2017.02.007](research/Golino and Demetriou - 2017 - Estimating the dimensionality of intelligence like.pdf)
+Golino, H., & Demetriou, A. (2017). Estimating the dimensionality of intelligence like data using Exploratory Graph Analysis. *Intelligence*, *62*, 54–70. doi: [10.1016/j.intell.2017.02.007](research/Golino and Demetriou - 2017 - Estimating the dimensionality of intelligence like.pdf){target="_blank"}
 
-Christensen, A. P., Gross, G. M., Golino, H. F., Silvia, P. J., & Kwapil, T. R. (2019). Exploratory graph analysis of the multidimensional schizotypy scale. *Schizophrenia Research*, *206*, 43–51. doi: [10.1016/j.schres.2018.12.018](research/Christensen et al. - 2019 - Exploratory graph analysis of the multidimensional.pdf)
+Christensen, A. P., Gross, G. M., Golino, H. F., Silvia, P. J., & Kwapil, T. R. (2019). Exploratory graph analysis of the multidimensional schizotypy scale. *Schizophrenia Research*, *206*, 43–51. doi: [10.1016/j.schres.2018.12.018](research/Christensen et al. - 2019 - Exploratory graph analysis of the multidimensional.pdf){target="_blank"}
 
-Golino, H., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Sadana, R., Thiyagarajan, J. A., & Martinez-Molina, A. (2020). Investigating the performance of exploratory graph analysis and traditional techniques to identify the number of latent factors: A simulation and tutorial. *Psychological Methods*, *25*(3), 292–320. doi: [10.1037/met0000255](research/Golino et al. - 2020 - Investigating the performance of exploratory graph.pdf)
+Golino, H., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Sadana, R., Thiyagarajan, J. A., & Martinez-Molina, A. (2020). Investigating the performance of exploratory graph analysis and traditional techniques to identify the number of latent factors: A simulation and tutorial. *Psychological Methods*, *25*(3), 292–320. doi: [10.1037/met0000255](research/Golino et al. - 2020 - Investigating the performance of exploratory graph.pdf){target="_blank"}
 
-Christensen, A. P., Garrido, L. E., Guerra-Peña, K., & Golino, H. (2023). Comparing community detection algorithms in psychometric networks: A Monte Carlo simulation. *Behavior Research Methods*, 1–21. doi: [10.3758/s13428-023-02106-4](research/Christensen et al. - 2023 - Comparing community detection algorithms in psycho.pdf)
+Christensen, A. P., Garrido, L. E., Guerra-Peña, K., & Golino, H. (2023). Comparing community detection algorithms in psychometric networks: A Monte Carlo simulation. *Behavior Research Methods*, 1–21. doi: [10.3758/s13428-023-02106-4](research/Christensen et al. - 2023 - Comparing community detection algorithms in psycho.pdf){target="_blank"}
 
 ***
 
 ### Exploratory Graph Analysis with Total Entropy Fit Index
 
-+   [`EGA.fit`](references/EGA.fit.html)
++   [`EGA.fit`](references/EGA.fit.html){target="_blank"}
 
-Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s community detection in networks using the Total Entropy Fit Index. *PsyArXiv*. doi: [10.31234/osf.io/9pj2m](research/Jamison et al. - 2021 - Optimizing Walktrap’s Community Detection in Netwo.pdf)
+Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s community detection in networks using the Total Entropy Fit Index. *PsyArXiv*. doi: [10.31234/osf.io/9pj2m](research/Jamison et al. - 2021 - Optimizing Walktrap’s Community Detection in Netwo.pdf){target="_blank"}
 
 ***
 
 ### Hierarchical Exploratory Graph Analysis
 
-+   [`hierEGA`](references/hierEGA.html)
++   [`hierEGA`](references/hierEGA.html){target="_blank"}
 
-Golino, H., Thiyagarajan, J. A., Sadana, R., Teles, M., Christensen, A. P., & Boker, S. M. (2020). Investigating the broad domains of intrinsic capacity, functional ability and environment: An exploratory graph analysis approach for improving analytical methodologies for measuring healthy aging. *PsyArXiv*. doi: [10.31234/osf.io/hj5mc](research/Golino et al. - 2020 - Investigating the broad domains of intrinsic capac.pdf)
+Golino, H., Thiyagarajan, J. A., Sadana, R., Teles, M., Christensen, A. P., & Boker, S. M. (2020). Investigating the broad domains of intrinsic capacity, functional ability and environment: An exploratory graph analysis approach for improving analytical methodologies for measuring healthy aging. *PsyArXiv*. doi: [10.31234/osf.io/hj5mc](research/Golino et al. - 2020 - Investigating the broad domains of intrinsic capac.pdf){target="_blank"}
 
-Christensen, A. P., Cardillo, E. R., & Chatterjee, A. (2022). What kind of impacts can artwork have on viewers? Establishing a taxonomy for aesthetic impacts. *British Journal of Psychology*. doi: [10.1111/bjop.12623](research/Christensen et al. - 2022 - What kind of impacts can artwork have on viewers.pdf)
+Christensen, A. P., Cardillo, E. R., & Chatterjee, A. (2022). What kind of impacts can artwork have on viewers? Establishing a taxonomy for aesthetic impacts. *British Journal of Psychology*. doi: [10.1111/bjop.12623](research/Christensen et al. - 2022 - What kind of impacts can artwork have on viewers.pdf){target="_blank"}
 
-Jiménez, M., Abad, F. J., Garcia-Garzon, E., Golino, H., Christensen, A. P., & Garrido, L. E. (2023). Dimensionality assessment in bifactor structures with multiple general factors: A network psychometrics approach. *Psychological Methods*. doi: [10.1037/met0000590](research/Jiménez et al. - 2023 - Dimensionality assessment in bifactor structures w.pdf)
+Jiménez, M., Abad, F. J., Garcia-Garzon, E., Golino, H., Christensen, A. P., & Garrido, L. E. (2023). Dimensionality assessment in bifactor structures with multiple general factors: A network psychometrics approach. *Psychological Methods*. doi: [10.1037/met0000590](research/Jiménez et al. - 2023 - Dimensionality assessment in bifactor structures w.pdf){target="_blank"}
 
 ***
 
 ### Loadings Comparison Test
 
-+   [`LCT`](reference/LCT.html)
++   [`LCT`](../reference/LCT.html){target="_blank"}
 
-Christensen, A. P., & Golino, H. (2021). Factor or network model? Predictions from neural networks. *Journal of Behavioral Data Science*, *1*(1), 85–126. doi: [10.35566/jbds/v1n1/p5](research/Christensen and Golino - 2021 - Factor or network model Predictions from neural n.pdf)
+Christensen, A. P., & Golino, H. (2021). Factor or network model? Predictions from neural networks. *Journal of Behavioral Data Science*, *1*(1), 85–126. doi: [10.35566/jbds/v1n1/p5](research/Christensen and Golino - 2021 - Factor or network model Predictions from neural n.pdf){target="_blank"}
 
 ***
 
 ### Measurement Invariance
 
-+   [`invariance`](reference/invariance.html)
++   [`invariance`](../reference/invariance.html){target="_blank"}
 
-Jamison, L., Golino, H., & Christensen, A. P. (2022). Metric invariance in exploratory graph analysis via permutation testing. *PsyArXiv*. doi: [10.31234/osf.io/j4rx9](research/Jamison et al. - 2022 - Metric invariance in exploratory graph analysis vi.pdf)
+Jamison, L., Golino, H., & Christensen, A. P. (2022). Metric invariance in exploratory graph analysis via permutation testing. *PsyArXiv*. doi: [10.31234/osf.io/j4rx9](research/Jamison et al. - 2022 - Metric invariance in exploratory graph analysis vi.pdf){target="_blank"}
 
 ***
 
 ### Network Loadings and Scores
 
-+   [`net.loads`](reference/net.loads.html)
-+   [`net.scores`](reference/net.scores.html)
++   [`net.loads`](../reference/net.loads.html){target="_blank"}
++   [`net.scores`](../reference/net.scores.html){target="_blank"}
 
-Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network perspective on the validity and validation of personality trait questionnaires. *European Journal of Personality*, *34*(6), 1095–1108. doi: [10.1002/per.2265](research/Christensen et al. - 2020 - A psychometric network perspective on the validity.pdf)
+Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network perspective on the validity and validation of personality trait questionnaires. *European Journal of Personality*, *34*(6), 1095–1108. doi: [10.1002/per.2265](research/Christensen et al. - 2020 - A psychometric network perspective on the validity.pdf){target="_blank"}
 
-Christensen, A. P., & Golino, H. (2021). On the equivalency of factor and network loadings. *Behavior Research Methods*, *53*(4), 1563–1580. doi: [10.3758/s13428-020-01500-6](research/Christensen and Golino - 2021 - On the equivalency of factor and network loadings.pdf)
+Christensen, A. P., & Golino, H. (2021). On the equivalency of factor and network loadings. *Behavior Research Methods*, *53*(4), 1563–1580. doi: [10.3758/s13428-020-01500-6](research/Christensen and Golino - 2021 - On the equivalency of factor and network loadings.pdf){target="_blank"}
 
-Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf)
+Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf){target="_blank"}
 
 ***
 
 ### Network Psychometrics + Information Theory
 
-+   [boot.ergoInfo](reference/boot.ergoInfo.html)
-+   [`ergoInfo`](reference/ergoInfo.html)
-+   [`infoCluster`](reference/infoCluster.html)
-+   [`jsd`](reference/jsd.html)
++   [boot.ergoInfo](../reference/boot.ergoInfo.html){target="_blank"}
++   [`ergoInfo`](../reference/ergoInfo.html){target="_blank"}
++   [`infoCluster`](../reference/infoCluster.html){target="_blank"}
++   [`jsd`](../reference/jsd.html){target="_blank"}
 
-Golino, H., Christensen, A. P., & Nesselroade, J. (2022). Towards a psychology of individuals: The ergodicity information index and a bottom-up approach for finding generalizations. *PsyArXiv*. doi: [10.31234/osf.io/th6rm](research/Golino et al. - 2022 - Towards a psychology of individuals The ergodicit.pdf)
+Golino, H., Christensen, A. P., & Nesselroade, J. (2022). Towards a psychology of individuals: The ergodicity information index and a bottom-up approach for finding generalizations. *PsyArXiv*. doi: [10.31234/osf.io/th6rm](research/Golino et al. - 2022 - Towards a psychology of individuals The ergodicit.pdf){target="_blank"}
 
 ***
 
 ### Total Correlation
 
-+   [`totalCor`](reference/totalCor.html)
-+   [`totalCorMat`](reference/totalCorMat.html)
++   [`totalCor`](../reference/totalCor.html){target="_blank"}
++   [`totalCorMat`](../reference/totalCorMat.html){target="_blank"}
 
-Felix, L. M., Mansur-Alves, M., Teles, M., Jamison, L., & Golino, H. (2021). Longitudinal impact and effects of booster sessions in a cognitive training program for healthy older adults. *Archives of Gerontology and Geriatrics*, *94*, 104337. doi: [10.1016/j.archger.2021.104337](research/Felix et al. - 2021 - Longitudinal impact and effects of booster session.pdf)
+Felix, L. M., Mansur-Alves, M., Teles, M., Jamison, L., & Golino, H. (2021). Longitudinal impact and effects of booster sessions in a cognitive training program for healthy older adults. *Archives of Gerontology and Geriatrics*, *94*, 104337. doi: [10.1016/j.archger.2021.104337](research/Felix et al. - 2021 - Longitudinal impact and effects of booster session.pdf){target="_blank"}
 
 ***
 
 ### Random-Intercept Exploratory Graph Analysis
 
-+   [`riEGA`](reference/riEGA.html)
++   [`riEGA`](../reference/riEGA.html){target="_blank"}
 
-Garcia-Pardina, A., Abad, F. J., Christensen, A. P., Golino, H., & Garrido, L. E. (2022). Dimensionality assessment in the presence of wording effects: A network psychometric and factorial approach. *PsyArXiv*. doi: [10.31234/osf.io/7yqau](research/Garcia-Pardina et al. - 2022 - Dimensionality assessment in the presence of wordi.pdf)
+Garcia-Pardina, A., Abad, F. J., Christensen, A. P., Golino, H., & Garrido, L. E. (2022). Dimensionality assessment in the presence of wording effects: A network psychometric and factorial approach. *PsyArXiv*. doi: [10.31234/osf.io/7yqau](research/Garcia-Pardina et al. - 2022 - Dimensionality assessment in the presence of wordi.pdf){target="_blank"}
 
 ***
 
 ### Triangulated Maximally Filtered Graph
 
-+   [`TMFG`](reference/TMFG.html)
++   [`TMFG`](../reference/TMFG.html){target="_blank"}
 
-Christensen, A. P., Kenett, Y. N., Aste, T., Silvia, P. J., & Kwapil, T. R. (2018). Network structure of the Wisconsin Schizotypy Scales–Short Forms: Examining psychometric network filtering approaches. *Behavior Research Methods*, *50*(6), 2531–2550. doi: [10.3758/s13428-018-1032-9](research/Christensen et al. - 2018 - Network structure of the Wisconsin Schizotypy Scal.pdf)
+Christensen, A. P., Kenett, Y. N., Aste, T., Silvia, P. J., & Kwapil, T. R. (2018). Network structure of the Wisconsin Schizotypy Scales–Short Forms: Examining psychometric network filtering approaches. *Behavior Research Methods*, *50*(6), 2531–2550. doi: [10.3758/s13428-018-1032-9](research/Christensen et al. - 2018 - Network structure of the Wisconsin Schizotypy Scal.pdf){target="_blank"}
 
-Christensen, A. P., Cotter, K. N., & Silvia, P. J. (2019). Reopening openness to experience: A network analysis of four openness to experience inventories. *Journal of Personality Assessment*, *101*(6), 574–588. doi: [10.1080/00223891.2018.1467428](research/Christensen et al. - 2019 - Reopening openness to experience A network analys.pdf)
+Christensen, A. P., Cotter, K. N., & Silvia, P. J. (2019). Reopening openness to experience: A network analysis of four openness to experience inventories. *Journal of Personality Assessment*, *101*(6), 574–588. doi: [10.1080/00223891.2018.1467428](research/Christensen et al. - 2019 - Reopening openness to experience A network analys.pdf){target="_blank"}
 
-Christensen, A. P., Cardillo, E. R., & Chatterjee, A. (2022). What kind of impacts can artwork have on viewers? Establishing a taxonomy for aesthetic impacts. *British Journal of Psychology*. doi: [10.1111/bjop.12623](research/Christensen et al. - 2022 - What kind of impacts can artwork have on viewers.pdf)
+Christensen, A. P., Cardillo, E. R., & Chatterjee, A. (2022). What kind of impacts can artwork have on viewers? Establishing a taxonomy for aesthetic impacts. *British Journal of Psychology*. doi: [10.1111/bjop.12623](research/Christensen et al. - 2022 - What kind of impacts can artwork have on viewers.pdf){target="_blank"}
 
 ***
 
 ### Unidimensionality
 
-+   [`community.unidimensional`](reference/community.unidimensional.html)
++   [`community.unidimensional`](../reference/community.unidimensional.html){target="_blank"}
 
-Golino, H., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Sadana, R., Thiyagarajan, J. A., & Martinez-Molina, A. (2020). Investigating the performance of exploratory graph analysis and traditional techniques to identify the number of latent factors: A simulation and tutorial. *Psychological Methods*, *25*(3), 292–320. doi: [10.1037/met0000255](research/Golino et al. - 2020 - Investigating the performance of exploratory graph.pdf)
+Golino, H., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Sadana, R., Thiyagarajan, J. A., & Martinez-Molina, A. (2020). Investigating the performance of exploratory graph analysis and traditional techniques to identify the number of latent factors: A simulation and tutorial. *Psychological Methods*, *25*(3), 292–320. doi: [10.1037/met0000255](research/Golino et al. - 2020 - Investigating the performance of exploratory graph.pdf){target="_blank"}
 
-Christensen, A. P., Garrido, L. E., Guerra-Peña, K., & Golino, H. (2023). Comparing community detection algorithms in psychometric networks: A Monte Carlo simulation. *Behavior Research Methods*, 1–21. doi: [10.3758/s13428-023-02106-4](research/Christensen et al. - 2023 - Comparing community detection algorithms in psycho.pdf)
+Christensen, A. P., Garrido, L. E., Guerra-Peña, K., & Golino, H. (2023). Comparing community detection algorithms in psychometric networks: A Monte Carlo simulation. *Behavior Research Methods*, 1–21. doi: [10.3758/s13428-023-02106-4](research/Christensen et al. - 2023 - Comparing community detection algorithms in psycho.pdf){target="_blank"}
 
 ***
 
 ### Unique Variable Analysis
 
-+   [`UVA`](reference/UVA.html)
++   [`UVA`](../reference/UVA.html){target="_blank"}
 
-Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network perspective on the validity and validation of personality trait questionnaires. *European Journal of Personality*, *34*(6), 1095–1108. doi: [10.1002/per.2265](research/Christensen et al. - 2020 - A psychometric network perspective on the validity.pdf)
+Christensen, A. P., Golino, H., & Silvia, P. J. (2020). A psychometric network perspective on the validity and validation of personality trait questionnaires. *European Journal of Personality*, *34*(6), 1095–1108. doi: [10.1002/per.2265](research/Christensen et al. - 2020 - A psychometric network perspective on the validity.pdf){target="_blank"}
 
-Christensen, A. P., Garrido, L. E., & Golino, H. (2023). Unique variable analysis: A network psychometrics method to detect local dependence. *Multivariate Behavioral Research*, 1–18. doi: [10.1080/00273171.2023.2194606](research/Christensen et al. - 2023 - Unique variable analysis A network psychometrics.pdf)
+Christensen, A. P., Garrido, L. E., & Golino, H. (2023). Unique variable analysis: A network psychometrics method to detect local dependence. *Multivariate Behavioral Research*, 1–18. doi: [10.1080/00273171.2023.2194606](research/Christensen et al. - 2023 - Unique variable analysis A network psychometrics.pdf){target="_blank"}
