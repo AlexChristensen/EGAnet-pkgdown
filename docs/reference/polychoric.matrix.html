@@ -92,7 +92,8 @@ CDF, and Brent's method (Brent, 2013) for optimization of rho</p>
 <span>  <span class="va">data</span>,</span>
 <span>  na.data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pairwise"</span>, <span class="st">"listwise"</span><span class="op">)</span>,</span>
 <span>  empty.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"zero"</span>, <span class="st">"all"</span><span class="op">)</span>,</span>
-<span>  empty.value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"point_five"</span>, <span class="st">"one_over"</span><span class="op">)</span></span>
+<span>  empty.value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"point_five"</span>, <span class="st">"one_over"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -152,6 +153,11 @@ Adds <code>1 / n</code> where <em>n</em> equals the number of cells
 based on <code>empty.method</code>. For <code>empty.method = "zero"</code>,
 <em>n</em> equals the number of <em>zero</em> cells</p></li>
 </ul></dd>
+
+
+<dt>...</dt>
+<dd><p>Not used but made available for easier
+argument passing</p></dd>
 
 </dl></div>
     <div class="section level2">
