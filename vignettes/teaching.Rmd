@@ -8,3 +8,5 @@ vignette: >
 ---
 
 +   [Exploratory Graph Analysis](teaching/Exploratory-graph-analysis.pdf){target="_blank"}
+
++   [EGA Robustness](teaching/EGA-robustness.pdf){target="_blank"}

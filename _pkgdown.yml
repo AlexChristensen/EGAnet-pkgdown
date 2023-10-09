@@ -19,7 +19,7 @@ navbar:
       href: articles/quick-start.html
     - text: "Workflows"
       menu:
-        - text: "EGA"
+        - text: "Exploratory Graph Analysis"
           href: articles/ega.html
     - text: "Articles"
       menu: 

@@ -28,7 +28,7 @@ singleton and disconnected nodes to missing (NA)"><!-- mathjax --><script src="h
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-workflows">Workflows</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-workflows">
-    <a class="dropdown-item" href="../articles/ega.html">EGA</a>
+    <a class="dropdown-item" href="../articles/ega.html">Exploratory Graph Analysis</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -41,20 +41,20 @@ singleton and disconnected nodes to missing (NA)"><!-- mathjax --><script src="h
     <a class="dropdown-item" href="../articles/index.html">More Articles...</a>
   </div>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/teaching.html">Teaching</a>
-</li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Functions</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/research.html">Publications</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">News</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../articles/errors.html">Errors</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/research.html">Publications</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/teaching.html">Teaching</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -217,7 +217,7 @@ The igraph software package for complex network research.
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11 wmt12 wmt13 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     1     1     1     1     1     1     1     1     2     1     1     2     2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> wmt14 wmt15 wmt16 wmt17 wmt18 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     2     2     2     1     1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2     2     2     1     2 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute Infomap</span></span></span>
 <span class="r-in"><span><span class="fu">community.detection</span><span class="op">(</span><span class="va">network</span>, algorithm <span class="op">=</span> <span class="st">"infomap"</span><span class="op">)</span></span></span>
@@ -310,9 +310,9 @@ The igraph software package for complex network research.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of communities:  4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11 wmt12 wmt13 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1     1     1     1     1     2     2     2     3     3     2     2     3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1     1     1     1     1     2     2     2     3     3     4     4     3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> wmt14 wmt15 wmt16 wmt17 wmt18 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     3     2     3     4     4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     3     4     3     4     4 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute Walktrap</span></span></span>
 <span class="r-in"><span><span class="fu">community.detection</span><span class="op">(</span><span class="va">network</span>, algorithm <span class="op">=</span> <span class="st">"walktrap"</span><span class="op">)</span></span></span>
