@@ -190,7 +190,8 @@ Expands the correlation matrix with four variables correlated 0.50.
 If number of dimension returns 2 or less in check, then the data 
 are unidimensional; otherwise, regular EGA with no matrix
 expansion is used. This method was used in the Golino et al.'s (2020)
-<em>Psychological Methods</em> simulation</p></li>
+<em>Psychological Methods</em> simulation.<em>Note</em>: <code>model = "BGGM"</code> will generated new data to be
+used in the estimation based on the same four variables correlated 0.50</p></li>
 <li><p><code>"LE"</code> --- 
 Applies the Leading Eigenvector algorithm
 (<code><a href="https://r.igraph.org/reference/cluster_leading_eigen.html" class="external-link">cluster_leading_eigen</a></code>)
@@ -264,7 +265,7 @@ Unidimensional community detection: A Monte Carlo simulation, grid search, and c
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of communities:  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11 wmt12 wmt13 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1     1     1     1     1     2     2     2     2     1     2     2     2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1     1     1     1     1     1     2     2     2     1     2     2     2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> wmt14 wmt15 wmt16 wmt17 wmt18 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2     2     2     2     2 </span>
 <span class="r-in"><span></span></span>

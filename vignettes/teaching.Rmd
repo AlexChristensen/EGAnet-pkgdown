@@ -7,6 +7,32 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-+   [Exploratory Graph Analysis](teaching/Exploratory-graph-analysis.pdf){target="_blank"}
++   [Exploratory Graph Analysis (EGA)](teaching/Exploratory-graph-analysis.pdf){target="_blank"}
+
+    +   Introduction to networks
+    +   Graphical least absolute shrinkage and selection operator (GLASSO)
+    +   Extended Bayesian information criterion (EBIC) for model selection
+    +   Community detection: Walktrap and Louvain algorithms
+    +   Consensus clustering
+    +   Unidimensionality
+    +   Entropy and Total Entropy Fit Index (TEFI)
+    +   EGA with TEFI community selection
 
 +   [EGA Robustness](teaching/EGA-robustness.pdf){target="_blank"}
+
+    +   Measurement concepts
+    +   Redundancy and unique variable analysis (UVA)
+    +   Bootstrap EGA
+    +   Item and dimension stability
+    +   Network loadings
+    +   Metric measurement invariance
+    +   Hierarchical EGA
+
++   [Dynamic EGA](teaching/Dynamic-EGA.pdf){target="_blank"}
+
+    +   Generalized Local Linear Approximation
+    +   Dynamic EGA
+    +   Normalized Mutual Information
+    +   Jensen-Shannon Distance
+    +   Hierarchical Clustering
+    +   Information Theory Clustering
