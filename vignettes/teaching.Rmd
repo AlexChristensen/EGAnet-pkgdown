@@ -17,6 +17,8 @@ vignette: >
     +   Unidimensionality
     +   Entropy and Total Entropy Fit Index (TEFI)
     +   EGA with TEFI community selection
+    
+\newline
 
 +   [EGA Robustness](teaching/EGA-robustness.pdf){target="_blank"}
 
@@ -27,6 +29,8 @@ vignette: >
     +   Network loadings
     +   Metric measurement invariance
     +   Hierarchical EGA
+    
+\newline
 
 +   [Dynamic EGA](teaching/Dynamic-EGA.pdf){target="_blank"}
 

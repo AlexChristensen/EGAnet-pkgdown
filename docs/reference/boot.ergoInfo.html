@@ -88,7 +88,7 @@ with a distribution of EII obtained by bootstrap sampling
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">boot.ergoInfo</span><span class="op">(</span></span>
 <span>  <span class="va">dynEGA.object</span>,</span>
 <span>  <span class="va">EII</span>,</span>
-<span>  use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"edge.list"</span>, <span class="st">"unweighted"</span><span class="op">)</span>,</span>
+<span>  use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"edge.list"</span>, <span class="st">"unweighted"</span>, <span class="st">"weighted"</span><span class="op">)</span>,</span>
 <span>  iter <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  <span class="va">ncores</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -122,6 +122,9 @@ Calculates the algorithm complexity using the list of edges.</p></li>
 <li><p><code>"unweighted"</code> --- 
 Calculates the algorithm complexity using the binary weights of the network.
 0 = edge absent and 1 = edge present</p></li>
+<li><p><code>"weighted"</code> --- 
+Calculates the algorithm complexity using the weights of encoded prime-weight transformed network
+where the weights are multiplied by 10 and rounded (to force integers)</p></li>
 </ul></dd>
 
 

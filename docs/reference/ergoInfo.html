@@ -81,7 +81,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ergoInfo</span><span class="op">(</span></span>
 <span>  <span class="va">dynEGA.object</span>,</span>
-<span>  use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"edge.list"</span>, <span class="st">"unweighted"</span><span class="op">)</span>,</span>
+<span>  use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"edge.list"</span>, <span class="st">"unweighted"</span>, <span class="st">"weighted"</span><span class="op">)</span>,</span>
 <span>  ordering <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"column"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -101,8 +101,11 @@ Current options are:</p>
 <ul><li><p><code>"edge.list"</code> --- 
 Calculates the algorithm complexity using the list of edges.</p></li>
 <li><p><code>"unweighted"</code> --- 
-Calculates the algorithm complexity using the binary weights of the network.
-0 = edge absent and 1 = edge present</p></li>
+Calculates the algorithm complexity using the binary weights of the encoded prime 
+transformed network. 0 = edge absent and 1 = edge present</p></li>
+<li><p><code>"weighted"</code> --- 
+Calculates the algorithm complexity using the weights of encoded prime-weight transformed network
+where the weights are multiplied by 10 and rounded (to force integers)</p></li>
 </ul></dd>
 
 
@@ -111,7 +114,7 @@ Calculates the algorithm complexity using the binary weights of the network.
 Changes ordering of edge list.
 <code>"row"</code> goes across the rows;
 <code>"column"</code> goes down the columns.
-Defaults to <code>"column"</code> (original implementation)</p></dd>
+Defaults to <code>"row"</code></p></dd>
 
 </dl></div>
     <div class="section level2">

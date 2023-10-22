@@ -29,6 +29,10 @@
 #' {Calculates the algorithm complexity using the binary weights of the network.
 #' 0 = edge absent and 1 = edge present}
 #' 
+#' \item{\code{"weighted"} --- }
+#' {Calculates the algorithm complexity using the weights of encoded prime-weight transformed network
+#' where the weights are multiplied by 10 and rounded (to force integers)}
+#' 
 #' }
 #'
 #' @param iter Numeric (length = 1).
@@ -141,10 +145,10 @@
 #'
 #' @export
 # Bootstrap Test for the Ergodicity Information Index
-# Updated 03.08.2023
+# Updated 19.10.2023
 boot.ergoInfo <- function(
     dynEGA.object, EII, 
-    use = c("edge.list", "unweighted"),
+    use = c("edge.list", "unweighted", "weighted"),
     iter = 100, ncores, verbose = TRUE
 ){
   
@@ -251,6 +255,9 @@ boot.ergoInfo <- function(
     )
   )
   
+  # Add "methods" attribute
+  attr(results, "methods") <- list(use = use)
+  
   # Set class
   class(results) <- "boot.ergoInfo"
   
@@ -288,16 +295,64 @@ boot.ergoInfo_errors <- function(dynEGA.object, iter, ncores, verbose)
 
 #' @exportS3Method 
 # S3 Print Method ----
-# Updated 26.07.2023
+# Updated 19.10.2023
 print.boot.ergoInfo <- function(x, ...)
 {
   
-  # Message about print support
-  message("No print support yet")
+  # Print lower order
+  cat(
+    styletext(
+      text = styletext(
+        text =  "Empirical EII\n\n", 
+        defaults = "underline"
+      ),
+      defaults = "bold"
+    )
+  )
   
-  # Print x
-  x
+  # Print EII method
+  cat(
+    "EII Method: ",
+    switch(
+      attr(x, "methods")$use,
+      "edge.list" = "Edge List",
+      "unweighted" = "Unweighted",
+      "weighted" = "Weighted"
+    ), "\n"
+  )
   
+  # Print EII value
+  cat("EII: ", round(x$empirical.ergoInfo, 4))
+  
+  # Add breakspace
+  cat("\n\n")
+  
+  # Print higher order
+  cat(
+    styletext(
+      text = styletext(
+        text =  "Bootstrap EII\n\n", 
+        defaults = "underline"
+      ),
+      defaults = "bold"
+    )
+  )
+  
+  # Print descriptives
+  cat(
+    paste0(
+      "Mean = ", round(mean(x$boot.ergoInfo, na.rm = TRUE), 4),
+      " (SD = ", round(sd(x$boot.ergoInfo, na.rm = TRUE), 4), ")",
+      "\np-value = ", round(x$p.value, 4), " (", x$effect, ")",
+      "\nErgodic: ", swiftelse(x$effect == "greater", "No", "Yes")
+    )
+  )
+  
+  cat("\n\n")
+  
+  # Print interpretation
+  cat("Interpretation:\n", x$interpretation)
+
 }
 
 #' @exportS3Method 

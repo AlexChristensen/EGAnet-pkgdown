@@ -73,82 +73,93 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.2" id="changes-in-version-202">Changes in version 2.0.2<a class="anchor" aria-label="anchor" href="#changes-in-version-202"></a></h2>
+<ul><li><p>FIX: ties for max gain in <code>TMFG</code></p></li>
+<li><p>FIX: continuous variables with few categories that are treated as ordinal in <code>polychoric.matrix</code></p></li>
+<li><p>FIX: character input for <code>structure</code> is now accepted</p></li>
+<li><p>ADD: website pointing t+ different data check errors added t+ error output (hopefully, makes errors more understandable)</p></li>
+<li><p>UPDATE: <code>corr = "cor_auto"</code> now performs <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">qgraph::cor_auto</a></code> in favor of legacy; previous behavior starting at 2.0.0 was t+ deprecate <code>"cor_auto"</code> in favor of <code>"auto"</code>; default remains <code>corr = "auto"</code></p></li>
+<li><p>UPDATE: <code>compare.EGA.plots</code> outputs <code>$all</code> and <code>$individual</code> for the plots</p></li>
+<li><p>UPDATE: when <code>structure</code> is supplied for <code>invariance</code>, then configural check is skipped (structure is assumed t+ be invariant)</p></li>
+<li><p>UPDATE: added data generation for <code>model = "BGGM"</code> and <code>uni.method = "expand"</code> in <code>community.unidimensional</code></p></li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.1" id="changes-in-version-201">Changes in version 2.0.1<a class="anchor" aria-label="anchor" href="#changes-in-version-201"></a></h2><p class="text-muted">CRAN release: 2023-08-23</p>
-<ul><li>updated the polychoric C code to avoid out-of-bounds access errors</li>
+<ul><li>updated the polychoric C code t+ avoid out-of-bounds access errors</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.0" id="changes-in-version-200">Changes in version 2.0.0<a class="anchor" aria-label="anchor" href="#changes-in-version-200"></a></h2><p class="text-muted">CRAN release: 2023-08-16</p>
-<ul><li><p>MAJOR REFACTOR: the update to version 2.0.0 includes many major changes that are designed to improve the speed, reliability, and reproducibility of {EGAnet}. The goal of these changes are to eliminate common errors and streamline the code in the package to prevent future error cases. There are several function additions that are provided to facilitate modular use of the {EGAnet} package</p></li>
+<ul><li><p>MAJOR REFACTOR: the update t+ version 2.0.0 includes many major # Changes that are designed t+ improve the speed, reliability, and reproducibility of {EGAnet}. The goal of these # Changes are t+ eliminate common errors and streamline the code in the package t+ prevent future error cases. There are several function additions that are provided t+ facilitate modular use of the {EGAnet} package</p></li>
 <li><p>INTERNALS: function-specific internal functions and S3methods are now located in their respective .R files rather than elsewhere (e.g., “utils-EGAnet.R”)</p></li>
-<li><p>SWAP: internal script usage of “utils-EGAnet.R” deprecated for “helper.R” functions that are used across the package (no visible changes for the user)</p></li>
-<li><p>NOTE: default objective function for Leiden algorithm is set to “modularity”</p></li>
-<li><p>NOTE: default for Louvain unidimensional method is set to single-shot <em>unless</em> argument “consensus.method” or “consensus.iter” is specified</p></li>
-<li><p>ADD: stricter <code>*apply</code> functions that are roughly equivalent to <code>*apply</code> but have stricter inputs/outputs (uses <code>vapply</code> as foundation; often, slightly faster)</p></li>
-<li><p>ADD: <code>community.consensus</code> to apply the Consensus Clustering approach introduced by Lancichnetti &amp; Fortunato (2012). Currently only available for the Louvain algorithm</p></li>
-<li><p>ADD: <code>community.detection</code> to apply community detection algorithms as a standalone function</p></li>
-<li><p>ADD: convenience function to convert an {igraph} object to a standard matrix (<code>igraph2matrix</code>)</p></li>
-<li><p>ADD: <code>modularity</code> to compute standard (absolute values) and signed modularity (implemented in C)</p></li>
-<li><p>ADD: <code>polychoric.matrix</code> to compute categorical correlations (implemented in C); handles missing data (“pairwise” or “listwise”) as well as empty cells in the joint frequency table (see documentation: <code><a href="../reference/polychoric.matrix.html">?polychoric.matrix</a></code>)</p></li>
-<li><p>ADD: <code>auto.correlate</code> now computes all correlations internally and no longer depends on external functions; categorical correlations are C based and bi/polyserial correlations are a simplified and vectorized version of {polycor}’s <code>polyserial</code>; substantial computational gains (between 10-25x faster than previous use of {qgraph}’s <code>cor_auto</code>)</p></li>
-<li><p>ADD: <code>network.estimation</code> to handle all network estimation in {EGAnet}; <em>includes</em> Bayesian GGM from {BGGM} for more seamless incorporation of BEGA</p></li>
-<li><p>ADD: <code>community.unidimensional</code> to apply different unidimensional community detection approaches; makes unidimensional community detection more modular and flexible</p></li>
-<li><p>ADD: basic (internal) function to handle all network plots to keep changes centralized to a single function; extends flexbility to handle all {GGally}’s <code>ggnet2</code> arguments</p></li>
+<li><p>SWAP: internal script usage of “utils-EGAnet.R” depracated for “helper.R” functions that are used across the package (n+ visible # Changes for the user)</p></li>
+<li><p>NOTE: default objective function for Leiden algorithm is set t+ “modularity”</p></li>
+<li><p>NOTE: default for Louvain unidimensional method is set t+ single-shot <em>unless</em> argument “consensus.method” or “consensus.iter” is specified</p></li>
+<li><p>ADD: stricter <code>*apply</code> functions that are roughly equivalent t+ <code>*apply</code> but have stricter inputs/outputs (uses <code>vapply</code> as foundation; often, slightly faster)</p></li>
+<li><p>ADD: <code>community.consensus</code> t+ apply the Consensus Clustering approach introduced by Lancichnetti &amp; Fortunat+ (2012). Currently only available for the Louvain algorithm</p></li>
+<li><p>ADD: <code>community.detection</code> t+ apply community detection algorithms as a standalone function</p></li>
+<li><p>ADD: convenience function t+ convert an {igraph} object t+ a standard matrix (<code>igraph2matrix</code>)</p></li>
+<li><p>ADD: <code>modularity</code> t+ compute standard (absolute values) and signed modularity (implemented in C)</p></li>
+<li><p>ADD: <code>polychoric.matrix</code> t+ compute categorical correlations (implemented in C); handles missing data (“pairwise” or “listwise”) as well as empty cells in the joint frequency table (see documentation: <code><a href="../reference/polychoric.matrix.html">?polychoric.matrix</a></code>)</p></li>
+<li><p>ADD: <code>auto.correlate</code> now computes all correlations internally and n+ longer depends on external functions; categorical correlations are C based and bi/polyserial correlations are a simplified and vectorized version of {polycor}’s <code>polyserial</code>; substantial computational gains (between 10-25x faster than previous use of {qgraph}’s <code>cor_auto</code>)</p></li>
+<li><p>ADD: <code>network.estimation</code> t+ handle all network estimation in {EGAnet}; <em>includes</em> Bayesian GGM from {BGGM} for more seamless incorporation of BEGA</p></li>
+<li><p>ADD: <code>community.unidimensional</code> t+ apply different unidimensional community detection approaches; makes unidimensional community detection more modular and flexible</p></li>
+<li><p>ADD: basic (internal) function t+ handle all network plots t+ keep # Changes centralized t+ a single function; extends flexbility t+ handle all {GGally}’s <code>ggnet2</code> arguments</p></li>
 <li><p>ADD: implemented reproducible parametric bootstrapping and random sampling (see <a href="https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG" class="external-link uri">https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG</a> for more details)</p></li>
 <li><p>ADD: implemented reproducible resampling bootstrapping and random sampling (see <a href="https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG" class="external-link uri">https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG</a> for more details)</p></li>
 <li><p>ADD: reproducible bootstrapping with seed setting that does <em>not</em> affect R’s seed and RNG (user’s seed will not be affected and will not affected bootstrapping seeds)</p></li>
 <li><p>ADD: <code>community.homogenize</code> as a core function rather than internal (previously <code>homogenize.membership</code>); about 2.5x faster than the original version</p></li>
-<li><p>ADD: <code>convert2tidygraph</code> for <code>ggraph</code> and <code>tidygraph</code> support – thanks to Dominique Makowski!</p></li>
+<li><p>ADD: <code>convert2tidygraph</code> for <code>ggraph</code> and <code>tidygraph</code> support – thanks t+ Dominique Makowski!</p></li>
 <li><p>ADD: “multilevel” plotting support for <code>hierEGA</code> (only used when <code>scores = "network"</code> since factor scores don’t directly align with EGA detected dimensions)</p></li>
-<li><p>ADD: internal functions <code>shuffle</code> and <code>shuffle_replace</code> to replace <code>sample</code> with and without replacement; performed in C and allows seed setting independent of R (about 2-3x faster)</p></li>
+<li><p>ADD: internal functions <code>shuffle</code> and <code>shuffle_replace</code> t+ replace <code>sample</code> with and without replacement; performed in C and allows seed setting independent of R (about 2-3x faster)</p></li>
 <li><p>ADD: xoshiro256++ PRNG for higher quailty random number generation, permutation, and resampling (~2x faster than <code>runif</code> and <code>sample</code>); based in C</p></li>
 <li><p>ADD: Ziggurat method for random normal generation over top xoshiro256++ (2-5x faster than <code>rnorm</code>); based in C</p></li>
-<li><p>ADD: configural invariance was added to <code>invariance</code> (see Details section)</p></li>
-<li><p>ADD: <code>genTEFI</code> to compute the Generalized Total Entropy Fit Index solely; <code>tefi</code> serves as a general function to compute TEFI for all <code>*EGA</code> classes</p></li>
+<li><p>ADD: configural invariance was added t+ <code>invariance</code> (see Details section)</p></li>
+<li><p>ADD: <code>genTEFI</code> t+ compute the Generalized Total Entropy Fit Index solely; <code>tefi</code> serves as a general function t+ compute TEFI for all <code>*EGA</code> classes</p></li>
 <li><p>REMOVE: <code>signed.louvain</code> until reproducibility can be sorted</p></li>
-<li><p>REMOVE: <code>methods.section</code> and <code>utils-EGAnet.methods.section</code> to avoid space issues in ./R directory (1MB)</p></li>
+<li><p>REMOVE: <code>methods.section</code> and <code>utils-EGAnet.methods.section</code> t+ avoid space issues in ./R directory (1MB)</p></li>
 <li><p>UPDATE: <code>EBICglasso.qgraph</code> and <code>TMFG</code> were optimized; <code>TMFG</code> is now 2x faster</p></li>
 <li><p>UPDATE: <code>TMFG</code> can now directly estimate a GGM with the argument ‘partial = TRUE’; implements the Local-Global Inversion method from Barfuss et al. (2016)</p></li>
 <li><p>UPDATE: switched on “Byte-Compile” (byte-compiles on our end and not when the user installs)</p></li>
 <li><p>UPDATE: <code>EGA.estimate</code> and <code>EGA</code> core functions have been updated for seamless use with more basic functions <code>network.estimation</code> and <code>community.*</code> functions</p></li>
-<li><p>UPDATE: S3method updates for <code>EGA.estimate</code> and <code>EGA</code> to provide estimation information</p></li>
-<li><p>UPDATE: <code>EGA.fit</code> updated to be compatiable with all updates to <code>EGA.estimate</code> (other optimizations were implemented such as direct communtiy detection application and unique solution finding)</p></li>
+<li><p>UPDATE: S3method updates for <code>EGA.estimate</code> and <code>EGA</code> t+ provide estimation information</p></li>
+<li><p>UPDATE: <code>EGA.fit</code> updated t+ be compatiable with all updates t+ <code>EGA.estimate</code> (other optimizations were implemented such as direct communtiy detection application and unique solution finding)</p></li>
 <li><p>UPDATE: <code>tefi</code> updated with several checks (slightly slower for correlation matrix but much faster with raw data; includes data/matrix checks)</p></li>
 <li><p>UPDATE: <code>entropyFit</code> uses more effective vectorization (about 5-7x faster)</p></li>
-<li><p>UPDATE: <code>Embed</code> and <code>glla</code> made to be more efficient and includes an internal <code>glla_setup</code> function to avoid the same matrix calculations for every participant in a sample for <code>dynEGA</code></p></li>
-<li><p>UPDATE: <code>riEGA</code> updated to be compatiable with all lower-level updates (slightly faster)</p></li>
-<li><p>UPDATE: <code>wto</code> updated to be fully vectorized (about 12x faster)</p></li>
-<li><p>UPDATE: <code>totalCor</code> and <code>totalCorMat</code> updated to be fully vectorized (about 10x faster)</p></li>
+<li><p>UPDATE: <code>Embed</code> and <code>glla</code> made t+ be more efficient and includes an internal <code>glla_setup</code> function t+ avoid the same matrix calculations for every participant in a sample for <code>dynEGA</code></p></li>
+<li><p>UPDATE: <code>riEGA</code> updated t+ be compatiable with all lower-level updates (slightly faster)</p></li>
+<li><p>UPDATE: <code>wto</code> updated t+ be fully vectorized (about 12x faster)</p></li>
+<li><p>UPDATE: <code>totalCor</code> and <code>totalCorMat</code> updated t+ be fully vectorized (about 10x faster)</p></li>
 <li><p>UPDATE: implemented internal <code>fast.data.frame</code> for more efficient data frame initialization when all values in data frame are the same</p></li>
-<li><p>UPDATE: <code>bootEGA</code> allows flexibility to add any arguments from any <code>EGA*</code> functions; much faster due to optimizations across all functions (“resampling” is nearly as fast as “parametric”)</p></li>
-<li><p>UPDATE: support for <code>EGA.fit</code> and <code>riEGA</code> added to <code>bootEGA</code> (support for <code>hierEGA</code> will be coming soon…)</p></li>
-<li><p>UPDATE: <code>itemStability</code> has been updated and runs about 2.5x faster due to <code>community.homogenize</code>; S3methods were added; greater flexibility available in plotting but not much support (e.g., error checking) yet</p></li>
+<li><p>UPDATE: <code>bootEGA</code> allows flexibility t+ add any arguments from any <code>EGA*</code> functions; much faster due t+ optimizations across all functions (“resampling” is nearly as fast as “parametric”)</p></li>
+<li><p>UPDATE: support for <code>EGA.fit</code> and <code>riEGA</code> added t+ <code>bootEGA</code> (support for <code>hierEGA</code> will be coming soon…)</p></li>
+<li><p>UPDATE: <code>itemStability</code> has been updated and runs about 2.5x faster due t+ <code>community.homogenize</code>; S3methods were added; greater flexibility available in plotting but not much support (e.g., error checking) yet</p></li>
 <li><p>UPDATE: <code>dimensionStability</code> has been updated and maintains speed gains from <code>itemStability</code></p></li>
 <li><p>UPDATE: <code>dynEGA.ind.pop</code> now calls <code>dynEGA</code> with <code>level = c("individual", "population")</code>; legacy <code>dynEGA.ind.pop</code> class is maintained across ergodicity functions</p></li>
 <li><p>UPDATE: <code>ergoInfo</code> is about 2x faster</p></li>
-<li><p>UPDATE: <code>jsd</code> received several internal functions to expedite procedures in <code>infoCluster</code> and <code>jsd.ergoInfo</code></p></li>
-<li><p>UPDATE: <code>net.loads</code> now includes ‘loading.method’ argument to allow for reproducibility with “BRM” implementation (and version 1.2.3); “experimental” implementation includes rotations alternative signs and cross-loading computation (potential future default)</p></li>
+<li><p>UPDATE: <code>jsd</code> received several internal functions t+ expedite procedures in <code>infoCluster</code> and <code>jsd.ergoInfo</code></p></li>
+<li><p>UPDATE: <code>net.loads</code> now includes ‘loading.method’ argument t+ allow for reproducibility with “BRM” implementation (and version 1.2.3); “experimental” implementation includes rotations alternative signs and cross-loading computation (potential future default)</p></li>
 <li><p>UPDATE: <code>net.scores</code> is much simpler (internally) and quicker; seamlessly integrates with <code>net.loads</code></p></li>
-<li><p>UPDATE: <code>compare.EGA.plots</code> is faster, more flexible, and more reliable for comparing two or more plots</p></li>
+<li><p>UPDATE: <code>compare.EGA.plots</code> is faster, more flexible, and more reliable for comparing tw+ or more plots</p></li>
 <li><p>UPDATE: <code>hierEGA</code> is faster and has new S3 methods</p></li>
 <li><p>UPDATE: S3 plotting for <code>invariance</code></p></li>
 <li><p>UPDATE: <code>hierEGA</code> + <code>bootEGA</code> integration for <code>itemStability</code> and <code>dimensionStability</code> (includes full S3 methods)</p></li>
-<li><p>UPDATE: <code>UVA</code> supports legacy of inital conception in Christensen, Golino, and Silvia (EJP, 2020) but will no longer fix bugs related to: manual variable selection, “adapt” or “alpha” methods (warnings will be thrown)</p></li>
-<li><p>UPDATE: streamlined <code>UVA</code> (about 4x faster); fixed bugs related to reverse coding issues</p></li>
+<li><p>UPDATE: <code>UVA</code> supports legacy of inital conception in Christensen, Golino, and Silvia (EJP, 2020) but will n+ longer fix bugs related to: manual variable selection, “adapt” or “alpha” methods (warnings will be thrown)</p></li>
+<li><p>UPDATE: streamlined <code>UVA</code> (about 4x faster); fixed bugs related t+ reverse coding issues</p></li>
 <li><p>UPDATE: <code>tefi</code> now handles all <code>EGA*</code> function objects including <code>hierEGA</code> which computes generalized TEFI</p></li>
-<li><p>UPDATE: documentation for all functions have been thoroughly revised to provide better instruction on how to use functions and their expected inputs</p></li>
-<li><p>DEPENDENCY: removed {network} because it is no longer used for plotting; switched {sna} to IMPORTS rather than SUGGESTS</p></li>
+<li><p>UPDATE: documentation for all functions have been thoroughly revised t+ provide better instruction on how t+ use functions and their expected inputs</p></li>
+<li><p>DEPENDENCY: removed {network} because it is n+ longer used for plotting; switched {sna} t+ IMPORTS rather than SUGGESTS</p></li>
 <li><p>DEPENDENCY: removed {rstudioapi} from ‘Suggests’ because it was used in <code>colortext</code> and used in the package</p></li>
 <li><p>DEPENDENCY: removed {matrixcalc} because it was only used for trace of a matrix (own internal function is used)</p></li>
-<li><p>DEPENDENCY: {future} and {future.apply} are used for parallelization (better integration); includes internal function to check for available memory to not break in big data cases</p></li>
+<li><p>DEPENDENCY: {future} and {future.apply} are used for parallelization (better integration); includes internal function t+ check for available memory t+ not break in big data cases</p></li>
 <li><p>DEPENDENCY: {progress} and {progressr} are used for progress bars (in parallelization)</p></li>
 <li><p>DEPENDENCY: removed {psychTools} from ‘Suggests’ which was only used in examples</p></li>
 <li><p>DEPENDENCY: removed {rmarkdown} from ‘Suggests’ since it wasn’t being used across the package</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.5.1" id="changes-in-version-1251">Changes in version 1.2.5.1<a class="anchor" aria-label="anchor" href="#changes-in-version-1251"></a></h2>
-<ul><li><p>FIX: cross-loading bug in <code>net.loads</code> was leading to problems when there were negative cross-loadings</p></li>
+<ul><li><p>FIX: cross-loading bug in <code>net.loads</code> was leading t+ problems when there were negative cross-loadings</p></li>
 <li><p>FIX: added <code><a href="https://rdrr.io/pkg/psych/man/factor.scores.html" class="external-link">psych::factor.scores</a></code> scoring methods in <code>net.scores</code></p></li>
-<li><p>ADD: <code>signed.louvain</code> to estimate the Signed Louvain algorithm (implemented in C)</p></li>
+<li><p>ADD: <code>signed.louvain</code> t+ estimate the Signed Louvain algorithm (implemented in C)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.5" id="changes-in-version-125">Changes in version 1.2.5<a class="anchor" aria-label="anchor" href="#changes-in-version-125"></a></h2>
@@ -157,19 +168,19 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.4" id="changes-in-version-124">Changes in version 1.2.4<a class="anchor" aria-label="anchor" href="#changes-in-version-124"></a></h2>
 <ul><li><p>REMOVE: <code>residualEGA</code> has been removed in favor of <code>riEGA</code> (removes {OpenMx} dependency)</p></li>
-<li><p>ADD: rotations to <code>net.loads</code> and <code>net.scores</code></p></li>
-<li><p>UPDATE: <code>hierEGA</code> only outputs specified output (no longer outputs all possible consensus methods and scores combinations – should be much faster)</p></li>
+<li><p>ADD: rotations t+ <code>net.loads</code> and <code>net.scores</code></p></li>
+<li><p>UPDATE: <code>hierEGA</code> only outputs specified output (n+ longer outputs all possible consensus methods and scores combinations – should be much faster)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.3" id="changes-in-version-123">Changes in version 1.2.3<a class="anchor" aria-label="anchor" href="#changes-in-version-123"></a></h2><p class="text-muted">CRAN release: 2022-09-05</p>
-<ul><li><p>FIX: many bug fixes related to latest update; functions have largely returned to stable status</p></li>
+<ul><li><p>FIX: many bug fixes related t+ latest update; functions have largely returned t+ stable status</p></li>
 <li><p>UPDATE: Mac and Linux parallelizations have been optimized</p></li>
 <li><p>UPDATE: documented examples are more efficient for CRAN checks</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.1" id="changes-in-version-121">Changes in version 1.2.1<a class="anchor" aria-label="anchor" href="#changes-in-version-121"></a></h2>
-<ul><li><p>FIX: <code>bootEGA</code> read of bootstrap data (was not calling from <code>datalist</code> in <code>do.call</code> leading to perfect item stability)</p></li>
-<li><p>FIX: number of possible colors expanded to 70 (increased from 40)</p></li>
+<ul><li><p>FIX: <code>bootEGA</code> read of bootstrap data (was not calling from <code>datalist</code> in <code>do.call</code> leading t+ perfect item stability)</p></li>
+<li><p>FIX: number of possible colors expanded t+ 70 (increased from 40)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.0" id="changes-in-version-120">Changes in version 1.2.0<a class="anchor" aria-label="anchor" href="#changes-in-version-120"></a></h2><p class="text-muted">CRAN release: 2022-08-12</p>
@@ -177,24 +188,24 @@
 <li><p>FIX: <code>ordered = TRUE</code> for categorical data in <em>lavaan</em> CFAs</p></li>
 <li><p>UPDATE: consesnsus clustering is now used with Louvain in <code>EGA</code></p></li>
 <li><p>UPDATE: print/summary S3methods have been standardized</p></li>
-<li><p>ADD/UPDATE: <code>boot.ergoInfo</code> has achieved functional working order. Results can be trusted to suggest whether dynamic data possess the ergodic property</p></li>
+<li><p>ADD/UPDATE: <code>boot.ergoInfo</code> has achieved functional working order. Results can be trusted t+ suggest whether dynamic data possess the ergodic property</p></li>
 <li><p>ADD: information theoretic clustering algorithm for dynamic data is available in <code>infoCluster</code></p></li>
 <li><p>REMOVE: “alpha” and “adapt” options in <code>UVA</code> (removes {fitdistrplus} dependency)</p></li>
-<li><p>REMOVE: {qgraph} plots are no longer available</p></li>
+<li><p>REMOVE: {qgraph} plots are n+ longer available</p></li>
 <li><p>ADD: <code>convert2igraph</code> is now a core function</p></li>
 <li><p>ADD: Jensen-Shannon Divergence <code>jsd</code> for determining (dis)similarity between network strcutures</p></li>
-<li><p>ADD: <code>riEGA</code>, <code>EGA.fit</code>, and <code>hierEGA</code> functionality to <code>bootEGA</code></p></li>
-<li><p>ADD: <code>hierEGA</code> functionality to <code>itemStability</code> and <code>dimensionStability</code></p></li>
+<li><p>ADD: <code>riEGA</code>, <code>EGA.fit</code>, and <code>hierEGA</code> functionality t+ <code>bootEGA</code></p></li>
+<li><p>ADD: <code>hierEGA</code> functionality t+ <code>itemStability</code> and <code>dimensionStability</code></p></li>
 <li><p>UPDATE: “louvain” algorithm used as default for unidimensionality check in <code>EGA</code></p></li>
-<li><p>INTERNAL: cleaned up <code>EGA</code> and <code>EGA.estimate</code>; streamlined code; no user facing differences</p></li>
+<li><p>INTERNAL: cleaned up <code>EGA</code> and <code>EGA.estimate</code>; streamlined code; n+ user facing differences</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="changes-in-version-110">Changes in version 1.1.0<a class="anchor" aria-label="anchor" href="#changes-in-version-110"></a></h2><p class="text-muted">CRAN release: 2022-05-10</p>
 <ul><li><p>FIX: CRAN note when <code>if(class(object))</code>. Replaced by <code>if(is(object))</code>.</p></li>
 <li><p>FIX: bug in <code>EGA.estimate</code> when using the TMFG network method. The resulting EGA plot did not have the correct node names.</p></li>
-<li><p>FIX: bug in <code>UVA</code> when trying to use sum score (<code>reduce.method = "sum"</code>) in automated procedure</p></li>
+<li><p>FIX: bug in <code>UVA</code> when trying t+ use sum score (<code>reduce.method = "sum"</code>) in automated procedure</p></li>
 <li><p>ADD: measurement <code>invariance</code> function for testing differences in network loadings between groups</p></li>
-<li><p>UPDATE: <code>itemStability</code> now has a parameter <code>structure</code> in which the user can specify a given structure to test its stability.</p></li>
+<li><p>UPDATE: <code>itemStability</code> now has a parameter <code>structure</code> in which the user can specify a given structure t+ test its stability.</p></li>
 <li><p>ADD: <code>riEGA</code> implementing random-intercept EGA for wording effects</p></li>
 <li><p>ADD: <code>hierEGA</code> implementing hierarchical EGA</p></li>
 <li><p>FIX: consensus clustering for the Louvain algorithm</p></li>
@@ -203,10 +214,10 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="changes-in-version-100">Changes in version 1.0.0<a class="anchor" aria-label="anchor" href="#changes-in-version-100"></a></h2><p class="text-muted">CRAN release: 2021-11-10</p>
 <ul><li><p>FIX: bug within the bootEGA function for <code>type = "resampling"</code>.</p></li>
-<li><p>UPDATE: default undimensionality adjustment has changed to leading eigenvalue (see Christensen, Garrido, &amp; Golino, 2021 <a href="https://doi.org/10.31234/osf.io/hz89e" class="external-link uri">https://doi.org/10.31234/osf.io/hz89e</a>). Previous unidimensionality adjustment in versions &lt;= 0.9.8 can be applied using <code>uni.method = "expand"</code></p></li>
+<li><p>UPDATE: default undimensionality adjustment has changed t+ leading eigenvalue (see Christensen, Garrido, &amp; Golino, 2021 <a href="https://doi.org/10.31234/osf.io/hz89e" class="external-link uri">https://doi.org/10.31234/osf.io/hz89e</a>). Previous unidimensionality adjustment in versions &lt;= 0.9.8 can be applied using <code>uni.method = "expand"</code></p></li>
 <li><p>UPDATE: default <code>UVA</code> was changed <code>type = "threshold"</code></p></li>
-<li><p>UPDATE: <code>UVA</code> is now automated using <code>auto = TRUE</code></p></li>
-<li><p>DEFUNCT: <code>dimStability</code> will no longer be supported. Instead, use <code>dimensionStability</code></p></li>
+<li><p>UPDATE: <code>UVA</code> is now automated using <code>aut+ = TRUE</code></p></li>
+<li><p>DEFUNCT: <code>dimStability</code> will n+ longer be supported. Instead, use <code>dimensionStability</code></p></li>
 <li><p>REVAMP: <code>itemStability</code> has been recoded. Now includes error checking and more readable code</p></li>
 <li><p>FIX: bug for plotting NA communities</p></li>
 <li><p>FIX: bug for changing edge size in ‘GGally’ plotting</p></li>
@@ -214,10 +225,10 @@
 <li><p>FIX: plotting parameters for <code>bootEGA</code></p></li>
 <li><p>FIX: redundancy output for adhoc check in <code>UVA</code></p></li>
 <li><p>FIX: latent variable with non-space separated entries in <code>UVA</code> (<code>reduce.method = "latent"</code>)</p></li>
-<li><p>UPDATE: <code>UVA</code> was added to <code>methods.section</code></p></li>
+<li><p>UPDATE: <code>UVA</code> was added t+ <code>methods.section</code></p></li>
 <li><p>UPDATE: neural network weights in <code>LCT</code> (now only tests for factor or small-world network models)</p></li>
 <li><p>UPDATE: citations</p></li>
-<li><p>UPDATE: added <code>seed</code> argument for <code>bootEGA</code> to reproduce results</p></li>
+<li><p>UPDATE: added <code>seed</code> argument for <code>bootEGA</code> t+ reproduce results</p></li>
 <li><p>FIX: bug for Rand index in <code>itemStability</code></p></li>
 </ul></div>
     <div class="section level2">
@@ -226,12 +237,12 @@
 <li><p>ADD: <code>color_palette_EGA</code> New EGA palettes for plotting <code>ggnet2</code> EGA network plots (see <code><a href="../reference/color_palette_EGA.html">?color_palette_EGA</a></code>)</p></li>
 <li><p>ADD: <code>UVA</code> or Unique Variable Analysis operates as a comprehensive handling of variable redundancy in multivariate data (see <code><a href="../reference/UVA.html">?UVA</a></code>)</p></li>
 <li><p>DEFUNCT: <code>node.redundant</code>, <code>node.redundant.names</code>, and <code>node.redundant.combine</code> will be defunct in next version. Please use <code>UVA</code></p></li>
-<li><p>ADD: a new function to compute a parametric Bootstrap Test for the Ergodicity Information Index (see <code><a href="../reference/boot.ergoInfo.html">?boot.ergoInfo</a></code>)</p></li>
+<li><p>ADD: a new function t+ compute a parametric Bootstrap Test for the Ergodicity Information Index (see <code><a href="../reference/boot.ergoInfo.html">?boot.ergoInfo</a></code>)</p></li>
 <li><p>ADD: basic Shiny functionality (<code>EGA</code> only)</p></li>
-<li><p>ADD: a new function to compute a Monte-Carlo Test for the Ergodicity Information Index (see <code>?mctest.ergoInfo</code>)</p></li>
-<li><p>ADD: a new function to compute the Ergodicity Information Index (see <code><a href="../reference/ergoInfo.html">?ergoInfo</a></code>)</p></li>
+<li><p>ADD: a new function t+ compute a Monte-Carl+ Test for the Ergodicity Information Index (see <code>?mctest.ergoInfo</code>)</p></li>
+<li><p>ADD: a new function t+ compute the Ergodicity Information Index (see <code><a href="../reference/ergoInfo.html">?ergoInfo</a></code>)</p></li>
 <li><p>UPDATE: new plotting scheme using <em>network</em> and <em>GGally</em> packages</p></li>
-<li><p>ADD: a function to produce an automated Methods section for several functions (see <code>?methods.section</code>)</p></li>
+<li><p>ADD: a function t+ produce an automated Methods section for several functions (see <code>?methods.section</code>)</p></li>
 <li><p>UPDATE: <code>bootEGA</code> now implements the updated <code>EGA</code> algorithm</p></li>
 <li><p>UPDATE: ega.wmt data (unidimensional)</p></li>
 <li><p>UPDATE: <code>itemStability</code> plot defaults (“GGally” color scheme) and examples (manipulating plot)</p></li>
@@ -245,7 +256,7 @@
 <li><p>FIX: naming in <code>EGA</code></p></li>
 <li><p>FIX: output network matrix in <code>EGA</code> when data are input</p></li>
 <li><p>UPDATE: citation version</p></li>
-<li><p>UPDATE: <code>node.redundant</code> now provides a full plot of redundancies detected, descriptive statistics including the critical value, central tendency descriptive statistics, and the distribution the significant values were determined from (thanks to Luis Garrido for the suggestion!)</p></li>
+<li><p>UPDATE: <code>node.redundant</code> now provides a full plot of redundancies detected, descriptive statistics including the critical value, central tendency descriptive statistics, and the distribution the significant values were determined from (thanks t+ Luis Garrid+ for the suggestion!)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.6" id="changes-in-version-096">Changes in version 0.9.6<a class="anchor" aria-label="anchor" href="#changes-in-version-096"></a></h2><p class="text-muted">CRAN release: 2020-07-13</p>
@@ -255,8 +266,8 @@
 <h2 class="pkg-version" data-toc-text="0.9.5" id="changes-in-version-095">Changes in version 0.9.5<a class="anchor" aria-label="anchor" href="#changes-in-version-095"></a></h2>
 <ul><li><p>ADD: loadings comparison test function added (see <code>LCT</code>)</p></li>
 <li><p>FIX: named community memberships in <code>itemStability</code> and <code>dimStability</code></p></li>
-<li><p>UPDATE: <code>plot</code>, <code>print</code>, and <code>summary</code> methods all moved into single .R files (no effect on user’s end)</p></li>
-<li><p>UPDATE: <code>net.scores</code> global score is improved and computes scores very close to CFA scores</p></li>
+<li><p>UPDATE: <code>plot</code>, <code>print</code>, and <code>summary</code> methods all moved int+ single .R files (n+ effect on user’s end)</p></li>
+<li><p>UPDATE: <code>net.scores</code> global score is improved and computes scores very close t+ CFA scores</p></li>
 <li><p>FIX: additional argument calls for <code>EGA.estimate</code> (and <code>EGA</code> by extension)</p></li>
 <li><p>UPDATE: message from <code>EGA.estimate</code> (and <code>EGA</code> by extension) reports both ‘gamma’ and ‘lambda.min.ratio’ arguments</p></li>
 <li><p>FIX: upper quantile output from <code>bootEGA</code></p></li>
@@ -266,10 +277,10 @@
 <h2 class="pkg-version" data-toc-text="0.9.4" id="changes-in-version-094">Changes in version 0.9.4<a class="anchor" aria-label="anchor" href="#changes-in-version-094"></a></h2>
 <ul><li><p>MAJOR UPDATE: <code>dimStability</code> now computes proportion of exact dimension replications rather than items that replicate within dimension (this latter information can still be found in the output of <code>itemStability</code> under $mean.dim.rep)</p></li>
 <li><p>FIX: <code>net.loads</code> for when dimensions equal one or the number of nodes in the network</p></li>
-<li><p>FIX: naming typo with characters in <code>itemStability</code></p></li>
+<li><p>FIX: naming typ+ with characters in <code>itemStability</code></p></li>
 <li><p>FIX: NAs in <code>dimStability</code></p></li>
 <li><p>FIX: weights of network in unidimensional structure of <code>EGA</code> are the same as multidimensional structure</p></li>
-<li><p>UPDATE: Added a new function to simulate dynamic factor models <code>simDFM</code></p></li>
+<li><p>UPDATE: Added a new function t+ simulate dynamic factor models <code>simDFM</code></p></li>
 <li><p>UPDATE: added internal functions for <code>net.loads</code> (see <code>utils-net.loads</code>)</p></li>
 <li><p>FIX: ordering of names in <code>itemStability</code></p></li>
 <li><p>FIX: handling of NA communities in <code>net.loads</code></p></li>
@@ -286,23 +297,22 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.2" id="changes-in-version-092">Changes in version 0.9.2<a class="anchor" aria-label="anchor" href="#changes-in-version-092"></a></h2>
-<ul><li><p>UPDATE: add latent variable scores comparison to <code>net.scores</code> vignette</p></li>
-<li><p>UPDATE: <code>node.redundant.combine</code> sets loadings equal to 1 when there are only two variables when the argument type = “latent”; warning also added from type = “sum”</p></li>
+<ul><li><p>UPDATE: add latent variable scores comparison t+ <code>net.scores</code> vignette</p></li>
+<li><p>UPDATE: <code>node.redundant.combine</code> sets loadings equal t+ 1 when there are only tw+ variables when the argument type = “latent”; warning als+ added from type = “sum”</p></li>
 <li><p>FIX: <code>node.redundant</code> alpha types bug</p></li>
 <li><p>updated <code>itemStability</code> (bug fixes)</p></li>
 <li><p>updated <code>node.redundant.combine</code> (bug fixes, latent variable option)</p></li>
 <li><p>major bug fix in <code>net.loads</code>: corrected loadings greater than 1 when there were many negative values</p></li>
-<li><p>added <code>EGA.estimate</code> to clean up <code>EGA</code> code and allow for future implementations of different network estimation methods and community detection algorithms</p></li>
+<li><p>added <code>EGA.estimate</code> t+ clean up <code>EGA</code> code and allow for future implementations of different network estimation methods and community detection algorithms</p></li>
 <li><p>updated <code>EGA</code> functionality: message for ‘gamma’ value used and <code>EGA.estimate</code> compatiability</p></li>
 <li><p>removed <em>iterators</em> dependency</p></li>
 <li><p>ordering and name fix in <code>net.loads</code></p></li>
 <li><p>auto-adjusts y-axis label size for <code>itemStability</code> plot based on number of nodes or length of node names</p></li>
-</ul><p>o <code>net.loads</code> adjusted for larger values using absolute values and applying the sign afterwards</p>
-<ul><li>reverse coding update in <code>net.loads</code>
-</li>
-</ul><p>o <code>node.redundant.combine</code> bug fix for reverse coding latent variables</p>
-<ul><li><p>added Louvain community detection to all EGA functions in <em>EGAnet</em></p></li>
-<li><p>functionality updates to <code>node.redundant</code></p></li>
+<li><p><code>net.loads</code> adjusted for larger values using absolute values and applying the sign afterwards</p></li>
+<li><p>reverse coding update in <code>net.loads</code></p></li>
+<li><p><code>node.redundant.combine</code> bug fix for reverse coding latent variables</p></li>
+<li><p>added Louvain community detection t+ all EGA functions in <em>EGAnet</em></p></li>
+<li><p>functionality updates t+ <code>node.redundant</code></p></li>
 <li><p>swapped arguments ‘type’ and ‘method’ in the <code>node.redundant</code> function (fixed examples in other node.redundant functions)</p></li>
 <li><p>updated citation</p></li>
 </ul></div>
@@ -313,27 +323,27 @@
 <li><p>corrected ordering of <code>net.loads</code> output</p></li>
 <li><p>corrected standard error in <code>bootEGA</code></p></li>
 <li><p>citation update</p></li>
-<li><p>added function <code>dimStability</code> to compute dimensional stability</p></li>
+<li><p>added function <code>dimStability</code> t+ compute dimensional stability</p></li>
 <li><p>added a series of functions for <code>node.redundant</code>, which facilitates detecting and combining redundant nodes in networks</p></li>
-<li><p>updated the EGA.fit function, so now a correlation matrix can be used as well.</p></li>
+<li><p>updated the EGA.fit function, s+ now a correlation matrix can be used as well.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0" id="changes-in-version-080">Changes in version 0.8.0<a class="anchor" aria-label="anchor" href="#changes-in-version-080"></a></h2>
-<p>o ‘bootEGA’ now computes time until bootstrap is finished</p>
-<ul><li><p>new functions ‘cmi’, ‘pmi’ and ‘residualEGA’ added: ‘cmi’ computes conditional mutual information, ‘pmi’ computes partial mutual information and residual EGA computes an EGA network controlling for wording effects</p></li>
+<ul><li><p>‘bootEGA’ now computes time until bootstrap is finished</p></li>
+<li><p>new functions ‘cmi’, ‘pmi’ and ‘residualEGA’ added: ‘cmi’ computes conditional mutual information, ‘pmi’ computes partial mutual information and residual EGA computes an EGA network controlling for wording effects</p></li>
 <li><p>new dataset ‘optimism’ added</p></li>
 <li><p>documentation and functionality for several functions updated</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="changes-in-version-070">Changes in version 0.7.0<a class="anchor" aria-label="anchor" href="#changes-in-version-070"></a></h2>
 <ul><li><p>fixed ‘EGA’ bug in ‘bootEGA’ function; updated ‘bootEGA’ documentation; added progress messages</p></li>
-<li><p>migrated ‘net.scores’ and ‘net.loads’ from ‘NetworkToolbox’ to ‘EGAnet’ package</p></li>
-<li><p>functions ‘itemConfirm’ and ‘itemIdent’ have been merged into a single function called, ‘itemStability’</p></li>
-<li><p>fixed item ordering in ‘itemStability’ output so dimensions are from least to greatest, the colors match the original community vector input, and updated average standardized network loadings to the ‘net.loads’ function</p></li>
-<li><p>added datasets ‘ega.wmt’ and ‘boot.wmt’ for quick user-friendly examples (also removed all ‘’)</p></li>
+<li><p>migrated ‘net.scores’ and ‘net.loads’ from ‘NetworkToolbox’ t+ ‘EGAnet’ package</p></li>
+<li><p>functions ‘itemConfirm’ and ‘itemIdent’ have been merged int+ a single function called, ‘itemStability’</p></li>
+<li><p>fixed item ordering in ‘itemStability’ output s+ dimensions are from least t+ greatest, the colors match the original community vector input, and updated average standardized network loadings t+ the ‘net.loads’ function</p></li>
+<li><p>added datasets ‘ega.wmt’ and ‘boot.wmt’ for quick user-friendly examples (als+ removed all ‘’)</p></li>
 <li><p>added package help page</p></li>
 <li><p>added package load message</p></li>
-<li><p>updated ‘itemStability’ algorithm (now can accept any number of ‘orig.wc’) and enforced ‘0’ to ‘1’ bounds on plot</p></li>
+<li><p>updated ‘itemStability’ algorithm (now can accept any number of ‘orig.wc’) and enforced ‘0’ t+ ‘1’ bounds on plot</p></li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
