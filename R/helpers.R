@@ -531,7 +531,7 @@ restore_state <- function()
 
 #' @noRd
 # Wrapper for parallelization ----
-# Updated 10.08.2023
+# Updated 24.10.2023
 parallel_process <- function(
     iterations, # number of iterations
     datalist = NULL, # list of data
@@ -545,30 +545,38 @@ parallel_process <- function(
 ){
   
   # Get available memory
-  memory_available <- available_memory()
-  
-  # Check for global environment size
-  if(isTRUE(export)){ # needs `isTRUE` in case of character vector
-    global_memory_usage <- sum(nvapply(ls(),function(x){object.size(get(x))}))
-  }else{
-    global_memory_usage <- sum(nvapply(ls()[ls() %in% export],function(x){object.size(get(x))}))
+  memory_available <- try(
+    available_memory(),
+    silent = TRUE
+  )
+
+  # In case the memory check fails
+  if(!is(memory_available, "try-error")){
+    
+    # Check for global environment size
+    if(export){ # needs `isTRUE` in case of character vector
+      global_memory_usage <- sum(nvapply(ls(),function(x){object.size(get(x))}))
+    }else{
+      global_memory_usage <- sum(nvapply(ls()[ls() %in% export],function(x){object.size(get(x))}))
+    }
+    
+    # Check for memory overload
+    if(memory_available < global_memory_usage * ncores){
+      stop(
+        paste0(
+          "Available memory (", byte_digits(memory_available), ") is less than ",
+          "the amount of memory needed to perform parallelization: ",
+          byte_digits(global_memory_usage * ncores), ".\n\n",
+          "Lower the number of cores (`ncores`) or perform ",
+          "batches of your operation."
+        ), call. = FALSE
+      )
+    }
+    
+    # Set max size
+    options(future.globals.maxSize = memory_available)
+    
   }
-  
-  # Check for memory overload
-  if(memory_available < global_memory_usage * ncores){
-    stop(
-      paste0(
-        "Available memory (", byte_digits(memory_available), ") is less than ",
-        "the amount of memory needed to perform parallelization: ",
-        byte_digits(global_memory_usage * ncores), ".\n\n",
-        "Lower the number of cores (`ncores`) or perform ",
-        "batches of your operation."
-      ), call. = FALSE
-    )
-  }
-  
-  # Set max size
-  options(future.globals.maxSize = memory_available)
   
   # Set up plan
   future::plan(
@@ -2731,6 +2739,73 @@ pcor2inv <- function(partial_correlations)
   
   # Return inverse covariance matrix
   return(solve(-partial_correlations))
+  
+}
+
+#%%%%%%%%%%%%%%%%%%%%%%%%
+## NETWORK FUNCTIONS ----
+#%%%%%%%%%%%%%%%%%%%%%%%%
+
+#' @noRd
+# Rewire networks ----
+# About 10x faster than previous implementation
+# Updated 30.07.2023
+rewire <- function(
+    network, min = 0.20, max = 0.40,
+    noise = 0.10, lower_triangle
+)
+{
+  
+  # Work only with the lower triangle
+  lower_network <- network[lower_triangle]
+  
+  # Get non-zero edges
+  non_zero_edges <- which(lower_network != 0)
+  
+  # Number of edges
+  edges <- length(non_zero_edges)
+  
+  # Add noise
+  if(!is.null(noise)){
+    
+    # Only add to existing edges
+    lower_network[non_zero_edges] <- 
+      lower_network[non_zero_edges] + runif(edges, -noise, noise)
+    
+  }
+  
+  # Number of edges to rewire
+  rewire_edges <- floor(edges * runif(1, min, max))
+  
+  # Get rewiring indices
+  rewire_index <- shuffle(non_zero_edges, size = rewire_edges)
+  
+  # Get replacement indices
+  replace_index <- shuffle(seq_along(lower_network), size = rewire_edges)
+  
+  # Make a copy of the lower network
+  lower_network_original <- lower_network
+  
+  # Replace values
+  lower_network[rewire_index] <- lower_network_original[replace_index]
+  lower_network[replace_index] <- lower_network_original[rewire_index]
+  
+  # Get nodes in original network
+  nodes <- dim(network)[2]
+  
+  # Initialize a new network
+  new_network <- matrix(
+    0, nrow = nodes, ncol = nodes,
+    dimnames = dimnames(network)
+  )
+  
+  # Replace values
+  new_network[lower_triangle] <- lower_network
+  new_network <- t(new_network)
+  new_network[lower_triangle] <- lower_network
+  
+  # Return the rewired network
+  return(new_network)
   
 }
 

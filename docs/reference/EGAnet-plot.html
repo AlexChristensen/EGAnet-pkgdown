@@ -150,45 +150,35 @@ Check out our Wiki on faster plots in
     
 
 
-<ul><li><p><code>x</code> --- 
-<code><a href="EGAnet-package.html">EGAnet</a></code> object with available S3 plot method 
+<ul><li><p><code>x</code> --- <code><a href="EGAnet-package.html">EGAnet</a></code> object with available S3 plot method 
 (see full list below)</p></li>
-<li><p><code>color.palette</code> --- 
-Character (vector). Either a character (length = 1) from the
+<li><p><code>color.palette</code> --- Character (vector). Either a character (length = 1) from the
 pre-defined palettes in <code><a href="color_palette_EGA.html">color_palette_EGA</a></code>
 or character (length = total number of communities) using
 HEX codes (see <strong>Color Palettes</strong> and <strong>Examples</strong> sections)</p></li>
-<li><p><code>layout</code> --- 
-Character (length = 1). Layouts can be set using <code><a href="https://rdrr.io/pkg/sna/man/gplot.layout.html" class="external-link">gplot.layout</a></code> and the
+<li><p><code>layout</code> --- Character (length = 1). Layouts can be set using <code><a href="https://rdrr.io/pkg/sna/man/gplot.layout.html" class="external-link">gplot.layout</a></code> and the
 ending layout name; for example, <code>gplot.layout.circle</code> can be set
 in these functions using <code>layout = "circle"</code> or <code>mode = "circle"</code>
 (see <strong>Examples</strong>)</p></li>
-<li><p><code>base</code> --- 
-Numeric (length = 1). Plot to be used as the base for the configuration of the networks.
+<li><p><code>base</code> --- Numeric (length = 1). Plot to be used as the base for the configuration of the networks.
 Uses the number of the order in which the plots are input.
 Defaults to <code>1</code> or the first plot</p></li>
-<li><p><code>id</code> --- 
-Numeric index(es) or character name(s). IDs to use when plotting 
+<li><p><code>id</code> --- Numeric index(es) or character name(s). IDs to use when plotting 
 <code><a href="dynEGA.html">dynEGA</a></code> <code>level = "individual"</code>.
 Defaults to <code>NULL</code> or 4 IDs drawn at random</p></li>
-<li><p><code>plot.type</code> --- 
-Character (length = 1). Whether <code><a href="hierEGA.html">hierEGA</a></code> 
+<li><p><code>plot.type</code> --- Character (length = 1). Whether <code><a href="hierEGA.html">hierEGA</a></code> 
 networks should plotted in a stacked, <code>"multilevel"</code> fashion 
 or as <code>"separate"</code> plots. Defaults to <code>"multilevel"</code></p></li>
-<li><p><code>color.match</code> --- 
-Boolean (length = 1). Whether lower order community colors in the 
+<li><p><code>color.match</code> --- Boolean (length = 1). Whether lower order community colors in the 
 <code><a href="hierEGA.html">hierEGA</a></code> plot should be "matched" and used as 
 the border color for the higher order communities. Defaults to <code>FALSE</code></p></li>
-<li><p><code>p_type</code> --- 
-Character (length = 1). Type of <em>p</em>-value when plotting 
+<li><p><code>p_type</code> --- Character (length = 1). Type of <em>p</em>-value when plotting 
 <code><a href="invariance.html">invariance</a></code>. Defaults to <code>"p"</code> or 
 uncorrected <em>p</em>-value. Set to <code>"p_BH"</code> for the 
 Benjamini-Hochberg corrected <em>p</em>-value</p></li>
-<li><p><code>p_value</code> --- 
-Numeric (length = 1). The <em>p</em>-value to use alongside <code>p_type</code> when 
+<li><p><code>p_value</code> --- Numeric (length = 1). The <em>p</em>-value to use alongside <code>p_type</code> when 
 plotting <code><a href="invariance.html">invariance</a></code>. Defaults to <code>0.05</code></p></li>
-<li><p><code>...</code> --- 
-Additional arguments to pass on to
+<li><p><code>...</code> --- Additional arguments to pass on to
 <code><a href="https://ggobi.github.io/ggally/reference/ggnet2.html" class="external-link">ggnet2</a></code> and <code><a href="https://rdrr.io/pkg/sna/man/gplot.layout.html" class="external-link">gplot.layout</a></code>
 (see <strong>Examples</strong>)</p></li>
 </ul></div>

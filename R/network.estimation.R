@@ -15,25 +15,21 @@
 #' 
 #' \itemize{
 #' 
-#' \item{\code{"auto"} --- }
-#' {Automatically computes appropriate correlations for
+#' \item \code{"auto"} --- Automatically computes appropriate correlations for
 #' the data using Pearson's for continuous, polychoric for ordinal,
 #' tetrachoric for binary, and polyserial/biserial for ordinal/binary with
 #' continuous. To change the number of categories that are considered
 #' ordinal, use \code{ordinal.categories}
-#' (see \code{\link[EGAnet]{polychoric.matrix}} for more details)}
+#' (see \code{\link[EGAnet]{polychoric.matrix}} for more details)
 #' 
-#' \item{\code{"cor_auto"} --- }
-#' {Uses \code{\link[qgraph]{cor_auto}} to compute correlations. Arguments
-#' can be passed along to the function}
+#' \item \code{"cor_auto"} --- Uses \code{\link[qgraph]{cor_auto}} to compute correlations. 
+#' Arguments can be passed along to the function
 #' 
-#' \item{\code{"pearson"} --- }
-#' {Pearson's correlation is computed for all variables regardless of
-#' categories}
+#' \item \code{"pearson"} --- Pearson's correlation is computed for all 
+#' variables regardless of categories
 #' 
-#' \item{\code{"spearman"} --- }
-#' {Spearman's rank-order correlation is computed for all variables
-#' regardless of categories}
+#' \item \code{"spearman"} --- Spearman's rank-order correlation is computed 
+#' for all variables regardless of categories
 #' 
 #' }
 #' 
@@ -47,12 +43,10 @@
 #' 
 #' \itemize{
 #' 
-#' \item{\code{"pairwise"} --- }
-#' {Computes correlation for all available cases between
-#' two variables}
+#' \item \code{"pairwise"} --- Computes correlation for all available cases between
+#' two variables
 #' 
-#' \item{\code{"listwise"} --- }
-#' {Computes correlation for all complete cases in the dataset}
+#' \item \code{"listwise"} --- Computes correlation for all complete cases in the dataset
 #' 
 #' }
 #' 
@@ -62,19 +56,16 @@
 #' 
 #' \itemize{
 #' 
-#' \item{\code{"BGGM"} --- }
-#' {Computes the Bayesian Gaussian Graphical Model.
+#' \item \code{"BGGM"} --- Computes the Bayesian Gaussian Graphical Model.
 #' Set argument \code{ordinal.categories} to determine
 #' levels allowed for a variable to be considered ordinal.
-#' See \code{\link[BGGM]{estimate}} for more details}
+#' See \code{?BGGM::estimate} for more details
 #' 
-#' \item{\code{"glasso"} --- }
-#' {Computes the GLASSO with EBIC model selection.
-#' See \code{\link[EGAnet]{EBICglasso.qgraph}} for more details}
+#' \item \code{"glasso"} --- Computes the GLASSO with EBIC model selection.
+#' See \code{\link[EGAnet]{EBICglasso.qgraph}} for more details
 #' 
-#' \item{\code{"TMFG"} --- }
-#' {Computes the TMFG method.
-#' See \code{\link[EGAnet]{TMFG}} for more details}
+#' \item \code{"TMFG"} --- Computes the TMFG method.
+#' See \code{\link[EGAnet]{TMFG}} for more details
 #' 
 #' }
 #' 
@@ -107,12 +98,6 @@
 #'   data = wmt, model = "glasso"
 #' )
 #' 
-#' # BGGM with analytic solution
-#' bggm_network <- network.estimation(
-#'   data = wmt, model = "BGGM",
-#'   analytic = TRUE # faster example for CRAN
-#' )
-#' 
 #' # TMFG
 #' tmfg_network <- network.estimation(
 #'   data = wmt, model = "TMFG"
@@ -142,7 +127,7 @@
 #' @export
 #'
 # Compute networks for EGA ----
-# Updated 07.09.2023
+# Updated 24.10.2023
 network.estimation <- function(
     data, n = NULL,
     corr = c("auto", "cor_auto", "pearson", "spearman"),
@@ -161,6 +146,11 @@ network.estimation <- function(
   corr <- set_default(corr, "auto", network.estimation)
   na.data <- set_default(na.data, "pairwise", network.estimation)
   model <- set_default(model, "glasso", network.estimation)
+  
+  # Check for {BGGM}
+  if(model == "bggm"){
+    stop("Due to CRAN check issues, `model = \"BGGM\"` is not available at the moment.")
+  }
   
   # Obtain ellipse arguments
   ellipse <- list(...)
@@ -195,48 +185,48 @@ network.estimation <- function(
   # For 'model = "BGGM"', take a different path...
   if(model == "bggm"){
   
-    # Obtain arguments for `BGGM`
-    bggm_estimate_ARGS <- obtain_arguments(
-      silent_load(BGGM::estimate), 
-      FUN.args = ellipse 
-    )
-    
-    # Check for override of 'type'
-    bggm_estimate_ARGS$type <- find_BGGM_type(data, ellipse)
-    
-    # Send 'data' and 'verbose' to arguments
-    bggm_estimate_ARGS$Y <- data
-    bggm_estimate_ARGS$progress <- verbose
-    
-    # Perform BGGM estimate
-    bggm_output <- do.call(
-      what = BGGM::estimate,
-      args = bggm_estimate_ARGS
-    )
-    
-    # Determine `select` arguments
-    ## Uses `overwrite_arguments` instead of
-    ## `obtain_arguments` because `BGGM::select`
-    ## is an S3method. It's possible to use
-    ## `BGGM:::select.estimate` but CRAN gets
-    ## mad about triple colons
-    bggm_select_ARGS <- overwrite_arguments(
-      list( # defaults for `BGGM:::select.estimate`
-        cred = 0.95, alternative = "two.sided"
-      ), ARGS = ellipse
-    )
-    
-    # Send 'bggm_output' to arguments
-    bggm_select_ARGS$object <- bggm_output
-    
-    # Perform BGGM select
-    bggm_select <- do.call(
-      what = BGGM::select,
-      args = bggm_select_ARGS
-    )
-    
-    # Obtain network (regardless of 'network.only')
-    estimated_network <- bggm_select$pcor_adj
+    # # Obtain arguments for `BGGM`
+    # bggm_estimate_ARGS <- obtain_arguments(
+    #   silent_load(BGGM::estimate), 
+    #   FUN.args = ellipse 
+    # )
+    # 
+    # # Check for override of 'type'
+    # bggm_estimate_ARGS$type <- find_BGGM_type(data, ellipse)
+    # 
+    # # Send 'data' and 'verbose' to arguments
+    # bggm_estimate_ARGS$Y <- data
+    # bggm_estimate_ARGS$progress <- verbose
+    # 
+    # # Perform BGGM estimate
+    # bggm_output <- do.call(
+    #   what = BGGM::estimate,
+    #   args = bggm_estimate_ARGS
+    # )
+    # 
+    # # Determine `select` arguments
+    # ## Uses `overwrite_arguments` instead of
+    # ## `obtain_arguments` because `BGGM::select`
+    # ## is an S3method. It's possible to use
+    # ## `BGGM:::select.estimate` but CRAN gets
+    # ## mad about triple colons
+    # bggm_select_ARGS <- overwrite_arguments(
+    #   list( # defaults for `BGGM:::select.estimate`
+    #     cred = 0.95, alternative = "two.sided"
+    #   ), ARGS = ellipse
+    # )
+    # 
+    # # Send 'bggm_output' to arguments
+    # bggm_select_ARGS$object <- bggm_output
+    # 
+    # # Perform BGGM select
+    # bggm_select <- do.call(
+    #   what = BGGM::select,
+    #   args = bggm_select_ARGS
+    # )
+    # 
+    # # Obtain network (regardless of 'network.only')
+    # estimated_network <- bggm_select$pcor_adj
     
   }else{ # Non-BGGM methods
     
@@ -283,12 +273,12 @@ network.estimation <- function(
   
   # Add methods attribute for BGGM
   ## Methods for GLASSO and TMFG are already there
-  if(model == "bggm"){
-    attr(estimated_network, "methods") <- c(
-      bggm_estimate_ARGS[c("type", "analytic", "prior_sd", "iter")],
-      bggm_select_ARGS[c("cred", "alternative")]
-    )
-  }
+  # if(model == "bggm"){
+  #   attr(estimated_network, "methods") <- c(
+  #     bggm_estimate_ARGS[c("type", "analytic", "prior_sd", "iter")],
+  #     bggm_select_ARGS[c("cred", "alternative")]
+  #   )
+  # }
   
   # Add "model", "corr", and "na.data" to attributes
   attr(estimated_network, "methods")[
@@ -303,16 +293,16 @@ network.estimation <- function(
     # BGGM or other model
     if(model == "bggm"){
       
-      # Set up results
-      return(
-        list(
-          estimated_network = estimated_network,
-          output = list(
-            bggm_estimate = bggm_output,
-            bggm_select = bggm_select[names(bggm_select) != "object"]
-          )
-        )
-      )
+      # # Set up results
+      # return(
+      #   list(
+      #     estimated_network = estimated_network,
+      #     output = list(
+      #       bggm_estimate = bggm_output,
+      #       bggm_select = bggm_select[names(bggm_select) != "object"]
+      #     )
+      #   )
+      # )
       
     }else{
       

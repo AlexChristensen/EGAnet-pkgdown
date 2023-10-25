@@ -118,22 +118,18 @@ Sample size if <code>data</code> is a correlation matrix</p></dd>
 Method to compute correlations.
 Defaults to <code>"auto"</code>.
 Available options:</p>
-<ul><li><p><code>"auto"</code> --- 
-Automatically computes appropriate correlations for
+<ul><li><p><code>"auto"</code> --- Automatically computes appropriate correlations for
 the data using Pearson's for continuous, polychoric for ordinal,
 tetrachoric for binary, and polyserial/biserial for ordinal/binary with
 continuous. To change the number of categories that are considered
 ordinal, use <code>ordinal.categories</code>
 (see <code><a href="polychoric.matrix.html">polychoric.matrix</a></code> for more details)</p></li>
-<li><p><code>"cor_auto"</code> --- 
-Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. Arguments
-can be passed along to the function</p></li>
-<li><p><code>"pearson"</code> --- 
-Pearson's correlation is computed for all variables regardless of
-categories</p></li>
-<li><p><code>"spearman"</code> --- 
-Spearman's rank-order correlation is computed for all variables
-regardless of categories</p></li>
+<li><p><code>"cor_auto"</code> --- Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. 
+Arguments can be passed along to the function</p></li>
+<li><p><code>"pearson"</code> --- Pearson's correlation is computed for all 
+variables regardless of categories</p></li>
+<li><p><code>"spearman"</code> --- Spearman's rank-order correlation is computed 
+for all variables regardless of categories</p></li>
 </ul><p>For other similarity measures, compute them first and input them
 into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 
@@ -143,11 +139,9 @@ into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 How should missing data be handled?
 Defaults to <code>"pairwise"</code>.
 Available options:</p>
-<ul><li><p><code>"pairwise"</code> --- 
-Computes correlation for all available cases between
+<ul><li><p><code>"pairwise"</code> --- Computes correlation for all available cases between
 two variables</p></li>
-<li><p><code>"listwise"</code> --- 
-Computes correlation for all complete cases in the dataset</p></li>
+<li><p><code>"listwise"</code> --- Computes correlation for all complete cases in the dataset</p></li>
 </ul></dd>
 
 
@@ -155,16 +149,13 @@ Computes correlation for all complete cases in the dataset</p></li>
 <dd><p>Character (length = 1).
 Defaults to <code>"glasso"</code>.
 Available options:</p>
-<ul><li><p><code>"BGGM"</code> --- 
-Computes the Bayesian Gaussian Graphical Model.
+<ul><li><p><code>"BGGM"</code> --- Computes the Bayesian Gaussian Graphical Model.
 Set argument <code>ordinal.categories</code> to determine
 levels allowed for a variable to be considered ordinal.
-See <code><a href="https://rdrr.io/pkg/BGGM/man/estimate.html" class="external-link">estimate</a></code> for more details</p></li>
-<li><p><code>"glasso"</code> --- 
-Computes the GLASSO with EBIC model selection.
+See <code><a href="https://rdrr.io/pkg/BGGM/man/estimate.html" class="external-link">?BGGM::estimate</a></code> for more details</p></li>
+<li><p><code>"glasso"</code> --- Computes the GLASSO with EBIC model selection.
 See <code><a href="EBICglasso.qgraph.html">EBICglasso.qgraph</a></code> for more details</p></li>
-<li><p><code>"TMFG"</code> --- 
-Computes the TMFG method.
+<li><p><code>"TMFG"</code> --- Computes the TMFG method.
 See <code><a href="TMFG.html">TMFG</a></code> for more details</p></li>
 </ul></dd>
 
@@ -173,8 +164,7 @@ See <code><a href="TMFG.html">TMFG</a></code> for more details</p></li>
 <dd><p>Character or <code>igraph</code> <code>cluster_*</code> function.
 Three options are listed below but all are available
 (see <code><a href="community.detection.html">community.detection</a></code> for other options):</p>
-<ul><li><p><code>"leiden"</code> --- 
-See <code><a href="https://r.igraph.org/reference/cluster_leiden.html" class="external-link">cluster_leiden</a></code> for more details.
+<ul><li><p><code>"leiden"</code> --- See <code><a href="https://r.igraph.org/reference/cluster_leiden.html" class="external-link">cluster_leiden</a></code> for more details.
 <em>Note</em>: The Leiden algorithm will default to the
 Constant Potts Model objective function
 (<code>objective_function = "CPM"</code>). Set
@@ -187,13 +177,11 @@ For modularity, searches along resolutions from 0 to 2 in 0.05 increments
 (<code>resolution_parameter = seq.int(0, 2, 0.05)</code>) by default.
 Use the argument <code>resolution_parameter</code> to change the search parameters
 (see examples)</p></li>
-<li><p><code>"louvain"</code> --- 
-See <code><a href="community.consensus.html">community.consensus</a></code> for more details.
+<li><p><code>"louvain"</code> --- See <code><a href="community.consensus.html">community.consensus</a></code> for more details.
 By default, searches along resolutions from 0 to 2 in 0.05 increments
 (<code>resolution_parameter = seq.int(0, 2, 0.05)</code>). Use the argument <code>resolution_parameter</code>
 to change the search parameters (see examples)</p></li>
-<li><p><code>"walktrap"</code> --- 
-This algorithm is the default. See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">cluster_walktrap</a></code> for more details.
+<li><p><code>"walktrap"</code> --- This algorithm is the default. See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">cluster_walktrap</a></code> for more details.
 By default, searches along 3 to 8 steps (<code>steps = 3:8</code>). Use the argument <code>steps</code>
 to change the search parameters (see examples)</p></li>
 </ul></dd>

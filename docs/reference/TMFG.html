@@ -142,22 +142,18 @@ Defaults to <code>NULL</code>.
 Method to compute correlations.
 Defaults to <code>"auto"</code>.
 Available options:</p>
-<ul><li><p><code>"auto"</code> --- 
-Automatically computes appropriate correlations for
+<ul><li><p><code>"auto"</code> --- Automatically computes appropriate correlations for
 the data using Pearson's for continuous, polychoric for ordinal,
 tetrachoric for binary, and polyserial/biserial for ordinal/binary with
 continuous. To change the number of categories that are considered
 ordinal, use <code>ordinal.categories</code>
 (see <code><a href="polychoric.matrix.html">polychoric.matrix</a></code> for more details)</p></li>
-<li><p><code>"cor_auto"</code> --- 
-Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. Arguments
-can be passed along to the function</p></li>
-<li><p><code>"pearson"</code> --- 
-Pearson's correlation is computed for all variables regardless of
-categories</p></li>
-<li><p><code>"spearman"</code> --- 
-Spearman's rank-order correlation is computed for all variables
-regardless of categories</p></li>
+<li><p><code>"cor_auto"</code> --- Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. 
+Arguments can be passed along to the function</p></li>
+<li><p><code>"pearson"</code> --- Pearson's correlation is computed for all 
+variables regardless of categories</p></li>
+<li><p><code>"spearman"</code> --- Spearman's rank-order correlation is computed 
+for all variables regardless of categories</p></li>
 </ul><p>For other similarity measures, compute them first and input them
 into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 
@@ -167,11 +163,9 @@ into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 How should missing data be handled?
 Defaults to <code>"pairwise"</code>.
 Available options:</p>
-<ul><li><p><code>"pairwise"</code> --- 
-Computes correlation for all available cases between
+<ul><li><p><code>"pairwise"</code> --- Computes correlation for all available cases between
 two variables</p></li>
-<li><p><code>"listwise"</code> --- 
-Computes correlation for all complete cases in the dataset</p></li>
+<li><p><code>"listwise"</code> --- Computes correlation for all complete cases in the dataset</p></li>
 </ul></dd>
 
 

@@ -131,22 +131,18 @@ Sample size if <code>data</code> provided is a correlation matrix</p></dd>
 Method to compute correlations.
 Defaults to <code>"auto"</code>.
 Available options:</p>
-<ul><li><p><code>"auto"</code> --- 
-Automatically computes appropriate correlations for
+<ul><li><p><code>"auto"</code> --- Automatically computes appropriate correlations for
 the data using Pearson's for continuous, polychoric for ordinal,
 tetrachoric for binary, and polyserial/biserial for ordinal/binary with
 continuous. To change the number of categories that are considered
 ordinal, use <code>ordinal.categories</code>
 (see <code><a href="polychoric.matrix.html">polychoric.matrix</a></code> for more details)</p></li>
-<li><p><code>"cor_auto"</code> --- 
-Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. Arguments
-can be passed along to the function</p></li>
-<li><p><code>"pearson"</code> --- 
-Pearson's correlation is computed for all variables regardless of
-categories</p></li>
-<li><p><code>"spearman"</code> --- 
-Spearman's rank-order correlation is computed for all variables
-regardless of categories</p></li>
+<li><p><code>"cor_auto"</code> --- Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. 
+Arguments can be passed along to the function</p></li>
+<li><p><code>"pearson"</code> --- Pearson's correlation is computed for all 
+variables regardless of categories</p></li>
+<li><p><code>"spearman"</code> --- Spearman's rank-order correlation is computed 
+for all variables regardless of categories</p></li>
 </ul><p>For other similarity measures, compute them first and input them
 into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 
@@ -156,11 +152,9 @@ into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 How should missing data be handled?
 Defaults to <code>"pairwise"</code>.
 Available options:</p>
-<ul><li><p><code>"pairwise"</code> --- 
-Computes correlation for all available cases between
+<ul><li><p><code>"pairwise"</code> --- Computes correlation for all available cases between
 two variables</p></li>
-<li><p><code>"listwise"</code> --- 
-Computes correlation for all complete cases in the dataset</p></li>
+<li><p><code>"listwise"</code> --- Computes correlation for all complete cases in the dataset</p></li>
 </ul></dd>
 
 
@@ -168,16 +162,13 @@ Computes correlation for all complete cases in the dataset</p></li>
 <dd><p>Character (length = 1).
 Defaults to <code>"glasso"</code>.
 Available options:</p>
-<ul><li><p><code>"BGGM"</code> --- 
-Computes the Bayesian Gaussian Graphical Model.
+<ul><li><p><code>"BGGM"</code> --- Computes the Bayesian Gaussian Graphical Model.
 Set argument <code>ordinal.categories</code> to determine
 levels allowed for a variable to be considered ordinal.
-See <code><a href="https://rdrr.io/pkg/BGGM/man/estimate.html" class="external-link">estimate</a></code> for more details</p></li>
-<li><p><code>"glasso"</code> --- 
-Computes the GLASSO with EBIC model selection.
+See <code><a href="https://rdrr.io/pkg/BGGM/man/estimate.html" class="external-link">?BGGM::estimate</a></code> for more details</p></li>
+<li><p><code>"glasso"</code> --- Computes the GLASSO with EBIC model selection.
 See <code><a href="EBICglasso.qgraph.html">EBICglasso.qgraph</a></code> for more details</p></li>
-<li><p><code>"TMFG"</code> --- 
-Computes the TMFG method.
+<li><p><code>"TMFG"</code> --- Computes the TMFG method.
 See <code><a href="TMFG.html">TMFG</a></code> for more details</p></li>
 </ul></dd>
 
@@ -188,16 +179,13 @@ See <code><a href="TMFG.html">TMFG</a></code> for more details</p></li>
 Defaults to <code>"walktrap"</code>.
 Three options are listed below but all are available
 (see <code><a href="community.detection.html">community.detection</a></code> for other options):</p>
-<ul><li><p><code>"leiden"</code> --- 
-See <code><a href="https://r.igraph.org/reference/cluster_leiden.html" class="external-link">cluster_leiden</a></code> for more details</p></li>
-<li><p><code>"louvain"</code> --- 
-By default, <code>"louvain"</code> will implement the Louvain algorithm using 
+<ul><li><p><code>"leiden"</code> --- See <code><a href="https://r.igraph.org/reference/cluster_leiden.html" class="external-link">cluster_leiden</a></code> for more details</p></li>
+<li><p><code>"louvain"</code> --- By default, <code>"louvain"</code> will implement the Louvain algorithm using 
 the consensus clustering method (see <code><a href="community.consensus.html">community.consensus</a></code> 
 for more information). This function will implement
 <code>consensus.method = "most_common"</code> and <code>consensus.iter = 1000</code> 
 unless specified otherwise</p></li>
-<li><p><code>"walktrap"</code> --- 
-See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">cluster_walktrap</a></code> for more details</p></li>
+<li><p><code>"walktrap"</code> --- See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">cluster_walktrap</a></code> for more details</p></li>
 </ul></dd>
 
 
@@ -206,21 +194,18 @@ See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="
 What unidimensionality method should be used? 
 Defaults to <code>"louvain"</code>.
 Available options:</p>
-<ul><li><p><code>"expand"</code> --- 
-Expands the correlation matrix with four variables correlated 0.50.
+<ul><li><p><code>"expand"</code> --- Expands the correlation matrix with four variables correlated 0.50.
 If number of dimension returns 2 or less in check, then the data 
 are unidimensional; otherwise, regular EGA with no matrix
 expansion is used. This method was used in the Golino et al.'s (2020)
 <em>Psychological Methods</em> simulation</p></li>
-<li><p><code>"LE"</code> --- 
-Applies the Leading Eigenvector algorithm
+<li><p><code>"LE"</code> --- Applies the Leading Eigenvector algorithm
 (<code><a href="https://r.igraph.org/reference/cluster_leading_eigen.html" class="external-link">cluster_leading_eigen</a></code>)
 on the empirical correlation matrix. If the number of dimensions is 1,
 then the Leading Eigenvector solution is used; otherwise, regular EGA
 is used. This method was used in the Christensen et al.'s (2023) 
 <em>Behavior Research Methods</em> simulation</p></li>
-<li><p><code>"louvain"</code> --- 
-Applies the Louvain algorithm (<code><a href="https://r.igraph.org/reference/cluster_louvain.html" class="external-link">cluster_louvain</a></code>)
+<li><p><code>"louvain"</code> --- Applies the Louvain algorithm (<code><a href="https://r.igraph.org/reference/cluster_louvain.html" class="external-link">cluster_louvain</a></code>)
 on the empirical correlation matrix. If the number of dimensions is 1, 
 then the Louvain solution is used; otherwise, regular EGA is used. 
 This method was validated Christensen's (2022) <em>PsyArXiv</em> simulation.
@@ -240,12 +225,10 @@ Defaults to <code>500</code> (recommended)</p></dd>
 What type of bootstrap should be performed?
 Defaults to <code>"parametric"</code>.
 Available options:</p>
-<ul><li><p><code>"parametric"</code> --- 
-Generates <code>iter</code> new datasets from
+<ul><li><p><code>"parametric"</code> --- Generates <code>iter</code> new datasets from
 (multivariate normal random distributions) based on the
 original dataset using <code><a href="https://rdrr.io/pkg/MASS/man/mvrnorm.html" class="external-link">mvrnorm</a></code></p></li>
-<li><p><code>"resampling"</code> --- 
-Generates <code>iter</code> new datasets from random subsamples 
+<li><p><code>"resampling"</code> --- Generates <code>iter</code> new datasets from random subsamples 
 of the original data</p></li>
 </ul></dd>
 
@@ -265,15 +248,11 @@ then type: <code><a href="https://rdrr.io/r/parallel/detectCores.html" class="ex
 Type of EGA model to use.
 Defaults to <code>"EGA"</code>
 Available options:</p>
-<ul><li><p><code>"<a href="EGA.html">EGA</a>"</code> --- 
-Uses standard exploratory graph analysis</p></li>
-<li><p><code>"<a href="EGA.fit.html">EGA.fit</a>"</code> --- 
-Uses <code><a href="tefi.html">tefi</a></code> to determine best fit of
+<ul><li><p><code>"<a href="EGA.html">EGA</a>"</code> --- Uses standard exploratory graph analysis</p></li>
+<li><p><code>"<a href="EGA.fit.html">EGA.fit</a>"</code> --- Uses <code><a href="tefi.html">tefi</a></code> to determine best fit of
 <code><a href="EGA.html">EGA</a></code></p></li>
-<li><p><code>"<a href="hierEGA.html">hierEGA</a>"</code> --- 
-Uses hierarhical exploratory graph analysis</p></li>
-<li><p><code>"<a href="riEGA.html">riEGA</a>"</code> --- 
-Uses random-intercept exploratory graph analysis</p></li>
+<li><p><code>"<a href="hierEGA.html">hierEGA</a>"</code> --- Uses hierarchical exploratory graph analysis</p></li>
+<li><p><code>"<a href="riEGA.html">riEGA</a>"</code> --- Uses random-intercept exploratory graph analysis</p></li>
 </ul><p>Arguments for <code>EGA.type</code> can be added (see links
 for details on specific function arguments)</p></dd>
 
@@ -371,12 +350,9 @@ quantiles (lower = 2.5% and upper = 97.5%)</p></dd>
 
 <dt>typicalGraph</dt>
 <dd><p>A list containing:</p>
-<ul><li><p><code>graph</code> --- 
-Network matrix of the median network structure</p></li>
-<li><p><code>typical.dim.variables</code> --- 
-An ordered matrix of item allocation</p></li>
-<li><p><code>wc</code> --- 
-Membership assignments of the median network</p></li>
+<ul><li><p><code>graph</code> --- Network matrix of the median network structure</p></li>
+<li><p><code>typical.dim.variables</code> --- An ordered matrix of item allocation</p></li>
+<li><p><code>wc</code> --- Membership assignments of the median network</p></li>
 </ul></dd>
 
 

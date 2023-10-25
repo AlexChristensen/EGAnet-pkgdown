@@ -132,21 +132,17 @@ Defaults to <code>"most_common"</code>.
 Available options for arriving at a consensus (<em>Note</em>: 
 All methods except <code>"iterative"</code> are considered experimental
 until validated):</p>
-<ul><li><p><code>"highest_modularity"</code> --- 
-<strong>EXPERIMENTAL.</strong> Selects the community solution with the highest modularity across
+<ul><li><p><code>"highest_modularity"</code> --- <strong>EXPERIMENTAL.</strong> Selects the community solution with the highest modularity across
 the applications. Modularity is a reasonable metric for identifying the number
 of communities in a network but it comes with limitations (e.g., resolution limit)</p></li>
-<li><p><code>"iterative"</code> --- 
-The original approach proposed by Lancichinetti &amp; Fortunato (2012). See
+<li><p><code>"iterative"</code> --- The original approach proposed by Lancichinetti &amp; Fortunato (2012). See
 "Details" for more information</p></li>
-<li><p><code>"most_common"</code> --- 
-Selects the community solution that appears the most
+<li><p><code>"most_common"</code> --- Selects the community solution that appears the most
 frequently across the applications. The idea behind this method is that the solution
 that appears most often will be the most likely solution for the algorithm as well
 as most reproducible. Can be less stable as the number of nodes increase requiring
 a larger value for <code>consensus.iter</code>.  This method is the <strong>default</strong></p></li>
-<li><p><code>"lowest_tefi"</code> --- 
-<strong>EXPERIMENTAL.</strong> Selects the community solution with the lowest Total Entropy
+<li><p><code>"lowest_tefi"</code> --- <strong>EXPERIMENTAL.</strong> Selects the community solution with the lowest Total Entropy
 Fit Index (<code><a href="tefi.html">tefi</a></code>) across the applications. TEFI is a reasonable metric
 to identify the number of communities in a network based on Golino, Moulder et al. (2020)</p></li>
 </ul></dd>

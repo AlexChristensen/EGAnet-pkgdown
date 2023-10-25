@@ -117,11 +117,9 @@ by added 4 to all values)</p></dd>
 How should missing data be handled?
 Defaults to <code>"pairwise"</code>.
 Available options:</p>
-<ul><li><p><code>"pairwise"</code> --- 
-Computes correlation for all available cases between
+<ul><li><p><code>"pairwise"</code> --- Computes correlation for all available cases between
 two variables</p></li>
-<li><p><code>"listwise"</code> --- 
-Computes correlation for all complete cases in the dataset</p></li>
+<li><p><code>"listwise"</code> --- Computes correlation for all complete cases in the dataset</p></li>
 </ul></dd>
 
 
@@ -129,14 +127,11 @@ Computes correlation for all complete cases in the dataset</p></li>
 <dd><p>Character (length = 1).
 Method for empty cell correction.
 Available options:</p>
-<ul><li><p><code>"none"</code> --- 
-Adds no value (<code>empty.value = "none"</code>)
+<ul><li><p><code>"none"</code> --- Adds no value (<code>empty.value = "none"</code>)
 to the empirical joint frequency table between two variables</p></li>
-<li><p><code>"zero"</code> --- 
-Adds <code>empty.value</code> to the cells with zero
+<li><p><code>"zero"</code> --- Adds <code>empty.value</code> to the cells with zero
 in the joint frequency table between two variables</p></li>
-<li><p><code>"all"</code> --- 
-Adds <code>empty.value</code> to all
+<li><p><code>"all"</code> --- Adds <code>empty.value</code> to all
 in the joint frequency table between two variables</p></li>
 </ul></dd>
 
@@ -146,13 +141,10 @@ in the joint frequency table between two variables</p></li>
 Value to add to the joint frequency table cells.
 Accepts numeric values between 0 and 1 or
 specific methods:</p>
-<ul><li><p><code>"none"</code> --- 
-Adds no value (<code>0</code>) to the empirical joint
+<ul><li><p><code>"none"</code> --- Adds no value (<code>0</code>) to the empirical joint
 frequency table between two variables</p></li>
-<li><p><code>"point_five"</code> --- 
-Adds <code>0.5</code> to the cells defined by <code>empty.method</code></p></li>
-<li><p><code>"one_over"</code> --- 
-Adds <code>1 / n</code> where <em>n</em> equals the number of cells
+<li><p><code>"point_five"</code> --- Adds <code>0.5</code> to the cells defined by <code>empty.method</code></p></li>
+<li><p><code>"one_over"</code> --- Adds <code>1 / n</code> where <em>n</em> equals the number of cells
 based on <code>empty.method</code>. For <code>empty.method = "zero"</code>,
 <em>n</em> equals the number of <em>zero</em> cells</p></li>
 </ul></dd>

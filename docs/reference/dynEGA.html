@@ -169,13 +169,10 @@ Generally recommended to leave "as is"</p></dd>
 Defaults to <code>1</code>.
 The order of the derivative to be used in the analysis.
 Available options:</p>
-<ul><li><p><code>0</code> --- 
-No derivatives; consistent with moving average</p></li>
-<li><p><code>1</code> --- 
-First-order derivatives; interpretated as "velocity" or 
+<ul><li><p><code>0</code> --- No derivatives; consistent with moving average</p></li>
+<li><p><code>1</code> --- First-order derivatives; interpreted as "velocity" or 
 rate of change over time</p></li>
-<li><p><code>2</code> --- 
-Second-order derivatives; interpreted as "acceleration" or
+<li><p><code>2</code> --- Second-order derivatives; interpreted as "acceleration" or
 rate of the rate of change over time</p></li>
 </ul><p>Generally recommended to leave "as is"</p></dd>
 
@@ -183,14 +180,11 @@ rate of the rate of change over time</p></li>
 <dt>level</dt>
 <dd><p>Character vector (up to length of 3).
 A character vector indicating which level(s) to estimate:</p>
-<ul><li><p><code>"individual"</code> --- 
-Estimates <code><a href="EGA.html">EGA</a></code> for each individual in <code>data</code>
+<ul><li><p><code>"individual"</code> --- Estimates <code><a href="EGA.html">EGA</a></code> for each individual in <code>data</code>
 (intraindividual structure; requires an <code>"ID"</code> column, see <code>data</code>)</p></li>
-<li><p><code>"group"</code> --- 
-Estimates <code><a href="EGA.html">EGA</a></code> for each group in <code>data</code>
+<li><p><code>"group"</code> --- Estimates <code><a href="EGA.html">EGA</a></code> for each group in <code>data</code>
 (group structure; requires a <code>"Group"</code> column, see <code>data</code>)</p></li>
-<li><p><code>"population"</code> --- 
-Estimates <code><a href="EGA.html">EGA</a></code> across all <code>data</code>
+<li><p><code>"population"</code> --- Estimates <code><a href="EGA.html">EGA</a></code> across all <code>data</code>
 (interindividual structure)</p></li>
 </ul></dd>
 
@@ -200,22 +194,18 @@ Estimates <code><a href="EGA.html">EGA</a></code> across all <code>data</code>
 Method to compute correlations.
 Defaults to <code>"auto"</code>.
 Available options:</p>
-<ul><li><p><code>"auto"</code> --- 
-Automatically computes appropriate correlations for
+<ul><li><p><code>"auto"</code> --- Automatically computes appropriate correlations for
 the data using Pearson's for continuous, polychoric for ordinal,
 tetrachoric for binary, and polyserial/biserial for ordinal/binary with
 continuous. To change the number of categories that are considered
 ordinal, use <code>ordinal.categories</code>
 (see <code><a href="polychoric.matrix.html">polychoric.matrix</a></code> for more details)</p></li>
-<li><p><code>"cor_auto"</code> --- 
-Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. Arguments
-can be passed along to the function</p></li>
-<li><p><code>"pearson"</code> --- 
-Pearson's correlation is computed for all variables regardless of
-categories</p></li>
-<li><p><code>"spearman"</code> --- 
-Spearman's rank-order correlation is computed for all variables
-regardless of categories</p></li>
+<li><p><code>"cor_auto"</code> --- Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations. 
+Arguments can be passed along to the function</p></li>
+<li><p><code>"pearson"</code> --- Pearson's correlation is computed for all 
+variables regardless of categories</p></li>
+<li><p><code>"spearman"</code> --- Spearman's rank-order correlation is computed 
+for all variables regardless of categories</p></li>
 </ul><p>For other similarity measures, compute them first and input them
 into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 
@@ -225,11 +215,9 @@ into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 How should missing data be handled?
 Defaults to <code>"pairwise"</code>.
 Available options:</p>
-<ul><li><p><code>"pairwise"</code> --- 
-Computes correlation for all available cases between
+<ul><li><p><code>"pairwise"</code> --- Computes correlation for all available cases between
 two variables</p></li>
-<li><p><code>"listwise"</code> --- 
-Computes correlation for all complete cases in the dataset</p></li>
+<li><p><code>"listwise"</code> --- Computes correlation for all complete cases in the dataset</p></li>
 </ul></dd>
 
 
@@ -237,16 +225,13 @@ Computes correlation for all complete cases in the dataset</p></li>
 <dd><p>Character (length = 1).
 Defaults to <code>"glasso"</code>.
 Available options:</p>
-<ul><li><p><code>"BGGM"</code> --- 
-Computes the Bayesian Gaussian Graphical Model.
+<ul><li><p><code>"BGGM"</code> --- Computes the Bayesian Gaussian Graphical Model.
 Set argument <code>ordinal.categories</code> to determine
 levels allowed for a variable to be considered ordinal.
-See <code><a href="https://rdrr.io/pkg/BGGM/man/estimate.html" class="external-link">estimate</a></code> for more details</p></li>
-<li><p><code>"glasso"</code> --- 
-Computes the GLASSO with EBIC model selection.
+See <code><a href="https://rdrr.io/pkg/BGGM/man/estimate.html" class="external-link">?BGGM::estimate</a></code> for more details</p></li>
+<li><p><code>"glasso"</code> --- Computes the GLASSO with EBIC model selection.
 See <code><a href="EBICglasso.qgraph.html">EBICglasso.qgraph</a></code> for more details</p></li>
-<li><p><code>"TMFG"</code> --- 
-Computes the TMFG method.
+<li><p><code>"TMFG"</code> --- Computes the TMFG method.
 See <code><a href="TMFG.html">TMFG</a></code> for more details</p></li>
 </ul></dd>
 
@@ -257,16 +242,13 @@ See <code><a href="TMFG.html">TMFG</a></code> for more details</p></li>
 Defaults to <code>"walktrap"</code>.
 Three options are listed below but all are available
 (see <code><a href="community.detection.html">community.detection</a></code> for other options):</p>
-<ul><li><p><code>"leiden"</code> --- 
-See <code><a href="https://r.igraph.org/reference/cluster_leiden.html" class="external-link">cluster_leiden</a></code> for more details</p></li>
-<li><p><code>"louvain"</code> --- 
-By default, <code>"louvain"</code> will implement the Louvain algorithm using 
+<ul><li><p><code>"leiden"</code> --- See <code><a href="https://r.igraph.org/reference/cluster_leiden.html" class="external-link">cluster_leiden</a></code> for more details</p></li>
+<li><p><code>"louvain"</code> --- By default, <code>"louvain"</code> will implement the Louvain algorithm using 
 the consensus clustering method (see <code><a href="community.consensus.html">community.consensus</a></code> 
 for more information). This function will implement
 <code>consensus.method = "most_common"</code> and <code>consensus.iter = 1000</code> 
 unless specified otherwise</p></li>
-<li><p><code>"walktrap"</code> --- 
-See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">cluster_walktrap</a></code> for more details</p></li>
+<li><p><code>"walktrap"</code> --- See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="external-link">cluster_walktrap</a></code> for more details</p></li>
 </ul></dd>
 
 
@@ -275,21 +257,18 @@ See <code><a href="https://r.igraph.org/reference/cluster_walktrap.html" class="
 What unidimensionality method should be used? 
 Defaults to <code>"louvain"</code>.
 Available options:</p>
-<ul><li><p><code>"expand"</code> --- 
-Expands the correlation matrix with four variables correlated 0.50.
+<ul><li><p><code>"expand"</code> --- Expands the correlation matrix with four variables correlated 0.50.
 If number of dimension returns 2 or less in check, then the data 
 are unidimensional; otherwise, regular EGA with no matrix
 expansion is used. This method was used in the Golino et al.'s (2020)
 <em>Psychological Methods</em> simulation</p></li>
-<li><p><code>"LE"</code> --- 
-Applies the Leading Eigenvector algorithm
+<li><p><code>"LE"</code> --- Applies the Leading Eigenvector algorithm
 (<code><a href="https://r.igraph.org/reference/cluster_leading_eigen.html" class="external-link">cluster_leading_eigen</a></code>)
 on the empirical correlation matrix. If the number of dimensions is 1,
 then the Leading Eigenvector solution is used; otherwise, regular EGA
 is used. This method was used in the Christensen et al.'s (2023) 
 <em>Behavior Research Methods</em> simulation</p></li>
-<li><p><code>"louvain"</code> --- 
-Applies the Louvain algorithm (<code><a href="https://r.igraph.org/reference/cluster_louvain.html" class="external-link">cluster_louvain</a></code>)
+<li><p><code>"louvain"</code> --- Applies the Louvain algorithm (<code><a href="https://r.igraph.org/reference/cluster_louvain.html" class="external-link">cluster_louvain</a></code>)
 on the empirical correlation matrix. If the number of dimensions is 1, 
 then the Louvain solution is used; otherwise, regular EGA is used. 
 This method was validated Christensen's (2022) <em>PsyArXiv</em> simulation.
@@ -331,11 +310,9 @@ Set to <code>FALSE</code> to not display progress</p></dd>
 <p>A list containing:</p>
 <dl><dt>Derivatives</dt>
 <dd><p>A list containing:</p>
-<ul><li><p><code>Estimates</code> --- 
-A list the length of the unique IDs containing
+<ul><li><p><code>Estimates</code> --- A list the length of the unique IDs containing
 data frames of zero- to second-order derivatives for each ID in <code>data</code></p></li>
-<li><p><code>EstimatesDF</code> --- 
-A data frame of derivatives across all IDs containing
+<li><p><code>EstimatesDF</code> --- A data frame of derivatives across all IDs containing
 columns of the zero- to second-order derivatives as well as <code>id</code> and
 <code>group</code> variables (<code>group</code> is automatically set to <code>1</code>
 for all if no <code>group</code> is provided)</p></li>
@@ -344,14 +321,11 @@ for all if no <code>group</code> is provided)</p></li>
 
 <dt>dynEGA</dt>
 <dd><p>A list containing:</p>
-<ul><li><p><code>population</code> --- 
-If <code>level</code> includes <code>"populaton"</code>, then
+<ul><li><p><code>population</code> --- If <code>level</code> includes <code>"populaton"</code>, then
 the <code><a href="EGA.html">EGA</a></code> results for the entire sample</p></li>
-<li><p><code>group</code> --- 
-If <code>level</code> includes <code>"group"</code>, then
+<li><p><code>group</code> --- If <code>level</code> includes <code>"group"</code>, then
 a list containing the <code><a href="EGA.html">EGA</a></code> results for each <code>group</code></p></li>
-<li><p><code>individual</code> --- 
-If <code>level</code> includes <code>"individual"</code>, then
+<li><p><code>individual</code> --- If <code>level</code> includes <code>"individual"</code>, then
 a list containing the <code><a href="EGA.html">EGA</a></code> results for each <code>id</code></p></li>
 </ul></dd>
 

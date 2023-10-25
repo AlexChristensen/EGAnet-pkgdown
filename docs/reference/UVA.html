@@ -170,19 +170,15 @@ Defaults to <code>TRUE</code></p></dd>
 <dd><p>Character (length = 1).
 Method to reduce redundancies.
 Available options:</p>
-<ul><li><p><code>"latent"</code> --- 
-Computes latent variables using <code><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">cfa</a></code> when 
+<ul><li><p><code>"latent"</code> --- Computes latent variables using <code><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">cfa</a></code> when 
 there are three or more redundant variables. If variables are not 
 all coded in the same direction, then they will be recoded as necessary.
 A warning will be produced for all variables that are flipped</p></li>
-<li><p><code>"mean"</code> --- 
-Computes mean of redundant variables. If variables are not all coded in the
+<li><p><code>"mean"</code> --- Computes mean of redundant variables. If variables are not all coded in the
 same direction, then they will be recoded as necessary.
 A warning will be produced for all variables that are flipped</p></li>
-<li><p><code>"remove"</code> --- 
-Removes all but one variable from a set of redundant variables</p></li>
-<li><p><code>"sum"</code> --- 
-Computes sum of redundant variables. If variables are not all coded in the
+<li><p><code>"remove"</code> --- Removes all but one variable from a set of redundant variables</p></li>
+<li><p><code>"sum"</code> --- Computes sum of redundant variables. If variables are not all coded in the
 same direction, then they will be recoded as necessary.
 A warning will be produced for all variables that are flipped</p></li>
 </ul></dd>
@@ -193,12 +189,10 @@ A warning will be produced for all variables that are flipped</p></li>
 Whether <code>reduce</code> should occur automatically. For
 <code>reduce.method = "remove"</code>, the automated decision
 process is as follows:</p>
-<ul><li><p><code>Two variables</code> --- 
-The variable with the lowest maximum <code><a href="wto.html">wto</a></code> 
+<ul><li><p><code>Two variables</code> --- The variable with the lowest maximum <code><a href="wto.html">wto</a></code> 
 to all other variables (other than the one it is redundant with)
 is retained and the other is removed</p></li>
-<li><p><code>Three or more variables</code> --- 
-The variable with the highest mean <code><a href="wto.html">wto</a></code>
+<li><p><code>Three or more variables</code> --- The variable with the highest mean <code><a href="wto.html">wto</a></code>
 to all other variables that are redundant with one another
 is retained and all others are removed</p></li>
 </ul></dd>
