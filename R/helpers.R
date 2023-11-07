@@ -242,20 +242,27 @@ reproducible_seeds <- function(n, seed = NULL)
 
 #' @noRd
 # Generate uniform data ----
-# Always between 0 and 1
-# Updated 30.07.2023
-runif_xoshiro <- function(n, seed = NULL)
+# Allows adjustment of range
+# Updated 26.10.2023
+runif_xoshiro <- function(n, min = 0, max = 1, seed = NULL)
 {
   
-  # Return call from C
-  return(
-    .Call(
-      "r_xoshiro_uniform",
-      as.integer(n),
-      swiftelse(is.null(seed), 0, seed),
-      PACKAGE = "EGAnet"
-    )
+  # Get values
+  values <- .Call(
+    "r_xoshiro_uniform",
+    as.integer(n),
+    swiftelse(is.null(seed), 0, seed),
+    PACKAGE = "EGAnet"
   )
+  
+  # Check for changes to minimum and maximum
+  if(min != 0 || max != 1){ # transform
+    values <- min + (max - min) * values
+  }
+  
+  
+  # Return call from C
+  return(values)
   
 }
 
@@ -440,6 +447,16 @@ reproducible_bootstrap <- function(
 #%%%%%%%%%%%%%%%%%%%%%
 # PARALLELIZATION ----
 #%%%%%%%%%%%%%%%%%%%%%
+
+#' @noRd
+# Clear memory ----
+# Updated 07.11.2023
+clear_memory <- function()
+{
+  sink <- capture.output(
+    gc(verbose = FALSE, reset = TRUE, full = TRUE)
+  )
+}
 
 #' @noRd
 # Get available memory ----
@@ -2442,7 +2459,7 @@ dimension_comparison <- function(original, comparison){
 
 #' @noRd
 # Basic set up for comparing plots ----
-# Updated 28.09.2023
+# Updated 26.10.2023
 compare_plots <- function(comparison_network, comparison_wc, plot_ARGS)
 {
   
@@ -2477,20 +2494,25 @@ compare_plots <- function(comparison_network, comparison_wc, plot_ARGS)
   ## Essentially, the same call but allows some freedom
   plot_ARGS[c("net", "node.color")] <- NULL
   
-  ## Check for "edge" stuff
-  edge_stuff <- c(
-    "edge.alpha", "edge.color", 
-    "edge.lty", "edge.size"
-  )
+  # Check for edges
+  ## Assume more than one edge alpha is default
+  if(length(plot_ARGS[["edge.alpha"]]) > 1){
+    plot_ARGS[["edge.alpha"]] <- NULL
+  }
   
-  ## Check for lengths of "edge" stuff
-  edge_lengths <- edge_stuff[
-    nvapply(plot_ARGS[edge_stuff], length) > 1
-  ]
+  ## Assume more than two edge color is default
+  if(length(plot_ARGS[["edge.color"]]) > 2){
+    plot_ARGS[["edge.color"]] <- NULL
+  }
   
-  ## Get edges arguments
-  if(length(edge_lengths) != 0){
-    plot_ARGS[edge_lengths] <- NULL
+  ## Assume more than two edge line type is default
+  if(length(plot_ARGS[["edge.lty"]]) > 2){
+    plot_ARGS[["edge.lty"]] <- NULL
+  }
+  
+  ## Assume more than one edge size is default
+  if(length(plot_ARGS[["edge.size"]]) > 1){
+    plot_ARGS[["edge.size"]] <- NULL
   }
   
   # Send on and return from `basic_plot_setup`
@@ -2747,65 +2769,172 @@ pcor2inv <- function(partial_correlations)
 #%%%%%%%%%%%%%%%%%%%%%%%%
 
 #' @noRd
-# Rewire networks ----
-# About 10x faster than previous implementation
-# Updated 30.07.2023
-rewire <- function(
-    network, min = 0.20, max = 0.40,
-    noise = 0.10, lower_triangle
-)
+# Rewiring based on {igraph}
+# Updated 30.10.2023
+igraph_rewire <- function(network, prob, noise = 0)
 {
   
-  # Work only with the lower triangle
-  lower_network <- network[lower_triangle]
+  # Get nodes
+  nodes <- dim(network)[2]
+  
+  # Assume NAs are zero
+  network[is.na(network)] <- 0
+  
+  # Get rewired network
+  rewired_network <- igraph2matrix(
+    igraph::rewire(
+      graph = convert2igraph(network),
+      with = igraph::each_edge(prob = prob)
+    )
+  )
+  
+  # Add noise (if any)
+  if(noise != 0){
+    
+    # Get absolute noise
+    abs_noise <- abs(noise)
+    
+    # Get lower triangle
+    lower_triangle <- lower.tri(rewired_network)
+    
+    # Get lower triangle
+    rewired_lower <- rewired_network[lower_triangle]
+    
+    # Get non-zero
+    non_zero <- rewired_lower != 0
+    
+    # Set noise
+    rewired_lower[non_zero] <- rewired_lower[non_zero] +
+      runif_xoshiro(sum(non_zero), min = -abs_noise, max = abs_noise)
+    
+    # Create new matrix
+    rewired_network <- matrix(0, nrow = nodes, ncol = nodes)
+    
+    # Add to lower triangle
+    rewired_network[lower_triangle] <- rewired_lower
+    
+    # Make symmetric
+    rewired_network <- rewired_network + t(rewired_network)
+  
+  }
+  
+  # Return rewired network
+  return(rewired_network)
+
+}
+
+#' @noRd
+# Rewire networks ----
+# About 10x faster than previous implementation
+# Updated 29.10.2023
+rewire <- function(network, p)
+{
+  
+  # Get number of nodes
+  nodes <- dim(network)[2]
+  
+  # Get node sequence
+  node_sequence <- seq_len(nodes)
+  
+  # Get sparse matrix
+  sparse_network <- data.frame(
+    row = rep(node_sequence, times = nodes),
+    col = rep(node_sequence, each = nodes),
+    weight = as.vector(network)
+  )
+  
+  # Get one-way edges
+  sparse_network <- sparse_network[
+    sparse_network$row < sparse_network$col,
+  ]
   
   # Get non-zero edges
-  non_zero_edges <- which(lower_network != 0)
+  non_zero <- sparse_network$weight != 0
   
-  # Number of edges
-  edges <- length(non_zero_edges)
+  # Get zero edges
+  zero <- !non_zero
   
-  # Add noise
-  if(!is.null(noise)){
+  # Get sparse zero edges
+  sparse_zero <- sparse_network[zero,]
+  
+  # Get sparse non-zero edges
+  sparse_network <- sparse_network[non_zero,]
+  
+  # Get number of non-zero edges
+  edges <- dim(sparse_network)[1]
+  
+  # Get number of zero edges
+  zero_edges <- dim(sparse_zero)[1]
+  
+  # Get edge sequence
+  edge_sequence <- seq_len(edges)
+  
+  # Get number of edges to rewire
+  rewire_number <- ceiling(zero_edges * p)
+  
+  # Get indices to rewire
+  rewire_index <- shuffle(edge_sequence, rewire_number)
+  
+  # Get row or column
+  rewire_dimension <- swiftelse(
+    runif_xoshiro(rewire_number) < 0.50, 1, 2
+  )
+
+  # Loop over indices to ensure no self loops
+  for(i in seq_len(rewire_number)){
     
-    # Only add to existing edges
-    lower_network[non_zero_edges] <- 
-      lower_network[non_zero_edges] + runif(edges, -noise, noise)
+    # Get current node
+    current_node <- sparse_network[
+      rewire_index[i], rewire_dimension[i]
+    ]
+    
+    # Get possible rewire index
+    row_index <- which(sparse_zero$row == current_node)
+    column_index <- which(sparse_zero$col == current_node)
+    
+    # Get possible nodes
+    row_node <- sparse_zero$col[row_index]
+    column_node <- sparse_zero$row[column_index]
+    
+    # Possible rewires
+    possible_rewire <- c(row_node, column_node)
+    
+    # Skip if no possible rewire
+    if(length(possible_rewire) != 0){
+      
+      # Add names
+      names(possible_rewire) <- c(row_index, column_index)
+      
+      # Get rewire node
+      rewire_node <- shuffle(possible_rewire, size = 1)
+      
+      # Get randomly assigned nodes
+      sparse_network[
+        rewire_index[i], 3 - rewire_dimension[i]
+      ] <- rewire_node
+      
+      # Remove possibility from sparse zero
+      sparse_zero <- sparse_zero[-as.numeric(names(rewire_node)),]
+      
+    }
     
   }
   
-  # Number of edges to rewire
-  rewire_edges <- floor(edges * runif(1, min, max))
+  # Populate rewired network
+  rewired_network <- matrix(0, nrow = nodes, ncol = nodes)
   
-  # Get rewiring indices
-  rewire_index <- shuffle(non_zero_edges, size = rewire_edges)
+  # Loop over sparse network
+  for(i in edge_sequence){
+    
+    # Update network
+    rewired_network[sparse_network$row[i], sparse_network$col[i]] <-
+    rewired_network[sparse_network$col[i], sparse_network$row[i]] <-
+    sparse_network$weight[i]
+    
+  }
   
-  # Get replacement indices
-  replace_index <- shuffle(seq_along(lower_network), size = rewire_edges)
-  
-  # Make a copy of the lower network
-  lower_network_original <- lower_network
-  
-  # Replace values
-  lower_network[rewire_index] <- lower_network_original[replace_index]
-  lower_network[replace_index] <- lower_network_original[rewire_index]
-  
-  # Get nodes in original network
-  nodes <- dim(network)[2]
-  
-  # Initialize a new network
-  new_network <- matrix(
-    0, nrow = nodes, ncol = nodes,
-    dimnames = dimnames(network)
-  )
-  
-  # Replace values
-  new_network[lower_triangle] <- lower_network
-  new_network <- t(new_network)
-  new_network[lower_triangle] <- lower_network
-  
-  # Return the rewired network
-  return(new_network)
+  # Return rewired network
+  return(transfer_names(network, rewired_network))
   
 }
 

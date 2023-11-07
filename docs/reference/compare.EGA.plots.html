@@ -12,7 +12,7 @@ nodes are placed in the same layout to maximize comparison"><!-- mathjax --><scr
     
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,8 @@ nodes are placed in the same layout to maximize comparison</p>
 <span>  base <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rows <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  columns <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  columns <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  plot.all <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -134,6 +135,14 @@ Number of rows to spread plots across</p></dd>
 <dt>columns</dt>
 <dd><p>Numeric (length = 1).
 Number of columns to spread plots down</p></dd>
+
+
+<dt>plot.all</dt>
+<dd><p>Boolean (length = 1).
+Whether plot should be produced or just output.
+Defaults to <code>TRUE</code>.
+Set to <code>FALSE</code> to avoid plotting (but still obtain
+plot objects)</p></dd>
 
 </dl></div>
     <div class="section level2">

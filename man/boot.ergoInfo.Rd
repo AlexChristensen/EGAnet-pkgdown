@@ -8,7 +8,9 @@ boot.ergoInfo(
   dynEGA.object,
   EII,
   use = c("edge.list", "unweighted", "weighted"),
-  iter = 100,
+  ordering = c("row", "column"),
+  shuffles = 5000,
+  iter = 200,
   ncores,
   verbose = TRUE
 )
@@ -27,23 +29,33 @@ If no \code{\link[EGAnet]{ergoInfo}} object is provided, then it is estimated}
 \item{use}{Character (length = 1).
 A string indicating what network element will be used
 to compute the algorithm complexity, the list of edges or the weights of the network.
-Defaults to \code{use = "edge.list"}.
+Defaults to \code{use = "unweighted"}.
 Current options are:
 
 \itemize{
 
 \item \code{"edge.list"} --- Calculates the algorithm complexity using the list of edges
 
-\item \code{"unweighted"} --- Calculates the algorithm complexity using the binary weights of the network.
-0 = edge absent and 1 = edge present
+\item \code{"unweighted"} --- Calculates the algorithm complexity using the binary weights of the encoded prime 
+transformed network. 0 = edge absent and 1 = edge present
 
 \item \code{"weighted"} --- Calculates the algorithm complexity using the weights of encoded prime-weight transformed network
 
 }}
 
+\item{ordering}{Character (length = 1).
+Changes ordering of edge list.
+\code{"row"} goes across the rows;
+\code{"column"} goes down the columns.
+Defaults to \code{"row"}}
+
+\item{shuffles}{Numeric.
+Number of shuffles used to compute the Kolmogorov complexity.
+Defaults to \code{5000}}
+
 \item{iter}{Numeric (length = 1).
 Number of replica samples to generate from the bootstrap analysis.
-Defaults to \code{100} (recommended)}
+Defaults to \code{200} (recommended)}
 
 \item{ncores}{Numeric (length = 1).
 Number of cores to use in computing results.
@@ -85,21 +97,22 @@ replacement from the empirical sample. This process is time consuming when carri
 across \emph{v} number of variables, \emph{n} number of participants,
 \emph{t} number of time points, and \emph{i} number of iterations.
 
-A more efficient process, the approach applied here, is to obtain a sampling distribution 
+The approach applied in \code{boot.ergoInfo}, is to obtain a sampling distribution 
 of EII values as if all participants in the data have the population network structure. 
-Sampling is not perfect and therefore random noise is added to the edges of the population 
-structure to simulate sampling variability. This noise follows a random uniform distribution
-ranging from -0.10 to 0.10. In addition, a proportion of edges are rewired to allow for 
-slight variations on the population structure. The proportion of nodes that are rewired is 
-sampled from a random uniform distribution between 0.20 to 0.40. This process is carried out 
-for each participant resulting in \emph{n} variations of the population structure. 
-Afterward, EII is computed. This process is carried out for \emph{i} iterations (e.g., 100).
+To mirror the sample of individuals, we generate as many population variants as there are participants 
+in the empirical sample. With the new sample containing the population network variants, we compute EII 
+with the original population network as the population network and the population network variants as the individuals. 
+We repeat this process for \emph{X} iterations (e.g., 200). This approach creates a sampling distribution of EII that would 
+be expected when the individuals in the population are deviations on the population structure -- that is, much of the 
+population structure is retained but with different variations of noise in each individual. If the empirical EII is 
+significant different than the generated distribution, then there is significant information lost when representing the sample 
+as an aggregate, population network; otherwise, the system is determine to be ergodic and the sample can adequately be 
+represented with the population network.
 
-The result is a sampling distribution of EII values that would be expected if the process 
-was ergodic. If the empirical EII value is significantly less than the distribution or 
-not significantly different, then  the empirical data can be expected to be generated 
-from an ergodic process and the population structure is  sufficient to describe all 
-individuals. If the empirical EII value is significantly greater than the distribution, 
+How to interpret the results: the result of \code{boot.ergoInfo} is a sampling distribution of EII values that would be expected if the process 
+was ergodic (null distribution). If the empirical EII value is not significantly different from the null distribution, then  the empirical data can 
+be expected to be generated from an ergodic process and the population structure is  sufficient to describe all 
+individuals. If the empirical EII value is significantly different from the null distribution, 
 then the empirical data cannot be described by the population structure -- significant 
 information is lost when collapsing across to the population structure.
 }
@@ -116,12 +129,12 @@ dyn1 <- dynEGA.ind.pop(
 )
 
 # Empirical Ergodicity Information Index
-eii1 <- ergoInfo(dynEGA.object = dyn1, use = "edge.list")
+eii1 <- ergoInfo(dynEGA.object = dyn1, use = "unweighted")
 
 # Bootstrap Test for Ergodicity Information Index
 testing.ergoinfo <- boot.ergoInfo(
   dynEGA.object = dyn1, EII = eii1,
-  ncores = 2
+  ncores = 2, use = "unweighted"
 )
 
 # Plot result
@@ -135,7 +148,7 @@ dyn2 <- dynEGA(
 )
 
 # Empirical Ergodicity Information Index
-eii2 <- ergoInfo(dynEGA.object = dyn2, use = "edge.list")
+eii2 <- ergoInfo(dynEGA.object = dyn2, use = "unweighted")
 
 # Bootstrap Test for Ergodicity Information Index
 testing.ergoinfo2 <- boot.ergoInfo(

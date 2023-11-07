@@ -17,23 +17,33 @@
 #' @param use Character (length = 1).
 #' A string indicating what network element will be used
 #' to compute the algorithm complexity, the list of edges or the weights of the network.
-#' Defaults to \code{use = "edge.list"}.
+#' Defaults to \code{use = "unweighted"}.
 #' Current options are:
 #'
 #' \itemize{
 #'
 #' \item \code{"edge.list"} --- Calculates the algorithm complexity using the list of edges
 #'
-#' \item \code{"unweighted"} --- Calculates the algorithm complexity using the binary weights of the network.
-#' 0 = edge absent and 1 = edge present
+#' \item \code{"unweighted"} --- Calculates the algorithm complexity using the binary weights of the encoded prime 
+#' transformed network. 0 = edge absent and 1 = edge present
 #' 
 #' \item \code{"weighted"} --- Calculates the algorithm complexity using the weights of encoded prime-weight transformed network
 #' 
 #' }
+#' 
+#' @param ordering Character (length = 1).
+#' Changes ordering of edge list.
+#' \code{"row"} goes across the rows;
+#' \code{"column"} goes down the columns.
+#' Defaults to \code{"row"}
+#' 
+#' @param shuffles Numeric.
+#' Number of shuffles used to compute the Kolmogorov complexity.
+#' Defaults to \code{5000}
 #'
 #' @param iter Numeric (length = 1).
 #' Number of replica samples to generate from the bootstrap analysis.
-#' Defaults to \code{100} (recommended)
+#' Defaults to \code{200} (recommended)
 #'
 #' @param ncores Numeric (length = 1).
 #' Number of cores to use in computing results.
@@ -54,21 +64,22 @@
 #' across \emph{v} number of variables, \emph{n} number of participants,
 #' \emph{t} number of time points, and \emph{i} number of iterations.
 #' 
-#' A more efficient process, the approach applied here, is to obtain a sampling distribution 
+#' The approach applied in \code{boot.ergoInfo}, is to obtain a sampling distribution 
 #' of EII values as if all participants in the data have the population network structure. 
-#' Sampling is not perfect and therefore random noise is added to the edges of the population 
-#' structure to simulate sampling variability. This noise follows a random uniform distribution
-#' ranging from -0.10 to 0.10. In addition, a proportion of edges are rewired to allow for 
-#' slight variations on the population structure. The proportion of nodes that are rewired is 
-#' sampled from a random uniform distribution between 0.20 to 0.40. This process is carried out 
-#' for each participant resulting in \emph{n} variations of the population structure. 
-#' Afterward, EII is computed. This process is carried out for \emph{i} iterations (e.g., 100).
+#' To mirror the sample of individuals, we generate as many population variants as there are participants 
+#' in the empirical sample. With the new sample containing the population network variants, we compute EII 
+#' with the original population network as the population network and the population network variants as the individuals. 
+#' We repeat this process for \emph{X} iterations (e.g., 200). This approach creates a sampling distribution of EII that would 
+#' be expected when the individuals in the population are deviations on the population structure -- that is, much of the 
+#' population structure is retained but with different variations of noise in each individual. If the empirical EII is 
+#' significant different than the generated distribution, then there is significant information lost when representing the sample 
+#' as an aggregate, population network; otherwise, the system is determine to be ergodic and the sample can adequately be 
+#' represented with the population network.
 #' 
-#' The result is a sampling distribution of EII values that would be expected if the process 
-#' was ergodic. If the empirical EII value is significantly less than the distribution or 
-#' not significantly different, then  the empirical data can be expected to be generated 
-#' from an ergodic process and the population structure is  sufficient to describe all 
-#' individuals. If the empirical EII value is significantly greater than the distribution, 
+#' How to interpret the results: the result of \code{boot.ergoInfo} is a sampling distribution of EII values that would be expected if the process 
+#' was ergodic (null distribution). If the empirical EII value is not significantly different from the null distribution, then  the empirical data can 
+#' be expected to be generated from an ergodic process and the population structure is  sufficient to describe all 
+#' individuals. If the empirical EII value is significantly different from the null distribution, 
 #' then the empirical data cannot be described by the population structure -- significant 
 #' information is lost when collapsing across to the population structure.
 #'
@@ -85,12 +96,12 @@
 #' )
 #'
 #' # Empirical Ergodicity Information Index
-#' eii1 <- ergoInfo(dynEGA.object = dyn1, use = "edge.list")
+#' eii1 <- ergoInfo(dynEGA.object = dyn1, use = "unweighted")
 #'
 #' # Bootstrap Test for Ergodicity Information Index
 #' testing.ergoinfo <- boot.ergoInfo(
 #'   dynEGA.object = dyn1, EII = eii1,
-#'   ncores = 2
+#'   ncores = 2, use = "unweighted"
 #' )
 #' 
 #' # Plot result
@@ -104,7 +115,7 @@
 #' )
 #' 
 #' # Empirical Ergodicity Information Index
-#' eii2 <- ergoInfo(dynEGA.object = dyn2, use = "edge.list")
+#' eii2 <- ergoInfo(dynEGA.object = dyn2, use = "unweighted")
 #' 
 #' # Bootstrap Test for Ergodicity Information Index
 #' testing.ergoinfo2 <- boot.ergoInfo(
@@ -141,18 +152,19 @@
 #'
 #' @export
 # Bootstrap Test for the Ergodicity Information Index
-# Updated 24.10.2023
+# Updated 07.11.2023
 boot.ergoInfo <- function(
     dynEGA.object, EII, 
     use = c("edge.list", "unweighted", "weighted"),
-    iter = 100, ncores, verbose = TRUE
+    ordering = c("row", "column"), shuffles = 5000,
+    iter = 200, ncores, verbose = TRUE
 ){
   
   # Send experimental message (for now)
   experimental("boot.ergoInfo")
   
   # Check for missing arguments (argument, default, function)
-  use <- set_default(use, "edge.list", ergoInfo)
+  use <- set_default(use, "unweighted", ergoInfo)
   if(missing(ncores)){ncores <- ceiling(parallel::detectCores() / 2)}
   
   # Argument errors
@@ -160,40 +172,56 @@ boot.ergoInfo <- function(
   
   # Check for EII
   if(missing(EII)){ # If missing, then compute it
-    EII <- ergoInfo(dynEGA.object, use = use)$EII # , seed = 0)$EII
+    EII <- ergoInfo(dynEGA.object, use = use, shuffles = shuffles)$EII
   }else if(is(EII, "EII")){
-    use <- attr(EII, "methods")$use; EII <- EII$EII
+    
+    # Get attributes
+    use <- attr(EII, "methods")$use
+    ordering <- attr(EII, "methods")$ordering
+    shuffles <- attr(EII, "methods")$shuffles
+    EII <- EII$EII # Save empirical EII for last
+    
   }
   
   # Get proper objects (if not, send an error)
   # Function found in `ergoInfo`
-  dynega_objects <- get_dynEGA_object(dynEGA.object)
+  dynEGA.object <- get_dynEGA_object(dynEGA.object)
   
-  # Replace individual networks with population networks
-  individual_networks <- lapply(
-    dynega_objects$individual, function(x){dynega_objects$population$network}
-  )
+  # Only use necessary data (saves memory!)
+  population_network <- dynEGA.object$population$network
+  n_dimensions <- dynEGA.object$population$n.dim
+  individual_sequence <- seq_along(dynEGA.object$individual)
   
-  # Get lower triangle indices (avoids repeated computation)
-  lower_triangle <- lower.tri(dynega_objects$population$network)
+  # Remove `dynEGA.object` from memory
+  rm(dynEGA.object); clear_memory()
   
   # Get rewired networks
-  rewired_networks <- lapply(
-    seq_len(iter), function(iteration){
+  rewired_EII <- parallel_process(
+    iterations = iter,
+    FUN = function(
+      iteration,
+      # dynEGA Arguments
+      population_network = population_network,
+      n_dimensions = n_dimensions,
+      individual_sequence = individual_sequence,
+      # EII Arguments
+      use = use, ordering = ordering, shuffles = shuffles
+    ){
       
       # Initialize `dynEGA` object structure
       rewired_dynEGA <- list(
         dynEGA = list(
           population = list(
-            network = dynega_objects$population$network,
-            n.dim = dynega_objects$population$n.dim
+            network = population_network,
+            n.dim = n_dimensions
           ),
           individual = lapply( # Return as list named "network"
-            individual_networks, function(x){
+            individual_sequence, function(x){
               list(
-                network = rewire(
-                  network = x, min = 0.20, max = 0.40,
-                  noise = 0.10, lower_triangle = lower_triangle
+                network = igraph_rewire(
+                  network = population_network,
+                  prob = runif_xoshiro(1, min = 0.05, max = 0.15),
+                  noise = 0.05
                 )
               )
             }
@@ -204,19 +232,23 @@ boot.ergoInfo <- function(
       # Set class
       class(rewired_dynEGA) <- "dynEGA"
       
-      # Return rewired networks
-      return(rewired_dynEGA)
+      # Return EII
+      return(
+        ergoInfo(
+          rewired_dynEGA, use = use,
+          ordering = ordering, shuffles = shuffles
+        )
+      )
       
-    }
-  )
-  
-  # Perform parallelization
-  rewired_EII <- parallel_process(
-    iterations = iter,
-    datalist = rewired_networks,
-    ergoInfo, use = use,
-    ncores = ncores,
-    progress = verbose
+    },
+    # dynEGA Arguments
+    population_network = population_network,
+    n_dimensions = n_dimensions,
+    individual_sequence = individual_sequence,
+    # EII Arguments
+    use = use, ordering = ordering, shuffles = shuffles,
+    # Parallelization settings
+    ncores = ncores, progress = verbose
   )
   
   # Get EII values
@@ -245,14 +277,16 @@ boot.ergoInfo <- function(
     effect = effect_direction,
     interpretation = switch(
       effect_direction,
-      "n.s." = "The empirical EII was not different from what would be expected from random variation in the population structure, meaning non-significant information is lost when aggregating the results into a single, population network.",
-      "less" = "The empirical EII was less than what would be expected from random variation in the population structure, meaning non-significant information is lost when aggregating the results into a single, population network.",
-      "greater" = "The empirical EII was greater than what would be expected from random variation in the population structure, meaning significant information is lost when aggregating the results into a single, population network."
+      "n.s." = "The empirical EII was not different from values that would be expected if the process was ergodic, meaning the empirical data can be expected to be generated from an ergodic process and the population structure is sufficient to describe all individuals",
+      "less" = "The empirical EII was significantly different from values that would be expected if the process was ergodic, meaning the empirical data cannot be described by the population structure -- significant information is lost when collapsing across to the population structure",
+      "greater" = "The empirical EII was significantly different from values that would be expected if the process was ergodic, meaning the empirical data cannot be described by the population structure -- significant information is lost when collapsing across to the population structure"
     )
   )
   
   # Add "methods" attribute
-  attr(results, "methods") <- list(use = use)
+  attr(results, "methods") <- list(
+    use = use, ordering = ordering, shuffles = shuffles
+  )
   
   # Set class
   class(results) <- "boot.ergoInfo"
@@ -291,7 +325,7 @@ boot.ergoInfo_errors <- function(dynEGA.object, iter, ncores, verbose)
 
 #' @exportS3Method 
 # S3 Print Method ----
-# Updated 19.10.2023
+# Updated 07.11.2023
 print.boot.ergoInfo <- function(x, ...)
 {
   
@@ -308,13 +342,17 @@ print.boot.ergoInfo <- function(x, ...)
   
   # Print EII method
   cat(
-    "EII Method: ",
-    switch(
-      attr(x, "methods")$use,
-      "edge.list" = "Edge List",
-      "unweighted" = "Unweighted",
-      "weighted" = "Weighted"
-    ), "\n"
+    paste0(
+      "EII Method: ",
+      switch(
+        attr(x, "methods")$use,
+        "edge.list" = "Edge List",
+        "unweighted" = "Unweighted",
+        "weighted" = "Weighted"
+      ), "\n",
+      "Ordering: ", totitle(attr(x, "methods")$ordering), "\n",
+      "Shuffles: ", attr(x, "methods")$shuffles, "\n"
+    )
   )
   
   # Print EII value
@@ -340,7 +378,7 @@ print.boot.ergoInfo <- function(x, ...)
       "Mean = ", round(mean(x$boot.ergoInfo, na.rm = TRUE), 4),
       " (SD = ", round(sd(x$boot.ergoInfo, na.rm = TRUE), 4), ")",
       "\np-value = ", round(x$p.value, 4), " (", x$effect, ")",
-      "\nErgodic: ", swiftelse(x$effect == "greater", "No", "Yes")
+      "\nErgodic: ", swiftelse(x$effect == "n.s.", "Yes", "No")
     )
   )
   

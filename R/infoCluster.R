@@ -46,7 +46,7 @@
 #' @export
 #' 
 # Information Theoretic Clustering for dynEGA
-# Updated 22.10.2023
+# Updated 30.10.2023
 infoCluster <- function(dynEGA.object, plot.cluster = TRUE)
 {
   
@@ -129,15 +129,11 @@ infoCluster <- function(dynEGA.object, plot.cluster = TRUE)
   
   # Check if single cluster
   if(unique_length(clusters) == 1){
-
-    # Get lower triangle
-    lower_triangle <- lower.tri(individual_networks[[1]])
     
     # Generate random networks
     random_networks <- lapply(
-      individual_networks, rewire,
-      min = 0.05, max = 0.05, noise = NULL,
-      lower_triangle = lower_triangle
+      individual_networks, igraph_rewire,
+      prob = runif_xoshiro(1, min = 0.10, max = 0.20)
     )
     
     # Get the random JSD matrix
@@ -156,6 +152,9 @@ infoCluster <- function(dynEGA.object, plot.cluster = TRUE)
 
     # Make diagonal 0 again
     diag(jsd_random_matrix) <- 0
+    
+    # Get lower triangle
+    lower_triangle <- lower.tri(individual_networks[[1]])
 
     # Compare to empirical
     comparison <- t.test(
@@ -185,7 +184,7 @@ infoCluster <- function(dynEGA.object, plot.cluster = TRUE)
     )
     
     # Check for empirical JSD > random JSD OR non-significant t-test
-    if(comparison_sign == 1 | abs(cohens_d) < 0.20){
+    if(comparison_sign == 1 || abs(cohens_d) < 0.20){
       
       # Set clusters to all individuals
       clusters <- cut_sequence
@@ -264,7 +263,7 @@ summary.infoCluster <- function(object, ...)
 #' @exportS3Method 
 # S3 Plot Method ----
 # Works fast enough, so leaving as original code
-# Updated 12.10.2023
+# Updated 04.11.2023
 plot.infoCluster <- function(x, ...)
 {
   
@@ -303,9 +302,13 @@ plot.infoCluster <- function(x, ...)
     cluster_data$segments$cluster <- c(-1, diff(cluster_data$segments$line))
     change <- which(cluster_data$segments$cluster == 1)
     for (i in 1:cut) cluster_data$segments$cluster[change[i]] = i + 1
-    cluster_data$segments$cluster <-  swiftelse(cluster_data$segments$line == 1, 1, 
-                                                swiftelse(cluster_data$segments$cluster == 0, NA, cluster_data$segments$cluster))
-    
+    cluster_data$segments$cluster <-  swiftelse(
+      cluster_data$segments$line == 1, 1, 
+      swiftelse(
+        cluster_data$segments$cluster == 0, 
+        NA, cluster_data$segments$cluster
+      )
+    )
     
     # Replace NA values in cluster
     if(!all(is.na(cluster_data$segments$cluster))){
@@ -347,17 +350,54 @@ plot.infoCluster <- function(x, ...)
     
   }
   
+  # This code is necessary to flip the colors to the proper
+  # order that is consistent with the output of `infoCluster$clusters`
+  # I have no idea why it doesn't work without it but
+  # after much MacGyvering, this solution works
+  
+  # First, extract cluster not equal to 1 (connecting lines)
+  not_one_clusters <- cluster_data$segments$cluster[
+    cluster_data$segments$cluster != 1
+  ]
+  
+  # Second, get the frequencies
+  segment_frequency <- fast_table(not_one_clusters)
+  
+  # Third, get the actual cluster frequencies
+  cluster_frequency <- fast_table(x$clusters)
+  
+  # Fourth, map the values
+  cluster_order <- order(cluster_frequency)
+  segment_order <- segment_frequency[
+    order(segment_frequency)[cluster_order]
+  ]
+  
+  # Additional check for equivalence
+  segment_order[] <- swiftelse(
+    unique_length(segment_frequency) == 1,
+    rev(seq_along(segment_order)) + 1,
+    seq_along(segment_order) + 1
+  )
+  
+  # Fifth, vectorize back
+  cluster_data$segments$cluster[
+    cluster_data$segments$cluster != 1
+  ] <- segment_order[as.character(not_one_clusters)]
+  
+
   # Ensure clusters are factors
   cluster_data$segments$cluster <- as.factor(
     cluster_data$segments$cluster
   )
   
+  # Get clusters and cluster sequence
+  cluster_sequence <- seq_len(cut)
+  
   # Make labels
-  if(max(clusters) == 1){
-    label <- "1"
-  }else{
-    label <- c("", 1:max(clusters))
-  }
+  label <- swiftelse(
+    cut == 1, "1",
+    c("", cluster_sequence)
+  )
   
   # Set up plot
   cluster_plot <- ggplot2::ggplot() +
@@ -373,9 +413,8 @@ plot.infoCluster <- function(x, ...)
     ggplot2::scale_color_manual(
       labels = label,
       values = c(
-        "grey", color_palette_EGA(
-              "polychrome", wc = 1:max(clusters)
-        )
+        "grey", 
+        color_palette_EGA("polychrome", wc = cluster_sequence)
       )
     ) +
     ggplot2::coord_flip() + 
@@ -393,29 +432,11 @@ plot.infoCluster <- function(x, ...)
     ggplot2::guides(
       color = ggplot2::guide_legend(title = "Cluster")
     )
-  
-  # Check whether "N.df" exists
-  if(exists("N.df")){
-    
-    cluster_plot <- cluster_plot +
-      ggplot2::geom_text(
-        data = N.df,
-        ggplot2::aes(
-          x = x, y = y, label = factor(cluster),
-          colour = factor(cluster + 1)
-        ),
-        hjust = 1.5, show.legend = FALSE
-      )
-    
-  }
-  
-  
+ 
   # Remove clusters if none
   if(all(clusters == ncol_sequence(x$JSD))){
     cluster_plot <- cluster_plot +
-      ggplot2::theme(
-        legend.position = "none"
-      )
+      ggplot2::theme(legend.position = "none")
   }
   
   # Return plot

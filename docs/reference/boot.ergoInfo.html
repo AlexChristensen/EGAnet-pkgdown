@@ -14,7 +14,7 @@ with a distribution of EII obtained by bootstrap sampling
     
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,9 @@ with a distribution of EII obtained by bootstrap sampling
 <span>  <span class="va">dynEGA.object</span>,</span>
 <span>  <span class="va">EII</span>,</span>
 <span>  use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"edge.list"</span>, <span class="st">"unweighted"</span>, <span class="st">"weighted"</span><span class="op">)</span>,</span>
-<span>  iter <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  ordering <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"column"</span><span class="op">)</span>,</span>
+<span>  shuffles <span class="op">=</span> <span class="fl">5000</span>,</span>
+<span>  iter <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>  <span class="va">ncores</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -115,19 +117,33 @@ If no <code><a href="ergoInfo.html">ergoInfo</a></code> object is provided, then
 <dd><p>Character (length = 1).
 A string indicating what network element will be used
 to compute the algorithm complexity, the list of edges or the weights of the network.
-Defaults to <code>use = "edge.list"</code>.
+Defaults to <code>use = "unweighted"</code>.
 Current options are:</p>
 <ul><li><p><code>"edge.list"</code> --- Calculates the algorithm complexity using the list of edges</p></li>
-<li><p><code>"unweighted"</code> --- Calculates the algorithm complexity using the binary weights of the network.
-0 = edge absent and 1 = edge present</p></li>
+<li><p><code>"unweighted"</code> --- Calculates the algorithm complexity using the binary weights of the encoded prime 
+transformed network. 0 = edge absent and 1 = edge present</p></li>
 <li><p><code>"weighted"</code> --- Calculates the algorithm complexity using the weights of encoded prime-weight transformed network</p></li>
 </ul></dd>
+
+
+<dt>ordering</dt>
+<dd><p>Character (length = 1).
+Changes ordering of edge list.
+<code>"row"</code> goes across the rows;
+<code>"column"</code> goes down the columns.
+Defaults to <code>"row"</code></p></dd>
+
+
+<dt>shuffles</dt>
+<dd><p>Numeric.
+Number of shuffles used to compute the Kolmogorov complexity.
+Defaults to <code>5000</code></p></dd>
 
 
 <dt>iter</dt>
 <dd><p>Numeric (length = 1).
 Number of replica samples to generate from the bootstrap analysis.
-Defaults to <code>100</code> (recommended)</p></dd>
+Defaults to <code>200</code> (recommended)</p></dd>
 
 
 <dt>ncores</dt>
@@ -180,20 +196,21 @@ with small variation in the population structure</p></dd>
 replacement from the empirical sample. This process is time consuming when carried out 
 across <em>v</em> number of variables, <em>n</em> number of participants,
 <em>t</em> number of time points, and <em>i</em> number of iterations.</p>
-<p>A more efficient process, the approach applied here, is to obtain a sampling distribution 
+<p>The approach applied in <code>boot.ergoInfo</code>, is to obtain a sampling distribution 
 of EII values as if all participants in the data have the population network structure. 
-Sampling is not perfect and therefore random noise is added to the edges of the population 
-structure to simulate sampling variability. This noise follows a random uniform distribution
-ranging from -0.10 to 0.10. In addition, a proportion of edges are rewired to allow for 
-slight variations on the population structure. The proportion of nodes that are rewired is 
-sampled from a random uniform distribution between 0.20 to 0.40. This process is carried out 
-for each participant resulting in <em>n</em> variations of the population structure. 
-Afterward, EII is computed. This process is carried out for <em>i</em> iterations (e.g., 100).</p>
-<p>The result is a sampling distribution of EII values that would be expected if the process 
-was ergodic. If the empirical EII value is significantly less than the distribution or 
-not significantly different, then  the empirical data can be expected to be generated 
-from an ergodic process and the population structure is  sufficient to describe all 
-individuals. If the empirical EII value is significantly greater than the distribution, 
+To mirror the sample of individuals, we generate as many population variants as there are participants 
+in the empirical sample. With the new sample containing the population network variants, we compute EII 
+with the original population network as the population network and the population network variants as the individuals. 
+We repeat this process for <em>X</em> iterations (e.g., 200). This approach creates a sampling distribution of EII that would 
+be expected when the individuals in the population are deviations on the population structure -- that is, much of the 
+population structure is retained but with different variations of noise in each individual. If the empirical EII is 
+significant different than the generated distribution, then there is significant information lost when representing the sample 
+as an aggregate, population network; otherwise, the system is determine to be ergodic and the sample can adequately be 
+represented with the population network.</p>
+<p>How to interpret the results: the result of <code>boot.ergoInfo</code> is a sampling distribution of EII values that would be expected if the process 
+was ergodic (null distribution). If the empirical EII value is not significantly different from the null distribution, then  the empirical data can 
+be expected to be generated from an ergodic process and the population structure is  sufficient to describe all 
+individuals. If the empirical EII value is significantly different from the null distribution, 
 then the empirical data cannot be described by the population structure -- significant 
 information is lost when collapsing across to the population structure.</p>
     </div>
@@ -227,12 +244,12 @@ Toward a psychology of individuals: The ergodicity information index and a botto
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Empirical Ergodicity Information Index</span></span></span>
-<span class="r-in"><span><span class="va">eii1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ergoInfo.html">ergoInfo</a></span><span class="op">(</span>dynEGA.object <span class="op">=</span> <span class="va">dyn1</span>, use <span class="op">=</span> <span class="st">"edge.list"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eii1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ergoInfo.html">ergoInfo</a></span><span class="op">(</span>dynEGA.object <span class="op">=</span> <span class="va">dyn1</span>, use <span class="op">=</span> <span class="st">"unweighted"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bootstrap Test for Ergodicity Information Index</span></span></span>
 <span class="r-in"><span><span class="va">testing.ergoinfo</span> <span class="op">&lt;-</span> <span class="fu">boot.ergoInfo</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  dynEGA.object <span class="op">=</span> <span class="va">dyn1</span>, EII <span class="op">=</span> <span class="va">eii1</span>,</span></span>
-<span class="r-in"><span>  ncores <span class="op">=</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span>  ncores <span class="op">=</span> <span class="fl">2</span>, use <span class="op">=</span> <span class="st">"unweighted"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot result</span></span></span>
@@ -246,7 +263,7 @@ Toward a psychology of individuals: The ergodicity information index and a botto
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Empirical Ergodicity Information Index</span></span></span>
-<span class="r-in"><span><span class="va">eii2</span> <span class="op">&lt;-</span> <span class="fu"><a href="ergoInfo.html">ergoInfo</a></span><span class="op">(</span>dynEGA.object <span class="op">=</span> <span class="va">dyn2</span>, use <span class="op">=</span> <span class="st">"edge.list"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">eii2</span> <span class="op">&lt;-</span> <span class="fu"><a href="ergoInfo.html">ergoInfo</a></span><span class="op">(</span>dynEGA.object <span class="op">=</span> <span class="va">dyn2</span>, use <span class="op">=</span> <span class="st">"unweighted"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bootstrap Test for Ergodicity Information Index</span></span></span>
 <span class="r-in"><span><span class="va">testing.ergoinfo2</span> <span class="op">&lt;-</span> <span class="fu">boot.ergoInfo</span><span class="op">(</span></span></span>
