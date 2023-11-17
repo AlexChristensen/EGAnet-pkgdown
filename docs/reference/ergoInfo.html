@@ -82,7 +82,6 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ergoInfo</span><span class="op">(</span></span>
 <span>  <span class="va">dynEGA.object</span>,</span>
 <span>  use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"edge.list"</span>, <span class="st">"unweighted"</span>, <span class="st">"weighted"</span><span class="op">)</span>,</span>
-<span>  ordering <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"column"</span><span class="op">)</span>,</span>
 <span>  shuffles <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -104,14 +103,6 @@ Current options are:</p>
 transformed network. 0 = edge absent and 1 = edge present</p></li>
 <li><p><code>"weighted"</code> --- Calculates the algorithm complexity using the weights of encoded prime-weight transformed network</p></li>
 </ul></dd>
-
-
-<dt>ordering</dt>
-<dd><p>Character (length = 1).
-Changes ordering of edge list.
-<code>"row"</code> goes across the rows;
-<code>"column"</code> goes down the columns.
-Defaults to <code>"row"</code></p></dd>
 
 
 <dt>shuffles</dt>
@@ -149,6 +140,13 @@ Defaults to <code>5000</code></p></dd>
 <dd><p>The Ergodicity Information Index</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p><strong>Original Implementation</strong> <br>
+Golino, H., Nesselroade, J. R., &amp; Christensen, A. P. (2022).
+Toward a psychology of individuals: The ergodicity information index and a bottom-up approach for finding generalizations.
+<em>PsyArXiv</em>.</p>
+    </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Hudson Golino &lt;hfg9s at virginia.edu&gt; and Alexander Christensen &lt;alexpaulchristensen@gmail.com&gt;</p>

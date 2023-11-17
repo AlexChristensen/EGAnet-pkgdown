@@ -6,6 +6,8 @@ BANNER: New website at https://r-ega.net
 
 + UPDATE: optimizations for speed and memory in `ergoInfo` and `boot.ergoInfo`
 
++ DEPENDENCY: swapped out {ggdendro} for {dendextend}
+
 
 ## Changes in version 2.0.2
 

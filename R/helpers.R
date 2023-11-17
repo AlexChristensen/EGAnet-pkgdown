@@ -779,6 +779,15 @@ swiftelse <- function(condition, true, false)
 #%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 #' @noRd
+# Determine decimal places before non-zero ----
+# From StackOverflow: https://stackoverflow.com/questions/35553244/count-leading-zeros-between-the-decimal-point-and-first-nonzero-digit
+# Updated 10.11.2023
+leading_zero <- function(number)
+{
+  floor(-log10(.Machine$double.eps + abs(number) - floor(abs(number))))
+}
+
+#' @noRd
 # Determine number of digits in a number ----
 # Updated 24.07.2023
 digits <- function(number)
@@ -1749,14 +1758,14 @@ legacy_EGA_args <- function(ellipse)
 
 #' @noRd
 # Make unidimensional CFA model ----
-# Updated 25.07.2023
+# Updated 08.11.2023
 make_unidimensional_cfa <- function(variable_names)
 {
   return(
     paste(
       "LF =~",
       swiftelse(
-        length(variable_names == 2),
+        length(variable_names) == 2,
         paste0("a*", variable_names, collapse = " + "),
         paste(variable_names, collapse = " + ")
       )
@@ -2769,7 +2778,79 @@ pcor2inv <- function(partial_correlations)
 #%%%%%%%%%%%%%%%%%%%%%%%%
 
 #' @noRd
-# Rewiring based on {igraph}
+# Create sparse network ----
+# Updated 08.11.2023
+sparse_network <- function(network)
+{
+  
+  # Get number of nodes
+  nodes <- dim(network)[2]
+  
+  # Get node sequence
+  node_sequence <- seq_len(nodes)
+  
+  # Create data frame
+  sparse_df <- data.frame(
+    row = rep(node_sequence, each = nodes),
+    col = rep(node_sequence, times = nodes),
+    weight = as.vector(network)
+  )
+  
+  # Return lower triangle
+  return(sparse_df[sparse_df$row < sparse_df$col,])
+  
+}
+
+#' @noRd
+# Scramble networks ----
+# Updated 11.11.2023
+network_scramble <- function(base, comparison)
+{
+  
+  # Get sparse networks
+  base_sparse <- sparse_network(base)
+  comparison_sparse <- sparse_network(comparison)
+  
+  # Get edges
+  base_edges <- base_sparse$weight != 0
+  comparison_edges <- comparison_sparse$weight != 0
+  
+  # Get shared edges
+  shared_total <- sum(base_edges & comparison_edges)
+  
+  # Get unique indices in comparison
+  unique_index <- !base_edges & comparison_edges
+  
+  # Assign edges
+  base_sparse$weight[-shuffle(which(base_edges), shared_total)] <- 0
+  base_sparse$weight[unique_index] <- comparison_sparse$weight[unique_index]
+  
+  # Remove zero edges from equivalent
+  base_sparse <- base_sparse[base_sparse$weight != 0,]
+  
+  # Get number of nodes
+  nodes <- dim(base)[2]
+  
+  # Initialize network to return
+  return_network <- matrix(0, nrow = nodes, ncol = nodes)
+  
+  # Loop over sparse equivalent
+  for(i in nrow_sequence(base_sparse)){
+    
+    # Populate return network
+    return_network[base_sparse$row[i], base_sparse$col[i]] <-
+    return_network[base_sparse$col[i], base_sparse$row[i]] <-
+    base_sparse$weight[i]
+    
+  }
+  
+  # Return the network
+  return(return_network)
+  
+}
+
+#' @noRd
+# Rewiring based on {igraph} ----
 # Updated 30.10.2023
 igraph_rewire <- function(network, prob, noise = 0)
 {
@@ -2815,126 +2896,11 @@ igraph_rewire <- function(network, prob, noise = 0)
     
     # Make symmetric
     rewired_network <- rewired_network + t(rewired_network)
-  
+    
   }
   
   # Return rewired network
   return(rewired_network)
-
-}
-
-#' @noRd
-# Rewire networks ----
-# About 10x faster than previous implementation
-# Updated 29.10.2023
-rewire <- function(network, p)
-{
-  
-  # Get number of nodes
-  nodes <- dim(network)[2]
-  
-  # Get node sequence
-  node_sequence <- seq_len(nodes)
-  
-  # Get sparse matrix
-  sparse_network <- data.frame(
-    row = rep(node_sequence, times = nodes),
-    col = rep(node_sequence, each = nodes),
-    weight = as.vector(network)
-  )
-  
-  # Get one-way edges
-  sparse_network <- sparse_network[
-    sparse_network$row < sparse_network$col,
-  ]
-  
-  # Get non-zero edges
-  non_zero <- sparse_network$weight != 0
-  
-  # Get zero edges
-  zero <- !non_zero
-  
-  # Get sparse zero edges
-  sparse_zero <- sparse_network[zero,]
-  
-  # Get sparse non-zero edges
-  sparse_network <- sparse_network[non_zero,]
-  
-  # Get number of non-zero edges
-  edges <- dim(sparse_network)[1]
-  
-  # Get number of zero edges
-  zero_edges <- dim(sparse_zero)[1]
-  
-  # Get edge sequence
-  edge_sequence <- seq_len(edges)
-  
-  # Get number of edges to rewire
-  rewire_number <- ceiling(zero_edges * p)
-  
-  # Get indices to rewire
-  rewire_index <- shuffle(edge_sequence, rewire_number)
-  
-  # Get row or column
-  rewire_dimension <- swiftelse(
-    runif_xoshiro(rewire_number) < 0.50, 1, 2
-  )
-
-  # Loop over indices to ensure no self loops
-  for(i in seq_len(rewire_number)){
-    
-    # Get current node
-    current_node <- sparse_network[
-      rewire_index[i], rewire_dimension[i]
-    ]
-    
-    # Get possible rewire index
-    row_index <- which(sparse_zero$row == current_node)
-    column_index <- which(sparse_zero$col == current_node)
-    
-    # Get possible nodes
-    row_node <- sparse_zero$col[row_index]
-    column_node <- sparse_zero$row[column_index]
-    
-    # Possible rewires
-    possible_rewire <- c(row_node, column_node)
-    
-    # Skip if no possible rewire
-    if(length(possible_rewire) != 0){
-      
-      # Add names
-      names(possible_rewire) <- c(row_index, column_index)
-      
-      # Get rewire node
-      rewire_node <- shuffle(possible_rewire, size = 1)
-      
-      # Get randomly assigned nodes
-      sparse_network[
-        rewire_index[i], 3 - rewire_dimension[i]
-      ] <- rewire_node
-      
-      # Remove possibility from sparse zero
-      sparse_zero <- sparse_zero[-as.numeric(names(rewire_node)),]
-      
-    }
-    
-  }
-  
-  # Populate rewired network
-  rewired_network <- matrix(0, nrow = nodes, ncol = nodes)
-  
-  # Loop over sparse network
-  for(i in edge_sequence){
-    
-    # Update network
-    rewired_network[sparse_network$row[i], sparse_network$col[i]] <-
-    rewired_network[sparse_network$col[i], sparse_network$row[i]] <-
-    sparse_network$weight[i]
-    
-  }
-  
-  # Return rewired network
-  return(transfer_names(network, rewired_network))
   
 }
 
