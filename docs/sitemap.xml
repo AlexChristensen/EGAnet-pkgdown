@@ -4,6 +4,12 @@
     <loc>https://r-ega.net/404.html</loc>
   </url>
   <url>
+    <loc>https://r-ega.net/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/Readme.html</loc>
+  </url>
+  <url>
     <loc>https://r-ega.net/articles/argument-flexibility.html</loc>
   </url>
   <url>
@@ -46,13 +52,40 @@
     <loc>https://r-ega.net/index.html</loc>
   </url>
   <url>
-    <loc>https://r-ega.net/LICENSE-text.html</loc>
-  </url>
-  <url>
     <loc>https://r-ega.net/news/index.html</loc>
   </url>
   <url>
-    <loc>https://r-ega.net/Readme.html</loc>
+    <loc>https://r-ega.net/reference/CFA.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/EBICglasso.qgraph.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/EGA.estimate.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/EGA.fit.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/EGA.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/EGAnet-package.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/EGAnet-plot.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/Embed.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/LCT.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/TMFG.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/UVA.html</loc>
   </url>
   <url>
     <loc>https://r-ega.net/reference/auto.correlate.html</loc>
@@ -67,10 +100,10 @@
     <loc>https://r-ega.net/reference/bootEGA.html</loc>
   </url>
   <url>
-    <loc>https://r-ega.net/reference/CFA.html</loc>
+    <loc>https://r-ega.net/reference/color_palette_EGA.html</loc>
   </url>
   <url>
-    <loc>https://r-ega.net/reference/color_palette_EGA.html</loc>
+    <loc>https://r-ega.net/reference/community.compare.html</loc>
   </url>
   <url>
     <loc>https://r-ega.net/reference/community.consensus.html</loc>
@@ -109,28 +142,7 @@
     <loc>https://r-ega.net/reference/dynEGA.ind.pop.html</loc>
   </url>
   <url>
-    <loc>https://r-ega.net/reference/EBICglasso.qgraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGA.estimate.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGA.fit.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGA.html</loc>
-  </url>
-  <url>
     <loc>https://r-ega.net/reference/ega.wmt.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGAnet-package.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGAnet-plot.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/Embed.html</loc>
   </url>
   <url>
     <loc>https://r-ega.net/reference/entropyFit.html</loc>
@@ -169,9 +181,6 @@
     <loc>https://r-ega.net/reference/jsd.html</loc>
   </url>
   <url>
-    <loc>https://r-ega.net/reference/LCT.html</loc>
-  </url>
-  <url>
     <loc>https://r-ega.net/reference/modularity.html</loc>
   </url>
   <url>
@@ -182,6 +191,9 @@
   </url>
   <url>
     <loc>https://r-ega.net/reference/network.estimation.html</loc>
+  </url>
+  <url>
+    <loc>https://r-ega.net/reference/network.predictability.html</loc>
   </url>
   <url>
     <loc>https://r-ega.net/reference/optimism.html</loc>
@@ -205,16 +217,10 @@
     <loc>https://r-ega.net/reference/tefi.html</loc>
   </url>
   <url>
-    <loc>https://r-ega.net/reference/TMFG.html</loc>
-  </url>
-  <url>
     <loc>https://r-ega.net/reference/totalCor.html</loc>
   </url>
   <url>
     <loc>https://r-ega.net/reference/totalCorMat.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/UVA.html</loc>
   </url>
   <url>
     <loc>https://r-ega.net/reference/vn.entropy.html</loc>

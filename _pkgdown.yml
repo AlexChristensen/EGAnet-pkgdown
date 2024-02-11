@@ -6,8 +6,10 @@ template:
   bootstrap: 5
   bootswatch: yeti
   bslib:
-    text-muted: 
-      - "#fff !important"
+    text-muted:
+      -   "#fff !important"
+  # text-muted appears not to work anymore...
+  # updated Bootstrap might have overwritten
   params:
     mathjax: true
 
