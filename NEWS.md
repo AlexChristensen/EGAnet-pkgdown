@@ -1,4 +1,27 @@
-BANNER: New website at https://r-ega.net
+WEBSITE: https://r-ega.net
+
+## Changes in version 2.0.5
+
++ ADD: `network.predictability` to estimate network generalizability to new data
+
++ UPDATE: `plot.bootEGA` will output `itemStability` plot by default
+
++ UPDATE: `dimensionStability` output now included in `bootEGA` as output `$stability`
+
++ DEPRECATED: `typicalStructure` and `plot.typicalStructure` have been deprecated to `FALSE`
+
+
+## Changes in version 2.0.4
+
++ FIX: plotting for `infoCluster` when there are grey lines involved (or not)
+
++ FIX: pass of multiple passes of `resolution_parameter` causing an error in {igraph} 2.0.0 for `EGA.fit` (see issue #148)
+
++ ADD: `community.compare` to perform permutation test to determine statistical significance of cluster similarity
+
++ UPDATE: moved `reindex_memberships` to helpers
+
++ UPDATE: `reindex_memberships` used in `community.homogenize`
 
 ## Changes in version 2.0.3
 
