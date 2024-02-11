@@ -121,6 +121,7 @@ reference:
     desc: "General purpose functions that allow for a more modular usage"
     contents:
       - "auto.correlate"
+      - "community.compare"
       - "community.consensus"
       - "community.detection"
       - "community.homogenize"
@@ -133,6 +134,7 @@ reference:
       - "igraph2matrix"
       - "modularity"
       - "network.estimation"
+      - "network.predictability"
       - "polychoric.matrix"
       - "simDFM"
       - "TMFG"
