@@ -2,7 +2,9 @@ WEBSITE: https://r-ega.net
 
 ## Changes in version 2.0.5
 
-+ ADD: `network.predictability` to estimate network generalizability to new data
++ ADD: `network.predictability` to predict new data based on a network
+
++ ADD: `network.generalizability` to estimate network generalizability to new data (leverages `network.predictability`)
 
 + UPDATE: `plot.bootEGA` will output `itemStability` plot by default
 

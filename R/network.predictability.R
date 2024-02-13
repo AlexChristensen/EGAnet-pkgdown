@@ -113,7 +113,7 @@
 #' @export
 #'
 # Predict new data based on network ----
-# Updated 11.02.2024
+# Updated 12.02.2024
 network.predictability <- function(network, original.data, newdata, ordinal.categories = 7)
 {
 
@@ -128,21 +128,6 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
   original.data <- as.matrix(output$original.data)
   newdata <- as.matrix(output$newdata)
 
-  # Get data categories
-  categories <- data_categories(original.data)
-
-  # Set flags
-  flags <- list(
-    dichotomous = categories == 2,
-    polytomous = categories > 2 & categories <= ordinal.categories
-  )
-
-  # Set categorical/continuous flag
-  flags$categorical <- flags$dichotomous | flags$polytomous
-
-  # Get the inverse variances
-  inverse_variances <- diag(pcor2inv(network))
-
   # Get dimensions
   dimensions <- dim(newdata)
 
@@ -152,37 +137,41 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
   # Get node names
   node_names <- colnames(network)
 
-  # Initialize betas
-  betas <- matrix(
-    0, nrow = dimensions[2], ncol = dimensions[2],
-    dimnames = list(node_names, node_names)
+  # Get data categories
+  categories <- data_categories(rbind(original.data, newdata))
+
+  # Set flags
+  flags <- list(
+    dichotomous = categories == 2,
+    polytomous = categories > 2 & categories <= ordinal.categories
   )
 
-  # Compute betas
-  for(i in dim_sequence){
-    for(j in i:dimensions[2]){
+  # Set categorical/continuous flag
+  flags$categorical <- flags$dichotomous | flags$polytomous
+  flags$continuous <- !flags$categorical
 
-      # Populate betas
-      betas[i,j] <- network[i,j] * sqrt(inverse_variances[i] / inverse_variances[j])
-      betas[j,i] <- network[j,i] * sqrt(inverse_variances[j] / inverse_variances[i])
+  # Get the inverse variances
+  inverse_variances <- diag(pcor2inv(network))
 
-    }
-  }
-
-  # Initialize scaled new data
-  newdata_scaled <- newdata
+  # Get betas
+  betas <- network * sqrt(outer(inverse_variances, inverse_variances, FUN = "/"))
 
   # Obtain means and standard deviations
   original_means <- colMeans(original.data, na.rm = TRUE)
   original_sds <- nvapply(dim_sequence, function(i){sd(original.data[,i])})
 
   # Scale from original data
-  for(i in dim_sequence){
-    newdata_scaled[,i] <- (newdata[,i] - original_means[i]) / original_sds[i]
-  }
+  newdata_scaled <- matrix(
+    nvapply(dim_sequence, function(i){
+      (newdata[,i] - original_means[i]) / original_sds[i]
+    }, LENGTH = dimensions[1]),
+    ncol = dimensions[2],
+    dimnames = list(NULL, node_names)
+  )
 
   # Get predictions
   predictions <- newdata_scaled %*% betas
+  adjusted_predictions <- predictions
 
   # Loop over variables
   for(i in dim_sequence){
@@ -201,10 +190,13 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
         # Check for lowest category
         minimum_value <- min(original.data[,i])
 
-        # Re-adjust minimum category to 1
+        # Re-adjust minimum category to 1 for new data
         if(minimum_value <= 0){
           newdata[,i] <- newdata[,i] + (abs(minimum_value) + 1)
         }
+
+        # Set adjusted predictions (for returning)
+        adjusted_predictions[,i] <- predictions[,i] + (minimum_value - 1)
 
     }
 
@@ -212,8 +204,8 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
 
   # Obtain results
   results <- setup_results(
-    predictions, original.data, newdata, flags, betas,
-    node_names, dimensions, dim_sequence
+    predictions, adjusted_predictions, original.data, newdata,
+    flags, betas, node_names, dimensions, dim_sequence
   )
 
   # Attach flags to results
@@ -276,15 +268,12 @@ network.predictability_errors <- function(network, original.data, newdata, ordin
 
 #' @exportS3Method
 # S3 Print Method ----
-# Updated 11.02.2024
+# Updated 12.02.2024
 print.predictability <- function(x, ...)
 {
 
   # Get flags
   flags <- attr(x$results, "flags")
-
-  # Add continuous flag
-  flags$continuous <- !flags$categorical
 
   # Set up full flags
   full_flags <- lapply(flags, any)
@@ -340,120 +329,102 @@ summary.predictability <- function(object, ...)
 
 #' @noRd
 # Set up results ----
-# Updated 11.02.2024
+# Updated 12.02.2024
 setup_results <- function(
-    predictions, original.data, newdata, flags, betas,
-    node_names, dimensions, dim_sequence
+    predictions, adjusted_predictions, original.data, newdata,
+    flags, betas, node_names, dimensions, dim_sequence
 )
 {
 
   # Check for all dichotomous
   if(all(flags$dichotomous)){
 
-    # Initialize results
-    results <- fast.data.frame(
-      0, nrow = dimensions[2], ncol = 1,
-      rownames = node_names, colnames = "Accuracy"
+    # Get results
+    results <- as.data.frame(
+      matrix(
+        nvapply(
+          dim_sequence, function(i){
+            categorical_accuracy(predictions[,i], newdata[,i])[["accuracy"]]
+          }
+        ), dimnames = list(node_names, "Accuracy")
+      )
     )
-
-    # Loop over and populate results
-    for(i in dim_sequence){
-
-      # Categorical measures
-      results[i,] <- data_accuracy(predictions[,i], newdata[,i])[["accuracy"]]
-
-      # Ensure predictions start as same values
-      predictions[,i] <- predictions[,i] - (min(predictions[,i]) - min(original.data[,i]))
-
-    }
 
   }else if(all(flags$polytomous)){ # Check for all polytomous
 
-    # Initialize results
-    results <- fast.data.frame(
-      0, nrow = dimensions[2], ncol = 2,
-      rownames = node_names,
-      colnames = c("Accuracy", "Weighted")
-    )
-
-    # Loop over and populate results
-    for(i in dim_sequence){
-
-      # Categorical measures
-      results[i,] <- data_accuracy(
-        predictions[,i], newdata[,i]
-      )[c("accuracy", "weighted")]
-
-      # Ensure predictions start as same values
-      predictions[,i] <- predictions[,i] - (min(predictions[,i]) - min(original.data[,i]))
-
-    }
-
-  }else if(all(!flags$categorical)){ # Check for all continuous
-
-
-    # Initialize results
-    results <- fast.data.frame(
-      0, nrow = dimensions[2], ncol = 2,
-      rownames = node_names,
-      colnames = c("R2", "RMSE")
-    )
-
-    # Loop over and populate results
-    for(i in dim_sequence){
-
-      # Continuous measures
-      results[i,] <- c(
-        data_r_squared(predictions[,i], newdata[,i]),
-        data_rmse(predictions[,i], newdata[,i])
+    # Get results
+    results <- as.data.frame(
+      matrix(
+        nvapply(
+          dim_sequence, function(i){
+            categorical_accuracy(predictions[,i], newdata[,i])[c("accuracy", "weighted")]
+          }, LENGTH = 2
+        ), ncol = 2, byrow = TRUE,
+        dimnames = list(node_names, c("Accuracy", "Weighted"))
       )
+    )
 
-    }
+  }else if(all(flags$continuous)){ # Check for all continuous
+
+
+    # Get results
+    results <- as.data.frame(
+      matrix(
+        nvapply(
+          dim_sequence, function(i){
+            continuous_accuracy(predictions[,i], newdata[,i])
+          }, LENGTH = 2
+        ), ncol = 2, byrow = TRUE,
+        dimnames = list(node_names, c("R2", "RMSE"))
+      )
+    )
 
   }else{ # Data are mixed
 
     # Initialize matrix
     results <- fast.data.frame(
-      0, nrow = dimensions[2], ncol = 4,
+      NA, nrow = dimensions[2], ncol = 4,
       rownames = node_names,
       colnames = c("Accuracy", "Weighted", "R2", "RMSE")
     )
 
-    # Based on categories, compute appropriate predictions
-    for(i in dim_sequence){
+    # Check for dichotomous data
+    if(any(flags$dichotomous)){
 
-      # Check for categories
-      if(flags$dichotomous[[i]]){
+      # Get results
+      results$Accuracy[flags$dichotomous] <- t(nvapply(
+        dim_sequence[flags$dichotomous], function(i){
+          categorical_accuracy(predictions[,i], newdata[,i])[["accuracy"]]
+        }
+      ))
 
-        # Set result
-        results[i,] <- c(
-          data_accuracy(predictions[,i], newdata[,i])[["accuracy"]],
-          NA, NA, NA
+    }
+
+    # Check for polytomous data
+    if(any(flags$polytomous)){
+
+      # Get results
+      results[flags$polytomous, c("Accuracy", "Weighted")] <- t(
+        nvapply(
+          dim_sequence[flags$polytomous], function(i){
+            categorical_accuracy(predictions[,i], newdata[,i])[c("accuracy", "weighted")]
+          }, LENGTH = 2
         )
+      )
 
-        # Ensure categorical predictions start as same values
-        predictions[,i] <- predictions[,i] - (min(predictions[,i]) - min(original.data[,i]))
+    }
 
-      }else if(flags$polytomous[[i]]){
+    # Check for polytomous data
+    if(any(flags$continuous)){
 
-        # Set result
-        results[i,] <- c(
-          data_accuracy(predictions[,i], newdata[,i])[c("accuracy", "weighted")],
-          NA, NA
+      # Get results
+      results[flags$continuous, c("R2", "RMSE")] <- t(
+        nvapply(
+          dim_sequence[flags$continuous], function(i){
+            continuous_accuracy(predictions[,i], newdata[,i])
+          }, LENGTH = 2
         )
-
-        # Ensure categorical predictions start as same values
-        predictions[,i] <- predictions[,i] - (min(predictions[,i]) - min(original.data[,i]))
-
-      }else{
-
-        # Set result
-        results[i,] <- c(
-          NA, NA, data_r_squared(predictions[,i], newdata[,i]),
-          data_rmse(predictions[,i], newdata[,i])
-        )
-
-      }
+      )
 
     }
 
@@ -462,10 +433,11 @@ setup_results <- function(
   # Return final results
   return(
     list(
-      predictions = predictions,
+      predictions = adjusted_predictions,
       betas = betas,
       results = results
     )
   )
+
 }
 
