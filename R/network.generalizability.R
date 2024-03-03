@@ -238,7 +238,7 @@
 #' @export
 #'
 # Perform generalizability analysis ----
-# Updated 13.02.2024
+# Updated 26.02.2024
 network.generalizability <- function(
     data,
     # generalizability arguments
@@ -278,7 +278,7 @@ network.generalizability <- function(
   # Get necessary output (ensure matrix and names for data)
   data <- ensure_dimension_names(as.matrix(output$data))
   dimensions <- output$dimensions
-  dim_sequence <- seq_len(dimensions[1])
+  row_sequence <- seq_len(dimensions[1])
 
   # Check for external suppression (from `invariance`)
   if(!"suppress" %in% names(ellipse) || !ellipse$suppress){
@@ -289,7 +289,7 @@ network.generalizability <- function(
   if(method == "split"){
 
     # Prepare indices
-    shuffled_indices <- shuffle(dim_sequence, round(dimensions[1] * number), seed = seed)
+    shuffled_indices <- shuffle(row_sequence, round(dimensions[1] * number), seed = seed)
 
     # Obtain results
     train_results <- EGA(
@@ -307,17 +307,22 @@ network.generalizability <- function(
     )
 
     # Get community results
-    community_summary <- tefi(
-      data = data[-shuffled_indices,], structure = train_results$wc
-    )$VN.Entropy.Fit
+    community_summary <- c(
+      TEFI = tefi(
+        data = data[-shuffled_indices,], structure = train_results$wc,
+        verbose = FALSE # ignore positive definite
+      )$VN.Entropy.Fit
+    )
 
   }else if(method == "cv"){
 
     # Prepare indices
-    shuffled_indices <- shuffle(dim_sequence, dimensions[1], seed = seed)
+    shuffled_indices <- shuffle(row_sequence, dimensions[1], seed = seed)
 
     # Set shuffled splits
-    end <- seq.int(round(dimensions[1] / number), dimensions[1], length.out = number)
+    end <- floor(
+      seq.int(round(dimensions[1] / number), dimensions[1], length.out = number)
+    )
     start <- c(1, end[-number] - 1)
 
     # Initialize lists
@@ -370,16 +375,15 @@ network.generalizability <- function(
 
         # Get TEFI
         tefi(
-          data = test_list[[i]], structure = train_results[[i]]$wc
+          data = test_list[[i]], structure = train_results[[i]]$wc,
+          verbose = FALSE # ignore positive definite
         )$VN.Entropy.Fit
 
       }
     )
 
     # Get metrics
-    metric_list <- lapply(cv_sequence, function(i){
-      prediction_results[[i]]$results
-    })
+    metric_list <- lapply(prediction_results, function(x){x$results})
 
     # Combine metrics
     combined_matrix <- do.call(cbind, metric_list)
@@ -424,7 +428,7 @@ network.generalizability <- function(
 
     # Get predictions
     prediction_results <- lapply(
-      dim_sequence, function(train){
+      row_sequence, function(train){
 
         # Get EGA result
         ega_train <- EGA(
@@ -448,23 +452,42 @@ network.generalizability <- function(
 
     # Get predictions (rather than metrics)
     prediction_matrix <- do.call(
-      rbind, lapply(dim_sequence, function(i){
-        prediction_results[[i]]$predictions
-      })
+      rbind, lapply(prediction_results, function(x){x$predictions})
     )
 
-    # Estimate actual EGA
-    ega <- EGA(
-      data = data, corr = corr, na.data = na.data,
-      model = model, algorithm = algorithm, uni.method = uni.method,
-      plot.EGA = FALSE, ...
+    # Get flags
+    flags <- attr(prediction_results[[1]]$results, "flags")
+
+    # Check for categories
+    if(any(flags$categorical)){
+
+      # Set up for combined
+      combined <- rbind(data, prediction_matrix)
+
+      # Get original sample size
+      original_n <- dimensions[1]
+
+      # Ensure categories start at 1
+      one_start_list <- ensure_one_start(combined, flags, original_n)
+
+      # Sort out data
+      original.data <- one_start_list$original.data
+      newdata <- one_start_list$newdata
+
+    }
+
+    # Set up as if at the end of `network.predictability`
+    metric_summary <- setup_results(
+      predictions = newdata, newdata = original.data, flags = flags,
+      betas = NULL, node_names = dimnames(data)[[2]],
+      dimensions = dimensions, dim_sequence = seq_len(dimensions[2])
     )
 
-    # Use prediction matrix as if it is a new dataset
-    metric_summary <- network.predictability(
-      network = ega$network, original.data = data,
-      newdata = prediction_matrix
-    )
+    # Attach categories to results
+    attr(metric_summary$results, "flags") <- flags
+
+    # Set class
+    class(metric_summary) <- "predictability"
 
     # Set community summary to `NULL`
     community_summary <- NULL
@@ -544,7 +567,7 @@ network.generalizability_errors <- function(data, method, number, seed, ...)
 
 #' @exportS3Method
 # S3 Print Method ----
-# Updated 13.02.2024
+# Updated 18.02.2024
 print.generalizability <- function(x, ...)
 {
 
@@ -584,7 +607,7 @@ print.generalizability <- function(x, ...)
       styletext(
         text = styletext(
           text = paste0(
-            methods$number, "-folds Cross-validation\n\n"
+            methods$number, "-fold Cross-validation\n\n"
           ),
           defaults = "underline"
         ),

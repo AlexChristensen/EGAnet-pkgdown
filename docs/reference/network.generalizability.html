@@ -16,7 +16,7 @@ generalizability methods over"><!-- mathjax --><script src="https://cdnjs.cloudf
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-primary" data-bs-theme="default"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-primary"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
@@ -176,7 +176,7 @@ Available options:</p>
 <ul><li><p><code>"BGGM"</code> --- Computes the Bayesian Gaussian Graphical Model.
 Set argument <code>ordinal.categories</code> to determine
 levels allowed for a variable to be considered ordinal.
-See <code><a href="https://rdrr.io/pkg/BGGM/man/estimate.html" class="external-link">?BGGM::estimate</a></code> for more details</p></li>
+See <code>?BGGM::estimate</code> for more details</p></li>
 <li><p><code>"glasso"</code> --- Computes the GLASSO with EBIC model selection.
 See <code><a href="EBICglasso.qgraph.html">EBICglasso.qgraph</a></code> for more details</p></li>
 <li><p><code>"TMFG"</code> --- Computes the TMFG method.
@@ -312,15 +312,18 @@ Why overfitting is not (usually) a problem in partial correlation networks.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dichotomous</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.734 0.827 0.785 0.705 0.747 0.785 0.713 0.679 0.743 0.747   0.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.755 0.857 0.781 0.692 0.759 0.772 0.696 0.688 0.684 0.705 0.696</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.377 0.495 0.392 0.372 0.390 0.491 0.377 0.358 0.364 0.367 0.197</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          wmt12 wmt13 wmt14 wmt15 wmt16 wmt17 wmt18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.738 0.713 0.667 0.759 0.743  0.81 0.776</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.755 0.717 0.654 0.700 0.713 0.819 0.776</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.290 0.400 0.290 0.262 0.297 0.194 0.232</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Community Metrics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -10.61322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TEFI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># k-folds cross-validation</span></span></span>
 <span class="r-in"><span><span class="fu">network.generalizability</span><span class="op">(</span></span></span>
@@ -328,22 +331,23 @@ Why overfitting is not (usually) a problem in partial correlation networks.
 <span class="r-in"><span>  number <span class="op">=</span> <span class="fl">5</span> <span class="co"># 5-fold cross-validation</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Argument 'seed' is set to `NULL`. Results will not be reproducible. Set 'seed' for reproducible results</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Correlation matrix is not positive definite. Finding nearest positive definite matrix using `Matrix::nearPD`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5-folds Cross-validation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5-fold Cross-validation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Node Metrics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          wmt1  wmt2  wmt3 wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11 wmt12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.742 0.849 0.8  0.704 0.747 0.757 0.715 0.693 0.75 0.745 0.709 0.738</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          wmt13 wmt14 wmt15 wmt16 wmt17 wmt18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.689 0.708 0.734 0.719 0.781 0.751</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9  wmt10 wmt11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.739 0.854 0.799 0.711 0.743 0.755 0.723 0.701 0.749 0.733 0.705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.32  0.464 0.408 0.401 0.327 0.451 0.426 0.396 0.487 0.421 0.233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          wmt12 wmt13 wmt14 wmt15 wmt16 wmt17 wmt18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.731 0.677 0.697 0.739 0.712 0.795 0.749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.309 0.325 0.383 0.353 0.304 0.134 0.183</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Community Metrics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Mean        SD  Median</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TEFI -10.48657 0.3955346 -10.466</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Mean        SD   Median</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TEFI -10.90097 0.4068079 -10.9325</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Leave-one-out cross-validation</span></span></span>
@@ -362,7 +366,7 @@ Why overfitting is not (usually) a problem in partial correlation networks.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer></div>

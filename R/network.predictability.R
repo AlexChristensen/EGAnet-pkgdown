@@ -56,17 +56,13 @@
 #'
 #' \itemize{
 #'
-#' \item dichotomous --- Accuracy or the percent correctly predicted for the 0s and 1s
+#' \item dichotomous --- \code{"Accuracy"} or the percent correctly predicted for the 0s and 1s
+#' and \code{"Kappa"} or Cohen's Kappa (see cite)
 #'
-#' \item polytomous --- Accuracy based on the correctly predicting the ordinal category exactly
-#' (i.e., 1 = 1, 2, = 2, etc.) and a weighted accuracy such that absolute distance of the
-#' predicted value from the actual value (e.g., |prediction - actual| = 1) is used
-#' as the power of 0.5. This weighted approach provides an overall distance in terms of
-#' accuracy where each predicted value away from the actual value is given a harsher
-#' penalty (absolute difference = accuracy value): 0 = 1.000, 1 = 0.500, 2 = 0.2500,
-#' 3 = 0.1250, 4 = 0.0625, etc.
+#' \item polytomous --- \code{"Linear Kappa"} or linearly weighted Kappa and
+#' \code{"Krippendorff's alpha"} (see cite)
 #'
-#' \item continuous --- R-sqaured and root mean square error
+#' \item continuous --- R-squared (\code{"R2"}) and root mean square error (\code{"RMSE"})
 #'
 #' }
 #'
@@ -110,10 +106,22 @@
 #' Why overfitting is not (usually) a problem in partial correlation networks.
 #' \emph{Psychological Methods}, \emph{27}(5), 822–840.
 #'
+#' \strong{Cohen's Kappa} \cr
+#' Cohen, J. (1960). A coefficient of agreement for nominal scales.
+#' \emph{Educational and Psychological Measurement}, \emph{20}(1), 37-46.
+#'
+#' Cohen, J. (1968). Weighted kappa: nominal scale agreement provision for scaled disagreement or partial credit.
+#' \emph{Psychological Bulletin}, \emph{70}(4), 213-220.
+#'
+#' \strong{Krippendorff's alpha} \cr
+#' Krippendorff, K. (2013).
+#' Content analysis: An introduction to its methodology (3rd ed.).
+#' Thousand Oaks, CA: Sage.
+#'
 #' @export
 #'
 # Predict new data based on network ----
-# Updated 12.02.2024
+# Updated 02.03.2024
 network.predictability <- function(network, original.data, newdata, ordinal.categories = 7)
 {
 
@@ -121,7 +129,9 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
   if(missing(newdata)){newdata <- original.data}
 
   # Argument errors (return data in case of tibble)
-  output <- network.predictability_errors(network, original.data, newdata, ordinal.categories)
+  output <- network.predictability_errors(
+    network, original.data, newdata, ordinal.categories
+  )
 
   # Put everything into a matrix
   network <- as.matrix(output$network)
@@ -135,10 +145,16 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
   dim_sequence <- seq_len(dimensions[2])
 
   # Get node names
-  node_names <- colnames(network)
+  node_names <- dimnames(network)[[2]]
+
+  # Combine original and new data
+  combined <- rbind(original.data, newdata)
+
+  # Get sample size for the original data
+  original_n <- dim(combined)[1] - dimensions[1]
 
   # Get data categories
-  categories <- data_categories(rbind(original.data, newdata))
+  categories <- data_categories(combined)
 
   # Set flags
   flags <- list(
@@ -150,15 +166,30 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
   flags$categorical <- flags$dichotomous | flags$polytomous
   flags$continuous <- !flags$categorical
 
-  # Get the inverse variances
-  inverse_variances <- diag(pcor2inv(network))
+  # Check for categories
+  if(any(flags$categorical)){
+
+    # Ensure categories start at 1
+    one_start_list <- ensure_one_start(combined, flags, original_n)
+
+    # Sort out data
+    original.data <- one_start_list$original.data
+    newdata <- matrix(one_start_list$newdata, nrow = dimensions[1], ncol = dimensions[2])
+    categorical_factors <- one_start_list$categorical_factors
+
+  }
+
+  # Get the inverse variances (use absolute for less than ideal matrices)
+  inverse_variances <- abs(diag(pcor2inv(network)))
 
   # Get betas
   betas <- network * sqrt(outer(inverse_variances, inverse_variances, FUN = "/"))
 
   # Obtain means and standard deviations
   original_means <- colMeans(original.data, na.rm = TRUE)
-  original_sds <- nvapply(dim_sequence, function(i){sd(original.data[,i])})
+  original_sds <- nvapply(
+    dim_sequence, function(i){sd(original.data[,i], na.rm = TRUE)}
+  )
 
   # Scale from original data
   newdata_scaled <- matrix(
@@ -170,8 +201,7 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
   )
 
   # Get predictions
-  predictions <- newdata_scaled %*% betas
-  adjusted_predictions <- predictions
+  predictions <- missing_matrix_multiply(newdata_scaled, betas)
 
   # Loop over variables
   for(i in dim_sequence){
@@ -179,24 +209,19 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
     # Check for categories
     if(flags$categorical[[i]]){
 
-        # Get thresholds from original data
-        thresholds <- obtain_thresholds(original.data[,i])
+      # Set factors for data
+      factored_data <- factor( # ensures proper tabling for accuracy
+        original.data[,i], levels = seq.int(1, max(original.data[,i]), 1)
+      )
 
-        # Assign categories to each observation
-        predictions[,i] <- as.numeric(
-          cut(x = predictions[,i], breaks = c(-Inf, thresholds, Inf))
+      # Assign categories to each observation
+      predictions[,i] <- as.numeric(
+        cut(
+          x = predictions[,i], breaks = c(
+            -Inf, handle_thresholds(factored_data), Inf
+          ) # `handle_thresholds` will properly adjust for missing thresholds
         )
-
-        # Check for lowest category
-        minimum_value <- min(original.data[,i])
-
-        # Re-adjust minimum category to 1 for new data
-        if(minimum_value <= 0){
-          newdata[,i] <- newdata[,i] + (abs(minimum_value) + 1)
-        }
-
-        # Set adjusted predictions (for returning)
-        adjusted_predictions[,i] <- predictions[,i] + (minimum_value - 1)
+      )
 
     }
 
@@ -204,11 +229,27 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
 
   # Obtain results
   results <- setup_results(
-    predictions, adjusted_predictions, original.data, newdata,
-    flags, betas, node_names, dimensions, dim_sequence
+    predictions, newdata, flags, betas,
+    node_names, dimensions, dim_sequence
   )
 
-  # Attach flags to results
+  # Check for categorical data
+  if(any(flags$categorical)){
+
+    # Get categorical predictions
+    categorical_predictions <- results$predictions[, flags$categorical, drop = FALSE]
+
+    # Convert predicted categories back into their original sequence
+    for(i in ncol_sequence(categorical_predictions)){
+      categorical_predictions[,i] <- categorical_factors[[i]][categorical_predictions[,i]]
+    }
+
+    # Return to results
+    results$predictions[,flags$categorical] <- categorical_predictions[,, drop = FALSE]
+
+  }
+
+  # Attach categories to results
   attr(results$results, "flags") <- flags
 
   # Set class
@@ -222,9 +263,12 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
 # Bug Checking ----
 ## Basic input
 # wmt <- NetworkToolbox::neoOpen; set.seed(42); training <- sample(1:nrow(wmt), round(nrow(wmt) * 0.80))
-# original.data <- wmt[training,]; newdata <- wmt[-training,]
+# original.data <- as.matrix(wmt[training,]); newdata <- as.matrix(wmt[-training,])
 # network <- network.estimation(original.data, model = "glasso")
 # ordinal.categories = 7
+# # Missing data
+# original.data[sample(1:length(original.data), 1000)] <- NA
+# newdata[sample(1:length(newdata), 1000)] <- NA
 
 #' @noRd
 # Argument errors ----
@@ -268,7 +312,7 @@ network.predictability_errors <- function(network, original.data, newdata, ordin
 
 #' @exportS3Method
 # S3 Print Method ----
-# Updated 12.02.2024
+# Updated 19.02.2024
 print.predictability <- function(x, ...)
 {
 
@@ -286,7 +330,7 @@ print.predictability <- function(x, ...)
   if(full_flags$dichotomous){
     cat("Dichotomous\n\n")
     print(
-      t(x$results[flags$dichotomous, "Accuracy", drop = FALSE]),
+      t(x$results[flags$dichotomous, c("Accuracy", "Kappa"), drop = FALSE]),
       quote = FALSE, digits = 3
     )
   }
@@ -299,7 +343,7 @@ print.predictability <- function(x, ...)
     }
     cat("Polytomous\n\n")
     print(
-      t(x$results[flags$polytomous, c("Accuracy", "Weighted"), drop = FALSE]),
+      t(x$results[flags$polytomous, c("Linear Kappa", "Krippendorff's Alpha"), drop = FALSE]),
       quote = FALSE, digits = 3
     )
   }
@@ -328,11 +372,141 @@ summary.predictability <- function(object, ...)
 }
 
 #' @noRd
+# Ensure that categorical data start at one ----
+# Updated 26.02.2024
+ensure_one_start <- function(combined, flags, original_n)
+{
+
+  # Convert categories
+  categorical_data <- combined[, flags$categorical, drop = FALSE]
+
+  # Get categorical sequence
+  categorical_sequence <- ncol_sequence(categorical_data)
+
+  # Initialize factors
+  categorical_factors <- lapply(
+    categorical_sequence, function(i){
+      return(as.numeric(levels(factor(categorical_data[,i]))))
+    }
+  )
+
+  # Get minimum values
+  minimum_values <- nvapply(as.data.frame(categorical_data), min)
+
+  # Set starting values to 1 for all categorical data
+  for(i in categorical_sequence){
+
+    # Check for categorical values *not* equal to one
+    if(minimum_values[i] != 1){
+
+      # Replace data
+      categorical_data[,i] <- swiftelse(
+        minimum_values[i] > 1,
+        categorical_data[,i] - (minimum_values[i] - (minimum_values[i] - 1)),
+        categorical_data[,i] + (abs(minimum_values[i]) - (abs(minimum_values[i]) - 1))
+      )
+
+    }
+
+  }
+
+  # Get original data indices
+  original_index <- seq_len(original_n)
+
+  # Return results
+  return(
+    list(
+      original.data = categorical_data[original_index,, drop = FALSE],
+      newdata = categorical_data[-original_index,, drop = FALSE],
+      categorical_factors = categorical_factors
+    )
+  )
+
+}
+
+#' @noRd
+# Missing data matrix multiplication ----
+# Updated 17.02.2024
+missing_matrix_multiply <- function(X, Y)
+{
+
+  # For this function, only X is expected to have missing data
+
+  # Check for missing
+  if(anyNA(X)){
+
+    # Determine NA indices
+    indices <- is.na(X)
+
+    # Set NAs to zero
+    X[indices] <- 0
+
+    # Perform matrix multiplication
+    outcome <- X %*% Y
+
+    # Set outcomes to NA
+    outcome[indices] <- NA
+
+    # Return outcome
+    return(outcome)
+
+  }else{ # no missing return normal
+    return(X %*% Y)
+  }
+
+}
+
+#' @noRd
+# Handle thresholds ----
+# Updated 14.02.2024
+handle_thresholds <- function(factored_data)
+{
+
+  # Get thresholds from original data
+  thresholds <- obtain_thresholds(factored_data)
+
+  # Detect infinities (with signs)
+  infinities <- is.infinite(thresholds) * sign(thresholds)
+
+  # Check for infinities
+  if(any(abs(infinities) == 1)){
+
+    # Convert negative infinities
+    negative_infinities <- infinities == -1
+    thresholds[negative_infinities] <- -1000 + (1:sum(negative_infinities))
+
+    # Convert positive infinities
+    positive_infinities <- infinities == 1
+    thresholds[positive_infinities] <- 1000 - (sum(positive_infinities):1)
+
+  }
+
+  # Determine identical thresholds
+  while(any(colSums(outer(thresholds, thresholds, FUN = "==")) > 1)){
+
+    # Loop over thresholds and increase from the highest threshold
+    for(i in length(thresholds):2){
+
+      # Check for identical thresholds (provide slight nudge)
+      if(thresholds[i] == thresholds[i - 1]){
+        thresholds[i] <- thresholds[i] + 1e-07
+      }
+
+    }
+
+  }
+
+  # Return thresholds
+  return(thresholds)
+
+}
+
+#' @noRd
 # Set up results ----
-# Updated 12.02.2024
+# Updated 02.03.2024
 setup_results <- function(
-    predictions, adjusted_predictions, original.data, newdata,
-    flags, betas, node_names, dimensions, dim_sequence
+    predictions, newdata, flags, betas,
+    node_names, dimensions, dim_sequence
 )
 {
 
@@ -344,9 +518,10 @@ setup_results <- function(
       matrix(
         nvapply(
           dim_sequence, function(i){
-            categorical_accuracy(predictions[,i], newdata[,i])[["accuracy"]]
-          }
-        ), dimnames = list(node_names, "Accuracy")
+            binary_accuracy(predictions[,i], newdata[,i])[c("accuracy", "kappa")]
+          }, LENGTH = 2
+        ), ncol = 2, byrow = TRUE,
+        dimnames = list(node_names, c("Accuracy", "Kappa"))
       )
     )
 
@@ -357,10 +532,10 @@ setup_results <- function(
       matrix(
         nvapply(
           dim_sequence, function(i){
-            categorical_accuracy(predictions[,i], newdata[,i])[c("accuracy", "weighted")]
+            ordinal_accuracy(predictions[,i], newdata[,i])[c("linear_kappa", "kripp_alpha")]
           }, LENGTH = 2
         ), ncol = 2, byrow = TRUE,
-        dimnames = list(node_names, c("Accuracy", "Weighted"))
+        dimnames = list(node_names, c("Linear Kappa", "Krippendorff's Alpha"))
       )
     )
 
@@ -383,20 +558,26 @@ setup_results <- function(
 
     # Initialize matrix
     results <- fast.data.frame(
-      NA, nrow = dimensions[2], ncol = 4,
+      NA, nrow = dimensions[2], ncol = 6,
       rownames = node_names,
-      colnames = c("Accuracy", "Weighted", "R2", "RMSE")
+      colnames = c(
+        "Accuracy", "Kappa",
+        "Linear Kappa", "Krippendorff's Alpha",
+        "R2", "RMSE"
+      )
     )
 
     # Check for dichotomous data
     if(any(flags$dichotomous)){
 
       # Get results
-      results$Accuracy[flags$dichotomous] <- t(nvapply(
-        dim_sequence[flags$dichotomous], function(i){
-          categorical_accuracy(predictions[,i], newdata[,i])[["accuracy"]]
-        }
-      ))
+      results[flags$dichotomous, c("Accuracy", "Kappa")] <- t(
+        nvapply(
+          dim_sequence[flags$dichotomous], function(i){
+            binary_accuracy(predictions[,i], newdata[,i])[c("accuracy", "kappa")]
+          }, LENGTH = 2
+        )
+      )
 
     }
 
@@ -404,10 +585,10 @@ setup_results <- function(
     if(any(flags$polytomous)){
 
       # Get results
-      results[flags$polytomous, c("Accuracy", "Weighted")] <- t(
+      results[flags$polytomous, c("Linear Kappa", "Krippendorff's Alpha")] <- t(
         nvapply(
           dim_sequence[flags$polytomous], function(i){
-            categorical_accuracy(predictions[,i], newdata[,i])[c("accuracy", "weighted")]
+            ordinal_accuracy(predictions[,i], newdata[,i])[c("linear_kappa", "kripp_alpha")]
           }, LENGTH = 2
         )
       )
@@ -433,7 +614,7 @@ setup_results <- function(
   # Return final results
   return(
     list(
-      predictions = adjusted_predictions,
+      predictions = predictions,
       betas = betas,
       results = results
     )
@@ -441,3 +622,55 @@ setup_results <- function(
 
 }
 
+#' @noRd
+# Ensure that categorical data start at one ----
+# Updated 26.02.2024
+ensure_one_start <- function(combined, flags, original_n)
+{
+
+  # Convert categories
+  categorical_data <- combined[, flags$categorical, drop = FALSE]
+
+  # Get categorical sequence
+  categorical_sequence <- ncol_sequence(categorical_data)
+
+  # Initialize factors
+  categorical_factors <- lapply(
+    categorical_sequence, function(i){
+      return(as.numeric(levels(factor(categorical_data[,i]))))
+    }
+  )
+
+  # Get minimum values
+  minimum_values <- nvapply(as.data.frame(categorical_data), min)
+
+  # Set starting values to 1 for all categorical data
+  for(i in categorical_sequence){
+
+    # Check for categorical values *not* equal to one
+    if(minimum_values[i] != 1){
+
+      # Replace data
+      categorical_data[,i] <- swiftelse(
+        minimum_values[i] > 1,
+        categorical_data[,i] - (minimum_values[i] - (minimum_values[i] - 1)),
+        categorical_data[,i] + (abs(minimum_values[i]) - (abs(minimum_values[i]) - 1))
+      )
+
+    }
+
+  }
+
+  # Get original data indices
+  original_index <- seq_len(original_n)
+
+  # Return results
+  return(
+    list(
+      original.data = categorical_data[original_index,],
+      newdata = categorical_data[-original_index,],
+      categorical_factors = categorical_factors
+    )
+  )
+
+}

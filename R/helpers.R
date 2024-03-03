@@ -548,7 +548,7 @@ restore_state <- function()
 
 #' @noRd
 # Wrapper for parallelization ----
-# Updated 24.10.2023
+# Updated 01.03.2024
 parallel_process <- function(
     iterations, # number of iterations
     datalist = NULL, # list of data
@@ -591,15 +591,21 @@ parallel_process <- function(
     }
 
     # Set max size
-    options(future.globals.maxSize = memory_available)
+    memory_options <- options(future.globals.maxSize = memory_available)
+
+    # Set up undo changes
+    on.exit(memory_options)
 
   }
 
   # Set up plan
-  future::plan(
+  parallel_plan <- future::plan(
     strategy = "multisession",
     workers = ncores
   )
+
+  # Set up undo changes
+  on.exit(future::plan(parallel_plan))
 
   # Check for progress
   if(isTRUE(progress)){
@@ -681,9 +687,6 @@ parallel_process <- function(
     )
 
   }
-
-  # Force close of connections
-  future::plan(strategy = "sequential")
 
   # Return results
   return(results)
@@ -2860,26 +2863,6 @@ pcor2inv <- function(partial_correlations)
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 #' @noRd
-# Cohen's Kappa (for clusters) ----
-# Updated 06.02.2024
-cluster_kappa <- function(base, comparison)
-{
-
-  # Get elements
-  elements <- length(base)
-
-  # Compute observed agreement
-  po <- sum(diag(table(base, comparison))) / elements
-
-  # Compute expected agreement (based on random assignment)
-  pe <- sum(fast_table(base) * fast_table(comparison)) / elements^2
-
-  # Return Kappa
-  return((po - pe) / (1 - pe))
-
-}
-
-#' @noRd
 # Continuous Accuracy (for single variable) ----
 # Updated 12.02.2024
 continuous_accuracy <- function(prediction, observed)
@@ -2902,20 +2885,25 @@ continuous_accuracy <- function(prediction, observed)
 }
 
 #' @noRd
-# Categorical Accuracy (for single variable) ----
-# Updated 12.02.2024
-categorical_accuracy <- function(prediction, observed)
+# Ordinal Accuracy (for single variable) ----
+# Updated 01.03.2024
+ordinal_accuracy <- function(prediction, observed)
 {
 
   # Get maximum categories
-  max_categories <- max(prediction, observed)
+  max_category <- max(prediction, observed, na.rm = TRUE)
+
+  # Check for single category
+  if(max_category == 1){
+    return(c(linear_kappa =  1, kripp_alpha = 1))
+  }
 
   # Set category sequence
-  category_sequence <- seq_len(max_categories)
+  category_sequence <- seq_len(max_category)
 
   # Set up table
   accuracy_table <- matrix(
-    0, nrow = max_categories, ncol = max_categories,
+    0, nrow = max_category, ncol = max_category,
     dimnames = list(category_sequence, category_sequence)
   )
 
@@ -2928,40 +2916,137 @@ categorical_accuracy <- function(prediction, observed)
   # Populate accuracy table
   accuracy_table[table_names$observed, table_names$prediction] <- tabled
 
-  # Get empirical frequencies
-  frequency <- table(factor(observed, levels = category_sequence))
+  # START of linear weighted Kappa
+
+  # Get frequencies
+  observed_frequency <- table(factor(observed, levels = category_sequence))
+  prediction_frequency <- table(factor(prediction, levels = category_sequence))
 
   # Get total values
-  total_values <- sum(frequency)
-
-  # Get maximum possible distance incorrect
-  max_distance <- pmax(
-    abs(max_categories - category_sequence), # distance from maximum category
-    abs(min(category_sequence) - category_sequence) # distance from minimum category
-  )
-
-  # Get minimum possible weight accuracy
-  minimum_weighted <- sum(0.5^max_distance * frequency)
+  total_values <- sum(observed_frequency)
 
   # Get diagonal of table (correct predictions)
   correct <- diag(accuracy_table)
 
+  # Standardize tables
+  observed_standard <- observed_frequency / total_values
+  prediction_standard <- prediction_frequency / total_values
+  confusion_matrix <- accuracy_table / total_values
+
+  # Compute absolute differences (linear kappa weighted)
+  weights <- outer(
+    category_sequence, category_sequence,
+    FUN = function(x, y){abs(x - y)}
+  )
+
+  # START of Krippendorff's alpha
+
+  # Coincidence table
+  coincidence_table <- accuracy_table + t(accuracy_table)
+
+  # Get upper triangle indices
+  upper_indices <- upper.tri(coincidence_table)
+
+  # Get upper triangle of coincidence table
+  coincidence_upper <- coincidence_table[upper_indices]
+
+  # Get sums
+  coincidence_sums <- colSums(coincidence_table, na.rm = TRUE)
+
+  # Compute outer of sums
+  coincidence_outer <- outer(coincidence_sums, coincidence_sums)[upper_indices]
+
+  # Pre-compute diff2 (based on irr::kripp.alpha)
+
+  ## Halve coincidence sums
+  half_sums <- coincidence_sums / 2
+
+  ## Set diff2
+  diff2 <- numeric(sum(upper_indices))
+
+  ## Initialize count
+  count <- 1
+
+  ## Perform loop as in irr::kripp.alpha
+  for(i in 2:max_category){
+    for(j in 1:(i-1)){
+
+      # Update diff2
+      diff2[count] <- half_sums[j] + half_sums[i]
+
+      # Check for outer loop greater than inner loop
+      if(i > (j + 1)){
+        for(k in (j + 1):(i - 1)){
+          diff2[count] <- diff2[count] + coincidence_sums[k]
+        }
+      }
+
+      # Update diff2
+      diff2[count] <- diff2[count]^2
+
+      # Increase count
+      count <- count + 1
+
+    }
+  }
+
   # Return accuracy by category
   return(
     c(
-      correct / frequency,
-      accuracy = sum(correct, na.rm = TRUE) / total_values,
-      balanced = sum(
-        correct / rowSums(accuracy_table, na.rm = TRUE),
-        na.rm = TRUE
-      ) / max_categories,
-      weighted = (sum(0.5^abs(prediction - observed), na.rm = TRUE) - minimum_weighted) /
-                 # weighted total
-                 (total_values - minimum_weighted)
-                 # normalization: all differences of 0 minus
-                 # all differences of maximum absolute difference
+      linear_kappa =  1 - (
+        sum(weights * confusion_matrix) / # observed
+        sum(weights * tcrossprod(observed_standard, prediction_standard)) # expected
+      ),
+      kripp_alpha = 1 - (sum(coincidence_table) - 1) *
+                    sum(coincidence_upper * diff2) /
+                    sum(coincidence_outer * diff2)
     )
   )
+
+}
+
+#' @noRd
+# Binary Accuracy (for single variable) ----
+# Updated 02.03.2024
+binary_accuracy <- function(prediction, observed)
+{
+
+  # Get maximum categories
+  max_category <- max(prediction, observed, na.rm = TRUE)
+
+  # Set category sequence
+  category_sequence <- seq_len(max_category)
+
+  # Set up table
+  accuracy_table <- matrix(
+    0, nrow = max_category, ncol = max_category,
+    dimnames = list(category_sequence, category_sequence)
+  )
+
+  # Get table
+  tabled <- table(observed, prediction)
+
+  # Get names from table
+  table_names <- dimnames(tabled)
+
+  # Populate accuracy table
+  accuracy_table[table_names$observed, table_names$prediction] <- tabled
+
+  # Get frequencies
+  observed_frequency <- table(factor(observed, levels = category_sequence))
+  prediction_frequency <- table(factor(prediction, levels = category_sequence))
+
+  # Get elements
+  elements <- sum(accuracy_table)
+
+  # Compute observed agreement
+  po <- sum(diag(accuracy_table)) / elements
+
+  # Compute expected agreement (based on random assignment)
+  pe <- sum(observed_frequency * prediction_frequency) / elements^2
+
+  # Return metrics
+  return(c(accuracy = po, kappa = (po - pe) / (1 - pe)))
 
 }
 

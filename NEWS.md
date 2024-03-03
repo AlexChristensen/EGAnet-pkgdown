@@ -2,13 +2,21 @@ WEBSITE: https://r-ega.net
 
 ## Changes in version 2.0.5
 
++ FIX: 'stroke' parameter in `hierEGA` that broke with {ggplot2} update
+
 + ADD: `network.predictability` to predict new data based on a network
 
 + ADD: `network.generalizability` to estimate network generalizability to new data (leverages `network.predictability`)
 
++ UPDATE: new loadings have been added to resolve issues in original loadings (e.g., signs, cross-loadings, standardization) 
+
 + UPDATE: `plot.bootEGA` will output `itemStability` plot by default
 
 + UPDATE: `dimensionStability` output now included in `bootEGA` as output `$stability`
+
++ UPDATE: 'rotate' argument added to `infoCluster` plot to allow for different angle of dendrogram
+
++ DEPENDENCY: {fungible} is now 'IMPORTS' over 'SUGGESTS' for dependency in new loadings
 
 + DEPRECATED: `typicalStructure` and `plot.typicalStructure` have been deprecated to `FALSE`
 
