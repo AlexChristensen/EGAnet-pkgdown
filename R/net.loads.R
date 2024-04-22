@@ -16,6 +16,12 @@
 #' an \code{"experimental"} implementation.
 #' Defaults to \code{"BRM"}
 #'
+#' @param scaling Numeric (length = 1).
+#' Scaling factor for the magnitude of the \code{"experimental"} network loadings.
+#' Defaults to \code{2}.
+#' \code{10} makes loadings roughly the size of factor loadings when correlations
+#' between factors are orthogonal
+#'
 #' @param rotation Character.
 #' A rotation to use to obtain a simpler structure.
 #' For a list of rotations, see \code{\link[GPArotation]{rotations}} for options.
@@ -74,13 +80,13 @@
 #'
 #' @export
 #'
-# Network Loadings
-# Updated 29.02.2024
+# Network Loadings ----
+# Updated 06.04.2024
 # Default = "BRM" or `net.loads` from version 1.2.3
 # Experimental = new signs and cross-loading adjustment
 net.loads <- function(
     A, wc, loading.method = c("BRM", "experimental"),
-    rotation = NULL, ...
+    scaling = 2, rotation = NULL, ...
 )
 {
 
@@ -159,7 +165,7 @@ net.loads <- function(
   }
 
   # Obtain standardized loadings
-  standardized <- standardize(unstandardized, loading.method, A, wc)
+  standardized <- standardize(unstandardized, loading.method, A, wc, scaling)
 
   # Get descending order
   standardized <- descending_order(standardized, wc, unique_communities, node_names)
@@ -282,7 +288,7 @@ net.loads <- function(
 # rotation = "geominq"
 
 #' @exportS3Method
-# S3 Print Method
+# S3 Print Method ----
 # Updated 08.10.2023
 print.net.loads <- function(x, ...)
 {
@@ -350,7 +356,7 @@ print.net.loads <- function(x, ...)
 }
 
 #' @exportS3Method
-# S3 Summary Method
+# S3 Summary Method ----
 # Updated 12.07.2023
 summary.net.loads <- function(object, ...)
 {
@@ -409,7 +415,7 @@ organize_input <- function(A, wc)
 #' @noRd
 # Obtain signs ----
 # Function to obtain signs on dominant community
-# Updated 11.07.2023
+# Updated 22.03.2024
 obtain_signs <- function(target_network)
 {
 
@@ -438,6 +444,11 @@ obtain_signs <- function(target_network)
 
   }
 
+  # Determine whether signs should be flipped
+  if(sum(signs) <= -1){
+    signs <- -signs
+  }
+
   # Add signs as an attribute to the target network
   attr(target_network, "signs") <- signs
 
@@ -448,7 +459,7 @@ obtain_signs <- function(target_network)
 
 #' @noRd
 # Experimental loadings ----
-# Updated 25.02.2024
+# Updated 22.03.2024
 experimental_loadings <- function(
     A, wc, nodes, node_names,
     communities, unique_communities
@@ -497,21 +508,23 @@ experimental_loadings <- function(
     FUN = "*"
   )
 
+  # Compute sums
+  community_sums <- colSums(abs(loading_matrix), na.rm = TRUE)
+
   # Check for unidimensional structure
   if(communities > 1){
 
     # Get negative sign indices
-    negative_signs <- signs == -1
+    negative_signs <- which(signs == -1)
 
-    # Check for any negative signs
-    if(any(negative_signs)){
+    # Loop over negative signs
+    if(length(negative_signs) != 0){
 
-      # Make a copy
-      A_copy <- A
+      # Flip signs
+      for(negative in negative_signs){
+        A[negative,] <- A[,negative] <- -A[,negative]
+      }
 
-      # Flip them
-      A[negative_signs,] <- -A_copy[negative_signs,]
-      A[,negative_signs] <- -A_copy[,negative_signs]
     }
 
     # Populate loading matrix with cross-loadings
@@ -541,31 +554,11 @@ experimental_loadings <- function(
   # Set signs
   loading_matrix <- loading_matrix * signs
 
-  # Using signs, ensure positive orientation based on most common direction
-  for(community in unique_communities){
-
-    # Get community index
-    community_index <- wc == community
-
-    # Check for negative orientation
-    if(sum(signs[community_index]) <= -1){
-
-      # Reverse community signs across all communities
-      loading_matrix[community_index,] <- -loading_matrix[community_index,]
-
-      # Check for cross-loadings
-      if(communities > 1){
-
-        # Reverse cross-loading signs on target community
-        loading_matrix[!community_index, community] <-
-          -loading_matrix[!community_index, community]
-
-      }
-
-    }
-
-  }
-
+  # Add attributes
+  attr(loading_matrix, "community") <- list(
+    community_sums = community_sums,
+    community_table = community_table
+  )
 
   # Return loading matrix
   return(loading_matrix)
@@ -574,8 +567,8 @@ experimental_loadings <- function(
 
 #' @noRd
 # Standardize loadings ----
-# Updated 29.02.2024
-standardize <- function(unstandardized, loading.method, A, wc)
+# Updated 06.04.2024
+standardize <- function(unstandardized, loading.method, A, wc, scaling)
 {
 
   # Check for loading method
@@ -583,41 +576,13 @@ standardize <- function(unstandardized, loading.method, A, wc)
     return(t(t(unstandardized) / sqrt(colSums(abs(unstandardized), na.rm = TRUE))))
   }else if(loading.method == "experimental"){
 
-    # Original community order
-    original_order <- dimnames(unstandardized)[[2]]
-
-    # Set community sequence
-    community_sequence <- seq_len(dim(unstandardized)[2])
-
-    # Set diagonal of network to 1
-    diag(A) <- 1
-
-    # Get eigenvectors and eigenvalues
-    eigens <- eigen(A)
-
-    # Get signs
-    signs <- sign(unstandardized)
-
-    # Align loadings
-    alignment <- fungible::faAlign(
-      F1 = eigens$vectors[,community_sequence],
-      F2 = unstandardized[dimnames(A)[[2]],]
-    )
-
-    # Pre-compute absolute values for standardization
-    absolute <- abs(unstandardized)
-
-    # Standardize loadings
-    standardized <- absolute / (absolute + 1)
-
-    # Get sorted order to pre-multiply by eigenvalues
-    sorted <- standardized[,alignment$FactorMap["Sorted Order",]]
-
-    # Get scaled loadings
-    loadings <- t(t(sorted) * sqrt(eigens$values[community_sequence]))
+    # Get attributes
+    community <- attr(unstandardized, "community")
 
     # Return loadings
-    return(loadings[,original_order] * signs)
+    return(
+      t(t(unstandardized) / (community$community_sums^(1 / log(scaling * community$community_table))))
+    )
 
   }
 

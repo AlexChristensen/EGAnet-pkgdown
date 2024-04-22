@@ -4,7 +4,7 @@ following Haslbeck and Waldorp (2018) and Williams and Rodriguez (2022) and usin
 generalizability methods of data splitting, k-folds cross-validation,
 and leave-one-out cross-validation
 Uses network.predictability as the basis to then perform
-generalizability methods over"><title>Estimate the Generalizability of Network — network.generalizability • EGAnet</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Estimate the Generalizability of Network — network.generalizability"><meta property="og:description" content="General function to compute a network's predictive power on new data,
+generalizability methods over"><title>Estimate the Generalizability of Network — network.generalizability • EGAnet</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Estimate the Generalizability of Network — network.generalizability"><meta property="og:description" content="General function to compute a network's predictive power on new data,
 following Haslbeck and Waldorp (2018) and Williams and Rodriguez (2022) and using
 generalizability methods of data splitting, k-folds cross-validation,
 and leave-one-out cross-validation
@@ -16,11 +16,11 @@ generalizability methods over"><!-- mathjax --><script src="https://cdnjs.cloudf
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-primary" data-bs-theme="default"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -312,18 +312,18 @@ Why overfitting is not (usually) a problem in partial correlation networks.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dichotomous</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9 wmt10 wmt11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.755 0.857 0.781 0.692 0.759 0.772 0.696 0.688 0.684 0.705 0.696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.377 0.495 0.392 0.372 0.390 0.491 0.377 0.358 0.364 0.367 0.197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.768 0.823 0.793 0.768 0.764 0.755 0.705 0.700 0.759 0.768 0.747</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.379 0.393 0.432 0.519 0.413 0.460 0.381 0.397 0.517 0.512 0.348</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          wmt12 wmt13 wmt14 wmt15 wmt16 wmt17 wmt18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.755 0.717 0.654 0.700 0.713 0.819 0.776</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.290 0.400 0.290 0.262 0.297 0.194 0.232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.675 0.692 0.654 0.726 0.730 0.823 0.768</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.184 0.354 0.296 0.312 0.339 0.156 0.125</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Community Metrics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TEFI </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      TEFI </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -10.64118 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># k-folds cross-validation</span></span></span>
 <span class="r-in"><span><span class="fu">network.generalizability</span><span class="op">(</span></span></span>
@@ -336,18 +336,18 @@ Why overfitting is not (usually) a problem in partial correlation networks.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Node Metrics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          wmt1  wmt2  wmt3  wmt4  wmt5  wmt6  wmt7  wmt8  wmt9  wmt10 wmt11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.739 0.854 0.799 0.711 0.743 0.755 0.723 0.701 0.749 0.733 0.705</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.32  0.464 0.408 0.401 0.327 0.451 0.426 0.396 0.487 0.421 0.233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.736 0.856 0.803 0.712 0.743 0.766 0.708 0.694 0.746 0.732 0.708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.3   0.464 0.421 0.404 0.321 0.475 0.393 0.383 0.481 0.42  0.259</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          wmt12 wmt13 wmt14 wmt15 wmt16 wmt17 wmt18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.731 0.677 0.697 0.739 0.712 0.795 0.749</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.309 0.325 0.383 0.353 0.304 0.134 0.183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accuracy 0.735 0.687 0.704 0.738 0.716 0.799 0.752</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Kappa    0.318 0.349 0.399 0.359 0.317 0.144 0.179</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Community Metrics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Mean        SD   Median</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> TEFI -10.90097 0.4068079 -10.9325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Mean        SD    Median</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TEFI -10.71975 0.4518458 -10.54695</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Leave-one-out cross-validation</span></span></span>
@@ -362,11 +362,11 @@ Why overfitting is not (usually) a problem in partial correlation networks.
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Hudson Golino, Alexander Christensen.</p>
+  <p>Developed by Hudson Golino, Alexander Christensen.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer></div>

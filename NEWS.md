@@ -1,5 +1,23 @@
 WEBSITE: https://r-ega.net
 
+## Changes in version 2.0.6
+
++ FIX: bug when using `na.data = "listwise"` in standard `cor()` function
+
++ FIX: update to revised network loadings signs: `net.loads(..., loading.method = "experimental")`
+
++ FIX: bug in argument 'returnAllResults' for `EBICglasso.qgraph`
+
++ FIX: bug when passing additional non-`dimensionStability` arguments into `bootEGA`
+
++ FIX: bug when printing `hierEGA` summary from `bootEGA`
+
++ UPDATE: colors in `itemStability` plots will match colors of `hierEGA` plot
+
++ UPDATE: `network.predictability` uses empirical inverse variances (rather than network-implied)
+
++ UPDATE: R-squared in `continuous_accuracy` helper uses Pearson's correlation squared
+
 ## Changes in version 2.0.5
 
 + FIX: 'stroke' parameter in `hierEGA` that broke with {ggplot2} update
