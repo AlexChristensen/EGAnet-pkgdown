@@ -121,7 +121,7 @@
 #' @export
 #'
 # Predict new data based on network ----
-# Updated 26.03.2024
+# Updated 13.05.2024
 network.predictability <- function(network, original.data, newdata, ordinal.categories = 7)
 {
 
@@ -173,9 +173,14 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
     one_start_list <- ensure_one_start(combined, flags, original_n)
 
     # Sort out data
-    original.data <- one_start_list$original.data
-    newdata <- matrix(one_start_list$newdata, nrow = dimensions[1], ncol = dimensions[2])
-    categorical_factors <- one_start_list$categorical_factors
+    original.data[,flags$categorical] <- one_start_list$original.data
+    newdata[,flags$categorical] <- one_start_list$newdata
+
+    # Create categorical factors list
+    categorical_factors <- vector("list", length = dimensions[2])
+
+    # Insert categorical factors
+    categorical_factors[flags$categorical] <- one_start_list$categorical_factors
 
   }
 
@@ -215,7 +220,7 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
 
       # Set factors for data
       factored_data <- factor( # ensures proper tabling for accuracy
-        original.data[,i], levels = seq.int(1, max(original.data[,i]), 1)
+        original.data[,i], levels = seq.int(1, max(original.data[,i], na.rm = TRUE), 1)
       )
 
       # Assign categories to each observation
@@ -228,6 +233,30 @@ network.predictability <- function(network, original.data, newdata, ordinal.cate
       )
 
     }
+
+  }
+
+  # Check for continuous data
+  if(any(flags$continuous)){
+
+    # Get continuous predictions
+    continuous_predictions <- predictions[,flags$continuous, drop = FALSE]
+
+    # Get continuous means and standard deviations
+    continuous_means <- original_means[flags$continuous]
+    continuous_sds <- original_sds[flags$continuous]
+
+    # Put continuous predictions back to scale with the original continuous variables
+    for(i in ncol_sequence(continuous_predictions)){
+
+      # Back to scale
+      continuous_predictions[,i] <- continuous_predictions[,i] *
+                                    continuous_sds[i] + continuous_means[i]
+
+    }
+
+    # Return to predictions
+    predictions[,flags$continuous] <- continuous_predictions
 
   }
 
@@ -628,7 +657,7 @@ setup_results <- function(
 
 #' @noRd
 # Ensure that categorical data start at one ----
-# Updated 26.02.2024
+# Updated 13.05.2024
 ensure_one_start <- function(combined, flags, original_n)
 {
 
@@ -646,7 +675,7 @@ ensure_one_start <- function(combined, flags, original_n)
   )
 
   # Get minimum values
-  minimum_values <- nvapply(as.data.frame(categorical_data), min)
+  minimum_values <- nvapply(as.data.frame(categorical_data), min, na.rm = TRUE)
 
   # Set starting values to 1 for all categorical data
   for(i in categorical_sequence){

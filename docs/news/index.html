@@ -73,7 +73,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.6" id="changes-in-version-206">Changes in version 2.0.6<a class="anchor" aria-label="anchor" href="#changes-in-version-206"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.0.7" id="changes-in-version-207">Changes in version 2.0.7<a class="anchor" aria-label="anchor" href="#changes-in-version-207"></a></h2>
+<ul><li><p>FIX: mixed data with missing data in <code>network.predictability</code></p></li>
+<li><p>UPDATE: NEWS is now formatted in markdown</p></li>
+<li><p>UPDATE: prediction and RMSE output for continuous data <code>network.predictability</code> is set to original scale to increase interpretability</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.6" id="changes-in-version-206">Changes in version 2.0.6<a class="anchor" aria-label="anchor" href="#changes-in-version-206"></a></h2><p class="text-muted">CRAN release: 2024-04-22</p>
 <ul><li><p>FIX: bug when using <code>na.data = "listwise"</code> in standard <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor()</a></code> function</p></li>
 <li><p>FIX: update to revised network loadings signs: <code>net.loads(..., loading.method = "experimental")</code></p></li>
 <li><p>FIX: bug in argument ‘returnAllResults’ for <code>EBICglasso.qgraph</code></p></li>
@@ -88,7 +94,7 @@
 <ul><li><p>FIX: ‘stroke’ parameter in <code>hierEGA</code> that broke with {ggplot2} update</p></li>
 <li><p>ADD: <code>network.predictability</code> to predict new data based on a network</p></li>
 <li><p>ADD: <code>network.generalizability</code> to estimate network generalizability to new data (leverages <code>network.predictability</code>)</p></li>
-<li><p>UPDATE: new loadings have been added to resolve issues in original loadings (e.g., signs, cross-loadings, standardization)</p></li>
+<li><p>UPDATE: new loadings (<code>net.loads(..., loading.method = "experimental")</code>) have been added to resolve issues in original loadings (e.g., signs, cross-loadings, standardization)</p></li>
 <li><p>UPDATE: <code>plot.bootEGA</code> will output <code>itemStability</code> plot by default</p></li>
 <li><p>UPDATE: <code>dimensionStability</code> output now included in <code>bootEGA</code> as output <code>$stability</code></p></li>
 <li><p>UPDATE: ‘rotate’ argument added to <code>infoCluster</code> plot to allow for different angle of dendrogram</p></li>
@@ -115,7 +121,7 @@
 <li><p>FIX: continuous variables with few categories that are treated as ordinal in <code>polychoric.matrix</code></p></li>
 <li><p>FIX: character input for <code>structure</code> is now accepted</p></li>
 <li><p>ADD: website pointing to different data check errors added to error output (hopefully, makes errors more understandable)</p></li>
-<li><p>UPDATE: <code>corr = "cor_auto"</code> now performs <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">qgraph::cor_auto</a></code> in favor of legacy; previous behavior starting at 2.0.0 was to deprecate <code>"cor_auto"</code> in favor of <code>"auto"</code>; default remains <code>corr = "auto"</code></p></li>
+<li><p>UPDATE: <code>corr = "cor_auto"</code> now performs <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">qgraph::cor_auto</a></code> in favor of legacy; previous behavior starting at 2.0.0 was t+ deprecate <code>"cor_auto"</code> in favor of <code>"auto"</code>; default remains <code>corr = "auto"</code></p></li>
 <li><p>UPDATE: <code>compare.EGA.plots</code> outputs <code>$all</code> and <code>$individual</code> for the plots</p></li>
 <li><p>UPDATE: when <code>structure</code> is supplied for <code>invariance</code>, then configural check is skipped (structure is assumed to be invariant)</p></li>
 <li><p>UPDATE: added data generation for <code>model = "BGGM"</code> and <code>uni.method = "expand"</code> in <code>community.unidimensional</code></p></li>
@@ -127,9 +133,9 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.0" id="changes-in-version-200">Changes in version 2.0.0<a class="anchor" aria-label="anchor" href="#changes-in-version-200"></a></h2><p class="text-muted">CRAN release: 2023-08-16</p>
-<ul><li><p>MAJOR REFACTOR: the update to version 2.0.0 includes many major ## Changes that are designed to improve the speed, reliability, and reproducibility of {EGAnet}. The goal of these ## Changes are to eliminate common errors and streamline the code in the package to prevent future error cases. There are several function additions that are provided to facilitate modular use of the {EGAnet} package</p></li>
+<ul><li><p>MAJOR REFACTOR: the update to version 2.0.0 includes many major changes that are designed to improve the speed, reliability, and reproducibility of {EGAnet}. The goal of these changes are to eliminate common errors and streamline the code in the package to prevent future error cases. There are several function additions that are provided to facilitate modular use of the {EGAnet} package</p></li>
 <li><p>INTERNALS: function-specific internal functions and S3methods are now located in their respective .R files rather than elsewhere (e.g., “utils-EGAnet.R”)</p></li>
-<li><p>SWAP: internal script usage of “utils-EGAnet.R” depracated for “helper.R” functions that are used across the package (no visible ## Changes for the user)</p></li>
+<li><p>SWAP: internal script usage of “utils-EGAnet.R” depracated for “helper.R” functions that are used across the package (no visible changes for the user)</p></li>
 <li><p>NOTE: default objective function for Leiden algorithm is set to “modularity”</p></li>
 <li><p>NOTE: default for Louvain unidimensional method is set to single-shot <em>unless</em> argument “consensus.method” or “consensus.iter” is specified</p></li>
 <li><p>ADD: stricter <code>*apply</code> functions that are roughly equivalent to <code>*apply</code> but have stricter inputs/outputs (uses <code>vapply</code> as foundation; often, slightly faster)</p></li>
@@ -141,7 +147,7 @@
 <li><p>ADD: <code>auto.correlate</code> now computes all correlations internally and no longer depends on external functions; categorical correlations are C based and bi/polyserial correlations are a simplified and vectorized version of {polycor}’s <code>polyserial</code>; substantial computational gains (between 10-25x faster than previous use of {qgraph}’s <code>cor_auto</code>)</p></li>
 <li><p>ADD: <code>network.estimation</code> to handle all network estimation in {EGAnet}; <em>includes</em> Bayesian GGM from {BGGM} for more seamless incorporation of BEGA</p></li>
 <li><p>ADD: <code>community.unidimensional</code> to apply different unidimensional community detection approaches; makes unidimensional community detection more modular and flexible</p></li>
-<li><p>ADD: basic (internal) function to handle all network plots to keep ## Changes centralized to a single function; extends flexbility to handle all {GGally}’s <code>ggnet2</code> arguments</p></li>
+<li><p>ADD: basic (internal) function to handle all network plots to keep changes centralized to a single function; extends flexbility to handle all {GGally}’s <code>ggnet2</code> arguments</p></li>
 <li><p>ADD: implemented reproducible parametric bootstrapping and random sampling (see <a href="https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG" class="external-link uri">https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG</a> for more details)</p></li>
 <li><p>ADD: implemented reproducible resampling bootstrapping and random sampling (see <a href="https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG" class="external-link uri">https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG</a> for more details)</p></li>
 <li><p>ADD: reproducible bootstrapping with seed setting that does <em>not</em> affect R’s seed and RNG (user’s seed will not be affected and will not affected bootstrapping seeds)</p></li>
@@ -346,11 +352,10 @@
 <li><p>removed <em>iterators</em> dependency</p></li>
 <li><p>ordering and name fix in <code>net.loads</code></p></li>
 <li><p>auto-adjusts y-axis label size for <code>itemStability</code> plot based on number of nodes or length of node names</p></li>
-</ul><p>o <code>net.loads</code> adjusted for larger values using absolute values and applying the sign afterwards</p>
-<ul><li>reverse coding update in <code>net.loads</code>
-</li>
-</ul><p>o <code>node.redundant.combine</code> bug fix for reverse coding latent variables</p>
-<ul><li><p>added Louvain community detection to all EGA functions in <em>EGAnet</em></p></li>
+<li><p><code>net.loads</code> adjusted for larger values using absolute values and applying the sign afterwards</p></li>
+<li><p>reverse coding update in <code>net.loads</code></p></li>
+<li><p><code>node.redundant.combine</code> bug fix for reverse coding latent variables</p></li>
+<li><p>added Louvain community detection to all EGA functions in <em>EGAnet</em></p></li>
 <li><p>functionality updates to <code>node.redundant</code></p></li>
 <li><p>swapped arguments ‘type’ and ‘method’ in the <code>node.redundant</code> function (fixed examples in other node.redundant functions)</p></li>
 <li><p>updated citation</p></li>
@@ -368,8 +373,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.0" id="changes-in-version-080">Changes in version 0.8.0<a class="anchor" aria-label="anchor" href="#changes-in-version-080"></a></h2>
-<p>o ‘bootEGA’ now computes time until bootstrap is finished</p>
-<ul><li><p>new functions ‘cmi’, ‘pmi’ and ‘residualEGA’ added: ‘cmi’ computes conditional mutual information, ‘pmi’ computes partial mutual information and residual EGA computes an EGA network controlling for wording effects</p></li>
+<ul><li><p>‘bootEGA’ now computes time until bootstrap is finished</p></li>
+<li><p>new functions ‘cmi’, ‘pmi’ and ‘residualEGA’ added: ‘cmi’ computes conditional mutual information, ‘pmi’ computes partial mutual information and residual EGA computes an EGA network controlling for wording effects</p></li>
 <li><p>new dataset ‘optimism’ added</p></li>
 <li><p>documentation and functionality for several functions updated</p></li>
 </ul></div>

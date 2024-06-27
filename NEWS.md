@@ -1,5 +1,14 @@
 WEBSITE: https://r-ega.net
 
+## Changes in version 2.0.7
+
++ FIX: mixed data with missing data in `network.predictability`
+
++ UPDATE: NEWS is now formatted in markdown
+
++ UPDATE: prediction and RMSE output for continuous data `network.predictability` is set to original scale to increase interpretability
+
+
 ## Changes in version 2.0.6
 
 + FIX: bug when using `na.data = "listwise"` in standard `cor()` function
@@ -18,6 +27,7 @@ WEBSITE: https://r-ega.net
 
 + UPDATE: R-squared in `continuous_accuracy` helper uses Pearson's correlation squared
 
+
 ## Changes in version 2.0.5
 
 + FIX: 'stroke' parameter in `hierEGA` that broke with {ggplot2} update
@@ -26,7 +36,7 @@ WEBSITE: https://r-ega.net
 
 + ADD: `network.generalizability` to estimate network generalizability to new data (leverages `network.predictability`)
 
-+ UPDATE: new loadings have been added to resolve issues in original loadings (e.g., signs, cross-loadings, standardization) 
++ UPDATE: new loadings (`net.loads(..., loading.method = "experimental")`) have been added to resolve issues in original loadings (e.g., signs, cross-loadings, standardization) 
 
 + UPDATE: `plot.bootEGA` will output `itemStability` plot by default
 
@@ -51,6 +61,7 @@ WEBSITE: https://r-ega.net
 
 + UPDATE: `reindex_memberships` used in `community.homogenize`
 
+
 ## Changes in version 2.0.3
 
 + FIX: freed `edge.*` arguments in `compare.EGA.plots` to allow full customization
@@ -70,7 +81,7 @@ WEBSITE: https://r-ega.net
 
 + ADD: website pointing to different data check errors added to error output (hopefully, makes errors more understandable)
 
-+ UPDATE: `corr = "cor_auto"` now performs `qgraph::cor_auto` in favor of legacy; previous behavior starting at 2.0.0 was to deprecate `"cor_auto"` in favor of `"auto"`; default remains `corr = "auto"`
++ UPDATE: `corr = "cor_auto"` now performs `qgraph::cor_auto` in favor of legacy; previous behavior starting at 2.0.0 was t+ deprecate `"cor_auto"` in favor of `"auto"`; default remains `corr = "auto"`
 
 + UPDATE: `compare.EGA.plots` outputs `$all` and `$individual` for the plots
 
@@ -88,11 +99,11 @@ WEBSITE: https://r-ega.net
 
 ## Changes in version 2.0.0
 
-+ MAJOR REFACTOR: the update to version 2.0.0 includes many major ## Changes that are designed to improve the speed, reliability, and reproducibility of {EGAnet}. The goal of these ## Changes are to eliminate common errors and streamline the code in the package to prevent future error cases. There are several function additions that are provided to facilitate modular use of the {EGAnet} package
++ MAJOR REFACTOR: the update to version 2.0.0 includes many major changes that are designed to improve the speed, reliability, and reproducibility of {EGAnet}. The goal of these changes are to eliminate common errors and streamline the code in the package to prevent future error cases. There are several function additions that are provided to facilitate modular use of the {EGAnet} package
 
 + INTERNALS: function-specific internal functions and S3methods are now located in their respective .R files rather than elsewhere (e.g., "utils-EGAnet.R")
 
-+ SWAP: internal script usage of "utils-EGAnet.R" depracated for "helper.R" functions that are used across the package (no visible ## Changes for the user)
++ SWAP: internal script usage of "utils-EGAnet.R" depracated for "helper.R" functions that are used across the package (no visible changes for the user)
 
 + NOTE: default objective function for Leiden algorithm is set to "modularity"
 
@@ -116,7 +127,7 @@ WEBSITE: https://r-ega.net
 
 + ADD: `community.unidimensional` to apply different unidimensional community detection approaches; makes unidimensional community detection more modular and flexible
 
-+ ADD: basic (internal) function to handle all network plots to keep ## Changes centralized to a single function; extends flexbility to handle all {GGally}'s `ggnet2` arguments
++ ADD: basic (internal) function to handle all network plots to keep changes centralized to a single function; extends flexbility to handle all {GGally}'s `ggnet2` arguments
 
 + ADD: implemented reproducible parametric bootstrapping and random sampling (see <https://github.com/hfgolino/EGAnet/wiki/Reproducibility-and-PRNG> for more details)
 
@@ -481,11 +492,11 @@ WEBSITE: https://r-ega.net
 
 + auto-adjusts y-axis label size for `itemStability` plot based on number of nodes or length of node names
 
-o `net.loads` adjusted for larger values using absolute values and applying the sign afterwards
++ `net.loads` adjusted for larger values using absolute values and applying the sign afterwards
 
 + reverse coding update in `net.loads`
 
-o `node.redundant.combine` bug fix for reverse coding latent variables
++ `node.redundant.combine` bug fix for reverse coding latent variables
 
 + added Louvain community detection to all EGA functions in *EGAnet*
 
@@ -517,7 +528,7 @@ o `node.redundant.combine` bug fix for reverse coding latent variables
 
 ## Changes in version 0.8.0
 
-o 'bootEGA' now computes time until bootstrap is finished
++ 'bootEGA' now computes time until bootstrap is finished
 
 + new functions 'cmi', 'pmi' and 'residualEGA' added: 'cmi' computes conditional mutual information, 'pmi' computes partial mutual information and residual EGA computes an EGA network controlling for wording effects
 
