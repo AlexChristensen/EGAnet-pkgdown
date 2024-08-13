@@ -215,7 +215,7 @@ riEGA <- function(
   uni.method <- set_default(uni.method, "louvain", community.unidimensional)
 
   # Obtain correlations
-  output <- EGAnet:::obtain_sample_correlations(data, n, corr, na.data, verbose)
+  output <- obtain_sample_correlations(data, n, corr, na.data, verbose)
 
   # Catch BGGM
   if(model == "bggm"){
@@ -262,7 +262,7 @@ riEGA <- function(
     "std.lv", "se"
   )] <- list(
     output$correlation_matrix, output$n,
-    swiftelse("estimator" %in% names(ellipse), estimator, "ml"),
+    swiftelse("estimator" %in% names(ellipse), ellipse$estimator, "ML"),
     FALSE, "none"
   )
 

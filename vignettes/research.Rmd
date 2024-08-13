@@ -11,7 +11,7 @@ vignette: >
 
 Brown, G. P., Delgadillo, J., & Golino, H. (2023). Distinguishing the dimensions of the original Dysfunctional Attitude Scale in an archival clinical sample. *Cognitive Therapy and Research*, *47*(1), 69–83. doi: [10.1007/s10608-022-10333-w](research/Brown et al. - 2023 - Distinguishing the dimensions of the original Dysf.pdf){target="_blank"}
 
-Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf){target="_blank"}
+Maertens, R., Götz, F. M., Golino, H., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf){target="_blank"}
 
 ***
 
@@ -43,6 +43,8 @@ Golino, H., Lillard, A. S., Becker, I., & Christensen, A. P. (2021). Investigati
 
 Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf){target="_blank"}
 
+Heshmati, S., Rombaoa, J. P., Merritt, S., & Christensen, A. P. (2024). Well-being is a personalized experience: An intraindividual approach to dynamic well-being networks in daily life. *PsyArXiv*. doi: [10.31234/osf.io/b65xh](research/Heshmati et al. - 2024 - Well-being is a personalized experience An intrai.pdf)
+
 ***
 
 ### EGA + NLP
@@ -51,7 +53,7 @@ Kjellström, S., & Golino, H. (2019). Mining concepts of health responsibility u
 
 Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Modeling latent topics in social media using Dynamic Exploratory Graph Analysis: The case of the right-wing and left-wing trolls in the 2016 US elections. *Psychometrika*, *87*(1), 156–187. doi: [10.1007/s11336-021-09820-y](research/Golino et al. - 2022 - Modeling latent topics in social media using Dynam.pdf){target="_blank"}
 
-Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf){target="_blank"}
+Maertens, R., Götz, F. M., Golino, H., Roozenbeek, J., Schneider, C. R., Kyrychenko, Y., Kerr, J. R., Stieger, S., McClanahan, W. P., & Drabot, K. (2023). The Misinformation Susceptibility Test (MIST): A psychometrically validated measure of news veracity discernment. *Behavior Research Methods*, 1–37. doi: [10.3758/s13428-023-02124-2](research/Maertens et al. - 2023 - The Misinformation Susceptibility Test (MIST) A p.pdf){target="_blank"}
 
 ***
 
@@ -59,8 +61,11 @@ Maertens, R., Götz, F. M., Golino, H. F., Roozenbeek, J., Schneider, C. R., Kyr
 
 +   [`EGA.fit`](references/EGA.fit.html){target="_blank"}
 +   [`entropyFit`](../reference/entropyFit.html){target="_blank"}
++   [`genTEFI`](../reference/genTEFI.html){target="_blank"}
 +   [`tefi`](../reference/tefi.html){target="_blank"}
 +   [`vn.entropy`](../reference/vn.entropy.html){target="_blank"}
+
+Golino, H., Jiménez, M., Garrido, L. E., & Christensen, A. P. (2024). Generalized Total Entropy Fit Index: A new fit index for dimensionality analysis of bifactor structures with multiple general factors in SEM and network psychometrics. *PsyArXiv*. doi:[10.31234/osf.io/5g3hb](research/Golino et al. - 2024 - Generalized Total Entropy Fit Index A new fit ind.pdf){target="_blank"}
 
 Golino, H., Moulder, R., Shi, D., Christensen, A. P., Garrido, L. E., Nieto, M. D., Nesselroade, J., Sadana, R., Thiyagarajan, J. A., & Boker, S. M. (2021). Entropy fit indices: New fit measures for assessing the structure and dimensionality of multiple latent variables. *Multivariate Behavioral Research*, *56*(6), 874–902. doi: [10.1080/00273171.2020.1779642](research/Golino et al. - 2021 - Entropy fit indices New fit measures for assessin.pdf){target="_blank"}
 
@@ -140,7 +145,7 @@ Golino, H., Christensen, A. P., Moulder, R., Kim, S., & Boker, S. M. (2022). Mod
 +   [`infoCluster`](../reference/infoCluster.html){target="_blank"}
 +   [`jsd`](../reference/jsd.html){target="_blank"}
 
-Golino, H., Christensen, A. P., & Nesselroade, J. (2022). Towards a psychology of individuals: The ergodicity information index and a bottom-up approach for finding generalizations. *PsyArXiv*. doi: [10.31234/osf.io/th6rm](research/Golino et al. - 2022 - Towards a psychology of individuals The ergodicit.pdf){target="_blank"}
+Golino, H., Nesselroade, J., & Christensen, A. P. (2022). Towards a psychology of individuals: The ergodicity information index and a bottom-up approach for finding generalizations. *PsyArXiv*. doi: [10.31234/osf.io/th6rm](research/Golino et al. - 2022 - Towards a psychology of individuals The ergodicit.pdf){target="_blank"}
 
 ***
 

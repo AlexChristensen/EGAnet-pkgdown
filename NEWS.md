@@ -4,9 +4,23 @@ WEBSITE: https://r-ega.net
 
 + FIX: mixed data with missing data in `network.predictability`
 
++ ADD: `frobenius` norm to compare networks
+
++ ADD: `network.compare` function to test for differences in network structures using three different metrics (Frobenius Norm, Jensen-Shannon Similarity, total network strength)
+
++ ADD: a general function called `information` to compute several information theory measures
+
++ UPDATE: default 'loading.method' for `net.loads` has been changed to "revised" moving forward -- the previous default in versions <= 2.0.6 can be obtained using "original"
+
++ UPDATE: `invariance` handles more than 2 groups (plots up to 4 groups pairwise)
+
++ UPDATE: added 'signed' argument in `jsd` to allow for signed or absolute networks to be used in computations (includes downstream functions: `infoCluster`)
+
 + UPDATE: NEWS is now formatted in markdown
 
-+ UPDATE: prediction and RMSE output for continuous data `network.predictability` is set to original scale to increase interpretability
++ UPDATE: `network.predictability` uses R-squared and mean absolute error (MAE) for all node predictions
+
++ INTERNAL: `network.generalizabilty` was moved to be internal (needs some work yet)
 
 
 ## Changes in version 2.0.6

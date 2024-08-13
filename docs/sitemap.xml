@@ -1,237 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://r-ega.net/404.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/Readme.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/argument-flexibility.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/ega-nlp.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/ega.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/errors.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/modular-approach.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/plotting.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/quick-start.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/reproducibility-prng.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/research.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/teaching.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/articles/whats-changed.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/CFA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EBICglasso.qgraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGA.estimate.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGA.fit.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGAnet-package.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/EGAnet-plot.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/Embed.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/LCT.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/TMFG.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/UVA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/auto.correlate.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/boot.ergoInfo.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/boot.wmt.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/bootEGA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/color_palette_EGA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/community.compare.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/community.consensus.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/community.detection.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/community.homogenize.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/community.unidimensional.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/compare.EGA.plots.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/convert2igraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/convert2tidygraph.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/depression.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/dimensionStability.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/dnn.weights.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/dynEGA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/dynEGA.ind.pop.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/ega.wmt.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/entropyFit.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/ergoInfo.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/genTEFI.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/glla.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/hierEGA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/igraph2matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/infoCluster.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/intelligenceBattery.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/invariance.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/itemStability.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/jsd.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/modularity.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/net.loads.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/net.scores.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/network.estimation.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/network.generalizability.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/network.predictability.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/optimism.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/polychoric.matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/prime.num.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/riEGA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/sim.dynEGA.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/simDFM.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/tefi.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/totalCor.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/totalCorMat.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/vn.entropy.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/wmt2.html</loc>
-  </url>
-  <url>
-    <loc>https://r-ega.net/reference/wto.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://r-ega.net/404.html</loc></url>
+<url><loc>https://r-ega.net/LICENSE-text.html</loc></url>
+<url><loc>https://r-ega.net/Readme.html</loc></url>
+<url><loc>https://r-ega.net/articles/argument-flexibility.html</loc></url>
+<url><loc>https://r-ega.net/articles/ega-nlp.html</loc></url>
+<url><loc>https://r-ega.net/articles/ega.html</loc></url>
+<url><loc>https://r-ega.net/articles/errors.html</loc></url>
+<url><loc>https://r-ega.net/articles/index.html</loc></url>
+<url><loc>https://r-ega.net/articles/modular-approach.html</loc></url>
+<url><loc>https://r-ega.net/articles/plotting.html</loc></url>
+<url><loc>https://r-ega.net/articles/quick-start.html</loc></url>
+<url><loc>https://r-ega.net/articles/reproducibility-prng.html</loc></url>
+<url><loc>https://r-ega.net/articles/research.html</loc></url>
+<url><loc>https://r-ega.net/articles/teaching.html</loc></url>
+<url><loc>https://r-ega.net/articles/whats-changed.html</loc></url>
+<url><loc>https://r-ega.net/authors.html</loc></url>
+<url><loc>https://r-ega.net/index.html</loc></url>
+<url><loc>https://r-ega.net/news/index.html</loc></url>
+<url><loc>https://r-ega.net/reference/CFA.html</loc></url>
+<url><loc>https://r-ega.net/reference/EBICglasso.qgraph.html</loc></url>
+<url><loc>https://r-ega.net/reference/EGA.estimate.html</loc></url>
+<url><loc>https://r-ega.net/reference/EGA.fit.html</loc></url>
+<url><loc>https://r-ega.net/reference/EGA.html</loc></url>
+<url><loc>https://r-ega.net/reference/EGAnet-package.html</loc></url>
+<url><loc>https://r-ega.net/reference/EGAnet-plot.html</loc></url>
+<url><loc>https://r-ega.net/reference/Embed.html</loc></url>
+<url><loc>https://r-ega.net/reference/LCT.html</loc></url>
+<url><loc>https://r-ega.net/reference/TMFG.html</loc></url>
+<url><loc>https://r-ega.net/reference/UVA.html</loc></url>
+<url><loc>https://r-ega.net/reference/auto.correlate.html</loc></url>
+<url><loc>https://r-ega.net/reference/boot.ergoInfo.html</loc></url>
+<url><loc>https://r-ega.net/reference/boot.wmt.html</loc></url>
+<url><loc>https://r-ega.net/reference/bootEGA.html</loc></url>
+<url><loc>https://r-ega.net/reference/color_palette_EGA.html</loc></url>
+<url><loc>https://r-ega.net/reference/community.compare.html</loc></url>
+<url><loc>https://r-ega.net/reference/community.consensus.html</loc></url>
+<url><loc>https://r-ega.net/reference/community.detection.html</loc></url>
+<url><loc>https://r-ega.net/reference/community.homogenize.html</loc></url>
+<url><loc>https://r-ega.net/reference/community.unidimensional.html</loc></url>
+<url><loc>https://r-ega.net/reference/compare.EGA.plots.html</loc></url>
+<url><loc>https://r-ega.net/reference/convert2igraph.html</loc></url>
+<url><loc>https://r-ega.net/reference/convert2tidygraph.html</loc></url>
+<url><loc>https://r-ega.net/reference/depression.html</loc></url>
+<url><loc>https://r-ega.net/reference/dimensionStability.html</loc></url>
+<url><loc>https://r-ega.net/reference/dnn.weights.html</loc></url>
+<url><loc>https://r-ega.net/reference/dynEGA.html</loc></url>
+<url><loc>https://r-ega.net/reference/dynEGA.ind.pop.html</loc></url>
+<url><loc>https://r-ega.net/reference/ega.wmt.html</loc></url>
+<url><loc>https://r-ega.net/reference/entropyFit.html</loc></url>
+<url><loc>https://r-ega.net/reference/ergoInfo.html</loc></url>
+<url><loc>https://r-ega.net/reference/frobenius.html</loc></url>
+<url><loc>https://r-ega.net/reference/genTEFI.html</loc></url>
+<url><loc>https://r-ega.net/reference/glla.html</loc></url>
+<url><loc>https://r-ega.net/reference/hierEGA.html</loc></url>
+<url><loc>https://r-ega.net/reference/igraph2matrix.html</loc></url>
+<url><loc>https://r-ega.net/reference/index.html</loc></url>
+<url><loc>https://r-ega.net/reference/infoCluster.html</loc></url>
+<url><loc>https://r-ega.net/reference/information.html</loc></url>
+<url><loc>https://r-ega.net/reference/intelligenceBattery.html</loc></url>
+<url><loc>https://r-ega.net/reference/invariance.html</loc></url>
+<url><loc>https://r-ega.net/reference/itemStability.html</loc></url>
+<url><loc>https://r-ega.net/reference/jsd.html</loc></url>
+<url><loc>https://r-ega.net/reference/modularity.html</loc></url>
+<url><loc>https://r-ega.net/reference/net.loads.html</loc></url>
+<url><loc>https://r-ega.net/reference/net.scores.html</loc></url>
+<url><loc>https://r-ega.net/reference/network.compare.html</loc></url>
+<url><loc>https://r-ega.net/reference/network.estimation.html</loc></url>
+<url><loc>https://r-ega.net/reference/network.generalizability.html</loc></url>
+<url><loc>https://r-ega.net/reference/network.predictability.html</loc></url>
+<url><loc>https://r-ega.net/reference/optimism.html</loc></url>
+<url><loc>https://r-ega.net/reference/polychoric.matrix.html</loc></url>
+<url><loc>https://r-ega.net/reference/prime.num.html</loc></url>
+<url><loc>https://r-ega.net/reference/riEGA.html</loc></url>
+<url><loc>https://r-ega.net/reference/sim.dynEGA.html</loc></url>
+<url><loc>https://r-ega.net/reference/simDFM.html</loc></url>
+<url><loc>https://r-ega.net/reference/tefi.html</loc></url>
+<url><loc>https://r-ega.net/reference/totalCor.html</loc></url>
+<url><loc>https://r-ega.net/reference/totalCorMat.html</loc></url>
+<url><loc>https://r-ega.net/reference/vn.entropy.html</loc></url>
+<url><loc>https://r-ega.net/reference/wmt2.html</loc></url>
+<url><loc>https://r-ega.net/reference/wto.html</loc></url>
 </urlset>
+

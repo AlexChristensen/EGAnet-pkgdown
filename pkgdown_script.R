@@ -5,7 +5,7 @@
 pkgdown::build_site()
 
 # Iterate on colors
-pkgdown::init_site()
+# pkgdown::init_site()
 
 # Make sure to remember to change the 
 # .css 'text-muted' to be '#fff'
