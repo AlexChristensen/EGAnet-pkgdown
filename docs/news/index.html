@@ -49,7 +49,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.0.7" id="changes-in-version-207">Changes in version 2.0.7<a class="anchor" aria-label="anchor" href="#changes-in-version-207"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.0.7" id="changes-in-version-207">Changes in version 2.0.7<a class="anchor" aria-label="anchor" href="#changes-in-version-207"></a></h2><p class="text-muted">CRAN release: 2024-09-02</p>
 <ul><li><p>FIX: mixed data with missing data in <code>network.predictability</code></p></li>
 <li><p>ADD: <code>frobenius</code> norm to compare networks</p></li>
 <li><p>ADD: <code>network.compare</code> function to test for differences in network structures using three different metrics (Frobenius Norm, Jensen-Shannon Similarity, total network strength)</p></li>
@@ -60,6 +60,7 @@
 <li><p>UPDATE: NEWS is now formatted in markdown</p></li>
 <li><p>UPDATE: <code>network.predictability</code> uses R-squared and mean absolute error (MAE) for all node predictions</p></li>
 <li><p>INTERNAL: <code>network.generalizabilty</code> was moved to be internal (needs some work yet)</p></li>
+<li><p>INTERNAL: signs for <code>net.loads</code> uses the first eigenvector of the target network (rather than the custom <code>obtain_signs</code> function)</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.6" id="changes-in-version-206">Changes in version 2.0.6<a class="anchor" aria-label="anchor" href="#changes-in-version-206"></a></h2><p class="text-muted">CRAN release: 2024-04-22</p>

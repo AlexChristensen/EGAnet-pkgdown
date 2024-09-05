@@ -147,7 +147,7 @@ See \code{\link[EGAnet]{TMFG}} for more details
 }}
 
 \item{lower.algorithm}{Character or
-\code{\link{igraph}} \code{cluster_*} function (length = 1).
+\code{} \code{cluster_*} function (length = 1).
 Defaults to the lower order \code{"louvain"} with most common
 consensus clustering (1000 iterations; see
 \code{\link[EGAnet]{community.consensus}} for more details)
@@ -158,7 +158,7 @@ recommended. Using any other algorithm is considered
 capture lower order communities}
 
 \item{higher.algorithm}{Character or
-\code{\link{igraph}} \code{cluster_*} function (length = 1).
+\code{} \code{cluster_*} function (length = 1).
 Defaults to \code{"louvain"}.
 Three options are listed below but all are available
 (see \code{\link[EGAnet]{community.detection}} for other options):
@@ -278,6 +278,10 @@ Jiménez, M., Abad, F. J., Garcia-Garzon, E., Golino, H., Christensen, A. P., & 
 Dimensionality assessment in bifactor structures with multiple general factors: A network psychometrics approach.
 \emph{Psychological Methods}.
 
+\strong{3+ level hierarchical EGA} \cr
+Samo, A., Christensen, A. P., Abad, F. J., Garrido, L. E., Garcia-Garzon, E., Golino, H. & McAbee, S. T. (2023). Building the structure of personality from the bottom-up using Hierarchical Exploratory Graph Analysis.
+\emph{PsyArXiv}.
+
 \strong{Conceptual implementation} \cr
 Golino, H., Thiyagarajan, J. A., Sadana, R., Teles, M., Christensen, A. P., & Boker, S. M. (2020).
 Investigating the broad domains of intrinsic capacity, functional ability and
@@ -291,7 +295,7 @@ Revised network loadings.
 \emph{PsyArXiv}.
 }
 \seealso{
-\code{\link[EGAnet]{plot.EGAnet}} for plot usage in \code{\link{EGAnet}}
+\code{\link[EGAnet]{plot.EGAnet}} for plot usage in \code{}
 }
 \author{
 Marcos Jiménez <marcosjnezhquez@gmailcom>,

@@ -369,11 +369,11 @@ Unidimensional Method:  Louvain
 
 EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
-                                        
-               1     2     3     4     5
-Frequency:  0.01 0.638 0.304 0.046 0.002
+                                         
+                1     2     3     4     5
+Frequency:  0.004 0.642 0.306 0.046 0.002
 
-Median dimensions: 2 [0.82, 3.18] 95% CI</code></pre>
+Median dimensions: 2 [0.83, 3.17] 95% CI</code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform `bootEGA` and set seed to `1234` (again)</span></span>
 <span><span class="va">boot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bootEGA.html">bootEGA</a></span><span class="op">(</span><span class="va">wmt2</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">24</span><span class="op">]</span>, seed <span class="op">=</span> <span class="fl">1234</span>, plot.typicalStructure <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -390,11 +390,11 @@ Unidimensional Method:  Louvain
 
 EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
-                                         
-                1     2     3     4     5
-Frequency:  0.006 0.644 0.302 0.046 0.002
+                                       
+                1     2   3     4     5
+Frequency:  0.014 0.638 0.3 0.046 0.002
 
-Median dimensions: 2 [0.83, 3.17] 95% CI</code></pre>
+Median dimensions: 2 [0.81, 3.19] 95% CI</code></pre>
 <p>Notice that the results are very similar but they are not
 <em>exactly</em> the same (frequencies for <code>1</code> and
 <code>3</code> are slightly different). The data that were generated in

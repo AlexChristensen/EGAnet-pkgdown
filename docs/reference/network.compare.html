@@ -176,8 +176,17 @@ for more details on random number generation in <code><a href="EGAnet-package.ht
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Returns data frame with row names of each measure, empirical value (<code>statisticl</code>), and p-value based on the permutation test (<code>p.value</code>)</p>
-    </div>
+    <p>Returns a list:</p>
+<dl><dt>network</dt>
+<dd><p>Data frame with row names of each measure, empirical value (<code>statistic</code>), and
+<em>p</em>-value based on the permutation test (<code>p.value</code>)</p></dd>
+
+
+<dt>edges</dt>
+<dd><p>List containing matrices of values for empirical values (<code>statistic</code>),
+<em>p</em>-values (<code>p.value</code>), and Benjamini-Hochberg corrected <em>p</em>-values (<code>p.adjusted</code>)</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p><strong>Frobenius Norm</strong> <br>
@@ -210,8 +219,16 @@ Comparing network structures on three aspects: A permutation test.
 <span class="r-in"><span><span class="va">group1</span> <span class="op">&lt;-</span> <span class="va">wmt</span><span class="op">[</span><span class="va">groups</span> <span class="op">==</span> <span class="fl">1</span>,<span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">group2</span> <span class="op">&lt;-</span> <span class="va">wmt</span><span class="op">[</span><span class="va">groups</span> <span class="op">==</span> <span class="fl">2</span>,<span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">network.compare</span><span class="op">(</span><span class="va">group1</span>, <span class="va">group2</span><span class="op">)</span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co"># Perform comparison</span></span></span>
+<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">network.compare</span><span class="op">(</span><span class="va">group1</span>, <span class="va">group2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Print results</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'results' not found</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot edge differences</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span> <span class="co"># \dontrun{}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'results' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
