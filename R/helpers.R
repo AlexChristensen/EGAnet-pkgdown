@@ -1448,7 +1448,7 @@ needs_usable <- function(ellipse)
 #' @noRd
 # Obtain data, sample size, correlation matrix ----
 # Generic function to get the usual needed inputs
-# Updated 16.03.2024
+# Updated 21.09.2024
 obtain_sample_correlations <- function(data, n, corr, na.data, verbose, ...)
 {
 
@@ -1478,7 +1478,9 @@ obtain_sample_correlations <- function(data, n, corr, na.data, verbose, ...)
     n <- dim(data)[1]
 
     # Check for automatic correlations
-    if(corr == "auto"){
+    if(corr == "cosine"){
+      correlation_matrix <- cosine(data)
+    }else if(corr == "auto"){
       correlation_matrix <- auto.correlate(
         data = data, corr = "pearson", na.data = na.data,
         verbose = verbose, ...
@@ -2852,7 +2854,7 @@ pcor2cor <- function(partial_correlations)
 
 #' @noRd
 # Partial correlations to inverse covariances ----
-# Updated 29.06.2023
+# Updated 25.09.2024
 pcor2inv <- function(partial_correlations)
 {
 
@@ -3234,10 +3236,10 @@ matrix_entropy <- function(density_matrix, base = 2.718282)
 #' @noRd
 # Positive definite matrix ----
 # Logical for whether a matrix is positive definite
-# Updated 29.06.2023
+# Updated 05.11.2024
 is_positive_definite <- function(data)
 {
-  return(all(eigen(data, symmetric = TRUE, only.values = TRUE)$values > 0))
+  return(all(eigen(data, symmetric = TRUE, only.values = TRUE)$values > .Machine$double.eps))
 }
 
 #' @noRd
@@ -3255,6 +3257,22 @@ matrix_eigenvalues <- function(data)
 trace <- function(object)
 {
   return(sum(diag(object), na.rm = TRUE))
+}
+
+#' @noRd
+# Standardized root mean square ----
+# Updated 24.09.2024
+srmr <- function(base, comparison)
+{
+
+  # Obtain lower triangle
+  lower_triangle <- lower.tri(base)
+
+  # Return SRMR
+  return(
+    sqrt(mean((base[lower_triangle] - comparison[lower_triangle])^2))
+  )
+
 }
 
 #' @noRd

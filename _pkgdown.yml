@@ -100,6 +100,12 @@ reference:
       - "net.loads"
       - "net.scores"
       - "UVA"
+  - title: "EGM Functions"
+    desc: "Main Exploratory Graph Model functions"
+    contents:
+      - "EGM"
+      - "EGM.compare"
+      - "simEGM"
   - title: "Information Theory Functions"
     desc: "Information Theory-related functions for network psychometrics"
     contents:
@@ -131,6 +137,7 @@ reference:
       - "community.unidimensional"
       - "convert2igraph"
       - "convert2tidygraph"
+      - "cosine"
       - "EBICglasso.qgraph"
       - "Embed"
       - "frobenius"

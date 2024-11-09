@@ -27,7 +27,7 @@ See Details for more information"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,7 @@ See <strong>Details</strong> for more information</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">TMFG</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  corr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"cor_auto"</span>, <span class="st">"pearson"</span>, <span class="st">"spearman"</span><span class="op">)</span>,</span>
+<span>  corr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"cor_auto"</span>, <span class="st">"cosine"</span>, <span class="st">"pearson"</span>, <span class="st">"spearman"</span><span class="op">)</span>,</span>
 <span>  na.data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pairwise"</span>, <span class="st">"listwise"</span><span class="op">)</span>,</span>
 <span>  partial <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  returnAllResults <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -128,6 +128,7 @@ ordinal, use <code>ordinal.categories</code>
 (see <code><a href="polychoric.matrix.html">polychoric.matrix</a></code> for more details)</p></li>
 <li><p><code>"cor_auto"</code> — Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations.
 Arguments can be passed along to the function</p></li>
+<li><p><code>"cosine"</code> — Uses <code><a href="cosine.html">cosine</a></code> to compute cosine similarity</p></li>
 <li><p><code>"pearson"</code> — Pearson's correlation is computed for all
 variables regardless of categories</p></li>
 <li><p><code>"spearman"</code> — Spearman's rank-order correlation is computed
@@ -379,7 +380,7 @@ Network filtering for big data: Triangulated maximally filtered graph.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

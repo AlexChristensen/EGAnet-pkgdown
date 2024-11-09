@@ -17,7 +17,7 @@ The tuning parameter is chosen using the Extended Bayesian Information criterion
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@ The tuning parameter is chosen using the Extended Bayesian Information criterion
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">EBICglasso.qgraph</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  n <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  corr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"cor_auto"</span>, <span class="st">"pearson"</span>, <span class="st">"spearman"</span><span class="op">)</span>,</span>
+<span>  corr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"cor_auto"</span>, <span class="st">"cosine"</span>, <span class="st">"pearson"</span>, <span class="st">"spearman"</span><span class="op">)</span>,</span>
 <span>  na.data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pairwise"</span>, <span class="st">"listwise"</span><span class="op">)</span>,</span>
 <span>  gamma <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  penalize.diagonal <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -114,13 +114,15 @@ tetrachoric for binary, and polyserial/biserial for ordinal/binary with
 continuous. To change the number of categories that are considered
 ordinal, use <code>ordinal.categories</code>
 (see <code><a href="polychoric.matrix.html">polychoric.matrix</a></code> for more details)</p></li>
-<li><p><code>"cor_auto"</code> — Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to
-compute correlations. Arguments can be passed along to the function</p></li>
-<li><p><code>"pearson"</code> — Pearson's correlation is computed for
-all variables regardless of categories</p></li>
-<li><p><code>"spearman"</code> — Spearman's rank-order correlation is
-computed for all variables regardless of categories</p></li>
-</ul></dd>
+<li><p><code>"cor_auto"</code> — Uses <code><a href="https://rdrr.io/pkg/qgraph/man/cor_auto.html" class="external-link">cor_auto</a></code> to compute correlations.
+Arguments can be passed along to the function</p></li>
+<li><p><code>"cosine"</code> — Uses <code><a href="cosine.html">cosine</a></code> to compute cosine similarity</p></li>
+<li><p><code>"pearson"</code> — Pearson's correlation is computed for all
+variables regardless of categories</p></li>
+<li><p><code>"spearman"</code> — Spearman's rank-order correlation is computed
+for all variables regardless of categories</p></li>
+</ul><p>For other similarity measures, compute them first and input them
+into <code>data</code> with the sample size (<code>n</code>)</p></dd>
 
 
 <dt id="arg-na-data">na.data<a class="anchor" aria-label="anchor" href="#arg-na-data"></a></dt>
@@ -263,7 +265,7 @@ Hudson Golino &lt;hfg9s at virginia.edu&gt; and Alexander P. Christensen &lt;ale
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

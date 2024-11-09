@@ -31,6 +31,8 @@
 #' \item \code{"cor_auto"} --- Uses \code{\link[qgraph]{cor_auto}} to compute correlations.
 #' Arguments can be passed along to the function
 #'
+#' \item \code{"cosine"} --- Uses \code{\link[EGAnet]{cosine}} to compute cosine similarity
+#'
 #' \item \code{"pearson"} --- Pearson's correlation is computed for all
 #' variables regardless of categories
 #'
@@ -227,10 +229,10 @@
 #'
 #' @export
 # EGA ----
-# Updated 24.10.2023
+# Updated 21.09.2024
 EGA <- function (
     data, n = NULL,
-    corr = c("auto", "cor_auto", "pearson", "spearman"),
+    corr = c("auto", "cor_auto", "cosine", "pearson", "spearman"),
     na.data = c("pairwise", "listwise"),
     model = c("BGGM", "glasso", "TMFG"),
     algorithm = c("leiden", "louvain", "walktrap"),
@@ -438,7 +440,7 @@ EGA_errors <- function(data, n, plot.EGA, verbose, ...)
 
 #' @exportS3Method
 # S3 Print Method ----
-# Updated 02.08.2023
+# Updated 09.10.2024
 print.EGA <- function(x, ...)
 {
 
@@ -454,57 +456,62 @@ print.EGA <- function(x, ...)
   # Print community detection
   print(x$wc)
 
-  # Add break space
-  cat("\n----\n\n")
+  # Check for unidimensional attributes
+  if("unidimensional" %in% names(attributes(x))){
 
-  # Get unidimensional attributes
-  unidimensional_attributes <- attr(x, "unidimensional")
+    # Add break space
+    cat("\n----\n\n")
 
-  # Obtain unidimensional method
-  unidimensional_method <- switch(
-    unidimensional_attributes$uni.method,
-    "expand" = "Expand",
-    "le" = "Leading Eigenvector",
-    "louvain" = "Louvain"
-  )
+    # Get unidimensional attributes
+    unidimensional_attributes <- attr(x, "unidimensional")
 
-  # Set up unidimensional print
-  if(
-    unidimensional_method == "Louvain" &
-    "consensus.iter" %in% names(unidimensional_attributes$consensus)
-  ){
-
-    # Set up consensus attributes
-    consensus_attributes <- unidimensional_attributes$consensus
-
-    # Obtain consensus name
-    consensus_name <- switch(
-      consensus_attributes$consensus.method,
-      "highest_modularity" = "Highest Modularity",
-      "iterative" = "Iterative",
-      "most_common" = "Most Common",
-      "lowest_tefi" = "Lowest TEFI"
+    # Obtain unidimensional method
+    unidimensional_method <- switch(
+      unidimensional_attributes$uni.method,
+      "expand" = "Expand",
+      "le" = "Leading Eigenvector",
+      "louvain" = "Louvain"
     )
 
-    # Update unidimensional method text
-    unidimensional_method <- paste0(
-      unidimensional_method, " (", consensus_name,
-      " for ", consensus_attributes$consensus.iter,
-      " iterations)"
+    # Set up unidimensional print
+    if(
+      unidimensional_method == "Louvain" &
+      "consensus.iter" %in% names(unidimensional_attributes$consensus)
+    ){
+
+      # Set up consensus attributes
+      consensus_attributes <- unidimensional_attributes$consensus
+
+      # Obtain consensus name
+      consensus_name <- switch(
+        consensus_attributes$consensus.method,
+        "highest_modularity" = "Highest Modularity",
+        "iterative" = "Iterative",
+        "most_common" = "Most Common",
+        "lowest_tefi" = "Lowest TEFI"
+      )
+
+      # Update unidimensional method text
+      unidimensional_method <- paste0(
+        unidimensional_method, " (", consensus_name,
+        " for ", consensus_attributes$consensus.iter,
+        " iterations)"
+      )
+
+    }
+
+    # Print unidimensional
+    cat(
+      paste0(
+        "Unidimensional Method: ", unidimensional_method, "\n",
+        "Unidimensional: ", swiftelse(
+          unidimensional_attributes$unidimensional,
+          "Yes", "No"
+        )
+      )
     )
 
   }
-
-  # Print unidimensional
-  cat(
-    paste0(
-      "Unidimensional Method: ", unidimensional_method, "\n",
-      "Unidimensional: ", swiftelse(
-        unidimensional_attributes$unidimensional,
-        "Yes", "No"
-      )
-    )
-  )
 
   # Check for "TEFI" in output
   if("TEFI" %in% names(x)){
@@ -543,7 +550,7 @@ plot.EGA <- function(x, ...)
 }
 
 #' @noRd
-# Cleaning adjusts model arguments
+# Cleaning adjusts model arguments ----
 # Updated 23.06.2023
 adjust_model_arguments <- function(model_ARGS)
 {

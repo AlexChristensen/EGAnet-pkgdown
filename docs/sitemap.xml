@@ -24,6 +24,8 @@
 <url><loc>https://r-ega.net/reference/EGA.html</loc></url>
 <url><loc>https://r-ega.net/reference/EGAnet-package.html</loc></url>
 <url><loc>https://r-ega.net/reference/EGAnet-plot.html</loc></url>
+<url><loc>https://r-ega.net/reference/EGM.compare.html</loc></url>
+<url><loc>https://r-ega.net/reference/EGM.html</loc></url>
 <url><loc>https://r-ega.net/reference/Embed.html</loc></url>
 <url><loc>https://r-ega.net/reference/LCT.html</loc></url>
 <url><loc>https://r-ega.net/reference/TMFG.html</loc></url>
@@ -41,6 +43,7 @@
 <url><loc>https://r-ega.net/reference/compare.EGA.plots.html</loc></url>
 <url><loc>https://r-ega.net/reference/convert2igraph.html</loc></url>
 <url><loc>https://r-ega.net/reference/convert2tidygraph.html</loc></url>
+<url><loc>https://r-ega.net/reference/cosine.html</loc></url>
 <url><loc>https://r-ega.net/reference/depression.html</loc></url>
 <url><loc>https://r-ega.net/reference/dimensionStability.html</loc></url>
 <url><loc>https://r-ega.net/reference/dnn.weights.html</loc></url>
@@ -74,6 +77,7 @@
 <url><loc>https://r-ega.net/reference/riEGA.html</loc></url>
 <url><loc>https://r-ega.net/reference/sim.dynEGA.html</loc></url>
 <url><loc>https://r-ega.net/reference/simDFM.html</loc></url>
+<url><loc>https://r-ega.net/reference/simEGM.html</loc></url>
 <url><loc>https://r-ega.net/reference/tefi.html</loc></url>
 <url><loc>https://r-ega.net/reference/totalCor.html</loc></url>
 <url><loc>https://r-ega.net/reference/totalCorMat.html</loc></url>

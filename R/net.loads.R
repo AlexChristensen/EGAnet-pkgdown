@@ -86,7 +86,7 @@
 #' @export
 #'
 # Network Loadings ----
-# Updated 12.08.2024
+# Updated 26.09.2024
 net.loads <- function(
     A, wc, loading.method = c("original", "revised"),
     scaling = 2, rotation = NULL, ...
@@ -162,6 +162,9 @@ net.loads <- function(
     unstandardized <- revised_loadings(
       A, wc, nodes, node_names, communities, unique_communities
     )
+
+    # Store attributes
+    unstd_attributes <- attr(unstandardized, "community")
 
   }else{
 
@@ -254,6 +257,12 @@ net.loads <- function(
   attr(results, "methods") <- list(
     loading.method = loading.method, rotation = rotation
   )
+
+  # Add "community" attributes
+  if(loading.method == "revised"){
+    attr(results, "methods")$scaling <- scaling
+    attr(results, "community") <- unstd_attributes
+  }
 
   # Add "membership" attributes for `net.scores`
   attr(results, "membership") <- list(
@@ -624,6 +633,24 @@ standardize <- function(unstandardized, loading.method, A, wc, scaling)
   }else if(loading.method == "original"){
     return(t(t(unstandardized) / sqrt(colSums(abs(unstandardized), na.rm = TRUE))))
   }
+
+}
+
+#' @noRd
+# Convert scale of revised loadings ----
+# Updated 26.09.2024
+scaling_conversion <- function(standardized, community, original_scaling, new_scaling)
+{
+
+  # Needs 'community' attribute from the unstandardized loadings
+  # This attribute is attached to the overall loading return when 'loading.method = "revised"'
+
+  # Compute change in scaling
+  delta <- community$community_sums^(1 / log(original_scaling * community$community_table)) /
+    community$community_sums^(1 / log(new_scaling * community$community_table))
+
+  # Return adjustment
+  return(t(t(standardized) * delta))
 
 }
 

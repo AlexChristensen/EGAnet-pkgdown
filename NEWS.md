@@ -1,5 +1,21 @@
 WEBSITE: https://r-ega.net
 
+## Changes in version 2.1.0
+
++	ADD: `EGM` and `simEGM` for model estimation and simulation of the Exploratory Graph Model, respectively
+
++	ADD: `EGM.compare` to compare EGM against EFA for most likely data generating mechanism
+
++	INTERNAL: `fit` function to calculate traditional, log-likelihood, and TEFI fit indices
+
+
+## Changes in version 2.0.8
+
++ FIX: issue with dynamic memory allocation in `polychoric_matrix.c` during CRAN's install of the package
+
++ ADD: `cosine` similarity added as a default for `auto.correlate` and 'corr' arguments
+
+
 ## Changes in version 2.0.7
 
 + FIX: mixed data with missing data in `network.predictability`
