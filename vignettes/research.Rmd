@@ -91,7 +91,7 @@ Christensen, A. P., Garrido, L. E., Guerra-Peña, K., & Golino, H. (2023). Compa
 
 ### Exploratory Graph Analysis with Total Entropy Fit Index
 
-+   [`EGA.fit`](references/EGA.fit.html){target="_blank"}
++   [`EGA.fit`](../reference/EGA.fit.html){target="_blank"}
 
 Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s community detection in networks using the Total Entropy Fit Index. *PsyArXiv*. doi: [10.31234/osf.io/9pj2m](research/Jamison et al. - 2021 - Optimizing Walktrap’s Community Detection in Netwo.pdf){target="_blank"}
 
@@ -99,7 +99,7 @@ Jamison, L., Christensen, A. P., & Golino, H. (2021). Optimizing Walktrap’s co
 
 ### Hierarchical Exploratory Graph Analysis
 
-+   [`hierEGA`](references/hierEGA.html){target="_blank"}
++   [`hierEGA`](../reference/hierEGA.html){target="_blank"}
 
 Golino, H., Thiyagarajan, J. A., Sadana, R., Teles, M., Christensen, A. P., & Boker, S. M. (2020). Investigating the broad domains of intrinsic capacity, functional ability and environment: An exploratory graph analysis approach for improving analytical methodologies for measuring healthy aging. *PsyArXiv*. doi: [10.31234/osf.io/hj5mc](research/Golino et al. - 2020 - Investigating the broad domains of intrinsic capac.pdf){target="_blank"}
 
