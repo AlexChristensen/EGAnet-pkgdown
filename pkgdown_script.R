@@ -13,3 +13,9 @@ pkgdown::build_site()
 # PATH: ./docs/deps/bootstrap-5.3.1/bootstrap.min.css
 # CHANGE: text-muted{--bs-text-opacity: 1;color:var(--bs-secondary-color) !important}
 # TO: text-muted{--bs-text-opacity: 1;color:#fff !important}
+
+# CHANGE: --bs-navbar-brand-color: rgba(var(--bs-emphasis-color-rgb), 1)
+# TO: --bs-navbar-brand-color: #fff
+
+# CHANGE: --bs-navbar-color: rgba(var(--bs-emphasis-color-rgb), 0.65)
+# TO: --bs-navbar-color: #fff
