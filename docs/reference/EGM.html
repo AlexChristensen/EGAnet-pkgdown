@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,14 +132,14 @@ Probability that a node is randomly linked to other nodes <em>not</em> in the sa
 Between community edges are set to zero based on <code>quantile(x, prob = 1 - p.out)</code>
 ensuring the lowest edge values are set to zero (i.e., most probable to <em>not</em>
 be randomly connected).
-Only used for <code>EGM.type = "standard"</code>.
+Only used for <code>EGM.type = "standard"</code> and <code>search = FALSE</code>.
 Defaults to <code>NULL</code> but must be set</p></dd>
 
 
 <dt id="arg-opt">opt<a class="anchor" aria-label="anchor" href="#arg-opt"></a></dt>
 <dd><p>Character vector (length = 1).
 Fit index used to select from when searching over models
-(only applies to <code>EGM.type = "search"</code>).
+(only applies to <code>search = TRUE</code>).
 Available options include:</p>
 <ul><li><p><code>"AIC"</code></p></li>
 <li><p><code>"BIC"</code></p></li>

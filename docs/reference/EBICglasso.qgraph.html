@@ -17,7 +17,7 @@ The tuning parameter is chosen using the Extended Bayesian Information criterion
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,8 +79,9 @@ The tuning parameter is chosen using the Extended Bayesian Information criterion
 <span>  penalize.diagonal <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  nlambda <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  lambda.min.ratio <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  fast <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  returnAllResults <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  <span class="va">penalizeMatrix</span>,</span>
+<span>  penalizeMatrix <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  countDiagonal <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  refit <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  model.selection <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EBIC"</span>, <span class="st">"JSD"</span><span class="op">)</span>,</span>
@@ -161,6 +162,15 @@ Defaults to <code>100</code></p></dd>
 Ratio of lowest lambda value compared to maximal lambda.
 Defaults to <code>0.1</code>.
 <strong>NOTE</strong> <code>qgraph</code> sets the default to <code>0.01</code></p></dd>
+
+
+<dt id="arg-fast">fast<a class="anchor" aria-label="anchor" href="#arg-fast"></a></dt>
+<dd><p>Boolean (length = 1).
+Whether the <code><a href="https://rdrr.io/pkg/glassoFast/man/glassoFast.html" class="external-link">glassoFast</a></code> version should be used
+to estimate the GLASSO.
+Defaults to <code>FALSE</code>.</p>
+<p>The fast results <em>may</em> differ by less than floating point of the original
+GLASSO implemented by <code><a href="https://rdrr.io/pkg/glasso/man/glasso.html" class="external-link">glasso</a></code> and should not impact reproducibility much</p></dd>
 
 
 <dt id="arg-returnallresults">returnAllResults<a class="anchor" aria-label="anchor" href="#arg-returnallresults"></a></dt>
@@ -247,6 +257,16 @@ Hudson Golino &lt;hfg9s at virginia.edu&gt; and Alexander P. Christensen &lt;ale
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Obtain data</span></span></span>
 <span class="r-in"><span><span class="va">wmt</span> <span class="op">&lt;-</span> <span class="va">wmt2</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">24</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Fast</span></span></span>
+<span class="r-in"><span><span class="va">fast</span> <span class="op">&lt;-</span> <span class="fu">EBICglasso.qgraph</span><span class="op">(</span><span class="va">wmt</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Regular</span></span></span>
+<span class="r-in"><span><span class="va">regular</span> <span class="op">&lt;-</span> <span class="fu">EBICglasso.qgraph</span><span class="op">(</span><span class="va">wmt</span>, fast <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Difference between fast and regular</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">fast</span> <span class="op">-</span> <span class="va">regular</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute graph with tuning = 0 (BIC)</span></span></span>
 <span class="r-in"><span><span class="va">BICgraph</span> <span class="op">&lt;-</span> <span class="fu">EBICglasso.qgraph</span><span class="op">(</span>data <span class="op">=</span> <span class="va">wmt</span>, gamma <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>

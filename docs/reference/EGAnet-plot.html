@@ -31,7 +31,7 @@ to maintain the EGAnet style"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,10 @@ to maintain the <code>EGAnet</code> style</p>
 <span>  color.match <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">plot.invariance</span><span class="op">(</span><span class="va">x</span>, p_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="st">"p_BH"</span><span class="op">)</span>, p_value <span class="op">=</span> <span class="fl">0.05</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">plot.invariance</span><span class="op">(</span><span class="va">x</span>, p_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p"</span>, <span class="st">"p_BH"</span><span class="op">)</span>, p_value <span class="op">=</span> <span class="fl">0.05</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plot.TEFI.compare</span><span class="op">(</span><span class="va">x</span>, <span class="va">base.name</span>, <span class="va">comparison.name</span>, <span class="va">base.color</span>, <span class="va">comparison.color</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span></code></pre></div>
 
     </div>
     <div class="section level2">
@@ -145,6 +148,14 @@ uncorrected <em>p</em>-value. Set to <code>"p_BH"</code> for the
 Benjamini-Hochberg corrected <em>p</em>-value</p></li>
 <li><p><code>p_value</code> — Numeric (length = 1). The <em>p</em>-value to use alongside <code>p_type</code> when
 plotting <code><a href="invariance.html">invariance</a></code>. Defaults to <code>0.05</code></p></li>
+<li><p><code>base.name</code> — Character (length = 1). A string to label the <code>base</code> structure in the plot.
+Defaults to <code>"Base"</code></p></li>
+<li><p><code>comparison.name</code> — Character (length = 1). A string to label the <code>comparison</code>
+structure in the plot. Defaults to <code>"Comparison"</code></p></li>
+<li><p><code>base.color</code> — Character (length = 1). A string to specifying the color of the <code>base</code> structure in the plot.
+Hex codes can be used. Defaults to <code>"blue"</code></p></li>
+<li><p><code>comparison.color</code> — Character (length = 1). A string to specifying the color of the <code>comparison</code>
+structure in the plot. Hex codes can be used. Defaults to <code>"red"</code></p></li>
 <li><p><code>...</code> — Additional arguments to pass on to
 <code><a href="https://ggobi.github.io/ggally/reference/ggnet2.html" class="external-link">ggnet2</a></code> and <code><a href="https://rdrr.io/pkg/sna/man/gplot.layout.html" class="external-link">gplot.layout</a></code>
 (see <strong>Examples</strong>)</p></li>
