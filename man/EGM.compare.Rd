@@ -4,25 +4,49 @@
 \alias{EGM.compare}
 \title{Compare \code{\link[EGAnet]{EGM}} with EFA}
 \usage{
-EGM.compare(data, constrained = FALSE, rotation = "geominQ", ...)
+EGM.compare(
+  data,
+  constrain.structure = FALSE,
+  constrain.zeros = FALSE,
+  fm = "ml",
+  rotation = "geominQ",
+  ...
+)
 }
 \arguments{
 \item{data}{Matrix or data frame.
 Should consist only of variables to be used in the analysis.
 Can be raw data or a correlation matrix}
 
-\item{constrained}{Boolean (length = 1).
+\item{constrain.structure}{Boolean (length = 1).
 Whether memberships of the communities should
 be added as a constraint when optimizing the network loadings.
-Defaults to \code{FALSE} to freely estimate each loading similar to
-exploratory factor analysis.
+Defaults to \code{TRUE} which ensures assigned loadings are
+guaranteed to never be smaller than any cross-loadings.
+Set to \code{FALSE} to freely estimate each loading similar to exploratory factor analysis
 
 \emph{Note: This default differs from} \code{\link[EGAnet]{EGM}}\emph{.
 Constraining loadings puts EGM at a deficit relative to EFA and therefore
 biases the comparability between the methods. It's best to leave the
 default of unconstrained when using this function.}}
 
-\item{rotation}{Character.
+\item{constrain.zeros}{Boolean (length = 1).
+Whether zeros in the estimated network loading matrix should
+be retained when optimizing the network loadings.
+Defaults to \code{TRUE} which ensures that zero networks loadings are retained.
+Set to \code{FALSE} to freely estimate each loading similar to exploratory factor analysis
+
+\emph{Note: This default differs from} \code{\link[EGAnet]{EGM}}\emph{.
+Constraining zeros puts EGM at a deficit relative to EFA and therefore
+biases the comparability between the methods. It's best to leave the
+default of unconstrained when using this function.}}
+
+\item{fm}{Character (length = 1).
+Estimation method for the EFA.
+See argument in \code{\link[psych]{fa}} for more details.
+Defaults to \code{"ml"} or maximum likelihood}
+
+\item{rotation}{Character (length = 1).
 A rotation to use to obtain a simpler structure for EFA.
 For a list of rotations, see \code{\link[GPArotation]{rotations}} for options.
 Defaults to \code{"geominQ"}}

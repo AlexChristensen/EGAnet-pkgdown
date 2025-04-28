@@ -6,15 +6,15 @@
 \usage{
 EGM(
   data,
-  EGM.model = c("standard", "EGA"),
+  EGM.model = c("beta.min", "EGA", "probability"),
   communities = NULL,
   structure = NULL,
   search = FALSE,
   p.in = NULL,
   p.out = NULL,
-  opt = c("AIC", "BIC", "CFI", "chisq", "logLik", "RMSEA", "SRMR", "TEFI", "TEFI.adj",
-    "TLI"),
-  constrained = TRUE,
+  opt = c("logLik", "SRMR"),
+  constrain.structure = TRUE,
+  constrain.zeros = TRUE,
   verbose = TRUE,
   ...
 )
@@ -30,12 +30,16 @@ Available options:
 
 \itemize{
 
+\item \code{"beta.min"} --- Applies the \code{\link[EGAnet]{modularity}}-adjusted (\code{Q})
+beta-min criterion to threshold the implied partial correlation matrix
+\deqn{Q \times \sqrt{\frac{\log{(p)}}{n}}}
+
 \item \code{"EGA"} (default) --- Applies \code{\link[EGAnet]{EGA}} to obtain the
 (sparse) regularized network structure, communities, and memberships
 
-\item \code{"standard"} --- Applies the standard EGM model which
-estimates communities based on the non-regularized empirical partial
-correlation matrix and sparsity is set using \code{p.in} and \code{p.out}
+\item \code{"probability"} --- Estimates communities based on the non-regularized
+empirical partial correlation matrix and sparsity is set using probabilities for the
+within- (\code{p.in}) and between-community (\code{p.out}) connectivity
 
 }}
 
@@ -75,39 +79,20 @@ Defaults to \code{NULL} but must be set}
 \item{opt}{Character vector (length = 1).
 Fit index used to select from when searching over models
 (only applies to \code{search = TRUE}).
-Available options include:
+Available options include maximum likelihood (default; \code{"logLik"}) and
+standardized root mean residual (\code{"SRMR"})}
 
-\itemize{
-
-\item \code{"AIC"}
-
-\item \code{"BIC"}
-
-\item \code{"CFI"}
-
-\item \code{"chisq"}
-
-\item \code{"logLik"}
-
-\item \code{"RMSEA"}
-
-\item \code{"SRMR"}
-
-\item \code{"TEFI"}
-
-\item \code{"TEFI.adj"}
-
-\item \code{"TLI"}
-
-}
-
-Defaults to \code{"SRMR"}}
-
-\item{constrained}{Boolean (length = 1).
+\item{constrain.structure}{Boolean (length = 1).
 Whether memberships of the communities should
 be added as a constraint when optimizing the network loadings.
 Defaults to \code{TRUE} which ensures assigned loadings are
 guaranteed to never be smaller than any cross-loadings.
+Set to \code{FALSE} to freely estimate each loading similar to exploratory factor analysis}
+
+\item{constrain.zeros}{Boolean (length = 1).
+Whether zeros in the estimated network loading matrix should
+be retained when optimizing the network loadings.
+Defaults to \code{TRUE} which ensures that zero networks loadings are retained.
 Set to \code{FALSE} to freely estimate each loading similar to exploratory factor analysis}
 
 \item{verbose}{Boolean (length = 1).
@@ -146,13 +131,8 @@ egm_ega_structure <- EGM(
   )
 )
 
-# Estimate EGM (using standard)
-egm_standard <- EGM(
-  data, EGM.model = "standard",
-  communities = 3, # specify number of communities
-  p.in = 0.95, # probability of edges *in* each community
-  p.out = 0.80 # probability of edges *between* each community
-)
+# Estimate EGM (using beta-min condition)
+egm_ega_search <- EGM(data, EGM.model = "beta.min")
 
 \dontrun{
 # Estimate EGM (using EGA search)
@@ -160,14 +140,9 @@ egm_ega_search <- EGM(
   data, EGM.model = "EGA", search = TRUE
 )
 
-# Estimate EGM (using EGA search and AIC criterion)
-egm_ega_search_AIC <- EGM(
-  data, EGM.model = "EGA", search = TRUE, opt = "AIC"
-)
-
 # Estimate EGM (using search)
 egm_search <- EGM(
-  data, EGM.model = "standard", search = TRUE,
+  data, EGM.model = "probability", search = TRUE,
   communities = 3, # need communities or structure
   p.in = 0.95 # only need 'p.in'
 )}

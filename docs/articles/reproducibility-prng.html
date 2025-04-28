@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -369,11 +369,11 @@ Unidimensional Method:  Louvain
 
 EGA Type: EGA 
 Bootstrap Samples: 500 (Parametric)
-                                         
-                1     2     3     4     5
-Frequency:  0.008 0.638 0.306 0.046 0.002
+                                      
+                1    2   3     4     5
+Frequency:  0.012 0.64 0.3 0.046 0.002
 
-Median dimensions: 2 [0.82, 3.18] 95% CI</code></pre>
+Median dimensions: 2 [0.81, 3.19] 95% CI</code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform `bootEGA` and set seed to `1234` (again)</span></span>
 <span><span class="va">boot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bootEGA.html">bootEGA</a></span><span class="op">(</span><span class="va">wmt2</span><span class="op">[</span>,<span class="fl">7</span><span class="op">:</span><span class="fl">24</span><span class="op">]</span>, seed <span class="op">=</span> <span class="fl">1234</span>, plot.typicalStructure <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -392,9 +392,9 @@ EGA Type: EGA
 Bootstrap Samples: 500 (Parametric)
                                          
                 1     2     3     4     5
-Frequency:  0.016 0.634 0.302 0.046 0.002
+Frequency:  0.014 0.636 0.302 0.046 0.002
 
-Median dimensions: 2 [0.8, 3.2] 95% CI</code></pre>
+Median dimensions: 2 [0.81, 3.19] 95% CI</code></pre>
 <p>Notice that the results are very similar but they are not
 <em>exactly</em> the same (frequencies for <code>1</code> and
 <code>3</code> are slightly different). The data that were generated in

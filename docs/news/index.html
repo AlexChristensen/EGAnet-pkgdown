@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,6 +48,20 @@
       <small>Source: <a href="https://github.com/hfgolino/EGAnet/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.1" id="changes-in-version-231">Changes in version 2.3.1<a class="anchor" aria-label="anchor" href="#changes-in-version-231"></a></h2>
+<ul><li><p>FIX: documentation for <code>itemDiagnostics</code></p></li>
+<li><p>FIX: <code>$keep</code> output from <code>itemDiagnostics</code> rather than <code>$suggested</code></p></li>
+<li><p>UPDATE: added argument, <code>ordered</code>, to either output <code>net.loads</code> in the initial variable order or descending order for each community</p></li>
+<li><p>UPDATE: beta-min condition is used to supply a model-implied network for <code>simEGM</code></p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.3.0" id="changes-in-version-230">Changes in version 2.3.0<a class="anchor" aria-label="anchor" href="#changes-in-version-230"></a></h2><p class="text-muted">CRAN release: 2025-04-09</p>
+<ul><li><p>ADD: <code>itemDiagnostics</code> for automated detection of potential instability issues such as local dependnece, minor dimensions, multidimensionality, and low loadings</p></li>
+<li><p>FIX: default <code>itemStability</code> plot switched back to empirical dimensions only</p></li>
+<li><p>UPDATE: <code>simEGM</code> has a new (faster) data generating mechanism</p></li>
+<li><p>UPDATE: <code>EGM</code> optimizations for log-likelihood, AIC, and BIC were added (including proper gradients)</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.2.0" id="changes-in-version-220">Changes in version 2.2.0<a class="anchor" aria-label="anchor" href="#changes-in-version-220"></a></h2><p class="text-muted">CRAN release: 2025-03-07</p>
 <ul><li><p>ADD: <code>network.nonconvex</code> to estimate networks using non-convex regularization penalties</p></li>

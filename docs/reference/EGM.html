@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">EGAnet</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,15 +57,15 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">EGM</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
-<span>  EGM.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"standard"</span>, <span class="st">"EGA"</span><span class="op">)</span>,</span>
+<span>  EGM.model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"beta.min"</span>, <span class="st">"EGA"</span>, <span class="st">"probability"</span><span class="op">)</span>,</span>
 <span>  communities <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  structure <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  search <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  p.in <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  p.out <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  opt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AIC"</span>, <span class="st">"BIC"</span>, <span class="st">"CFI"</span>, <span class="st">"chisq"</span>, <span class="st">"logLik"</span>, <span class="st">"RMSEA"</span>, <span class="st">"SRMR"</span>, <span class="st">"TEFI"</span>, <span class="st">"TEFI.adj"</span>,</span>
-<span>    <span class="st">"TLI"</span><span class="op">)</span>,</span>
-<span>  constrained <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  opt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"logLik"</span>, <span class="st">"SRMR"</span><span class="op">)</span>,</span>
+<span>  constrain.structure <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  constrain.zeros <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -85,11 +85,14 @@ Can be raw data or a correlation matrix</p></dd>
 <dd><p>Character vector (length = 1).
 Sets the procedure to conduct <code>EGM</code>.
 Available options:</p>
-<ul><li><p><code>"EGA"</code> (default) — Applies <code><a href="EGA.html">EGA</a></code> to obtain the
+<ul><li><p><code>"beta.min"</code> — Applies the <code><a href="modularity.html">modularity</a></code>-adjusted (<code>Q</code>)
+beta-min criterion to threshold the implied partial correlation matrix
+$$Q \times \sqrt{\frac{\log{(p)}}{n}}$$</p></li>
+<li><p><code>"EGA"</code> (default) — Applies <code><a href="EGA.html">EGA</a></code> to obtain the
 (sparse) regularized network structure, communities, and memberships</p></li>
-<li><p><code>"standard"</code> — Applies the standard EGM model which
-estimates communities based on the non-regularized empirical partial
-correlation matrix and sparsity is set using <code>p.in</code> and <code>p.out</code></p></li>
+<li><p><code>"probability"</code> — Estimates communities based on the non-regularized
+empirical partial correlation matrix and sparsity is set using probabilities for the
+within- (<code>p.in</code>) and between-community (<code>p.out</code>) connectivity</p></li>
 </ul></dd>
 
 
@@ -140,26 +143,24 @@ Defaults to <code>NULL</code> but must be set</p></dd>
 <dd><p>Character vector (length = 1).
 Fit index used to select from when searching over models
 (only applies to <code>search = TRUE</code>).
-Available options include:</p>
-<ul><li><p><code>"AIC"</code></p></li>
-<li><p><code>"BIC"</code></p></li>
-<li><p><code>"CFI"</code></p></li>
-<li><p><code>"chisq"</code></p></li>
-<li><p><code>"logLik"</code></p></li>
-<li><p><code>"RMSEA"</code></p></li>
-<li><p><code>"SRMR"</code></p></li>
-<li><p><code>"TEFI"</code></p></li>
-<li><p><code>"TEFI.adj"</code></p></li>
-<li><p><code>"TLI"</code></p></li>
-</ul><p>Defaults to <code>"SRMR"</code></p></dd>
+Available options include maximum likelihood (default; <code>"logLik"</code>) and
+standardized root mean residual (<code>"SRMR"</code>)</p></dd>
 
 
-<dt id="arg-constrained">constrained<a class="anchor" aria-label="anchor" href="#arg-constrained"></a></dt>
+<dt id="arg-constrain-structure">constrain.structure<a class="anchor" aria-label="anchor" href="#arg-constrain-structure"></a></dt>
 <dd><p>Boolean (length = 1).
 Whether memberships of the communities should
 be added as a constraint when optimizing the network loadings.
 Defaults to <code>TRUE</code> which ensures assigned loadings are
 guaranteed to never be smaller than any cross-loadings.
+Set to <code>FALSE</code> to freely estimate each loading similar to exploratory factor analysis</p></dd>
+
+
+<dt id="arg-constrain-zeros">constrain.zeros<a class="anchor" aria-label="anchor" href="#arg-constrain-zeros"></a></dt>
+<dd><p>Boolean (length = 1).
+Whether zeros in the estimated network loading matrix should
+be retained when optimizing the network loadings.
+Defaults to <code>TRUE</code> which ensures that zero networks loadings are retained.
 Set to <code>FALSE</code> to freely estimate each loading similar to exploratory factor analysis</p></dd>
 
 
@@ -206,13 +207,8 @@ Set to <code>FALSE</code> to not display progress</p></dd>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Estimate EGM (using standard)</span></span></span>
-<span class="r-in"><span><span class="va">egm_standard</span> <span class="op">&lt;-</span> <span class="fu">EGM</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">data</span>, EGM.model <span class="op">=</span> <span class="st">"standard"</span>,</span></span>
-<span class="r-in"><span>  communities <span class="op">=</span> <span class="fl">3</span>, <span class="co"># specify number of communities</span></span></span>
-<span class="r-in"><span>  p.in <span class="op">=</span> <span class="fl">0.95</span>, <span class="co"># probability of edges *in* each community</span></span></span>
-<span class="r-in"><span>  p.out <span class="op">=</span> <span class="fl">0.80</span> <span class="co"># probability of edges *between* each community</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Estimate EGM (using beta-min condition)</span></span></span>
+<span class="r-in"><span><span class="va">egm_ega_search</span> <span class="op">&lt;-</span> <span class="fu">EGM</span><span class="op">(</span><span class="va">data</span>, EGM.model <span class="op">=</span> <span class="st">"beta.min"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Estimate EGM (using EGA search)</span></span></span>
@@ -220,14 +216,9 @@ Set to <code>FALSE</code> to not display progress</p></dd>
 <span class="r-in"><span>  <span class="va">data</span>, EGM.model <span class="op">=</span> <span class="st">"EGA"</span>, search <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Estimate EGM (using EGA search and AIC criterion)</span></span></span>
-<span class="r-in"><span><span class="va">egm_ega_search_AIC</span> <span class="op">&lt;-</span> <span class="fu">EGM</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">data</span>, EGM.model <span class="op">=</span> <span class="st">"EGA"</span>, search <span class="op">=</span> <span class="cn">TRUE</span>, opt <span class="op">=</span> <span class="st">"AIC"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Estimate EGM (using search)</span></span></span>
 <span class="r-in"><span><span class="va">egm_search</span> <span class="op">&lt;-</span> <span class="fu">EGM</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">data</span>, EGM.model <span class="op">=</span> <span class="st">"standard"</span>, search <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  <span class="va">data</span>, EGM.model <span class="op">=</span> <span class="st">"probability"</span>, search <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  communities <span class="op">=</span> <span class="fl">3</span>, <span class="co"># need communities or structure</span></span></span>
 <span class="r-in"><span>  p.in <span class="op">=</span> <span class="fl">0.95</span> <span class="co"># only need 'p.in'</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">}</span> <span class="co"># }</span></span></span>

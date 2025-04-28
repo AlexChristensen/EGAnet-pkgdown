@@ -1,5 +1,27 @@
 WEBSITE: https://r-ega.net
 
+## Changes in version 2.3.1
+
++	FIX: documentation for `itemDiagnostics`
+
++	FIX: `$keep` output from `itemDiagnostics` rather than `$suggested`
+
++	UPDATE: added argument, `ordered`, to either output `net.loads` in the initial variable order or descending order for each community
+
++	UPDATE: beta-min condition is used to supply a model-implied network for `simEGM`
+
+
+## Changes in version 2.3.0
+
++	ADD: `itemDiagnostics` for automated detection of potential instability issues such as local dependnece, minor dimensions, multidimensionality, and low loadings
+
++	FIX: default `itemStability` plot switched back to empirical dimensions only
+
++	UPDATE: `simEGM` has a new (faster) data generating mechanism
+
++	UPDATE: `EGM` optimizations for log-likelihood, AIC, and BIC were added (including proper gradients)
+
+
 ## Changes in version 2.2.0
 
 +	ADD: `network.nonconvex` to estimate networks using non-convex regularization penalties

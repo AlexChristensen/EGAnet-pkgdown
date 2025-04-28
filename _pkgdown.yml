@@ -95,6 +95,7 @@ reference:
       - "CFA"
       - "dimensionStability"
       - "invariance"
+      - "itemDiagnostics"
       - "itemStability"
       - "LCT"
       - "net.loads"
